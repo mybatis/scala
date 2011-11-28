@@ -16,9 +16,7 @@
 
 package org.mybatis.scala
 
-/** Configuration classes.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** Configuration classes. */
 package object config {
-  
+
 }

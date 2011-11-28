@@ -18,7 +18,6 @@ package org.mybatis.scala.util;
 
 /**
  * Provides some reflection utilities implemented in java for simplicity (because reflection api is java centric :S)
- * @author Frank D. Martinez M. [mnesarco at gmail.com]
  */
 public class ReflectionUtils {
 

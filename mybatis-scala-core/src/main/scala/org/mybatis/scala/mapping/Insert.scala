@@ -18,9 +18,7 @@ package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
 
-/** A mapped INSERT statement.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** A mapped INSERT statement. */
 abstract class Insert[Param : Manifest] extends Statement {
 
   /** Key Generator used to retrieve database geberated keys */

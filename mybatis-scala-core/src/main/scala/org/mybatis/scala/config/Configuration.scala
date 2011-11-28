@@ -25,7 +25,6 @@ import org.mybatis.scala.session.SessionManager
 /** Mybatis Configuration
   * @constructor Creates a new Configuration with a wrapped myBatis Configuration.
   * @param configuration A myBatis Configuration instance.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
   */
 sealed class Configuration(configuration : MBConfig) {
 
@@ -48,9 +47,7 @@ sealed class Configuration(configuration : MBConfig) {
 
 }
 
-/** A factory of [[org.mybatis.scala.config.Configuration]] instances.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** A factory of [[org.mybatis.scala.config.Configuration]] instances. */
 object Configuration {
 
   /** Creates a Configuration built from a reader.

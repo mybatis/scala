@@ -18,16 +18,12 @@ package org.mybatis.scala.mapping
 
 import org.apache.ibatis.`type`.{JdbcType => JdbcTypeEnum}
 
-/** A wrapper of [[org.apache.ibatis.type.JdbcType]]
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** A wrapper of [[org.apache.ibatis.type.JdbcType]] */
 sealed trait JdbcType {
   val unwrap : JdbcTypeEnum
 }
 
-/** A wrapper of [[org.apache.ibatis.type.JdbcType]] values.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** A wrapper of [[org.apache.ibatis.type.JdbcType]] values. */
 object JdbcType {
   val ARRAY     = new JdbcType { val unwrap = JdbcTypeEnum.ARRAY }
   val BIT       = new JdbcType { val unwrap = JdbcTypeEnum.BIT }

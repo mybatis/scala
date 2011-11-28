@@ -18,9 +18,7 @@ package org.mybatis.scala.session
 
 import org.apache.ibatis.session._
 
-/** Session lifecycle manager.
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** Session lifecycle manager. */
 sealed class SessionManager(factory : SqlSessionFactory) {
 
   type Callback = (Session) => Unit

@@ -19,9 +19,7 @@ package org.mybatis.scala
 import org.apache.ibatis.session.{ResultHandler => MBResultHandler}
 import org.apache.ibatis.session.{RowBounds => MBRowBounds}
 
-/** Session Management classes
-  * @author Frank D. Martinez M. [mnesarco at gmail.com]
-  */
+/** Session Management classes */
 package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
