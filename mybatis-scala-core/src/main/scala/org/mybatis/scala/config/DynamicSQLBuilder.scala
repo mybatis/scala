@@ -22,6 +22,10 @@ import org.apache.ibatis.builder.xml.dynamic._
 import org.apache.ibatis.mapping.SqlSource
 import scala.xml._
 
+/**
+ * Builder of Dynamic SQL Trees.
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 class DynamicSQLBuilder(val configuration : MBConfig, val node : Node) {
 
   def build : SqlSource =

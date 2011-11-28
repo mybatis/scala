@@ -29,7 +29,7 @@ import org.mybatis.scala.session.SessionManager
 sealed class Configuration(configuration : MBConfig) {
 
   /**
-   * Create a new space of mapped statements
+   * Creates a new space of mapped statements
    */
   def addSpace(name : String)(f : (ConfigurationSpace => Unit)) : this.type = {
     val space = new ConfigurationSpace(configuration, name)
@@ -38,7 +38,7 @@ sealed class Configuration(configuration : MBConfig) {
   }
 
   /**
-   * Builds a Session Factory
+   * Builds a Session Manager
    */
   def createPersistenceContext = {
     val builder = new SqlSessionFactoryBuilder
@@ -47,6 +47,10 @@ sealed class Configuration(configuration : MBConfig) {
 
 }
 
+/**
+ * Mybatis Configuration
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 object Configuration {
 
   def apply(reader : Reader) : Configuration = {

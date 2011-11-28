@@ -18,6 +18,10 @@ package org.mybatis.scala.session
 
 import org.apache.ibatis.session._
 
+/**
+ * Session lifecycle manager.
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 sealed class SessionManager(factory : SqlSessionFactory) {
 
   type Callback = (Session) => Unit
@@ -35,6 +39,9 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     closeSession = hook
   }
 
+  /**
+   * Executes the callback within a new session and rollback at the end.
+   */
   def readOnly(callback : Callback) : Unit = {
     val sqlSession = openSession(factory)
     try {
@@ -46,6 +53,9 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
   }
 
+  /**
+   * Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception.
+   */
   def transaction(callback : Callback) : Unit = {
     val sqlSession = openSession(factory)
     try {
@@ -62,6 +72,9 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
   }
 
+  /**
+   * Executes the callback within a new session. Do not call any transaction method.
+   */
   def managed(callback : Callback) : Unit = {
     val sqlSession = openSession(factory)
     try {

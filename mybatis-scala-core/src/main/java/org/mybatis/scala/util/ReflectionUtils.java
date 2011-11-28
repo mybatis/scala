@@ -17,11 +17,16 @@
 package org.mybatis.scala.util;
 
 /**
- *
+ * Provides some reflection utilities implemented in java for simplicity (because reflection api is java centric :S)
  * @author Frank D. Martinez M. [mnesarco at gmail.com]
  */
 public class ReflectionUtils {
 
+    /**
+     * Returns true if the cls type is void (void exists in java but not in scala)
+     * @param cls Type
+     * @return true if the cls type is void
+     */
     public static boolean isVoid(Class<?> cls) {
         return cls == void.class;
     }

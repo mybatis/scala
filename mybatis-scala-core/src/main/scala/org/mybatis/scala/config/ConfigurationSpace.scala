@@ -23,6 +23,10 @@ import org.mybatis.scala.mapping._
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
 
+/**
+ * Configuration Space (a.k.a. mybatis namespace)
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAULT_") {
 
   // == Start primary constructor code ===
