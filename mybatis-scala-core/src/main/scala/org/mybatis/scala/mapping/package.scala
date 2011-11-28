@@ -19,11 +19,25 @@ package org.mybatis.scala
 import org.apache.ibatis.`type`.{TypeHandler => MBTypeHandler}
 import scala.xml.Node
 
+/**
+ * Statement mapping classes
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 package object mapping {
 
+  /**
+   * Alias of org.apache.ibatis.type.TypeHandler
+   */
   type TypeHandler[T] = MBTypeHandler[T]
+
+  /**
+   * Alias of scala.xml.Node
+   */
   type XSQL = Node
 
+  /**
+   * Implicit conversion from String to XSQL
+   */
   implicit def string_to_xsql( s : String ) : XSQL = new scala.xml.Text(s)
 
 }

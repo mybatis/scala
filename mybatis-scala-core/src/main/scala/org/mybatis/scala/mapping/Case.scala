@@ -16,4 +16,8 @@
 
 package org.mybatis.scala.mapping
 
+/**
+ * A Case is a result map reference based on some value.
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 case class Case(val value : String, val resultMap : ResultMap[_])

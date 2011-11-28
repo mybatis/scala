@@ -23,10 +23,12 @@ import org.mybatis.scala.mapping._
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
 
-/**
- * Configuration Space (a.k.a. mybatis namespace)
- * @author Frank D. Martinez M. [mnesarco at gmail.com]
- */
+/** Configuration Space (a.k.a. mybatis namespace)
+  * @constructor Creates an empty configuration space.
+  * @param configuration myBatis Configuration target
+  * @param spaceName Space name or namespace
+  * @author Frank D. Martinez M. [mnesarco at gmail.com]
+  */
 class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAULT_") {
 
   // == Start primary constructor code ===
@@ -39,13 +41,16 @@ class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAUL
 
   // == Start of public API ===
 
+  /** Adds a statement to the space */
   def += (s : Statement) : this.type = addStatement(s)
 
+  /** Adds a sequence of statements to the space */
   def ++=(ss : Seq[Statement]) : this.type = {
     for (s <- ss) addStatement(s)
     this
   }
 
+  /** Adds a mapper to the space */
   def ++=(mapper : { def bind : Seq[Statement] }) : this.type = ++=(mapper.bind)
 
   // == End of public API ===
@@ -242,7 +247,7 @@ class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAUL
 
 }
 
-object ConfigurationSpace {
+private object ConfigurationSpace {
 
   private var count : Int = 0
 

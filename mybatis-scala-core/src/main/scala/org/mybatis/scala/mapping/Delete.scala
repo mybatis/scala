@@ -18,6 +18,10 @@ package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
 
+/**
+ * A mapped DELEETE statement.
+ * @author Frank D. Martinez M. [mnesarco at gmail.com]
+ */
 abstract class Delete [Param : Manifest] extends Statement {
 
   def parameterTypeClass = manifest[Param].erasure
