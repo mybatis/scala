@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="standalone">
+        <environment id="standalone">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://127.0.0.1:5432/scala"/>
+                <property name="username" value="scala"/>
+                <property name="password" value="test"/>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>
