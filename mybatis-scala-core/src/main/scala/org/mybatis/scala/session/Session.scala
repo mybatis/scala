@@ -19,10 +19,9 @@ package org.mybatis.scala.session
 import org.apache.ibatis.session.SqlSession
 import scala.collection.JavaConversions._
 
-/**
- * SqlSession Wrapper
- * @author Frank D. Martinez M. [mnesarco at gmail.com]
- */
+/** SqlSession Wrapper
+  * @author Frank D. Martinez M. [mnesarco at gmail.com]
+  */
 class Session(sqls : SqlSession) {
 
   def selectOne[Result](statement : String) : Result = {

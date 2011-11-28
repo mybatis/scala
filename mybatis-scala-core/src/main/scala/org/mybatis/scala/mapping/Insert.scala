@@ -18,9 +18,13 @@ package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
 
+/** A mapped INSERT statement.
+  * @author Frank D. Martinez M. [mnesarco at gmail.com]
+  */
 abstract class Insert[Param : Manifest] extends Statement {
 
-  def keyGenerator : KeyGenerator = JdbcGeneratedKey(null, "id")
+  /** Key Generator used to retrieve database geberated keys */
+  var keyGenerator : KeyGenerator = JdbcGeneratedKey(null, "id")
 
   def parameterTypeClass = manifest[Param].erasure
 

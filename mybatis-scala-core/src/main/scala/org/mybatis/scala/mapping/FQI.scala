@@ -16,6 +16,9 @@
 
 package org.mybatis.scala.mapping
 
+/** Fully Qualified Name
+  * @author Frank D. Martinez M. [mnesarco at gmail.com]
+  */
 case class FQI(spaceId : String, localId : String) {
   def resolveIn(externalSpaceId : String) : String = {
     if (externalSpaceId == spaceId)
