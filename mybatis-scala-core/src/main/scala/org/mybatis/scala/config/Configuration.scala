@@ -21,10 +21,12 @@ import org.apache.ibatis.builder.xml.XMLConfigBuilder
 import java.io.Reader
 import org.apache.ibatis.io.Resources
 import org.mybatis.scala.session.SessionManager
+import java.util.Properties
 
 /** Mybatis Configuration
   * @constructor Creates a new Configuration with a wrapped myBatis Configuration.
   * @param configuration A myBatis Configuration instance.
+  * @version $$Id$
   */
 sealed class Configuration(configuration : MBConfig) {
 
@@ -46,7 +48,8 @@ sealed class Configuration(configuration : MBConfig) {
 
 }
 
-/** A factory of [[org.mybatis.scala.config.Configuration]] instances. */
+/** A factory of [[org.mybatis.scala.config.Configuration]] instances.
+  */
 object Configuration {
 
   /** Creates a Configuration built from a reader.
@@ -57,11 +60,47 @@ object Configuration {
     new Configuration(builder.parse)
   }
 
+  /** Creates a Configuration built from a reader.
+    * @param reader Reader over a myBatis main configuration XML
+    * @param env Environment name
+    */
+  def apply(reader : Reader, env : String) : Configuration = {
+    val builder = new XMLConfigBuilder(reader, env)
+    new Configuration(builder.parse)
+  }
+
+  /** Creates a Configuration built from a reader.
+    * @param reader Reader over a myBatis main configuration XML
+    * @param env Environment name
+    * @param properties Properties
+    */
+  def apply(reader : Reader, env : String, properties : Properties) : Configuration = {
+    val builder = new XMLConfigBuilder(reader, env, properties)
+    new Configuration(builder.parse)
+  }
+
   /** Creates a Configuration built from a classpath resource.
     * @param path Classpath resource with main configuration XML
     */
   def apply(path : String) : Configuration = {
     apply(Resources.getResourceAsReader(path))
+  }
+
+  /** Creates a Configuration built from a classpath resource.
+    * @param path Classpath resource with main configuration XML
+    * @param env Environment name
+    */
+  def apply(path : String, env : String) : Configuration = {
+    apply(Resources.getResourceAsReader(path), env)
+  }
+
+  /** Creates a Configuration built from a classpath resource.
+    * @param path Classpath resource with main configuration XML
+    * @param env Environment name
+    * @param properties Properties
+    */
+  def apply(path : String, env : String, properties : Properties) : Configuration = {
+    apply(Resources.getResourceAsReader(path), env, properties)
   }
 
 }

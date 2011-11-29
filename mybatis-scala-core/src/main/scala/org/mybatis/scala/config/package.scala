@@ -17,10 +17,10 @@
 package org.mybatis.scala
 
 /** Provides main configuration classes.
-  * = Basic usage =
+  * == Basic usage ==
   * Usual steps are:
-  *  - Load the configuration
-  *  - Add a configuration space
+  *  - Load the configuration from an external XML file
+  *  - Add one or more configuration spaces with mapped statements
   *  - Create the persistenceContext
   *
   * == Code sample ==

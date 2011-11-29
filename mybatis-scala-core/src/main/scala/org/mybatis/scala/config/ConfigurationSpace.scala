@@ -23,7 +23,7 @@ import org.mybatis.scala.mapping._
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
 
-/** Configuration Space (a.k.a. mybatis namespace)
+/** Configuration Space (mybatis namespace)
   * @constructor Creates an empty configuration space.
   * @param configuration myBatis Configuration target
   * @param spaceName Space name or namespace
