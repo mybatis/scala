@@ -23,7 +23,7 @@ import org.apache.ibatis.mapping.SqlSource
 import scala.xml._
 
 /** Builder of Dynamic SQL Trees. */
-class DynamicSQLBuilder(val configuration : MBConfig, val node : Node) {
+private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : Node) {
 
   /** SqlSource built from an XML Node */
   def build : SqlSource =

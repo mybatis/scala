@@ -16,7 +16,22 @@
 
 package org.mybatis.scala
 
-/** Configuration classes. */
+/** Provides main configuration classes.
+  * = Basic usage =
+  * Usual steps are:
+  *  - Load the configuration
+  *  - Add a configuration space
+  *  - Create the persistenceContext
+  *
+  * == Code sample ==
+  * {{{
+  * val config = Configuration("META-INF/mybatis.xml")
+  * config.addSpace("ns") { space =>
+  *   space ++= MyDAO
+  * }
+  * val persistenceContext = config.createPersistenceContext
+  * }}}
+  */
 package object config {
 
 }

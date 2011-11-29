@@ -29,7 +29,7 @@ object Config {
   }
 
   // Build the session manager
-  def persistenceContext = config.createPersistenceContext
+  val persistenceContext = config.createPersistenceContext
 
 
 }

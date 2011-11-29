@@ -21,7 +21,7 @@ import org.apache.ibatis.mapping.{ResultFlag => ResultFlagEnum}
 import java.util.{List => JList}
 import scala.collection.JavaConversions._
 
-class ResultMapping (
+private[scala] class ResultMapping (
   resultType : T[_],
   property_ : String,
   column_ : String,
@@ -44,7 +44,5 @@ class ResultMapping (
   def notNullColumn : String = notNullColumn_
   def typeHandlerClass : Class[_ <: TypeHandler[_]] = if (typeHandler == null) null else typeHandler.unwrap
   def flags : JList[ResultFlagEnum] = for (f <- flags_) yield f.unwrap
-
-
 
 }

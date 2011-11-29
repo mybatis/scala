@@ -18,11 +18,11 @@ package org.mybatis.scala.mapping
 
 import org.apache.ibatis.mapping.{ResultFlag => ResultFlagEnum}
 
-sealed trait ResultFlag {
+private[scala] sealed trait ResultFlag {
   val unwrap : ResultFlagEnum
 }
 
-object ResultFlag {
+private[scala] object ResultFlag {
   val ID = new ResultFlag { val unwrap = ResultFlagEnum.ID }
   val CONSTRUCTOR = new ResultFlag { val unwrap = ResultFlagEnum.CONSTRUCTOR }
 }
