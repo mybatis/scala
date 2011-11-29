@@ -16,11 +16,9 @@
 
 package org.mybatis.scala.mapping
 
-import org.mybatis.scala.util.ReflectionUtils
-
 class T[t : Manifest] {
   val unwrap = manifest[t].erasure.asInstanceOf[Class[t]]
-  val isVoid = ReflectionUtils.isVoid(unwrap)
+  val isVoid = unwrap == java.lang.Void.TYPE
 }
 
 object T {

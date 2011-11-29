@@ -31,7 +31,6 @@ sealed class Configuration(configuration : MBConfig) {
   /** Creates a new space of mapped statements.
     * @param name A Speca name (a.k.a. namespace)
     * @param f A configuration block.
-    * @returns This
     */
   def addSpace(name : String)(f : (ConfigurationSpace => Unit)) : this.type = {
     val space = new ConfigurationSpace(configuration, name)
