@@ -26,7 +26,7 @@ import java.util.Properties
 /** Mybatis Configuration
   * @constructor Creates a new Configuration with a wrapped myBatis Configuration.
   * @param configuration A myBatis Configuration instance.
-  * @version $$Id$
+  * @version \$Id$
   */
 sealed class Configuration(configuration : MBConfig) {
 
