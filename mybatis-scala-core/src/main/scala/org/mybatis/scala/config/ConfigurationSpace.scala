@@ -27,6 +27,7 @@ import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, S
   * @constructor Creates an empty configuration space.
   * @param configuration myBatis Configuration target
   * @param spaceName Space name or namespace
+  * @version \$Revision$
   */
 class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAULT_") {
 

@@ -19,7 +19,17 @@ package org.mybatis.scala.session
 import org.apache.ibatis.session.SqlSession
 import scala.collection.JavaConversions._
 
-/** SqlSession Wrapper */
+/** SqlSession Wrapper.
+  * You rarely use this class in an explicit manner.
+  * == Usage ==
+  * Used implicitly by mapped statements:
+  * {{{
+  * dbcontext.transaction( implicit session =>
+  *   MyDAO.findAll()
+  * )
+  * }}}
+  * @version \$Revision$
+  */
 class Session(sqls : SqlSession) {
 
   def selectOne[Result](statement : String) : Result = {

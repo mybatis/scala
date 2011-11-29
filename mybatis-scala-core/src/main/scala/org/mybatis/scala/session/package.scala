@@ -19,7 +19,23 @@ package org.mybatis.scala
 import org.apache.ibatis.session.{ResultHandler => MBResultHandler}
 import org.apache.ibatis.session.{RowBounds => MBRowBounds}
 
-/** Session Management classes */
+/** Session Management classes.
+  * Provides classes needed to execute the mapped statements.
+  * == Basic usage ==
+  * Usual steps are:
+  *  - Obtain a SessionManager instance from a Configuration
+  *  - Call any of the lifecycle methods of the SessionManager passing the code to be executed.
+  * == Code sample ==
+  * {{{
+  * val db = Config.persistenceContext
+  * db.transaction { implicit session =>
+  *   MyDAO.insert(...)
+  *   MyDAO.update(...)
+  *   // etc...
+  * }
+  * }}}
+  * @version \$Revision$
+  */
 package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */

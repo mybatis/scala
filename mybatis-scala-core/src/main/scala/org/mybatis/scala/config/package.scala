@@ -31,6 +31,7 @@ package org.mybatis.scala
   * }
   * val persistenceContext = config.createPersistenceContext
   * }}}
+  * @version \$Revision$
   */
 package object config {
 
