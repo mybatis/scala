@@ -19,11 +19,28 @@ package org.mybatis.scala.mapping
 import org.mybatis.scala.session.{Session, RowBounds}
 import scala.collection.JavaConversions._
 
+/** Base class for all Select statements.
+  * @version \$Revision$
+  */
 sealed trait Select extends Statement {
 
+  /** A reference to an external resultMap.
+    * Result maps are the most powerful feature of MyBatis, and with a good understanding of them,
+    * many difficult mapping cases can be solved.
+    */
   var resultMap       : ResultMap[_] = null
+
+  /** Any one of FORWARD_ONLY|SCROLL_SENSITIVE|SCROLL_INSENSITIVE. Default FORWARD_ONLY. */
   var resultSetType   : ResultSetType = ResultSetType.FORWARD_ONLY
+
+  /** This is a driver hint that will attempt to cause the driver to return results in batches of rows
+    * numbering in size equal to this setting. Default is unset (driver dependent).
+    */
   var fetchSize       : Int = -1
+
+  /** Setting this to true will cause the results of this statement to be cached.
+    * Default: true for select statements.
+    */
   var useCache        : Boolean = true
 
   flushCache = false
@@ -32,6 +49,39 @@ sealed trait Select extends Statement {
 
 }
 
+/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
+  * or null (none). If any more than one, an exception will be thrown.
+  *
+  * If you don’t know how many objects are expected, use selectList.
+  *
+  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
+  *
+  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
+  * one of the properties in the resulting objects.
+  *
+  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+  *
+  * == Details ==
+  * This class defines a function: ((param : Param, rowBounds : RowBounds) => List[Result]) where param and rowBounds are optional.
+  *
+  * == Sample code ==
+  * {{{
+  *   val findAll = new SelectList[Nothing,Person] {
+  *     def xsql = "SELECT * FROM person ORDER BY name"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findAll()
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
 abstract class SelectList[Param : Manifest, Result : Manifest] extends Select {
 
   def parameterTypeClass = manifest[Param].erasure
@@ -51,6 +101,39 @@ abstract class SelectList[Param : Manifest, Result : Manifest] extends Select {
 
 }
 
+/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
+  * or null (none). If any more than one, an exception will be thrown.
+  *
+  * If you don’t know how many objects are expected, use selectList.
+  *
+  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
+  *
+  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
+  * one of the properties in the resulting objects.
+  *
+  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+  *
+  * == Details ==
+  * This class defines a function: ((param : Param) => Result) where param is optional.
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOne[Int,Person] {
+  *     def xsql = "SELECT * FROM person WHERE id = #{{id}}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find(1)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
 abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
 
   def parameterTypeClass = manifest[Param].erasure
@@ -64,6 +147,42 @@ abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
 
 }
 
+/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
+  * or null (none). If any more than one, an exception will be thrown.
+  *
+  * If you don’t know how many objects are expected, use selectList.
+  *
+  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
+  *
+  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
+  * one of the properties in the resulting objects.
+  *
+  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+  *
+  * == Details ==
+  * This class defines a function: ((param : Param) => Map[ResultKey, ResultValue]) where param is optional.
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMap[Nothing,Long,Person](mapKey="id") {
+  *     def xsql = "SELECT * FROM person"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById()
+  *     val p = people(5)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
 abstract class SelectMap[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) extends Select {
 
   def parameterTypeClass = manifest[Param].erasure

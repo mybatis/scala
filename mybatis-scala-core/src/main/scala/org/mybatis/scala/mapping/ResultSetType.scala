@@ -18,10 +18,12 @@ package org.mybatis.scala.mapping
 
 import org.apache.ibatis.mapping.{ResultSetType => MBResultSetType}
 
+/** Wrapper of org.apache.ibatis.mapping.ResultSetType */
 sealed trait ResultSetType {
   val unwrap : MBResultSetType
 }
 
+/** Wrapper of org.apache.ibatis.mapping.ResultSetType values */
 object ResultSetType {
   val FORWARD_ONLY = new ResultSetType { val unwrap = MBResultSetType.FORWARD_ONLY }
   val SCROLL_INSENSITIVE = new ResultSetType { val unwrap = MBResultSetType.SCROLL_INSENSITIVE }

@@ -18,15 +18,28 @@ package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
 
-/** A mapped DELETE statement. */
+/** A mapped SQL DELETE statement.
+  * Basically this defines a function: (p : Param => Int) where p is optional.
+  * @tparam Param Input parameter type of the apply method.
+  * @version \$Revision$
+  */
 abstract class Delete [Param : Manifest] extends Statement {
 
   def parameterTypeClass = manifest[Param].erasure
 
+  /** Exceutes the SQL DELETE Statement
+    * @param s Implicit Session
+    * @return number of affected rows
+    */
   def apply()(implicit s : Session) : Int = {
     s.delete(fqi.id)
   }
 
+  /** Exceutes the SQL DELETE Statement
+    * @param param Input paramenter of the statement
+    * @param s Implicit Session
+    * @return number of affected rows
+    */
   def apply(param : Param)(implicit s : Session) : Int = {
     s.delete(fqi.id, param)
   }

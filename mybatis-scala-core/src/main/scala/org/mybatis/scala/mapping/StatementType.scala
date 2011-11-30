@@ -18,10 +18,12 @@ package org.mybatis.scala.mapping
 
 import org.apache.ibatis.mapping.{StatementType => MBStatementType}
 
+/** Wrapper of org.apache.ibatis.mapping.StatementType */
 sealed trait StatementType {
   val unwrap : MBStatementType
 }
 
+/** Wrapper of org.apache.ibatis.mapping.StatementType values */
 object StatementType {
   val STATEMENT = new StatementType { val unwrap = MBStatementType.STATEMENT }
   val PREPARED = new StatementType { val unwrap = MBStatementType.PREPARED }

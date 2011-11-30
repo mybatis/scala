@@ -18,18 +18,33 @@ package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
 
-/** A mapped INSERT statement. */
+/** A mapped SQL INSERT statement.
+  * Basically this defines a function: (p : Param => Int) where p is optional.
+  * @tparam Param Input parameter type of the apply method.
+  * @version \$Revision$
+  */
 abstract class Insert[Param : Manifest] extends Statement {
 
-  /** Key Generator used to retrieve database geberated keys */
+  /** Key Generator used to retrieve database generated keys.
+    * Defaults to JdbcGeneratedKey(null, "id")
+    */
   var keyGenerator : KeyGenerator = JdbcGeneratedKey(null, "id")
 
   def parameterTypeClass = manifest[Param].erasure
 
+  /** Exceutes the SQL INSERT Statement
+    * @param s Implicit Session
+    * @return number of affected rows
+    */
   def apply()(implicit s : Session) : Int = {
     s.insert(fqi.id)
   }
 
+  /** Exceutes the SQL INSERT Statement
+    * @param param Input paramenter of the statement
+    * @param s Implicit Session
+    * @return number of affected rows
+    */
   def apply(param : Param)(implicit s : Session) : Int = {
     s.insert(fqi.id, param)
   }

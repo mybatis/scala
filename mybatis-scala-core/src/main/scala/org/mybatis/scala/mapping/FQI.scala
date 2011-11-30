@@ -16,7 +16,7 @@
 
 package org.mybatis.scala.mapping
 
-/** Fully Qualified Name */
+/** Fully Qualified Identifier */
 private[scala] case class FQI(spaceId : String, localId : String) {
   def resolveIn(externalSpaceId : String) : String = {
     if (externalSpaceId == spaceId)

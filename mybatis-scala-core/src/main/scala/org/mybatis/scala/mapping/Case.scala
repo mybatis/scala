@@ -16,5 +16,10 @@
 
 package org.mybatis.scala.mapping
 
-/** A result map reference based on some value. */
+/** A result map reference based on some discriminator value.
+  * @see [[org.mybatis.scala.mapping.ResultMap]]
+  * @param value A discriminator value
+  * @param resultMap A ResultMap to be used if value matches
+  * @version \$Revision$
+  */
 case class Case(val value : String, val resultMap : ResultMap[_])
