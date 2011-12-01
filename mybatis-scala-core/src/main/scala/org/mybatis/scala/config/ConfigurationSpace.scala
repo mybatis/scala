@@ -20,8 +20,10 @@ import org.apache.ibatis.session.{Configuration => MBConfig}
 import org.apache.ibatis.executor.keygen.{Jdbc3KeyGenerator, NoKeyGenerator, SelectKeyGenerator, KeyGenerator => MBKeyGenerator}
 import org.apache.ibatis.builder.MapperBuilderAssistant
 import org.mybatis.scala.mapping._
+import org.mybatis.scala.cache._
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
+import java.util.Properties
 
 /** Configuration Space (mybatis namespace)
   * @constructor Creates an empty configuration space.
@@ -29,7 +31,7 @@ import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, S
   * @param spaceName Space name or namespace
   * @version \$Revision$
   */
-class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAULT_") {
+class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DEFAULT_") {
 
   // == Start primary constructor code ===
 
@@ -52,6 +54,43 @@ class ConfigurationSpace(configuration : MBConfig, spaceName : String = "_DEFAUL
 
   /** Adds a mapper to the space */
   def ++=(mapper : { def bind : Seq[Statement] }) : this.type = ++=(mapper.bind)
+
+  /** Adds cache support
+    * @param impl Cache implementation class
+    * @param eviction cache eviction policy (LRU,FIFO,WEAK,SOFT)
+    * @param flushInterval any positive integer in milliseconds.
+    *        The default is not set, thus no flush interval is used and the cache is only flushed by calls to statements.
+    * @param size max number of objects that can live in the cache. Default is 1024
+    * @param readWrite A read-only cache will return the same instance of the cached object to all callers.
+    *        Thus such objects should not be modified.  This offers a significant performance advantage though.
+    *        A read-write cache will return a copy (via serialization) of the cached object,
+    *        this is slower, but safer, and thus the default is true.
+    * @param props implementation specific properties.
+    */
+  def cache(
+    impl : T[_ <: Cache] = DefaultCache,
+    eviction : T[_ <: Cache] = Eviction.LRU,
+    flushInterval : Long = -1,
+    size : Int = -1,
+    readWrite : Boolean = true,
+    props : Properties = null) : this.type = {
+
+    builderAssistant.useNewCache(
+      impl.unwrap,
+      eviction.unwrap,
+      if (flushInterval > -1) flushInterval else null,
+      if (size > -1) size else null,
+      readWrite,
+      props
+    )
+    this
+  }
+
+  /** Reference to an external Cache */
+  def cacheRef(that : ConfigurationSpace) : this.type = {
+    builderAssistant.useCacheRef(that.spaceName)
+    this
+  }
 
   // == End of public API ===
 

@@ -79,7 +79,7 @@ import scala.xml.Node
   *
   * Sample Mapping
   * {{{
-  * 
+  *
   *    // Define the result mapping
   *    resultMap = new ResultMap[Person] {
   *
@@ -106,10 +106,10 @@ import scala.xml.Node
   */
 package object mapping {
 
-  /** Alias of org.apache.ibatis.type.TypeHandler */
+  /** Alias of [[org.apache.ibatis.type.TypeHandler]] */
   type TypeHandler[T] = MBTypeHandler[T]
 
-  /** Alias of scala.xml.Node */
+  /** Alias of [[scala.xml.Node]] */
   type XSQL = Node
 
   /** Implicit conversion from String to XSQL */
