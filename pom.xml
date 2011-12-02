@@ -6,8 +6,8 @@
     <artifactId>mybatis-parent</artifactId>
     <version>12</version>
   </parent>
-  <groupId>org.mybatis</groupId>
-  <artifactId>mybatis-scala</artifactId>
+  <groupId>org.mybatis.scala</groupId>
+  <artifactId>mybatis-scala-parent</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>myBatis Scala API</name>
