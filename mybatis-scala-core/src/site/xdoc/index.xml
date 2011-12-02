@@ -64,21 +64,18 @@
                 </p>
                 <p>
                     Once you have your configuration file, you can load it with the Configuration class:
-                    <source><![CDATA[
-                    val config = Configuration("mybatis.xml")
-                    ]]></source>
+                    <source><![CDATA[val config = Configuration("mybatis.xml")]]></source>
                 </p>
                 <p>
                     Once you have your main configuration in place, you should add one or more configuration spaces with
                     your mappings.
                     <source><![CDATA[
-                    val config = Configuration("mybatis.xml")
-                    config.addSpace("mynamespace") { space =>
-                        space += findPeople     // Adds mapped statement findPeople
-                        space ++= PersonDAO     // Adds all mapped statements declared in PersonDAO
-                        space ++= Seq(deletePerson, updatePerson, ...)  // Adds all specified statements
-                    }
-                    ]]></source>
+val config = Configuration("mybatis.xml")
+config.addSpace("mynamespace") { space =>
+    space += findPeople                             // Adds mapped statement findPeople
+    space ++= PersonDAO                             // Adds all mapped statements declared in PersonDAO
+    space ++= Seq(deletePerson, updatePerson, ...)  // Adds all specified statements
+}]]></source>
                 </p>
                 <p>
                     Configuration instances should be created only once per application, just like the SqlSessionFactory.
@@ -97,14 +94,10 @@
                 <p>
                     To declare a ResultMap, just extend ResultMap[T] and call its mapping methods in its main constructor.
                     <source><![CDATA[
-                        val personResultMap = new ResultMap[Person] {
-
-                            id ( property="id", column="pid" )
-
-                            result ( property="name" column="full_name" )
-
-                        }
-                    ]]></source>
+val personResultMap = new ResultMap[Person] {
+    id ( property="id", column="pid" )
+    result ( property="name" column="full_name" )
+}]]></source>
                     You can define contructor args, properties, associations, collections, discriminators, ...
                     Look at the scaladoc for furter details of ResultMap construction.
                 </p>
@@ -127,33 +120,31 @@
                 <p>
                     For example, if you want to select a User by its id:
                     <source><![CDATA[
-                        val findUserById = new SelectOne[Int,User] {
-                            def xsql = "SELECT * from user WHERE id = #{id}"
-                        }
+val findUserById = new SelectOne[Int,User] {
+    def xsql = "SELECT * from user WHERE id = #{id}"
+}
 
-                        // this is also valid
-                        val findUserById = new SelectOne[Int,User] {
-                            def xsql =
-                                <xsql>
-                                    SELECT *
-                                    FROM user
-                                    WHERE id = #{{id}}"
-                                </xsql>
-                        }
-                    ]]></source>
+// this is also valid
+val findUserById = new SelectOne[Int,User] {
+    def xsql =
+        <xsql>
+            SELECT *
+            FROM user
+            WHERE id = #{{id}}"
+        </xsql>
+}]]></source>
                 </p>
                 <p>
                     You can also select a list of users filtered by its name
                     <source><![CDATA[
-                        val findUsers = new SelectList[String,User] {
-                            def xsql =
-                                <xsql>
-                                    SELECT *
-                                    FROM user
-                                    WHERE name LIKE #{{name}}
-                                </xsql>
-                        }
-                    ]]></source>
+val findUsers = new SelectList[String,User] {
+    def xsql =
+        <xsql>
+            SELECT *
+            FROM user
+            WHERE name LIKE #{{name}}
+        </xsql>
+}]]></source>
                 </p>
 
                 <h4>Insert, Update, Delete</h4>
@@ -163,17 +154,14 @@
                 <p>
                     Example
                     <source><![CDATA[
-                        val insertNewUser = new Insert[User] {
-
-                            KeyGenerator = JdbcGeneratedKey(null, "id")
-
-                            def xsql =
-                                <xsql>
-                                    INSERT INTO user(name, username, password)
-                                    VALUES (#{{name}}, #{{username}}, #{{password}})
-                                </xsql>
-                        }
-                    ]]></source>
+val insertNewUser = new Insert[User] {
+    KeyGenerator = JdbcGeneratedKey(null, "id")
+    def xsql =
+        <xsql>
+            INSERT INTO user(name, username, password)
+            VALUES (#{{name}}, #{{username}}, #{{password}})
+        </xsql>
+}]]></source>
                 </p>
 
                 <p>
@@ -182,7 +170,7 @@
                 </p>
 
             </subsection>
-            <subsection name="Session package: org.mybatis.scala.session">
+            <subsection name="Session">
                 <h4>package: org.mybatis.scala.session</h4>
                 <p>
                     This package provides service classes to execute your mapperd statements againt a database connection.
@@ -198,15 +186,14 @@
                 <p>
                     This method opens a connection, executes a code block, and calls rollback.
                     <source><![CDATA[
-                        manager.readOnly {
+manager.readOnly {
 
-                            val list = findUsers("a%")
-                            for (user <- list) {
-                                // Do something with user
-                            }
+    val list = findUsers("a%")
+    for (user <- list) {
+        // Do something with user
+    }
 
-                        }
-                    ]]></source>
+}]]></source>
                 </p>
 
                 <h4>transaction</h4>
@@ -214,17 +201,16 @@
                     This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
                     else calls rollback.
                     <source><![CDATA[
-                        manager.transaction {
+manager.transaction {
 
-                            val user = new User
-                            user.name = "John"
-                            user.username = "john1"
-                            user.password = "12345"
+    val user = new User
+    user.name = "John"
+    user.username = "john1"
+    user.password = "12345"
 
-                            insertNewUser(user)
+    insertNewUser(user)
 
-                        }
-                    ]]></source>
+}]]></source>
                 </p>
 
                 <h4>managed</h4>
@@ -232,21 +218,20 @@
                     This method opens a connection, executes a code block and closes the connection. The Transaction lifecycle
                     must be managed externally by the container or manually by the developer.
                     <source><![CDATA[
-                        manager.managed {
+manager.managed {
 
-                            val user = new User
-                            user.name = "John"
-                            user.username = "john1"
-                            user.password = "12345"
+    val user = new User
+    user.name = "John"
+    user.username = "john1"
+    user.password = "12345"
 
-                            insertNewUser(user)
+    insertNewUser(user)
 
-                        }
-                    ]]></source>
+}]]></source>
                 </p>
 
             </subsection>
-            <subsection name="Cache package: org.mybatis.scala.cache">
+            <subsection name="Cache">
                 <h4>package: org.mybatis.scala.cache</h4>
                 <p>This package provides some aliases to core MyBatis Cache types.</p>
                 <p>See the API docs for more info about caching.</p>
@@ -254,19 +239,18 @@
                    The only thing you have to do is call the cache method of the space,
                    all parameters are optional, and by default they are set to sensible values.
                     <source><![CDATA[
-                    val config = Configuration("mybatis.xml")
-                    config.addSpace("mynamespace") { space =>
+val config = Configuration("mybatis.xml")
+config.addSpace("mynamespace") { space =>
 
-                        space cache(eviction=FIFO)
+    space cache(eviction=FIFO)
 
-                        space += findPeople
-                        space ++= PersonDAO
-                        space ++= Seq(deletePerson, updatePerson, ...)
+    space += findPeople
+    space ++= PersonDAO
+    space ++= Seq(deletePerson, updatePerson, ...)
 
-                        ...
+    ...
 
-                    }
-                    ]]></source>
+}]]></source>
                     <strong>Important: Call the cache method earliest in the space block</strong>
                 </p>
             </subsection>
