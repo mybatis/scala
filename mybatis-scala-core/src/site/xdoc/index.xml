@@ -250,6 +250,25 @@
                 <h4>package: org.mybatis.scala.cache</h4>
                 <p>This package provides some aliases to core MyBatis Cache types.</p>
                 <p>See the API docs for more info about caching.</p>
+                <p>
+                   The only thing you have to do is call the cache method of the space,
+                   all parameters are optional, and by default they are set to sensible values.
+                    <source><![CDATA[
+                    val config = Configuration("mybatis.xml")
+                    config.addSpace("mynamespace") { space =>
+
+                        space cache(eviction=FIFO)
+
+                        space += findPeople
+                        space ++= PersonDAO
+                        space ++= Seq(deletePerson, updatePerson, ...)
+
+                        ...
+
+                    }
+                    ]]></source>
+                    <strong>Important: Call the cache method earliest in the space block</strong>
+                </p>
             </subsection>
         </section>
         <section name="Samples">

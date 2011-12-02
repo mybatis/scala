@@ -55,7 +55,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   /** Adds a mapper to the space */
   def ++=(mapper : { def bind : Seq[Statement] }) : this.type = ++=(mapper.bind)
 
-  /** Adds cache support
+  /** Adds cache support to this space.
     * @param impl Cache implementation class
     * @param eviction cache eviction policy (LRU,FIFO,WEAK,SOFT)
     * @param flushInterval any positive integer in milliseconds.
