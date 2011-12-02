@@ -43,13 +43,6 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <contributors>
-    <contributor>
-      <name>Frank D. martinez M.</name>
-      <email>mnesarco at gmail.com</email>
-    </contributor>
-  </contributors>
-
   <scm>
     <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
     <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
