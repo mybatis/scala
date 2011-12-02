@@ -18,15 +18,6 @@
     <module>mybatis-scala-samples</module>
   </modules>
 
-  <licenses>
-    <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
-    </license>
-  </licenses>
-
   <repositories>
     <repository>
       <id>scala-tools.org</id>
