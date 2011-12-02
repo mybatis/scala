@@ -11,11 +11,6 @@
   <name>myBatis Scala API Samples</name>
   <url>http://www.mybatis.org</url>
 
-  <properties>
-    <javac.src.version>1.6</javac.src.version>
-    <javac.target.version>1.6</javac.target.version>
-  </properties>
-
   <build>
     <plugins>
       <plugin>
