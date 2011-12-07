@@ -103,7 +103,7 @@ config.addSpace("mynamespace") { space =>
                     Configuration instances should be created only once per application, just like the SqlSessionFactory.
                 </p>
                 <p>
-                    All the configuration code is disconnected, so you can put it in a staic initializer (scala object)
+                    All the configuration code is disconnected, so you can put it in a static initializer (scala object)
                     or wherever you want.
                 </p>
             </subsection>
@@ -171,13 +171,13 @@ val findUsers = new SelectList[String,User] {
 
                 <h4>Insert, Update, Delete</h4>
                 <p>
-                    The same applies to this statement types, just extends and define.
+                    The same applies to these statement types, just extends and define.
                 </p>
                 <p>
                     Example
                     <source><![CDATA[
 val insertNewUser = new Insert[User] {
-    KeyGenerator = JdbcGeneratedKey(null, "id")
+    keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql =
         <xsql>
             INSERT INTO user(name, username, password)
@@ -187,7 +187,7 @@ val insertNewUser = new Insert[User] {
                 </p>
 
                 <p>
-                    All the mapping code is disconnected, so you can put it in a staic initializer (scala object)
+                    All the mapping code is disconnected, so you can put it in a static initializer (scala object)
                     or wherever you want.
                 </p>
 
@@ -195,7 +195,7 @@ val insertNewUser = new Insert[User] {
             <subsection name="Session">
                 <h4>package: org.mybatis.scala.session</h4>
                 <p>
-                    This package provides service classes to execute your mapperd statements againt a database connection.
+                    This package provides service classes to execute your mapped statements against a database connection.
                 </p>
                 <p>
                     The main class in this package is SessionManager which its instances are provided by the configuration
@@ -206,7 +206,7 @@ val insertNewUser = new Insert[User] {
                 <h4>Connected methods</h4>
                 <h4>readOnly</h4>
                 <p>
-                    This method opens a connection, executes a code block, and calls rollback.
+                    This method opens a connection, executes a code block, calls rollback and close.
                     <source><![CDATA[
 manager.readOnly {
 
@@ -221,7 +221,7 @@ manager.readOnly {
                 <h4>transaction</h4>
                 <p>
                     This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
-                    else calls rollback.
+                    else calls rollback, then close.
                     <source><![CDATA[
 manager.transaction {
 
