@@ -277,9 +277,6 @@ config.addSpace("mynamespace") { space =>
                 </p>
             </subsection>
         </section>
-        <section name="Samples">
-            <p></p>
-        </section>
     </body>
 
 </document>
