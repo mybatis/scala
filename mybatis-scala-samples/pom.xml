@@ -8,7 +8,7 @@
   </parent>
   <artifactId>mybatis-scala-samples</artifactId>
   <packaging>jar</packaging>
-  <name>myBatis Scala API Samples</name>
+  <name>MyBatis Scala API Samples</name>
   <url>http://www.mybatis.org</url>
 
   <build>

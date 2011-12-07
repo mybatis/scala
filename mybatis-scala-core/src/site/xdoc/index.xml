@@ -63,6 +63,28 @@
                     But you don't need to specify typeAliases nor mappers. Look at the mybatis core users guide for more details.
                 </p>
                 <p>
+                    A sample configuration file could be:
+                    <source><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="standalone">
+        <environment id="standalone">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://127.0.0.1:5432/mydb"/>
+                <property name="username" value="scalauser"/>
+                <property name="password" value="test"/>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>
+]]></source>
+                </p>
+                <p>
                     Once you have your configuration file, you can load it with the Configuration class:
                     <source><![CDATA[val config = Configuration("mybatis.xml")]]></source>
                 </p>

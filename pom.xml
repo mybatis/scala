@@ -10,7 +10,7 @@
   <artifactId>mybatis-scala-parent</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>myBatis Scala API</name>
+  <name>MyBatis Scala API</name>
   <url>http://www.mybatis.org</url>
 
   <modules>

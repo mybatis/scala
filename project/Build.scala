@@ -3,7 +3,7 @@ import Keys._
 
 object MainBuild extends Build {
 
-        lazy val root = Project(id = "mybatis-scala", base = file(".")) aggregate(core, samples)
+        lazy val root = Project(id = "mybatis-scala-parent", base = file(".")) aggregate(core, samples)
 
         lazy val core = Project(id = "mybatis-scala-core", base = file("mybatis-scala-core"))
 

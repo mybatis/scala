@@ -92,7 +92,7 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
   }
 
-  /** Executes the callback within a new session. Do not call any transaction method. */
+  /** Executes the callback within a new session. Does not call any transaction method. */
   def managed(callback : Callback) : Unit = {
     val sqlSession = openSession(factory)
     try {
