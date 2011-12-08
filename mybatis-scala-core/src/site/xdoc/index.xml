@@ -27,7 +27,6 @@
   <properties>
     <title>MyBatis Scala API</title>
     <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
-    <author email="mnesarco@gmail.com">Frank Martinez</author>
     <date>$Date$</date>
   </properties>
 
