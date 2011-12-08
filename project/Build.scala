@@ -11,8 +11,4 @@ object MainBuild extends Build {
           id = "mybatis-scala-samples",
           base = file("mybatis-scala-samples")) dependsOn(core)
 
-
 }
-
-
-
