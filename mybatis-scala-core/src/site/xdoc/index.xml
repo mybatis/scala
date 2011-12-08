@@ -15,57 +15,60 @@
   limitations under the License.
 -->
 
+
+<!--
+  version: $Id$
+-->
 <document xmlns="http://maven.apache.org/XDOC/2.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
   lang="en">
 
-    <properties>
-        <title>MyBatis Scala API</title>
-        <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
-        <author email="mnesarco@gmail.com">Frank Martinez</author>
-        <date>$Date$</date>
-    </properties>
+  <properties>
+    <title>MyBatis Scala API</title>
+    <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+    <author email="mnesarco@gmail.com">Frank Martinez</author>
+    <date>$Date$</date>
+  </properties>
 
-    <body>
-        <section name="Introduction">
-            <p>
-                MyBatis is one of the best advanced persistence frameworks available for java, it can be
-                used with Scala too, but the main API is Java centric. This sub-project is to provide a
-                more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
-                can be declared directly and elegantly in your scala code.
-            </p>
-        </section>
-        <section name="API Structure">
-            <p>
-                The API is structured in four main packages, each package contains types and objects related to a specific
-                concern. They are Configuration, Mapping, Session and Cache.
-            </p>
-            <ul>
-                <li>Configuration package: org.mybatis.scala.config</li>
-                <li>Mapping package: org.mybatis.scala.mapping</li>
-                <li>Session package: org.mybatis.scala.session</li>
-                <li>Cache package: org.mybatis.scala.cache</li>
-            </ul>
-            <subsection name="Configuration">
-                <h4>package: org.mybatis.scala.config</h4>
-                <p>
-                    The main responibility of this package is to provide classes to load the main configurations like
-                    plugins, datasource and transaction services, etc...
-                </p>
-                <p>
-                    Because this API is code centric and type safe, you don't need typeAliases. When you need to reference a type 'Type'
-                    just use T[Type].
-                </p>
-                <p>
-                    Your main configuration is specified in a small XML file as usual:
-                    <a href="http://mybatis.org/dtd/mybatis-3-config.dtd">http://mybatis.org/dtd/mybatis-3-config.dtd</a>
-                    But you don't need to specify typeAliases nor mappers. Look at the mybatis core users guide for more details.
-                </p>
-                <p>
-                    A sample configuration file could be:
-                    <source><![CDATA[
-<?xml version="1.0" encoding="UTF-8" ?>
+  <body>
+    <section name="Introduction">
+      <p>
+        MyBatis is one of the best advanced persistence frameworks available for java, it can be
+        used with Scala too, but the main API is Java centric. This sub-project is to provide a
+        more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
+        can be declared directly and elegantly in your scala code.
+      </p>
+    </section>
+    <section name="API Structure">
+      <p>
+        The API is structured in four main packages, each package contains types and objects related to a specific
+        concern. They are Configuration, Mapping, Session and Cache.
+      </p>
+      <ul>
+        <li>Configuration package: org.mybatis.scala.config</li>
+        <li>Mapping package: org.mybatis.scala.mapping</li>
+        <li>Session package: org.mybatis.scala.session</li>
+        <li>Cache package: org.mybatis.scala.cache</li>
+      </ul>
+      <subsection name="Configuration">
+        <h4>package: org.mybatis.scala.config</h4>
+        <p>
+          The main responibility of this package is to provide classes to load the main configurations like
+          plugins, datasource and transaction services, etc...
+        </p>
+        <p>
+          Because this API is code centric and type safe, you don't need typeAliases. When you need to reference a type 'Type'
+          just use T[Type].
+        </p>
+        <p>
+          Your main configuration is specified in a small XML file as usual:
+          <a href="http://mybatis.org/dtd/mybatis-3-config.dtd">http://mybatis.org/dtd/mybatis-3-config.dtd</a>
+          But you don't need to specify typeAliases nor mappers. Look at the mybatis core users guide for more details.
+        </p>
+        <p>
+          A sample configuration file could be:
+          <source><![CDATA[<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -83,66 +86,63 @@
     </environments>
 </configuration>
 ]]></source>
-                </p>
-                <p>
-                    Once you have your configuration file, you can load it with the Configuration class:
-                    <source><![CDATA[val config = Configuration("mybatis.xml")]]></source>
-                </p>
-                <p>
-                    Once you have your main configuration in place, you should add one or more configuration spaces with
-                    your mappings.
-                    <source><![CDATA[
-val config = Configuration("mybatis.xml")
+        </p>
+        <p>
+          Once you have your configuration file, you can load it with the Configuration class:
+          <source><![CDATA[val config = Configuration("mybatis.xml")]]></source>
+        </p>
+        <p>
+          Once you have your main configuration in place, you should add one or more configuration spaces with
+          your mappings.
+          <source><![CDATA[val config = Configuration("mybatis.xml")
 config.addSpace("mynamespace") { space =>
     space += findPeople                             // Adds mapped statement findPeople
     space ++= PersonDAO                             // Adds all mapped statements declared in PersonDAO
     space ++= Seq(deletePerson, updatePerson, ...)  // Adds all specified statements
 }]]></source>
-                </p>
-                <p>
-                    Configuration instances should be created only once per application, just like the SqlSessionFactory.
-                </p>
-                <p>
-                    All the configuration code is disconnected, so you can put it in a static initializer (scala object)
-                    or wherever you want.
-                </p>
-            </subsection>
-            <subsection name="Mapping">
-                <h4>package: org.mybatis.scala.mapping</h4>
-                <p>
-                    This is the main package of the API, this provides all idioms needed to declare ResultMaps and Statements.
-                </p>
-                <h4>ResultMap</h4>
-                <p>
-                    To declare a ResultMap, just extend ResultMap[T] and call its mapping methods in its main constructor.
-                    <source><![CDATA[
-val personResultMap = new ResultMap[Person] {
+        </p>
+        <p>
+          Configuration instances should be created only once per application, just like the SqlSessionFactory.
+        </p>
+        <p>
+          All the configuration code is disconnected, so you can put it in a static initializer (scala object)
+          or wherever you want.
+        </p>
+      </subsection>
+      <subsection name="Mapping">
+        <h4>package: org.mybatis.scala.mapping</h4>
+        <p>
+          This is the main package of the API, this provides all idioms needed to declare ResultMaps and Statements.
+        </p>
+        <h4>ResultMap</h4>
+        <p>
+          To declare a ResultMap, just extend ResultMap[T] and call its mapping methods in its main constructor.
+          <source><![CDATA[val personResultMap = new ResultMap[Person] {
     id ( property="id", column="pid" )
     result ( property="name" column="full_name" )
 }]]></source>
-                    You can define contructor args, properties, associations, collections, discriminators, ...
-                    Look at the scaladoc for furter details of ResultMap construction.
-                </p>
-                <p>
-                    You can declare your ResultMaps wherever you want, you will reference them later when you declare
-                    your mapped statements.
-                </p>
+          You can define contructor args, properties, associations, collections, discriminators, ...
+          Look at the scaladoc for furter details of ResultMap construction.
+        </p>
+        <p>
+          You can declare your ResultMaps wherever you want, you will reference them later when you declare
+          your mapped statements.
+        </p>
 
-                <h4>Mapped Statements</h4>
-                <p>
-                    There are four types of Mapped Statements as you know: Select, Insert, Update and Delete. But Select is
-                    a special case with three subtypes: SelectOne, SelectList and SelectMap.
-                </p>
-                <p>
-                    To define/declare a mapped statement you just have to extend one of the Statement types and set the
-                    desired properties.
-                </p>
+        <h4>Mapped Statements</h4>
+        <p>
+          There are four types of Mapped Statements as you know: Select, Insert, Update and Delete. But Select is
+          a special case with three subtypes: SelectOne, SelectList and SelectMap.
+        </p>
+        <p>
+          To define/declare a mapped statement you just have to extend one of the Statement types and set the
+          desired properties.
+        </p>
 
-                <h4>Select</h4>
-                <p>
-                    For example, if you want to select a User by its id:
-                    <source><![CDATA[
-val findUserById = new SelectOne[Int,User] {
+        <h4>Select</h4>
+        <p>
+          For example, if you want to select a User by its id:
+          <source><![CDATA[val findUserById = new SelectOne[Int,User] {
     def xsql = "SELECT * from user WHERE id = #{id}"
 }
 
@@ -155,11 +155,10 @@ val findUserById = new SelectOne[Int,User] {
             WHERE id = #{{id}}"
         </xsql>
 }]]></source>
-                </p>
-                <p>
-                    You can also select a list of users filtered by its name
-                    <source><![CDATA[
-val findUsers = new SelectList[String,User] {
+        </p>
+        <p>
+          You can also select a list of users filtered by its name
+          <source><![CDATA[val findUsers = new SelectList[String,User] {
     def xsql =
         <xsql>
             SELECT *
@@ -167,16 +166,15 @@ val findUsers = new SelectList[String,User] {
             WHERE name LIKE #{{name}}
         </xsql>
 }]]></source>
-                </p>
+        </p>
 
-                <h4>Insert, Update, Delete</h4>
-                <p>
-                    The same applies to these statement types, just extends and define.
-                </p>
-                <p>
-                    Example
-                    <source><![CDATA[
-val insertNewUser = new Insert[User] {
+        <h4>Insert, Update, Delete</h4>
+        <p>
+          The same applies to these statement types, just extends and define.
+        </p>
+        <p>
+          Example
+            <source><![CDATA[val insertNewUser = new Insert[User] {
     keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql =
         <xsql>
@@ -184,31 +182,30 @@ val insertNewUser = new Insert[User] {
             VALUES (#{{name}}, #{{username}}, #{{password}})
         </xsql>
 }]]></source>
-                </p>
+        </p>
 
-                <p>
-                    All the mapping code is disconnected, so you can put it in a static initializer (scala object)
-                    or wherever you want.
-                </p>
+        <p>
+          All the mapping code is disconnected, so you can put it in a static initializer (scala object)
+          or wherever you want.
+        </p>
 
-            </subsection>
-            <subsection name="Session">
-                <h4>package: org.mybatis.scala.session</h4>
-                <p>
-                    This package provides service classes to execute your mapped statements against a database connection.
-                </p>
-                <p>
-                    The main class in this package is SessionManager which its instances are provided by the configuration
-                    object. You should have only one instance of the SessionManager in your application. Just like
-                    SqlSessionFactory. This class is disconnected, it only create connections when you call a connected method.
-                </p>
+      </subsection>
+      <subsection name="Session">
+        <h4>package: org.mybatis.scala.session</h4>
+        <p>
+          This package provides service classes to execute your mapped statements against a database connection.
+        </p>
+        <p>
+          The main class in this package is SessionManager which its instances are provided by the configuration
+          object. You should have only one instance of the SessionManager in your application. Just like
+          SqlSessionFactory. This class is disconnected, it only create connections when you call a connected method.
+        </p>
 
-                <h4>Connected methods</h4>
-                <h4>readOnly</h4>
-                <p>
-                    This method opens a connection, executes a code block, calls rollback and close.
-                    <source><![CDATA[
-manager.readOnly {
+        <h4>Connected methods</h4>
+        <h4>readOnly</h4>
+        <p>
+          This method opens a connection, executes a code block, calls rollback and close.
+          <source><![CDATA[manager.readOnly {
 
     val list = findUsers("a%")
     for (user <- list) {
@@ -216,31 +213,13 @@ manager.readOnly {
     }
 
 }]]></source>
-                </p>
+        </p>
 
-                <h4>transaction</h4>
-                <p>
-                    This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
-                    else calls rollback, then close.
-                    <source><![CDATA[
-manager.transaction {
-
-    val user = new User
-    user.name = "John"
-    user.username = "john1"
-    user.password = "12345"
-
-    insertNewUser(user)
-
-}]]></source>
-                </p>
-
-                <h4>managed</h4>
-                <p>
-                    This method opens a connection, executes a code block and closes the connection. The Transaction lifecycle
-                    must be managed externally by the container or manually by the developer.
-                    <source><![CDATA[
-manager.managed {
+        <h4>transaction</h4>
+        <p>
+          This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
+          else calls rollback, then close.
+          <source><![CDATA[manager.transaction {
 
     val user = new User
     user.name = "John"
@@ -250,18 +229,33 @@ manager.managed {
     insertNewUser(user)
 
 }]]></source>
-                </p>
+        </p>
 
-            </subsection>
-            <subsection name="Cache">
-                <h4>package: org.mybatis.scala.cache</h4>
-                <p>This package provides some aliases to core MyBatis Cache types.</p>
-                <p>See the API docs for more info about caching.</p>
-                <p>
-                   The only thing you have to do is call the cache method of the space,
-                   all parameters are optional, and by default they are set to sensible values.
-                    <source><![CDATA[
-val config = Configuration("mybatis.xml")
+        <h4>managed</h4>
+        <p>
+          This method opens a connection, executes a code block and closes the connection. The Transaction lifecycle
+          must be managed externally by the container or manually by the developer.
+          <source><![CDATA[manager.managed {
+
+    val user = new User
+    user.name = "John"
+    user.username = "john1"
+    user.password = "12345"
+
+    insertNewUser(user)
+
+}]]></source>
+        </p>
+
+      </subsection>
+      <subsection name="Cache">
+        <h4>package: org.mybatis.scala.cache</h4>
+        <p>This package provides some aliases to core MyBatis Cache types.</p>
+        <p>See the API docs for more info about caching.</p>
+        <p>
+           The only thing you have to do is call the cache method of the space,
+           all parameters are optional, and by default they are set to sensible values.
+          <source><![CDATA[val config = Configuration("mybatis.xml")
 config.addSpace("mynamespace") { space =>
 
     space cache(eviction=FIFO)
@@ -273,13 +267,10 @@ config.addSpace("mynamespace") { space =>
     ...
 
 }]]></source>
-                    <strong>Important: Call the cache method earliest in the space block</strong>
-                </p>
-            </subsection>
-        </section>
-    </body>
+          <strong>Important: Call the cache method earliest in the space block</strong>
+        </p>
+      </subsection>
+    </section>
+  </body>
 
 </document>
-<!--
-    version: $Id$
--->
