@@ -45,10 +45,10 @@
         concern. They are Configuration, Mapping, Session and Cache.
       </p>
       <ul>
-        <li>Configuration package: org.mybatis.scala.config</li>
-        <li>Mapping package: org.mybatis.scala.mapping</li>
-        <li>Session package: org.mybatis.scala.session</li>
-        <li>Cache package: org.mybatis.scala.cache</li>
+        <li>Configuration package: <code>org.mybatis.scala.config</code></li>
+        <li>Mapping package: <code>org.mybatis.scala.mapping</code></li>
+        <li>Session package: <code>org.mybatis.scala.session</code></li>
+        <li>Cache package: <code>org.mybatis.scala.cache</code></li>
       </ul>
       <subsection name="Configuration">
         <h4>package: org.mybatis.scala.config</h4>
