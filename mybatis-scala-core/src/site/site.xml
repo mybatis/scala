@@ -24,7 +24,11 @@
 
   <body>
     <menu name="Reference Documentation">
-      <item name="Introduction" href="index.html"/>
+      <item name="Introduction" href="index.html" />
+      <item name="Configuration" href="configuration.html" />
+      <item name="Mapping" href="mapping.html" />
+      <item name="Session" href="session.html" />
+      <item name="Cache" href="cache.html" />
     </menu>
 
     <menu ref="reports"/>

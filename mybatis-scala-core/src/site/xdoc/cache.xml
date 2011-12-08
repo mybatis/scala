@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2010-2011 The myBatis Team
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<!--
+  version: $Id$
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
+  lang="en">
+
+  <properties>
+    <title>MyBatis Scala API > Cache</title>
+    <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+    <date>$Date$</date>
+  </properties>
+
+  <body>
+    <section name="Cache">
+      <p>This <code>org.mybatis.scala.cache</code> package provides some aliases to core MyBatis Cache types.</p>
+        <p>See the API docs for more info about caching.</p>
+        <p>
+           The only thing you have to do is call the cache method of the space,
+           all parameters are optional, and by default they are set to sensible values.
+        </p>
+          <source><![CDATA[val config = Configuration("mybatis.xml")
+config.addSpace("mynamespace") { space =>
+
+    space cache(eviction=FIFO)
+
+    space += findPeople
+    space ++= PersonDAO
+    space ++= Seq(deletePerson, updatePerson, ...)
+
+    ...
+
+}]]></source>
+        <p>
+          <span class="label notice">Notice</span> Call the cache method earliest in the space block.
+        </p>
+    </section>
+  </body>
+</document>
