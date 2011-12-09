@@ -32,15 +32,6 @@
   <name>MyBatis Scala API Core</name>
   <url>http://www.mybatis.org</url>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.scala-tools</groupId>
-        <artifactId>maven-scala-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -59,6 +50,15 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
   <reporting>
     <plugins>
