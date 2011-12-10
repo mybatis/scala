@@ -30,7 +30,6 @@
   <artifactId>mybatis-scala-samples</artifactId>
   <packaging>jar</packaging>
   <name>MyBatis Scala API Samples</name>
-  <url>http://www.mybatis.org</url>
 
   <dependencies>
     <dependency>

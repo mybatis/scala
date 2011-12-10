@@ -24,18 +24,39 @@
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
   lang="en">
 
-  <properties>
-    <title>MyBatis Scala</title>
-    <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
-    <date>$Date$</date>
-  </properties>
+    <properties>
+        <title>MyBatis Scala</title>
+        <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+        <date>$Date$</date>
+    </properties>
 
-  <body>
-    <section name="Introduction">
-      <p>
-        FILLME.
-      </p>
-    </section>
-  </body>
+    <body>
+        <section name="Introduction">
+            <p>
+        MyBatis is a persistence framework for Java, so you can use it in Scala as any other
+        java library, nonetheless the main API is too java centric, it uses Java annotations
+        and external xml files where you put your SQL.
+            </p>
+            <p>
+        The MyBatis Scala API is a lightweight wrapper, it  supports a 100% of the framework
+        functionality, taking advantage of the elegant Scala syntax and its type system.
+        With this API you can use the Scala collections and "Scala beans", and you can define
+        all you dynamic SQL code directly in your scala code without String concatenation
+        and with very clear syntax.
+            </p>
+            <p>
+        Appart from the main configuration xml file where you define the datasource and transaction
+        configurations, you will avoid use of external xml files and java Annotations.
+            </p>
+            <p>
+        The main documentation is at the core project:
+        <a href="mybatis-scala-core/index.html">mybatis-scala-core</a>
+            </p>
+            <p>
+        There are some examples here:
+        <a href="mybatis-scala-samples/index.html">mybatis-scala-samples</a>
+            </p>
+        </section>
+    </body>
 
 </document>
