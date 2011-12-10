@@ -27,7 +27,7 @@
   </parent>
   <groupId>org.mybatis.scala</groupId>
   <artifactId>mybatis-scala-parent</artifactId>
-  <version>1.0-RC1</version>
+  <version>1.0-RC2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MyBatis Scala</name>
   <url>http://www.mybatis.org/scala/1.0</url>
@@ -54,9 +54,9 @@
   </pluginRepositories>
 
   <scm>
-    <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-parent-1.0-RC1</url>
-    <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-parent-1.0-RC1</connection>
-    <developerConnection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-parent-1.0-RC1</developerConnection>
+    <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
+    <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
+    <developerConnection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</developerConnection>
   </scm>
 
   <distributionManagement>
