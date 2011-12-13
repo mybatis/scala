@@ -30,7 +30,7 @@
   <version>1.0-RC2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MyBatis Scala</name>
-  <url>http://www.mybatis.org/scala/1.0</url>
+  <url>http://www.mybatis.org/scala</url>
 
   <modules>
     <module>mybatis-scala-core</module>
@@ -62,7 +62,7 @@
   <distributionManagement>
     <site>
       <id>mybatis.site</id>
-      <url>ftp://${mybatis.host}/scala/${project.version}</url>
+      <url>ftp://${mybatis.host}/scala/</url>
     </site>
   </distributionManagement>
 
