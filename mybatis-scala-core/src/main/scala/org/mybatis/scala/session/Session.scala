@@ -53,15 +53,15 @@ class Session(sqls : SqlSession) {
   }
 
   def selectMap[Key,Value](statement : String, mapKey : String) : Map[Key,Value] = {
-    sqls.selectMap(statement, mapKey).toMap.asInstanceOf[Map[Key,Value]]
+    sqls.selectMap[Key,Value](statement, mapKey).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String) : Map[Key,Value] = {
-    sqls.selectMap(statement, parameter, mapKey).toMap.asInstanceOf[Map[Key,Value]]
+    sqls.selectMap[Key,Value](statement, parameter, mapKey).toMap //.toMap[Key,Value] //.asInstanceOf[Map[Key,Value]]
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String, rowBounds : RowBounds) : Map[Key,Value] = {
-    sqls.selectMap(statement, parameter, mapKey, rowBounds).toMap.asInstanceOf[Map[Key,Value]]
+    sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
   }
 
   def select[Param](statement : String, parameter : Param, handler : ResultHandler) : Unit = {

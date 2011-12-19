@@ -178,7 +178,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.flushCache,
             stmt.useCache,
             new NoKeyGenerator(),
-            null
+            null,
+            stmt.databaseId
           )
         case stmt : Insert[_] =>
           builderAssistant.addMappedStatement(
@@ -195,8 +196,9 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             ResultSetType.FORWARD_ONLY.unwrap,
             stmt.flushCache,
             false,
-            buildKeyGenerator(stmt.keyGenerator, stmt.parameterTypeClass, stmt.fqi.id),
-            if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyProperty
+            buildKeyGenerator(stmt.keyGenerator, stmt.parameterTypeClass, stmt.fqi.id, stmt.databaseId),
+            if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyProperty,
+            stmt.databaseId
           )
         case stmt : Update[_] =>
           builderAssistant.addMappedStatement(
@@ -214,7 +216,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.flushCache,
             false,
             new NoKeyGenerator(),
-            null
+            null,
+            stmt.databaseId
           )
         case stmt : Delete[_] =>
           builderAssistant.addMappedStatement(
@@ -232,7 +235,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.flushCache,
             false,
             new NoKeyGenerator(),
-            null
+            null,
+            stmt.databaseId
           )
         case unsupported =>
           error("Unsupported statement type")
@@ -244,18 +248,18 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   private def buildDynamicSQL(xsql : XSQL) : SqlSource
     = new DynamicSQLBuilder(configuration, xsql).build
 
-  private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[_], baseId : String) : MBKeyGenerator = {
+  private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
     generator match {
       case jdbc : JdbcGeneratedKey =>
         new Jdbc3KeyGenerator(jdbc.keyColumn)
       case sql : SqlGeneratedKey[_] =>
-        buildSqlKeyGenerator(sql, parameterTypeClass, baseId)
+        buildSqlKeyGenerator(sql, parameterTypeClass, baseId, databaseId)
       case _ =>
         new NoKeyGenerator()
     }
   }
 
-  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[_], parameterTypeClass : Class[_], baseId : String) : MBKeyGenerator = {
+  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[_], parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
 
     val id = baseId + SelectKeyGenerator.SELECT_KEY_SUFFIX
     val useCache = false
@@ -275,7 +279,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
 
     builderAssistant.addMappedStatement(id, sqlSource, statementType, sqlCommandType,
       fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,
-      resultSetTypeEnum, flushCache, useCache, keyGenerator, keyProperty)
+      resultSetTypeEnum, flushCache, useCache, keyGenerator, keyProperty, databaseId)
 
     val keyStatement = configuration.getMappedStatement(id, false)
     val answer = new SelectKeyGenerator(keyStatement, executeBefore)

@@ -42,7 +42,7 @@ trait Statement {
     */
   var flushCache      : Boolean = true
 
-  /** Reserved */
+  /** Vendor ID */
   var databaseId      : String = null
 
   /** Dynamic SQL definition, an xml node with root &lt;xsql&gt;

@@ -41,7 +41,7 @@
         The MyBatis Scala API is a lightweight wrapper, it  supports a 100% of the framework
         functionality, taking advantage of the elegant Scala syntax and its type system.
         With this API you can use the Scala collections and "Scala beans", and you can define
-        all you dynamic SQL code directly in your scala code without String concatenation
+        all your dynamic SQL code directly in your scala code without String concatenation
         and with very clear syntax.
             </p>
             <p>

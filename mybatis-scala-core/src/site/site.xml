@@ -29,6 +29,7 @@
       <item name="Mapping" href="mapping.html" />
       <item name="Session" href="session.html" />
       <item name="Cache" href="cache.html" />
+      <item name="API Docs" href="scaladocs/index.html#org.mybatis.scala.mapping.package" />
     </menu>
 
     <menu ref="reports"/>
