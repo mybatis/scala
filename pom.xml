@@ -27,7 +27,7 @@
   </parent>
   <groupId>org.mybatis.scala</groupId>
   <artifactId>mybatis-scala-parent</artifactId>
-  <version>1.0-RC3-SNAPSHOT</version>
+  <version>1.0-beta1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MyBatis Scala</name>
   <url>http://www.mybatis.org/scala</url>

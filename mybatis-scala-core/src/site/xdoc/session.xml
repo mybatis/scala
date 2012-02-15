@@ -46,7 +46,7 @@
         <p>
           This method opens a connection, executes a code block, calls rollback and close.
         </p>
-          <source><![CDATA[manager.readOnly {
+          <source><![CDATA[manager.readOnly { implicit session =>
 
     val list = findUsers("a%")
     for (user <- list) {
@@ -61,7 +61,7 @@
           This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
           else calls rollback, then close.
         </p>
-          <source><![CDATA[manager.transaction {
+          <source><![CDATA[manager.transaction { implicit session =>
 
     val user = new User
     user.name = "John"
@@ -77,7 +77,7 @@
         <p>
           This method opens a connection, executes a code block and closes the connection. The Transaction lifecycle
           must be managed externally by the container or manually by the developer.
-          <source><![CDATA[manager.managed {
+          <source><![CDATA[manager.managed { implicit session =>
 
     val user = new User
     user.name = "John"
