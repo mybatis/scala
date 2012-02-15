@@ -56,6 +56,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       null,
       null,
       null,
+      null,
       typeHandler,
       Seq(ResultFlag.ID))
 
@@ -84,6 +85,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       null,
       null,
       null,
+      null,
       typeHandler,
       Seq())
   }
@@ -107,6 +109,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       column,
       javaType,
       jdbcType,
+      null,
       null,
       null,
       null,
@@ -139,6 +142,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       select,
       resultMap,
       null,
+      null,
       typeHandler,
       Seq(ResultFlag.CONSTRUCTOR))
   }
@@ -165,6 +169,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     select : Select = null,
     resultMap : ResultMap[_] = null,
     notNullColumn : String = null,
+    columnPrefix : String = null,
     typeHandler : T[_ <: TypeHandler[_]] = null) = {
 
     mappings += new ResultMapping(
@@ -176,6 +181,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       select,
       resultMap,
       notNullColumn,
+      columnPrefix,
       typeHandler,
       Seq())
 
@@ -203,17 +209,19 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     select : Select = null,
     resultMap : ResultMap[_] = null,
     notNullColumn : String = null,
+    columnPrefix : String = null,
     typeHandler : T[_ <: TypeHandler[_]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
       property,
       column,
-      T[java.util.List[Type]],
+      null /* Let's mybatis infer this */,
       jdbcType,
       select,
       resultMap,
       notNullColumn,
+      columnPrefix,
       typeHandler,
       Seq())
 

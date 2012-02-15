@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package org.mybatis.scala.samples
+package org.mybatis.scala.samples.select
 
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
-import scala.reflect._
 
-object SelectSample {
+// Model beans =================================================================
 
-  // Simple Person POJO
-  class Person {
-    var id : Int = _
-    var firstName : String = _
-    var lastName : String = _
-  }
+class Person {
+  var id : Int = _
+  var firstName : String = _
+  var lastName : String = _
+}
 
-  // Simple select method
+// Data access layer ===========================================================
+
+object DB {
+
+  // Simple select function
   val findAll = new SelectList[String,Person] {
     def xsql =
       <xsql>
@@ -45,33 +47,41 @@ object SelectSample {
       </xsql>
   }
 
-  // Load datasource configuration
-  val config = Configuration("mybatis.xml")
+  // Datasource configuration
+  val config = Configuration(
+    Environment(
+      "default", 
+      new JdbcTransactionFactory(), 
+      new PooledDataSource(
+        "org.postgresql.Driver",
+        "jdbc:postgresql://127.0.0.1:5432/scala",
+        "scala",
+        "test"
+      )
+    )
+  )
 
-  // Create a configuration space, add the data access method
-  config.addSpace("ns1") { space =>
-    space += findAll
-  }
+  // Add the data access method to the default namespace
+  config += findAll
 
   // Build the session manager
-  val db = config.createPersistenceContext
+  lazy val context = config.createPersistenceContext
+  
+}
+
+// Application code ============================================================
+
+object SelectSample {
 
   // Do the Magic ...
   def main(args : Array[String]) : Unit = {
+    DB.context.readOnly { implicit session =>
 
-    db.readOnly { implicit session =>
-
-      for (p <- findAll("%a%"))
+      DB.findAll("%a%").foreach { p => 
         println( "Person(%d): %s %s".format(p.id, p.firstName, p.lastName) )
-
-      println("======================")
-
-      for (p <- findAll())
-        println( "Person(%d): %s %s".format(p.id, p.firstName, p.lastName) )
-
+      }
+      
     }
-
   }
-
 
 }

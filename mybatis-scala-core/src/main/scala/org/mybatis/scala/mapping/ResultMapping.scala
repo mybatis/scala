@@ -30,6 +30,7 @@ private[scala] class ResultMapping (
   nestedSelect_ : Select,
   nestedResultMap_ : ResultMap[_],
   notNullColumn_ : String,
+  columnPrefix_ : String,
   typeHandler : T[_ <: TypeHandler[_]],
   flags_ : Seq[ResultFlag] = Seq()
 ) {
@@ -44,5 +45,5 @@ private[scala] class ResultMapping (
   def notNullColumn : String = notNullColumn_
   def typeHandlerClass : Class[_ <: TypeHandler[_]] = if (typeHandler == null) null else typeHandler.unwrap
   def flags : JList[ResultFlagEnum] = for (f <- flags_) yield f.unwrap
-
+  def columnPrefix = columnPrefix_
 }

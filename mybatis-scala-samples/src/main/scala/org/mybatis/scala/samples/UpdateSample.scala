@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.mybatis.scala.samples
+package org.mybatis.scala.samples.update
 
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._

@@ -48,7 +48,7 @@ import org.apache.ibatis.session._
   */
 sealed class SessionManager(factory : SqlSessionFactory) {
 
-  type Callback = (Session) => Unit
+  type Callback[T] = (Session) => T
   type OpenSessionHook = (SqlSessionFactory) => SqlSession
   type CloseSessionHook = (SqlSession) => Unit
 
@@ -64,11 +64,12 @@ sealed class SessionManager(factory : SqlSessionFactory) {
   }
 
   /** Executes the callback within a new session and rollback at the end. */
-  def readOnly(callback : Callback) : Unit = {
+  def readOnly[T](callback : Callback[T]) : T = {
     val sqlSession = openSession(factory)
     try {
-      callback(new Session(sqlSession))
+      val ret = callback(new Session(sqlSession))
       sqlSession.rollback
+      ret
     }
     finally {
       closeSession(sqlSession)
@@ -76,11 +77,12 @@ sealed class SessionManager(factory : SqlSessionFactory) {
   }
 
   /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
-  def transaction(callback : Callback) : Unit = {
+  def transaction[T](callback : Callback[T]) : T = {
     val sqlSession = openSession(factory)
     try {
-      callback(new Session(sqlSession))
+      val t = callback(new Session(sqlSession))
       sqlSession.commit
+      t
     }
     catch {
       case e =>
@@ -93,7 +95,7 @@ sealed class SessionManager(factory : SqlSessionFactory) {
   }
 
   /** Executes the callback within a new session. Does not call any transaction method. */
-  def managed(callback : Callback) : Unit = {
+  def managed[T](callback : Callback[T]) : T = {
     val sqlSession = openSession(factory)
     try {
       callback(new Session(sqlSession))

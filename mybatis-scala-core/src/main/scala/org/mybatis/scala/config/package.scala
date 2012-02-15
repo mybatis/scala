@@ -35,4 +35,12 @@ package org.mybatis.scala
   */
 package object config {
 
+  type TransactionFactory = org.apache.ibatis.transaction.TransactionFactory
+  type JdbcTransactionFactory = org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
+  type ManagedTransactionFactory = org.apache.ibatis.transaction.managed.ManagedTransactionFactory
+  
+  type PooledDataSource = org.apache.ibatis.datasource.pooled.PooledDataSource
+  type UnpooledDataSource = org.apache.ibatis.datasource.unpooled.UnpooledDataSource
+  type JndiDataSourceFactory = org.apache.ibatis.datasource.jndi.JndiDataSourceFactory
+   
 }

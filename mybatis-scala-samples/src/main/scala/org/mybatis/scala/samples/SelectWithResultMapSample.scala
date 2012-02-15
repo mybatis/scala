@@ -14,37 +14,41 @@
  * limitations under the License.
  */
 
-package org.mybatis.scala.samples
+package org.mybatis.scala.samples.resultmap
 
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
 
-object SelectWithResultMapSample {
+// Model beans =================================================================
 
-  // Simple Group POJO
-  class Group {
-    var id : Int = _
-    var name : String = _
-  }
+// Simple Group POJO
+class Group {
+  var id : Int = _
+  var name : String = _
+}
 
-  // Simple ContactInfo POJO
-  class ContactInfo {
-    var id : Int = _
-    var address : String = _
-    var phone : String = _
-  }
+// Simple ContactInfo POJO
+class ContactInfo {
+  var id : Int = _
+  var address : String = _
+  var phone : String = _
+}
 
-  // Simple Person POJO
-  class Person {
-    var id : Int = _
-    var firstName : String = _
-    var lastName : String = _
-    var group : Group = _
-    var contact : java.util.List[ContactInfo] = _
-  }
+// Simple Person POJO with OneToMany to ContactInfo
+class Person {
+  var id : Int = _
+  var firstName : String = _
+  var lastName : String = _
+  var group : Group = _
+  var contact : Seq[ContactInfo] = _
+}
 
-  // Simple select method
+// Data access layer ===========================================================
+
+object Persistence {
+  
+  // Simple select function (Nothing) => List[Person]
   val findAll = new SelectList[Nothing,Person] {
 
     // Define the result mapping
@@ -54,14 +58,14 @@ object SelectWithResultMapSample {
       result(property="firstName", column="first_name_")
       result(property="lastName", column="last_name_")
 
-      association[Group] (property="group", column="group_id_",
+      association[Group] (property="group",
         resultMap= new ResultMap[Group] {
           id(property="id", column="group_id_")
           result(property="name", column="group_name_")
         }
       )
 
-      collection[ContactInfo] (property="contact", column="cinfo_id_",
+      collection[ContactInfo] (property="contact",
         resultMap= new ResultMap[ContactInfo] {
           id(property="id", column="cinfo_id_")
           result(property="address", column="street_address_")
@@ -85,25 +89,26 @@ object SelectWithResultMapSample {
       </xsql>
   }
 
-  // Load datasource configuration
+  // Load datasource configuration from an external file
   val config = Configuration("mybatis.xml")
 
-  // Create a configuration space, add the data access method
-  config.addSpace("ns1") { space =>
-    space += findAll
-  }
+  // Add the data access function to the default namespace
+  config += findAll
 
   // Build the session manager
-  val db = config.createPersistenceContext
+  lazy val context = config.createPersistenceContext
+  
+}
+
+// Application code ============================================================
+
+object SelectWithResultMapSample {
 
   // Do the Magic ...
   def main(args : Array[String]) : Unit = {
+    Persistence.context.readOnly { implicit session =>
 
-    db.readOnly { implicit session =>
-
-      import scala.collection.JavaConversions._
-
-      for (p <- findAll()) {
+      for (p <- Persistence.findAll()) {
         println("\nPerson(%d): %s %s is in group: %s".format(p.id, p.firstName, p.lastName, p.group.name))
         for (contact <- p.contact) {
           println("  Address: %s, Phone: %s".format(contact.address, contact.phone))
@@ -111,8 +116,6 @@ object SelectWithResultMapSample {
       }
 
     }
-
   }
-
 
 }

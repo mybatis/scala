@@ -21,6 +21,7 @@ package org.mybatis.scala.mapping
   */
 trait KeyGenerator {
   var keyProperty : String
+  var keyColumn   : String
 }
 
 /** JDBC 3 Key Generator implementation.
@@ -28,7 +29,10 @@ trait KeyGenerator {
   * @param keyColumn Column to be read from the generated keys resultset.
   * @param keyProperty Property to be set with the generated key value.
   */
-class JdbcGeneratedKey(val keyColumn : String, var keyProperty : String) extends KeyGenerator
+class JdbcGeneratedKey(keyColumn_ : String, keyProperty_ : String) extends KeyGenerator {
+  var keyColumn = keyColumn_
+  var keyProperty = keyProperty_
+}
 
 /** Factory of JdbcGeneratedKey */
 object JdbcGeneratedKey {
@@ -51,7 +55,7 @@ object JdbcGeneratedKey {
   *   }
   * }}}
   */
-abstract class SqlGeneratedKey[Type : Manifest] extends  {
+abstract class SqlGeneratedKey[Type : Manifest] extends KeyGenerator {
 
   /** Any one of STATEMENT, PREPARED or CALLABLE.
     * This causes MyBatis to use Statement, PreparedStatement or CallableStatement respectively.
@@ -61,6 +65,9 @@ abstract class SqlGeneratedKey[Type : Manifest] extends  {
 
   /** Property to be set. */
   var keyProperty     : String = "id"
+
+  /** Property to be set. */
+  var keyColumn       : String = null
 
   /** If true then this statement will be executed before the main statement. */
   var executeBefore   : Boolean = false

@@ -29,7 +29,6 @@ import java.util.Properties
   * @constructor Creates an empty configuration space.
   * @param configuration myBatis Configuration target
   * @param spaceName Space name or namespace
-  * @version \$Revision$
   */
 class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DEFAULT_") {
 
@@ -114,6 +113,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             resolveFQI(r.nestedSelect),
             resolveFQI(r.nestedResultMap),
             r.notNullColumn,
+            r.columnPrefix,
             r.typeHandlerClass,
             r.flags
           )
@@ -179,6 +179,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.useCache,
             new NoKeyGenerator(),
             null,
+            null,
             stmt.databaseId
           )
         case stmt : Insert[_] =>
@@ -198,6 +199,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             false,
             buildKeyGenerator(stmt.keyGenerator, stmt.parameterTypeClass, stmt.fqi.id, stmt.databaseId),
             if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyProperty,
+            if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyColumn,
             stmt.databaseId
           )
         case stmt : Update[_] =>
@@ -216,6 +218,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.flushCache,
             false,
             new NoKeyGenerator(),
+            null,
             null,
             stmt.databaseId
           )
@@ -236,6 +239,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             false,
             new NoKeyGenerator(),
             null,
+            null,
             stmt.databaseId
           )
         case unsupported =>
@@ -251,7 +255,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
     generator match {
       case jdbc : JdbcGeneratedKey =>
-        new Jdbc3KeyGenerator(jdbc.keyColumn)
+        new Jdbc3KeyGenerator()
       case sql : SqlGeneratedKey[_] =>
         buildSqlKeyGenerator(sql, parameterTypeClass, baseId, databaseId)
       case _ =>
@@ -274,12 +278,28 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     val sqlCommandType = SqlCommandType.SELECT
     val statementType = generator.statementType.unwrap
     val keyProperty = generator.keyProperty
+    val keyColumn = generator.keyColumn
     val executeBefore = generator.executeBefore
     val resultTypeClass = generator.resultTypeClass
 
-    builderAssistant.addMappedStatement(id, sqlSource, statementType, sqlCommandType,
-      fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,
-      resultSetTypeEnum, flushCache, useCache, keyGenerator, keyProperty, databaseId)
+    builderAssistant.addMappedStatement(
+      id, 
+      sqlSource, 
+      statementType, 
+      sqlCommandType,
+      fetchSize, 
+      timeout, 
+      parameterMap, 
+      parameterTypeClass, 
+      resultMap, 
+      resultTypeClass,
+      resultSetTypeEnum, 
+      flushCache, 
+      useCache, 
+      keyGenerator, 
+      keyProperty, 
+      keyColumn,
+      databaseId)
 
     val keyStatement = configuration.getMappedStatement(id, false)
     val answer = new SelectKeyGenerator(keyStatement, executeBefore)

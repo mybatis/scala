@@ -22,13 +22,25 @@ import java.io.Reader
 import org.apache.ibatis.io.Resources
 import org.mybatis.scala.session.SessionManager
 import java.util.Properties
+import org.mybatis.scala.mapping.Statement
+import org.mybatis.scala.mapping.T
+import org.mybatis.scala.cache._
 
 /** Mybatis Configuration
   * @constructor Creates a new Configuration with a wrapped myBatis Configuration.
   * @param configuration A myBatis Configuration instance.
-  * @version \$Revision$
   */
 sealed class Configuration(configuration : MBConfig) {
+  
+  if (configuration.getObjectFactory().getClass == classOf[org.apache.ibatis.reflection.factory.DefaultObjectFactory]) {
+    configuration.setObjectFactory(new ObjectFactory())
+  }
+  
+  if (configuration.getObjectWrapperFactory.getClass == classOf[org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory]) {
+    configuration.setObjectWrapperFactory(new ObjectWrapperFactory())
+  }
+  
+  lazy val defaultSpace = new ConfigurationSpace(configuration, "_DEFAULT_")
 
   /** Creates a new space of mapped statements.
     * @param name A Speca name (a.k.a. namespace)
@@ -40,6 +52,39 @@ sealed class Configuration(configuration : MBConfig) {
     this
   }
 
+  /** Adds a statement to the default space */
+  def += (s : Statement) = defaultSpace += s
+
+  /** Adds a sequence of statements to the default space */
+  def ++=(ss : Seq[Statement]) = defaultSpace ++= ss
+
+  /** Adds a mapper to the space */
+  def ++=(mapper : { def bind : Seq[Statement] }) = defaultSpace ++= mapper
+
+  /** Adds cache support to this space.
+    * @param impl Cache implementation class
+    * @param eviction cache eviction policy (LRU,FIFO,WEAK,SOFT)
+    * @param flushInterval any positive integer in milliseconds.
+    *        The default is not set, thus no flush interval is used and the cache is only flushed by calls to statements.
+    * @param size max number of objects that can live in the cache. Default is 1024
+    * @param readWrite A read-only cache will return the same instance of the cached object to all callers.
+    *        Thus such objects should not be modified.  This offers a significant performance advantage though.
+    *        A read-write cache will return a copy (via serialization) of the cached object,
+    *        this is slower, but safer, and thus the default is true.
+    * @param props implementation specific properties.
+    */
+  def cache(
+    impl : T[_ <: Cache] = DefaultCache,
+    eviction : T[_ <: Cache] = Eviction.LRU,
+    flushInterval : Long = -1,
+    size : Int = -1,
+    readWrite : Boolean = true,
+    props : Properties = null) = 
+      defaultSpace.cache(impl, eviction, flushInterval, size, readWrite, props)
+
+  /** Reference to an external Cache */
+  def cacheRef(that : ConfigurationSpace) = defaultSpace.cacheRef(that)
+  
   /** Builds a Session Manager */
   def createPersistenceContext = {
     val builder = new SqlSessionFactoryBuilder
@@ -48,9 +93,7 @@ sealed class Configuration(configuration : MBConfig) {
 
 }
 
-/** A factory of [[org.mybatis.scala.config.Configuration]] instances.
-  * @version \$Revision$
-  */
+/** A factory of [[org.mybatis.scala.config.Configuration]] instances. */
 object Configuration {
 
   /** Creates a Configuration built from a reader.
@@ -102,6 +145,13 @@ object Configuration {
     */
   def apply(path : String, env : String, properties : Properties) : Configuration = {
     apply(Resources.getResourceAsReader(path), env, properties)
+  }
+
+  /** Creates a Configuration built from an environment
+    * @param env Environment
+    */
+  def apply(env : Environment) : Configuration = {
+    new Configuration(new MBConfig(env.unwrap))
   }
 
 }
