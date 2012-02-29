@@ -42,10 +42,11 @@ object Main extends App {
     }
 
     // Change something ...
-    val item = ItemDAO findById(3)
-    item.description += " Updated at " + new java.util.Date
-    ItemDAO update item
-
+    for (item <- ItemDAO findById(3)) {
+      item.description += " Updated at " + new java.util.Date
+      ItemDAO update item
+    }
+    
     // Show again ...
     println("== With some changes =================")
     for (i <- ItemDAO.findAll()) {
@@ -53,8 +54,10 @@ object Main extends App {
     }
 
     // Delete something ...
-    ItemDAO delete item
-
+    for (item <- ItemDAO findById(3)) {
+      ItemDAO delete item
+    }
+    
     // Show again ...
     println("== With some items removed =================")
     for (i <- ItemDAO.findAll()) {

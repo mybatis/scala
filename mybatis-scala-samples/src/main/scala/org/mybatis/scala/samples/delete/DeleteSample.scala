@@ -83,9 +83,10 @@ object DeleteSample {
       for (p <- findAll())
         println( "\tPerson(%d): %s %s".format(p.id, p.firstName, p.lastName) )
 
-      val id = findMaxId()
-      deletePersonContacts(id)
-      deletePersonById(id)
+      for(id <- findMaxId()) {
+        deletePersonContacts(id)
+        deletePersonById(id)
+      }
 
       println("After =>")
       for (p <- findAll())

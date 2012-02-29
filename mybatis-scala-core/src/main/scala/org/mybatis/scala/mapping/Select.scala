@@ -139,11 +139,15 @@ abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply()(implicit s : Session) : Result
-    = s.selectOne[Result](fqi.id)
+  def apply()(implicit s : Session) : Option[Result] = {
+    val r = s.selectOne[Result](fqi.id);
+    if (r == null) None else Some(r)
+  }
 
-  def apply(param : Param)(implicit s : Session) : Result
-    = s.selectOne[Param,Result](fqi.id, param)
+  def apply(param : Param)(implicit s : Session) : Option[Result] = {
+    val r = s.selectOne[Param,Result](fqi.id, param)
+    if (r == null) None else Some(r)
+  }
 
 }
 

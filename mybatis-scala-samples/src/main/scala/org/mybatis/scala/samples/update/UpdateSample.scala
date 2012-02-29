@@ -69,16 +69,24 @@ object UpdateSample {
 
     db.transaction { implicit session =>
 
-      var p = findPerson(1)
-      println( "Before =>\n\tPerson(%d): %s, %s".format(p.id, p.lastName, p.firstName) )
-
-      p.firstName = "Sun (Updated " + new java.util.Date + ")"
-      updatePerson(p)
-
-      // Reload to verify
-      p = findPerson(1)
-      println( "After =>\n\tPerson(%d): %s, %s".format(p.id, p.lastName, p.firstName) )
-
+      findPerson(1) match {
+        case Some(p) =>
+          
+          // Show original
+          println("Before =>\n\tPerson(%d): %s, %s".format(p.id, p.lastName, p.firstName))
+          
+          // Update a property
+          p.firstName = "Sun (Updated " + new java.util.Date + ")"
+          updatePerson(p)     
+          
+          // Reload to verify
+          for (p2 <- findPerson(1)) 
+            println( "After =>\n\tPerson(%d): %s, %s".format(p2.id, p2.lastName, p2.firstName) )
+          
+        case None =>
+          println("Person with id=1 does not exists!!!")
+      }
+      
     }
 
   }
