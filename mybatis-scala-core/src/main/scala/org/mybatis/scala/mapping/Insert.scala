@@ -26,9 +26,9 @@ import org.mybatis.scala.session.Session
 abstract class Insert[Param : Manifest] extends Statement {
 
   /** Key Generator used to retrieve database generated keys.
-    * Defaults to JdbcGeneratedKey(null, "id")
+    * Defaults to null
     */
-  var keyGenerator : KeyGenerator = JdbcGeneratedKey(null, "id")
+  var keyGenerator : KeyGenerator = null //JdbcGeneratedKey(null, "id")
 
   def parameterTypeClass = manifest[Param].erasure
 

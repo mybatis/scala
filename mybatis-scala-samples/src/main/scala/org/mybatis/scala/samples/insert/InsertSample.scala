@@ -16,6 +16,7 @@
 
 package org.mybatis.scala.samples.insert
 
+import org.mybatis.scala.samples.util._
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
@@ -38,6 +39,7 @@ object InsertSample {
 
   // Simple insert method
   val insertPerson = new Insert[Person] {
+    keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql =
       <xsql>
         INSERT INTO person (first_name_, last_name_, group_id_)
@@ -47,6 +49,7 @@ object InsertSample {
 
   // Simple insert method
   val insertGroup = new Insert[Group] {
+    keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql =
       <xsql>
         INSERT INTO people_group (name_)
@@ -60,6 +63,7 @@ object InsertSample {
   // Create a configuration space, add the data access method
   config.addSpace("ns1") { space =>
     space ++= Seq(insertPerson, insertGroup)
+    space ++= DBSchema
   }
 
   // Build the session manager
@@ -70,6 +74,8 @@ object InsertSample {
 
     db.transaction { implicit session =>
 
+      DBSchema.create
+      
       val g = new Group
       g.name = "New Group"
 

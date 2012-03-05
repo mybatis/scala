@@ -19,6 +19,8 @@ package org.mybatis.scala.samples.resultmap
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
+import org.mybatis.scala.samples.util._
+
 
 // Model beans =================================================================
 
@@ -94,6 +96,8 @@ object Persistence {
 
   // Add the data access function to the default namespace
   config += findAll
+  config ++= DBSchema
+  config ++= DBSampleData
 
   // Build the session manager
   lazy val context = config.createPersistenceContext
@@ -106,8 +110,11 @@ object SelectWithResultMapSample {
 
   // Do the Magic ...
   def main(args : Array[String]) : Unit = {
-    Persistence.context.readOnly { implicit session =>
+    Persistence.context.transaction { implicit session =>
 
+      DBSchema.create
+      DBSampleData.populate
+      
       for (p <- Persistence.findAll()) {
         println("\nPerson(%d): %s %s is in group: %s".format(p.id, p.firstName, p.lastName, p.group.name))
         for (contact <- p.contact) {

@@ -19,6 +19,7 @@ package org.mybatis.scala.samples.delete
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
+import org.mybatis.scala.samples.util._
 
 object DeleteSample {
 
@@ -69,6 +70,8 @@ object DeleteSample {
     space += findMaxId
     space += deletePersonById
     space += deletePersonContacts
+    space ++= DBSchema
+    space ++= DBSampleData
   }
 
   // Build the session manager
@@ -79,6 +82,9 @@ object DeleteSample {
 
     db.transaction { implicit session =>
 
+      DBSchema.create
+      DBSampleData.populate
+      
       println("Before =>")
       for (p <- findAll())
         println( "\tPerson(%d): %s %s".format(p.id, p.firstName, p.lastName) )

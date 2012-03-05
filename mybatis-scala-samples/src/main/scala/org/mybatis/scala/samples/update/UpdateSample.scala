@@ -19,6 +19,7 @@ package org.mybatis.scala.samples.update
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
+import org.mybatis.scala.samples.util._
 
 object UpdateSample {
 
@@ -61,6 +62,9 @@ object UpdateSample {
     space += updatePerson += findPerson
   }
 
+  config ++= DBSchema
+  config ++= DBSampleData 
+  
   // Build the session manager
   val db = config.createPersistenceContext
 
@@ -69,6 +73,9 @@ object UpdateSample {
 
     db.transaction { implicit session =>
 
+      DBSchema.create
+      DBSampleData.populate      
+      
       findPerson(1) match {
         case Some(p) =>
           
