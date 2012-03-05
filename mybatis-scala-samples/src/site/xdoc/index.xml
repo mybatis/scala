@@ -42,7 +42,7 @@
                 <img src="images/ERD.png" alt="Sample Database ERD" />
             </p>
             <p>
-                Also all of them share the same configuration file:
+                Also most of them share the same configuration file:
                 <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/resources/mybatis.xml">mybatis.xml</a>
             </p>
             <p>
@@ -55,11 +55,11 @@
     <environments default="standalone">
         <environment id="standalone">
             <transactionManager type="JDBC" />
-            <dataSource type="POOLED">
-                <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="jdbc:postgresql://127.0.0.1:5432/scala"/>
-                <property name="username" value="scala"/>
-                <property name="password" value="test"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="org.hsqldb.jdbcDriver"/>
+                <property name="url" value="jdbc:hsqldb:mem:scala"/>
+                <property name="username" value="sa"/>
+                <property name="password" value=""/>
             </dataSource>
         </environment>
     </environments>
@@ -72,23 +72,27 @@
                 <ul>
                     <li>
                         Simple Select without result map:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/SelectSample.scala">Code</a>
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/select/SelectSample.scala">Code</a>
                     </li>
                     <li>
-                        Complex Select with result map:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/SelectWithResultMapSample.scala">Code</a>
+                        Complex Select with nested resultmaps:
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/resultmap/SelectWithResultMapSample.scala">Code</a>
+                    </li>
+                    <li>
+                        Complex Select with nested selects
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/nestedselect/NestedSelectSample.scala">Code</a>
                     </li>
                     <li>
                         Insert:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/InsertSample.scala">Code</a>
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/insert/InsertSample.scala">Code</a>
                     </li>
                     <li>
                         Update:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/UpdateSample.scala">Code</a>
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/update/UpdateSample.scala">Code</a>
                     </li>
                     <li>
                         Delete:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/DeleteSample.scala">Code</a>
+                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/delete/DeleteSample.scala">Code</a>
                     </li>
                 </ul>
             </p>

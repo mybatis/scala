@@ -20,38 +20,54 @@
   version: $Id$
 -->
 <document xmlns="http://maven.apache.org/XDOC/2.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
-  lang="en">
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
+          lang="en">
 
-  <properties>
-    <title>MyBatis Scala API > Introduction</title>
-    <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
-    <date>$Date$</date>
-  </properties>
+    <properties>
+        <title>MyBatis Scala API > Introduction</title>
+        <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+        <date>$Date$</date>
+    </properties>
 
-  <body>
-    <section name="Introduction">
-      <p>
-        MyBatis is one of the best advanced persistence frameworks available for java, it can be
-        used with Scala too, but the main API is Java centric. This sub-project is to provide a
-        more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
-        can be declared directly and elegantly in your scala code.
-      </p>
+    <body>
+        <section name="Disclaimer">
+            <p>This is a beta version. There could be minor changes before the final release.</p>
+        </section>
+        
+        <section name="Introduction">
+            <p>
+                MyBatis is one of the best advanced persistence frameworks available for java, it can be
+                used with Scala too, but the main API is Java centric. This sub-project is to provide a
+                more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
+                can be declared directly and elegantly in your scala code.
+            </p>
 
-      <subsection name="API Structure">
-        <p>
-          The API is structured in four main packages, each package contains types and objects related to a specific
-          concern. They are Configuration, Mapping, Session and Cache.
-        </p>
-        <ul>
-          <li><a href="./configuration.html">Configuration</a> package: <code>org.mybatis.scala.config</code></li>
-          <li><a href="./maping.html">Mapping</a> package: <code>org.mybatis.scala.mapping</code></li>
-          <li><a href="./session.html">Session</a> package: <code>org.mybatis.scala.session</code></li>
-          <li><a href="./cache.html">Cache</a> package: <code>org.mybatis.scala.cache</code></li>
-        </ul>
-      </subsection>
-    </section>
-  </body>
+            <subsection name="API Structure">
+                <p>
+                    The API is structured in four main packages, each package contains types and objects related to a specific
+                    concern. They are Configuration, Mapping, Session and Cache.
+                </p>
+                <ul>
+                    <li>
+                        <a href="./configuration.html">Configuration</a> package: 
+                        <code>org.mybatis.scala.config</code>
+                    </li>
+                    <li>
+                        <a href="./maping.html">Mapping</a> package: 
+                        <code>org.mybatis.scala.mapping</code>
+                    </li>
+                    <li>
+                        <a href="./session.html">Session</a> package: 
+                        <code>org.mybatis.scala.session</code>
+                    </li>
+                    <li>
+                        <a href="./cache.html">Cache</a> package: 
+                        <code>org.mybatis.scala.cache</code>
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+    </body>
 
 </document>
