@@ -80,7 +80,8 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
               if (defaultNode == null)
                 defaultNode = parseChildren(ch)
               else
-                error("Too many default (otherwise) elements in choose statement.")
+                throw new ConfigurationException("Too many default (otherwise) elements in choose statement.")
+                //error("Too many default (otherwise) elements in choose statement.")
           }
         }
         new ChooseSqlNode(ifNodes, defaultNode)
@@ -90,7 +91,8 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
       case other @ <otherwise>{children @ _*}</otherwise> =>
         parseChildren(other)
       case unsupported =>
-        error("Unknown element " + unsupported.toString + " in SQL statement.")
+        throw new ConfigurationException("Unknown element " + unsupported.toString + " in SQL statement.")
+        //error("Unknown element " + unsupported.toString + " in SQL statement.")
     }
   }
 

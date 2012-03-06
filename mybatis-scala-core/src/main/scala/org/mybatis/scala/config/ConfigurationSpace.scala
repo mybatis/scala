@@ -243,7 +243,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.databaseId
           )
         case unsupported =>
-          error("Unsupported statement type")
+          throw new ConfigurationException("Unsupported statement type")
+          //error("Unsupported statement type")
       }
     }
     this
