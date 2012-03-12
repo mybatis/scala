@@ -42,13 +42,6 @@
       <artifactId>scala-library</artifactId>
       <version>2.9.1</version>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.0-801.jdbc4</version>
-    </dependency>
-    -->
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>

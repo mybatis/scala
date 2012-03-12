@@ -37,22 +37,6 @@
     <module>mybatis-scala-samples</module>
   </modules>
 
-  <repositories>
-    <repository>
-      <id>scala-tools.org</id>
-      <name>Scala-tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>scala-tools.org</id>
-      <name>Scala-tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </pluginRepository>
-  </pluginRepositories>
-
   <scm>
     <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
     <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
