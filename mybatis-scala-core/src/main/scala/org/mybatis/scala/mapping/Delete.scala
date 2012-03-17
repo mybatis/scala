@@ -19,7 +19,7 @@ package org.mybatis.scala.mapping
 import org.mybatis.scala.session.Session
 
 /** A mapped SQL DELETE statement.
-  * Basically this defines a function: (p : Param => Int) where p is optional.
+  * Basically this defines a function: (Param => Int)
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
