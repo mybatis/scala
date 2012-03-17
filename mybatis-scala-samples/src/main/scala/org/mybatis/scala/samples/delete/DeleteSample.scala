@@ -31,7 +31,7 @@ object DeleteSample {
   }
 
   // Simple select method
-  val findAll = new SelectList[Nothing,Person] {
+  val findAll = new SelectList[Person] {
     def xsql =
       <xsql>
         SELECT id_ as id, first_name_ as firstName, last_name_ as lastName
@@ -40,7 +40,7 @@ object DeleteSample {
       </xsql>
   }
 
-  val findMaxId = new SelectOne[Nothing,Int] {
+  val findMaxId = new SelectOne[Int] {
     def xsql =
       <xsql>
         SELECT MAX(id_) FROM person

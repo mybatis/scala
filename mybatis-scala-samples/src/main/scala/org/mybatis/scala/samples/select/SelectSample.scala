@@ -34,7 +34,7 @@ class Person {
 object DB {
 
   // Simple select function
-  val findAll = new SelectList[String,Person] {
+  val findAll = new SelectListBy[String,Person] {
     def xsql =
       <xsql>
         SELECT

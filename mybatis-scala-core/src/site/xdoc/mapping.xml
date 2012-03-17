@@ -68,12 +68,12 @@
         <p>
           For example, if you want to select a User by its id:
         </p>
-          <source><![CDATA[val findUserById = new SelectOne[Int,User] {
+          <source><![CDATA[val findUserById = new SelectOneBy[Int,User] {
     def xsql = "SELECT * from user WHERE id = #{id}"
 }
 
 // this is also valid
-val findUserById = new SelectOne[Int,User] {
+val findUserById = new SelectOneBy[Int,User] {
     def xsql =
         <xsql>
             SELECT *
@@ -84,7 +84,7 @@ val findUserById = new SelectOne[Int,User] {
         <p>
           You can also select a list of users filtered by its name
         </p>
-          <source><![CDATA[val findUsers = new SelectList[String,User] {
+          <source><![CDATA[val findUsers = new SelectListBy[String,User] {
     def xsql =
         <xsql>
             SELECT *

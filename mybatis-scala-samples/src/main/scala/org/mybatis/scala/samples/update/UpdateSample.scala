@@ -44,7 +44,7 @@ object UpdateSample {
   }
 
   // Simple select method
-  val findPerson = new SelectOne[Int,Person] {
+  val findPerson = new SelectOneBy[Int,Person] {
     def xsql =
       <xsql>
         SELECT id_ as id, first_name_ as firstName, last_name_ as lastName

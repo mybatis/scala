@@ -41,8 +41,4 @@ package object session {
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
   type ResultHandler = MBResultHandler
 
-
-  /** Alias of [[org.apache.ibatis.session.RowBounds]] */
-  type RowBounds = MBRowBounds
-
 }

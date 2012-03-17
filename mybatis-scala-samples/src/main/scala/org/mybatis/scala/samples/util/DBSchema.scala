@@ -21,7 +21,7 @@ import org.mybatis.scala.session.Session
 
 object DBSchema {
 
-  val createPeopleGroupTable = new Update[Nothing] {
+  val createPeopleGroupTable = new Perform {
     def xsql = 
       <xsql>
         CREATE TABLE people_group (
@@ -32,7 +32,7 @@ object DBSchema {
       </xsql>
   }
   
-  val createPersonTable = new Update[Nothing] {
+  val createPersonTable = new Perform {
     def xsql = 
       <xsql>
         CREATE TABLE person (
@@ -46,7 +46,7 @@ object DBSchema {
       </xsql>
   }
   
-  val createContactInfoTable = new Update[Nothing] {
+  val createContactInfoTable = new Perform {
     def xsql = 
       <xsql>
         CREATE TABLE contact_info (

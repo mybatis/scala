@@ -51,7 +51,7 @@ class Person {
 object Persistence {
   
   // Simple select function (Nothing) => List[Person]
-  val findAll = new SelectList[Nothing,Person] {
+  val findAll = new SelectList[Person] {
 
     // Define the result mapping
     resultMap = new ResultMap[Person] {

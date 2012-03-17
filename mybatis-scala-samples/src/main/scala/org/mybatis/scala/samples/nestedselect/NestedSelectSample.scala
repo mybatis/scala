@@ -50,7 +50,7 @@ class Person {
 object Persistence {
 
   // Query for a Group
-  val selectGroup = new SelectOne[Int,Group] {
+  val selectGroup = new SelectOneBy[Int,Group] {
     def xsql = 
       <xsql>
       SELECT id_ as id, name_ as name 
@@ -60,7 +60,7 @@ object Persistence {
   }
   
   // Query for a list of contact info
-  val selectContact = new SelectList[Int,ContactInfo] {
+  val selectContact = new SelectListBy[Int,ContactInfo] {
     resultMap = new ResultMap[ContactInfo] {
       id(property="id", column="id_")
       result(property="address", column="street_address_")
@@ -70,7 +70,7 @@ object Persistence {
   }
   
   // Query for a list of all persons
-  val findAll = new SelectList[Nothing,Person] {
+  val findAll = new SelectList[Person] {
 
     // Define the result mapping
     resultMap = new ResultMap[Person] {

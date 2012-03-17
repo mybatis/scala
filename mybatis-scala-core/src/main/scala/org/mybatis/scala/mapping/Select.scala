@@ -20,7 +20,6 @@ import org.mybatis.scala.session.{Session, RowBounds}
 import scala.collection.JavaConversions._
 
 /** Base class for all Select statements.
-  * @version \$Revision$
   */
 sealed trait Select extends Statement {
 
@@ -49,24 +48,14 @@ sealed trait Select extends Statement {
 
 }
 
-/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
-  * or null (none). If any more than one, an exception will be thrown.
-  *
-  * If you don’t know how many objects are expected, use selectList.
-  *
-  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
-  *
-  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
-  * one of the properties in the resulting objects.
-  *
-  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+/** Query for a list of objects.
   *
   * == Details ==
-  * This class defines a function: ((param : Param, rowBounds : RowBounds) => List[Result]) where param and rowBounds are optional.
+  * This class defines a function: (=> List[Result])
   *
   * == Sample code ==
   * {{{
-  *   val findAll = new SelectList[Nothing,Person] {
+  *   val findAll = new SelectList[Person] {
   *     def xsql = "SELECT * FROM person ORDER BY name"
   *   }
   *
@@ -79,47 +68,169 @@ sealed trait Select extends Statement {
   *   }
   *
   * }}}
-  * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectList[Param : Manifest, Result : Manifest] extends Select {
+abstract class SelectList[Result : Manifest] 
+  extends Select 
+  with SQLFunction0[List[Result]] {
 
-  def parameterTypeClass = manifest[Param].erasure
+  def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
   def apply()(implicit s : Session) : List[Result]
     = s.selectList[Result](fqi.id)
 
+}
+
+/** Query for a list of objects using the input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param => List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findByName = new SelectListBy[String,Person] {
+  *     def xsql = "SELECT * FROM person WHERE name LIKE #{name}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByName("John%")
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
+abstract class SelectListBy[Param : Manifest, Result : Manifest] 
+  extends Select 
+  with SQLFunction1[Param, List[Result]] {
+
+  def parameterTypeClass = manifest[Param].erasure
+  def resultTypeClass = manifest[Result].erasure
+
   def apply(param : Param)(implicit s : Session) : List[Result]
     = s.selectList[Param,Result](fqi.id, param)
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : List[Result]
-    = s.selectList[Param,Result](fqi.id, param, rowBounds)
+}
+
+/** Query for a list of objects with RowBounds.
+  *
+  * == Details ==
+  * This class defines a function: (RowBounds => List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findAll = new SelectListPage[Person] {
+  *     def xsql = "SELECT * FROM person ORDER BY name"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findAll(RowBounds(100, 20))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result retult type
+  */
+abstract class SelectListPage[Result : Manifest] 
+  extends Select 
+  with SQLFunction1[RowBounds,List[Result]] {
+
+  def parameterTypeClass = classOf[Nothing]
+  def resultTypeClass = manifest[Result].erasure
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : List[Result]
     = s.selectList[Null,Result](fqi.id, null, rowBounds)
 
 }
 
-/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
-  * or null (none). If any more than one, an exception will be thrown.
-  *
-  * If you don’t know how many objects are expected, use selectList.
-  *
-  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
-  *
-  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
-  * one of the properties in the resulting objects.
-  *
-  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+/** Query for a list of objects with RowBounds and one input parameter.
   *
   * == Details ==
-  * This class defines a function: ((param : Param) => Result) where param is optional.
+  * This class defines a function: ((Param, RowBounds) => List[Result])
   *
   * == Sample code ==
   * {{{
-  *   val find = new SelectOne[Int,Person] {
-  *     def xsql = "SELECT * FROM person WHERE id = #{{id}}"
+  *   val findByName = new SelectListPageBy[String,Person] {
+  *     def xsql = "SELECT * FROM person WHERE name LIKE #{name}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByName("John%", RowBounds(100, 20))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
+abstract class SelectListPageBy[Param : Manifest, Result : Manifest] 
+  extends Select
+  with SQLFunction2[Param, RowBounds, List[Result]] {
+
+  def parameterTypeClass = manifest[Param].erasure
+  def resultTypeClass = manifest[Result].erasure
+
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : List[Result]
+    = s.selectList[Param,Result](fqi.id, param, rowBounds)
+
+}
+
+/** Query for a single object.
+  *
+  * == Details ==
+  * This class defines a function: (=> Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOne[Person] {
+  *     def xsql = "SELECT * FROM person WHERE id = 1"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find()
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result retult type
+  */
+abstract class SelectOne[Result : Manifest] 
+  extends Select
+  with SQLFunction0[Option[Result]] {
+
+  def parameterTypeClass = classOf[Nothing]
+  def resultTypeClass = manifest[Result].erasure
+
+  def apply()(implicit s : Session) : Option[Result] = {
+    val r = s.selectOne[Result](fqi.id);
+    if (r == null) None else Some(r)
+  }
+
+}
+
+/** Query for a single object using an input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param => Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOneBy[Int,Person] {
+  *     def xsql = "SELECT * FROM person WHERE id = #{id}"
   *   }
   *
   *   // Configuration etc .. omitted ..
@@ -134,15 +245,12 @@ abstract class SelectList[Param : Manifest, Result : Manifest] extends Select {
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
+abstract class SelectOneBy[Param : Manifest, Result : Manifest] 
+  extends Select
+  with SQLFunction1[Param, Option[Result]] {
 
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
-
-  def apply()(implicit s : Session) : Option[Result] = {
-    val r = s.selectOne[Result](fqi.id);
-    if (r == null) None else Some(r)
-  }
 
   def apply(param : Param)(implicit s : Session) : Option[Result] = {
     val r = s.selectOne[Param,Result](fqi.id, param)
@@ -151,24 +259,14 @@ abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
 
 }
 
-/** The difference between SelectOne and SelectList is only in that SelectOne must return exactly one object
-  * or null (none). If any more than one, an exception will be thrown.
-  *
-  * If you don’t know how many objects are expected, use selectList.
-  *
-  * If you want to check for the existence of an object, you’re better off returning a count (0 or 1).
-  *
-  * The SelectMap is a special case in that it is designed to convert a list of results into a Map based on
-  * one of the properties in the resulting objects.
-  *
-  * Because not all statements require a parameter, these methods are overloaded with versions that do not require the parameter object.
+/** Query for a Map of objects.
   *
   * == Details ==
-  * This class defines a function: ((param : Param) => Map[ResultKey, ResultValue]) where param is optional.
+  * This class defines a function: (=> Map[ResultKey, ResultValue])
   *
   * == Sample code ==
   * {{{
-  *   val peopleMapById = new SelectMap[Nothing,Long,Person](mapKey="id") {
+  *   val peopleMapById = new SelectMap[Long,Person](mapKey="id") {
   *     def xsql = "SELECT * FROM person"
   *   }
   *
@@ -182,26 +280,132 @@ abstract class SelectOne[Param : Manifest, Result : Manifest] extends Select {
   *   }
   *
   * }}}
-  * @tparam Param input parameter type
   * @tparam ResultKey map Key type
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMap[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) extends Select {
+abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String) 
+  extends Select
+  with SQLFunction0[Map[ResultKey, ResultValue]] {
 
-  def parameterTypeClass = manifest[Param].erasure
+  def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[ResultValue].erasure
 
   def apply()(implicit s : Session) : Map[ResultKey, ResultValue]
     = s.selectMap[ResultKey,ResultValue](fqi.id, mapKey)
 
+}
+
+/** Query for a Map of objects using an input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param => Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapBy[String,Long,Person](mapKey="id") {
+  *     def xsql = "SELECT * FROM person WHERE name LIKE #{name}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById("John%")
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) 
+  extends Select
+  with SQLFunction1[Param, Map[ResultKey, ResultValue]] {
+
+  def parameterTypeClass = manifest[Param].erasure
+  def resultTypeClass = manifest[ResultValue].erasure
+
   def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue]
     = s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey)
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue]
-    = s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds)
+} 
+
+/** Query for a Map of objects with RowBounds.
+  *
+  * == Details ==
+  * This class defines a function: (RowBounds => Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapPage[Long,Person](mapKey="id") {
+  *     def xsql = "SELECT * FROM person"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById(RowBounds(100,20))
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String) 
+  extends Select
+  with SQLFunction1[RowBounds, Map[ResultKey, ResultValue]] {
+
+  def parameterTypeClass = classOf[Nothing]
+  def resultTypeClass = manifest[ResultValue].erasure
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue]
     = s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds)
 
-}
+} 
+
+/** Query for a Map of objects with RowBounds and one input parameter.
+  *
+  * == Details ==
+  * This class defines a function: ((Param, RowBounds) => Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapPageBy[String,Long,Person](mapKey="id") {
+  *     def xsql = "SELECT * FROM person WHERE name LIKE #{name}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById("John%", RowBounds(100,20))
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) 
+  extends Select
+  with SQLFunction2[Param, RowBounds, Map[ResultKey, ResultValue]] {
+
+  def parameterTypeClass = manifest[Param].erasure
+  def resultTypeClass = manifest[ResultValue].erasure
+
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue]
+    = s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds)
+
+} 
+ 

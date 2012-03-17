@@ -49,7 +49,7 @@ class Session(sqls : SqlSession) {
   }
 
   def selectList[Param,Result](statement : String, parameter : Param, rowBounds : RowBounds) : List[Result] = {
-    sqls.selectList(statement, parameter, rowBounds).toList.asInstanceOf[List[Result]]
+    sqls.selectList(statement, parameter, rowBounds.unwrap).toList.asInstanceOf[List[Result]]
   }
 
   def selectMap[Key,Value](statement : String, mapKey : String) : Map[Key,Value] = {
@@ -61,7 +61,7 @@ class Session(sqls : SqlSession) {
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String, rowBounds : RowBounds) : Map[Key,Value] = {
-    sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
+    sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
   }
 
   def select[Param](statement : String, parameter : Param, handler : ResultHandler) : Unit = {
@@ -73,7 +73,7 @@ class Session(sqls : SqlSession) {
   }
 
   def select[Param](statement : String, parameter : Param, rowBounds : RowBounds, handler : ResultHandler) : Unit = {
-    sqls.select(statement, parameter, rowBounds, handler)
+    sqls.select(statement, parameter, rowBounds.unwrap, handler)
   }
 
   def insert(statement : String) : Int = {

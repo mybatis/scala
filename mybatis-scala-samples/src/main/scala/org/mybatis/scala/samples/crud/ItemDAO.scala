@@ -32,12 +32,12 @@ object ItemDAO {
       FROM item
     </xsql>
 
-  val findAll = new SelectList[Nothing,Item] {
+  val findAll = new SelectList[Item] {
     resultMap = ItemResultMap
     def xsql = selectSql
   }
 
-  val findByDescription = new SelectList[String,Item] {
+  val findByDescription = new SelectListBy[String,Item] {
     resultMap = ItemResultMap
     def xsql =
       <xsql>
@@ -47,7 +47,7 @@ object ItemDAO {
       </xsql>
   }
 
-  val findById = new SelectOne[Int,Item] {
+  val findById = new SelectOneBy[Int,Item] {
     resultMap = ItemResultMap
     def xsql =
       <xsql>
@@ -87,14 +87,14 @@ object ItemDAO {
     def xsql = deleteSql
   }
 
-  val dropTable = new Update[Nothing] {
+  val dropTable = new Perform {
     def xsql =
       <xsql>
         DROP TABLE IF EXISTS item
       </xsql>
   }
 
-  val createTable = new Update[Nothing] {
+  val createTable = new Perform {
     def xsql =
       <xsql>
         CREATE TABLE item (

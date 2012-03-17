@@ -242,6 +242,26 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             null,
             stmt.databaseId
           )
+        case stmt : Perform =>
+          builderAssistant.addMappedStatement(
+            stmt.fqi.resolveIn(spaceName),
+            buildDynamicSQL(stmt.xsql),
+            stmt.statementType.unwrap,
+            SqlCommandType.UPDATE,
+            null,
+            if (stmt.timeout > -1) stmt.timeout else null,
+            null,
+            stmt.parameterTypeClass,
+            null,
+            classOf[Int],
+            ResultSetType.FORWARD_ONLY.unwrap,
+            stmt.flushCache,
+            false,
+            new NoKeyGenerator(),
+            null,
+            null,
+            stmt.databaseId
+          )
         case unsupported =>
           throw new ConfigurationException("Unsupported statement type")
           //error("Unsupported statement type")

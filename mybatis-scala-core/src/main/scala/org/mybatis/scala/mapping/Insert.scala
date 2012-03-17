@@ -23,7 +23,9 @@ import org.mybatis.scala.session.Session
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
-abstract class Insert[Param : Manifest] extends Statement {
+abstract class Insert[Param : Manifest] 
+  extends Statement
+     with SQLFunction1[Param,Int] {
 
   /** Key Generator used to retrieve database generated keys.
     * Defaults to null
@@ -31,14 +33,6 @@ abstract class Insert[Param : Manifest] extends Statement {
   var keyGenerator : KeyGenerator = null //JdbcGeneratedKey(null, "id")
 
   def parameterTypeClass = manifest[Param].erasure
-
-  /** Exceutes the SQL INSERT Statement
-    * @param s Implicit Session
-    * @return number of affected rows
-    */
-  def apply()(implicit s : Session) : Int = {
-    s.insert(fqi.id)
-  }
 
   /** Exceutes the SQL INSERT Statement
     * @param param Input paramenter of the statement
