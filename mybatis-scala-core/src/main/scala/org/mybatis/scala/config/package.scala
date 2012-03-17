@@ -31,7 +31,25 @@ package org.mybatis.scala
   * }
   * val persistenceContext = config.createPersistenceContext
   * }}}
-  * @version \$Revision$
+  * 
+  * == Another example without external XML file and with default namespace ==
+  * {{{
+  * val config = Configuration(
+  *  Environment(
+  *    "default", 
+  *    new JdbcTransactionFactory(), 
+  *    new PooledDataSource(
+  *      "org.hsqldb.jdbcDriver",
+  *      "jdbc:hsqldb:mem:scala",
+  *      "sa",
+  *      ""
+  *    )
+  *  )
+  * )
+  * config ++= MyDAO
+  * 
+  * val persistenceContext = config.createPersistenceContext
+  * }}}
   */
 package object config {
 
