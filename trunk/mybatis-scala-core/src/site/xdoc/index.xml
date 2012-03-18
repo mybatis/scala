@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2010-2011 The myBatis Team
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<!--
+  version: $Id$
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
+          lang="en">
+
+    <properties>
+        <title>MyBatis Scala API > Introduction</title>
+        <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+        <date>$Date$</date>
+    </properties>
+
+    <body>
+        <section name="Disclaimer">
+            <p>This is a beta version. There could be minor changes before the final release.</p>
+        </section>
+        
+        <section name="Introduction">
+            <p>
+                MyBatis is one of the best advanced persistence frameworks available for java, it can be
+                used with Scala too, but the main API is Java centric. This sub-project is to provide a
+                more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
+                can be declared directly and elegantly in your scala code.
+            </p>
+
+            <subsection name="API Structure">
+                <p>
+                    The API is structured in four main packages, each package contains types and objects related to a specific
+                    concern. They are Configuration, Mapping, Session and Cache.
+                </p>
+                <ul>
+                    <li>
+                        <a href="./configuration.html">Configuration</a> package: 
+                        <code>org.mybatis.scala.config</code>
+                    </li>
+                    <li>
+                        <a href="./mapping.html">Mapping</a> package: 
+                        <code>org.mybatis.scala.mapping</code>
+                    </li>
+                    <li>
+                        <a href="./session.html">Session</a> package: 
+                        <code>org.mybatis.scala.session</code>
+                    </li>
+                    <li>
+                        <a href="./cache.html">Cache</a> package: 
+                        <code>org.mybatis.scala.cache</code>
+                    </li>
+                </ul>
+            </subsection>
+        </section>
+    </body>
+
+</document>

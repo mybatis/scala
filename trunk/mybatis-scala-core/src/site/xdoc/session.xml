@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2010-2011 The myBatis Team
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<!--
+  version: $Id$
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
+  lang="en">
+
+  <properties>
+    <title>MyBatis Scala API > Session</title>
+    <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+    <date>$Date$</date>
+  </properties>
+
+  <body>
+    <section name="Session">
+      <p>
+          The <code>org.mybatis.scala.session</code> package provides service classes to execute your mapped statements
+          against a database connection.
+        </p>
+        <p>
+          The main class in this package is SessionManager which its instances are provided by the configuration
+          object. You should have only one instance of the SessionManager in your application. Just like
+          SqlSessionFactory. This class is disconnected, it only create connections when you call a connected method.
+        </p>
+
+        <subsection name="readOnly">
+        <p>
+          This method opens a connection, executes a code block, calls rollback and close.
+        </p>
+          <source><![CDATA[manager.readOnly { implicit session =>
+
+    val list = findUsers("a%")
+    for (user <- list) {
+        // Do something with user
+    }
+
+}]]></source>
+        </subsection>
+
+        <subsection name="transaction">
+        <p>
+          This method opens a connection, executes a code block, and calls commit if no exceptions are thrown,
+          else calls rollback, then close.
+        </p>
+          <source><![CDATA[manager.transaction { implicit session =>
+
+    val user = new User
+    user.name = "John"
+    user.username = "john1"
+    user.password = "12345"
+
+    insertNewUser(user)
+
+}]]></source>
+      </subsection>
+
+      <subsection name="managed">
+        <p>
+          This method opens a connection, executes a code block and closes the connection. The Transaction lifecycle
+          must be managed externally by the container or manually by the developer.
+          <source><![CDATA[manager.managed { implicit session =>
+
+    val user = new User
+    user.name = "John"
+    user.username = "john1"
+    user.password = "12345"
+
+    insertNewUser(user)
+
+}]]></source>
+        </p>
+      </subsection>
+    </section>
+  </body>
+</document>

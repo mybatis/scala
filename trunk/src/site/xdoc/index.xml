@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2011-2012 The myBatis Team
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+<!--
+  version: $Id$
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd"
+  lang="en">
+
+    <properties>
+        <title>MyBatis Scala</title>
+        <author email="mybatis-dev@googlegroups.com">The MyBatis Team</author>
+        <date>$Date$</date>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+        MyBatis is a persistence framework for Java, so you can use it in Scala as any other
+        java library, nonetheless the main API is too java centric, it uses Java annotations
+        and external xml files where you put your SQL.
+            </p>
+            <p>
+        The MyBatis Scala API is a lightweight wrapper, it  supports a 100% of the framework
+        functionality, taking advantage of the elegant Scala syntax and its type system.
+        With this API you can use the Scala collections and "Scala beans", and you can define
+        all your dynamic SQL code directly in your scala code without String concatenation
+        and with very clear syntax.
+            </p>
+            <p>
+        Appart from the main configuration xml file where you define the datasource and transaction
+        configurations, you will avoid use of external xml files and java Annotations.
+            </p>
+            <p>
+        The main documentation is at the core project:
+        <a href="mybatis-scala-core/index.html">mybatis-scala-core</a>
+            </p>
+            <p>
+        There are some examples here:
+        <a href="mybatis-scala-samples/index.html">mybatis-scala-samples</a>
+            </p>
+        </section>
+    </body>
+
+</document>
