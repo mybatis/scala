@@ -55,34 +55,23 @@
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
-        <version>2.15.2</version>
       </plugin>
-      
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <version>3.0</version>
-            <configuration>
-                <reportPlugins>
-                    <plugin>
-                        <groupId>org.scala-tools</groupId>
-                        <artifactId>maven-scala-plugin</artifactId>
-                        <version>2.15.2</version>
-                    </plugin>
-                </reportPlugins>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>attach-descriptor</id>
-                    <goals>
-                        <goal>attach-descriptor</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-      
-      
-    </plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-site-plugin</artifactId>
+      <version>3.0</version>
+      <configuration>
+        <reportPlugins>
+          <plugin>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <version>2.15.2</version>
+          </plugin>
+        </reportPlugins>
+      </configuration>
+    </plugin>
+  </plugins>
   </build>
 
 </project>
