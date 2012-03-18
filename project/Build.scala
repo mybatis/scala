@@ -6,7 +6,7 @@ object BuildSettings {
     organization := "org.mybatis.scala",
     version      := "1.0-beta1",
     scalaVersion := "2.9.1"
-  )  
+  )
 }
 
 object Resolvers {
@@ -26,10 +26,10 @@ object MainBuild extends Build {
   import BuildSettings._
   import Resolvers._
   import Dependencies._
-  
+
   val coreDeps = Seq(mybatis, scalatest)
   val coreResolvers = Seq(sonatypeSnapshots, sonatype)
-  
+
   lazy val root = Project(
     "mybatis-scala-parent",
     file("."),
