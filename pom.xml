@@ -79,11 +79,11 @@
         <artifactId>maven-pdf-plugin</artifactId>
       </plugin>
       <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-release-plugin</artifactId>
-      <configuration>
-        <arguments>-Prelease,bundle,gupload</arguments>
-      </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <arguments>-Prelease,bundle,gupload</arguments>
+        </configuration>
       </plugin>
     </plugins>
 
