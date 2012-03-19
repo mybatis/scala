@@ -65,6 +65,7 @@
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <javac.src.version>1.6</javac.src.version>
     <javac.target.version>1.6</javac.target.version>
+    <gcu.product>Scala</gcu.product>
     <!--
      | see distributionManagement.site.url
     -->
