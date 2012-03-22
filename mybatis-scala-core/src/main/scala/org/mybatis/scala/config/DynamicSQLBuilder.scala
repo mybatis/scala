@@ -90,8 +90,10 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
         new IfSqlNode(content, attr(ifNode, "@test"))
       case other @ <otherwise>{children @ _*}</otherwise> =>
         parseChildren(other)
+      case a : Atom[String] =>
+        new TextSqlNode(a.data)
       case unsupported =>
-        throw new ConfigurationException("Unknown element " + unsupported.toString + " in SQL statement.")
+        throw new ConfigurationException("Unknown element " + unsupported.getClass.getName + " in SQL statement.")
         //error("Unknown element " + unsupported.toString + " in SQL statement.")
     }
   }

@@ -36,7 +36,7 @@ object DB {
   // Simple select function
   val findAll = new SelectListBy[String,Person] {
     def xsql =
-      <xsql>
+      """
         SELECT
           id_ as id,
           first_name_ as firstName,
@@ -44,8 +44,8 @@ object DB {
         FROM
           person
         WHERE
-          first_name_ LIKE #{{name}}
-      </xsql>
+          first_name_ LIKE #{name}
+      """
   }
 
   // Datasource configuration
