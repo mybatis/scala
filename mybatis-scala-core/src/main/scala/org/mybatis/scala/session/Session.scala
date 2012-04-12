@@ -109,5 +109,7 @@ class Session(sqls : SqlSession) {
   def rollback(force : Boolean) : Unit = sqls.rollback(force)
 
   def clearCache : Unit = sqls.clearCache
+  
+  def flushStatements : Seq[BatchResult] = sqls.flushStatements
 
 }

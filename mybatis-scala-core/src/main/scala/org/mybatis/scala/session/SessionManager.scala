@@ -49,23 +49,19 @@ import org.apache.ibatis.session._
 sealed class SessionManager(factory : SqlSessionFactory) {
 
   type Callback[T] = (Session) => T
-  type OpenSessionHook = (SqlSessionFactory) => SqlSession
   type CloseSessionHook = (SqlSession) => Unit
 
-  private var openSession : OpenSessionHook = {(f : SqlSessionFactory) => f.openSession}
   private var closeSession : CloseSessionHook = {(s : SqlSession) => s.close}
-
-  def openSessionHook(hook : OpenSessionHook) = {
-    openSession = hook
-  }
 
   def closeSessionHook(hook : CloseSessionHook) = {
     closeSession = hook
   }
 
   /** Executes the callback within a new session and rollback at the end. */
-  def readOnly[T](callback : Callback[T]) : T = {
-    val sqlSession = openSession(factory)
+  def readOnly[T](
+    executorType : ExecutorType = ExecutorType.SIMPLE,
+    level: TransactionIsolationLevel = TransactionIsolationLevel.UNDEFINED)(callback : Callback[T]) : T = {
+    val sqlSession = factory.openSession(executorType.unwrap, level.unwrap)
     try {
       val ret = callback(new Session(sqlSession))
       sqlSession.rollback
@@ -74,11 +70,12 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     finally {
       closeSession(sqlSession)
     }
-  }
+  }  
+  
+  /** Executes the callback within a new session and rollback at the end. */
+  def readOnly[T](callback : Callback[T]) : T = readOnly[T]()(callback)
 
-  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
-  def transaction[T](callback : Callback[T]) : T = {
-    val sqlSession = openSession(factory)
+  private def transaction[T](sqlSession : SqlSession)(callback : Callback[T]) : T = {
     try {
       val t = callback(new Session(sqlSession))
       sqlSession.commit
@@ -94,9 +91,33 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
   }
 
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType, level : TransactionIsolationLevel)(callback : Callback[T]) : T = 
+    transaction[T](factory.openSession(executorType.unwrap, level.unwrap))(callback)
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType)(callback : Callback[T]) : T = 
+    transaction[T](factory.openSession(executorType.unwrap))(callback)
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](level : TransactionIsolationLevel)(callback : Callback[T]) : T = 
+    transaction[T](factory.openSession(level.unwrap))(callback)
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType, autoCommit : Boolean)(callback : Callback[T]) : T = 
+    transaction[T](factory.openSession(executorType.unwrap, autoCommit))(callback)
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](autoCommit : Boolean)(callback : Callback[T]) : T = 
+    transaction[T](factory.openSession(autoCommit))(callback)
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](callback : Callback[T]) : T = 
+    transaction[T](ExecutorType.SIMPLE, TransactionIsolationLevel.UNDEFINED)(callback)
+
   /** Executes the callback within a new session. Does not call any transaction method. */
-  def managed[T](callback : Callback[T]) : T = {
-    val sqlSession = openSession(factory)
+  def managed[T](executorType : ExecutorType)(callback : Callback[T]) : T = {
+    val sqlSession = factory.openSession(executorType.unwrap)
     try {
       callback(new Session(sqlSession))
     }
@@ -105,4 +126,7 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
   }
 
+  /** Executes the callback within a new session. Does not call any transaction method. */
+  def managed[T](callback : Callback[T]) : T = managed[T](ExecutorType.SIMPLE)(callback)
+  
 }

@@ -40,5 +40,8 @@ package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
   type ResultHandler = MBResultHandler
-
+  
+  /** Alias of [[org.apache.ibatis.executor.BatchResult]] */
+  type BatchResult = org.apache.ibatis.executor.BatchResult
+  
 }
