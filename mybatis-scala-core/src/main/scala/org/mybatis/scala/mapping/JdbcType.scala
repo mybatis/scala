@@ -21,6 +21,7 @@ import org.apache.ibatis.`type`.{JdbcType => JdbcTypeEnum}
 /** A wrapper of [[org.apache.ibatis.type.JdbcType]] */
 sealed trait JdbcType {
   val unwrap : JdbcTypeEnum
+  override def toString = unwrap.toString
 }
 
 /** A wrapper of [[org.apache.ibatis.type.JdbcType]] values. */

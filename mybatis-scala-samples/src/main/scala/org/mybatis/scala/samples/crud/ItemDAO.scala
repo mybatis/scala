@@ -17,6 +17,7 @@
 package org.mybatis.scala.samples.crud
 
 import org.mybatis.scala.mapping._
+import org.mybatis.scala.mapping.Binding._
 import org.mybatis.scala.session.Session
 
 object ItemDAO {
@@ -26,7 +27,7 @@ object ItemDAO {
     result ( column = "description_", property = "description" )
   }
 
-  val selectSql  =
+  val SELECT_SQL =
     <xsql>
       SELECT *
       FROM item
@@ -34,15 +35,15 @@ object ItemDAO {
 
   val findAll = new SelectList[Item] {
     resultMap = ItemResultMap
-    def xsql = selectSql
+    def xsql = SELECT_SQL
   }
 
   val findByDescription = new SelectListBy[String,Item] {
     resultMap = ItemResultMap
     def xsql =
       <xsql>
-        {selectSql}
-        WHERE description_ LIKE #{{description}}
+        {SELECT_SQL}
+        WHERE description_ LIKE {"description"?}
         ORDER BY description_
       </xsql>
   }
@@ -51,8 +52,8 @@ object ItemDAO {
     resultMap = ItemResultMap
     def xsql =
       <xsql>
-        {selectSql}
-        WHERE id_ = #{{id}}
+        {SELECT_SQL}
+        WHERE id_ = {"id"?}
       </xsql>
   }
 
@@ -60,7 +61,7 @@ object ItemDAO {
     def xsql =
       <xsql>
         INSERT INTO item(description_)
-        VALUES (#{{description}})
+        VALUES ( {"description"?} )
       </xsql>
   }
 
@@ -68,23 +69,23 @@ object ItemDAO {
     def xsql =
       <xsql>
         UPDATE item
-        SET description_ = #{{description}}
-        WHERE id_ = #{{id}}
+        SET description_ = {"description"?}
+        WHERE id_ = {"id"?}
       </xsql>
   }
 
-  val deleteSql =
+  val DELETE_SQL =
     <xsql>
       DELETE FROM item
-      WHERE id_ = #{{id}}
+      WHERE id_ = {"id"?}
     </xsql>
 
   val delete = new Delete[Item] {
-    def xsql = deleteSql
+    def xsql = DELETE_SQL
   }
 
   val deleteById = new Delete[Int] {
-    def xsql = deleteSql
+    def xsql = DELETE_SQL
   }
 
   val dropTable = new Perform {
