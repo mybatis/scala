@@ -25,6 +25,7 @@ import java.util.Properties
 import org.mybatis.scala.mapping.Statement
 import org.mybatis.scala.mapping.T
 import org.mybatis.scala.cache._
+import org.apache.ibatis.`type`.TypeHandler
 
 /** Mybatis Configuration
   * @constructor Creates a new Configuration with a wrapped myBatis Configuration.
@@ -39,7 +40,10 @@ sealed class Configuration(configuration : MBConfig) {
   if (configuration.getObjectWrapperFactory.getClass == classOf[org.apache.ibatis.reflection.wrapper.DefaultObjectWrapperFactory]) {
     configuration.setObjectWrapperFactory(new ObjectWrapperFactory())
   }
-  
+
+  /** Register Option[_] TypeHandlers */
+  registerAdditionalTypeHandlers()
+
   lazy val defaultSpace = new ConfigurationSpace(configuration, "_DEFAULT_")
 
   /** Creates a new space of mapped statements.
@@ -89,6 +93,38 @@ sealed class Configuration(configuration : MBConfig) {
   def createPersistenceContext = {
     val builder = new SqlSessionFactoryBuilder
     new SessionManager(builder.build(configuration))
+  }
+
+  def registerOptionTypeHandler[T](h : TypeHandler[T], jdbcTypes : Seq[org.apache.ibatis.`type`.JdbcType]) = {
+    import org.mybatis.scala.mapping.OptionTypeHandler
+    val registry = configuration.getTypeHandlerRegistry
+    val oth = new OptionTypeHandler[T](h)
+    val cls = classOf[Option[_]]
+    for (jdbcType <- jdbcTypes) {
+      registry.register(cls, jdbcType, oth)
+    }
+  }
+
+  private def registerAdditionalTypeHandlers() = {
+    import org.apache.ibatis.`type`._
+    import org.apache.ibatis.`type`.JdbcType._
+    registerOptionTypeHandler(new BooleanTypeHandler(), Seq(BOOLEAN, BIT))
+    registerOptionTypeHandler(new ByteTypeHandler(), Seq(TINYINT))
+    registerOptionTypeHandler(new ShortTypeHandler(), Seq(SMALLINT))
+    registerOptionTypeHandler(new IntegerTypeHandler(), Seq(INTEGER))
+    registerOptionTypeHandler(new FloatTypeHandler(), Seq(FLOAT))
+    registerOptionTypeHandler(new DoubleTypeHandler(), Seq(DOUBLE))
+    registerOptionTypeHandler(new LongTypeHandler(), Seq(BIGINT))
+    registerOptionTypeHandler(new StringTypeHandler(), Seq(VARCHAR, CHAR))
+    registerOptionTypeHandler(new ClobTypeHandler(), Seq(CLOB, LONGVARCHAR))
+    registerOptionTypeHandler(new NStringTypeHandler(), Seq(NVARCHAR, NCHAR))
+    registerOptionTypeHandler(new NClobTypeHandler(), Seq(NCLOB))
+    registerOptionTypeHandler(new BigDecimalTypeHandler(), Seq(REAL, DECIMAL, NUMERIC))
+    registerOptionTypeHandler(new BlobTypeHandler(), Seq(BLOB, LONGVARBINARY))
+    registerOptionTypeHandler(new UnknownTypeHandler(configuration.getTypeHandlerRegistry), Seq(OTHER))
+    registerOptionTypeHandler(new DateOnlyTypeHandler(), Seq(DATE))
+    registerOptionTypeHandler(new TimeOnlyTypeHandler(), Seq(TIME))
+    registerOptionTypeHandler(new DateTypeHandler(), Seq(TIMESTAMP))    
   }
 
 }
