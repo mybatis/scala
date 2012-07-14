@@ -41,8 +41,7 @@ sealed class Configuration(configuration : MBConfig) {
     configuration.setObjectWrapperFactory(new ObjectWrapperFactory())
   }
 
-  /** Register Option[_] TypeHandlers */
-  registerAdditionalTypeHandlers()
+  registerCommonOptionTypeHandlers
 
   lazy val defaultSpace = new ConfigurationSpace(configuration, "_DEFAULT_")
 
@@ -95,36 +94,37 @@ sealed class Configuration(configuration : MBConfig) {
     new SessionManager(builder.build(configuration))
   }
 
-  def registerOptionTypeHandler[T](h : TypeHandler[T], jdbcTypes : Seq[org.apache.ibatis.`type`.JdbcType]) = {
+  private def registerOptionTypeHandler[T <: Option[_]](h : TypeHandler[T], jdbcTypes : Seq[org.apache.ibatis.`type`.JdbcType]) = {
     import org.mybatis.scala.mapping.OptionTypeHandler
     val registry = configuration.getTypeHandlerRegistry
-    val oth = new OptionTypeHandler[T](h)
     val cls = classOf[Option[_]]
     for (jdbcType <- jdbcTypes) {
-      registry.register(cls, jdbcType, oth)
+      registry.register(cls, jdbcType, h)
     }
   }
 
-  private def registerAdditionalTypeHandlers() = {
+  private def registerCommonOptionTypeHandlers = {
+    import org.mybatis.scala.mapping.OptionTypeHandler
+    import org.mybatis.scala.mapping.TypeHandlers._
     import org.apache.ibatis.`type`._
     import org.apache.ibatis.`type`.JdbcType._
-    registerOptionTypeHandler(new BooleanTypeHandler(), Seq(BOOLEAN, BIT))
-    registerOptionTypeHandler(new ByteTypeHandler(), Seq(TINYINT))
-    registerOptionTypeHandler(new ShortTypeHandler(), Seq(SMALLINT))
-    registerOptionTypeHandler(new IntegerTypeHandler(), Seq(INTEGER))
-    registerOptionTypeHandler(new FloatTypeHandler(), Seq(FLOAT))
-    registerOptionTypeHandler(new DoubleTypeHandler(), Seq(DOUBLE))
-    registerOptionTypeHandler(new LongTypeHandler(), Seq(BIGINT))
-    registerOptionTypeHandler(new StringTypeHandler(), Seq(VARCHAR, CHAR))
-    registerOptionTypeHandler(new ClobTypeHandler(), Seq(CLOB, LONGVARCHAR))
-    registerOptionTypeHandler(new NStringTypeHandler(), Seq(NVARCHAR, NCHAR))
-    registerOptionTypeHandler(new NClobTypeHandler(), Seq(NCLOB))
-    registerOptionTypeHandler(new BigDecimalTypeHandler(), Seq(REAL, DECIMAL, NUMERIC))
-    registerOptionTypeHandler(new BlobTypeHandler(), Seq(BLOB, LONGVARBINARY))
-    registerOptionTypeHandler(new UnknownTypeHandler(configuration.getTypeHandlerRegistry), Seq(OTHER))
-    registerOptionTypeHandler(new DateOnlyTypeHandler(), Seq(DATE))
-    registerOptionTypeHandler(new TimeOnlyTypeHandler(), Seq(TIME))
-    registerOptionTypeHandler(new DateTypeHandler(), Seq(TIMESTAMP))    
+    registerOptionTypeHandler(new OptBooleanTypeHandler(), Seq(BOOLEAN, BIT))
+    registerOptionTypeHandler(new OptByteTypeHandler(), Seq(TINYINT))
+    registerOptionTypeHandler(new OptShortTypeHandler(), Seq(SMALLINT))
+    registerOptionTypeHandler(new OptIntegerTypeHandler(), Seq(INTEGER))
+    registerOptionTypeHandler(new OptFloatTypeHandler(), Seq(FLOAT))
+    registerOptionTypeHandler(new OptDoubleTypeHandler(), Seq(DOUBLE))
+    registerOptionTypeHandler(new OptLongTypeHandler(), Seq(BIGINT))
+    registerOptionTypeHandler(new OptStringTypeHandler(), Seq(VARCHAR, CHAR))
+    registerOptionTypeHandler(new OptClobTypeHandler(), Seq(CLOB, LONGVARCHAR))
+    registerOptionTypeHandler(new OptNStringTypeHandler(), Seq(NVARCHAR, NCHAR))
+    registerOptionTypeHandler(new OptNClobTypeHandler(), Seq(NCLOB))
+    registerOptionTypeHandler(new OptBigDecimalTypeHandler(), Seq(REAL, DECIMAL, NUMERIC))
+    registerOptionTypeHandler(new OptBlobTypeHandler(), Seq(BLOB, LONGVARBINARY))
+    registerOptionTypeHandler(new OptDateTypeHandler(), Seq(DATE))
+    registerOptionTypeHandler(new OptTimeTypeHandler(), Seq(TIME))
+    registerOptionTypeHandler(new OptTimestampTypeHandler(), Seq(TIMESTAMP))    
+    registerOptionTypeHandler(new OptionTypeHandler(new UnknownTypeHandler(configuration.getTypeHandlerRegistry)), Seq(OTHER))
   }
 
 }
