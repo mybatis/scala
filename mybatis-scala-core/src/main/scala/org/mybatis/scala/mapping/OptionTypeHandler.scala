@@ -31,28 +31,28 @@ import java.sql.ResultSet
 class OptionTypeHandler[T](delegate : TypeHandler[T]) extends TypeHandler[Option[T]] {
 
   def setParameter(ps : PreparedStatement, i : Int, parameter : Option[T], jdbcType : JdbcTypeEnum) : Unit = 
-		parameter match {
-			case None => delegate.setParameter(ps, i, null.asInstanceOf[T], jdbcType)
-			case Some(v) => delegate.setParameter(ps, i, v, jdbcType)
-		}
+    parameter match {
+      case None => delegate.setParameter(ps, i, null.asInstanceOf[T], jdbcType)
+      case Some(v) => delegate.setParameter(ps, i, v, jdbcType)
+    }
 
   def getResult(rs : ResultSet, columnName : String) : Option[T] =
-  	delegate.getResult(rs, columnName) match {
-  		case null => None
-  		case v : T => Some(v)
-  	}
+    delegate.getResult(rs, columnName) match {
+      case null => None
+      case v : T => Some(v)
+    }
 
   def getResult(rs : ResultSet, columnIndex : Int) : Option[T]  =
-  	delegate.getResult(rs, columnIndex) match {
-  		case null => None
-  		case v : T => Some(v)
-  	}
+    delegate.getResult(rs, columnIndex) match {
+      case null => None
+      case v : T => Some(v)
+    }
 
   def getResult(cs : CallableStatement, columnIndex : Int) : Option[T] = 
-  	delegate.getResult(cs, columnIndex) match {
-  		case null => None
-  		case v : T => Some(v)
-  	}
+    delegate.getResult(cs, columnIndex) match {
+      case null => None
+      case v : T => Some(v)
+    }
 
 }
 
@@ -79,3 +79,4 @@ object TypeHandlers {
   class OptTimestampTypeHandler   extends OptionTypeHandler(new DateTypeHandler())
 
 }
+
