@@ -29,14 +29,14 @@ object Main extends App {
 
     // Insert some items
     ItemDAO insert Item("BMW")
-    ItemDAO insert Item("Ford", Some("USA"))
+    ItemDAO insert Item("Ford", Some("USA"), Some(1900))
     ItemDAO insert Item("Renault", Some("France"))
     ItemDAO insert Item("Chevrolet")
     ItemDAO insert Item("Hyundai", Some("Korea"))
     ItemDAO insert Item("Honda", year=Some(1997))
 
     // Show ...
-    println("== Initial values ===================")
+    println("== Initial values ====================")
     ItemDAO.findAll() foreach (printItem _)
 
     // Change something ...
@@ -48,7 +48,7 @@ object Main extends App {
     }
     
     // Show again ...
-    println("== With some changes ================")
+    println("== With some changes =================")
     ItemDAO.findAll() foreach (printItem _)
 
     // Delete something ...
@@ -57,16 +57,16 @@ object Main extends App {
     }
     
     // Show again ...
-    println("== With some items removed ==========")
+    println("== With some items removed ===========")
     ItemDAO.findAll() foreach (printItem _)
 
     // Show filtered ...
-    println("== Filtered by H% ===================")
+    println("== Filtered by H% ====================")
     ItemDAO.findByDescription("H%") foreach (printItem _)
 
   }
 
   def printItem(i : Item) = 
-    println("%d: %10s\t %10s\t %s" format (i.id, i.description, i.info.getOrElse("USA"), i.year.getOrElse(2012)))
+    println("%d: %10s\t %10s\t %5s" format (i.id, i.description, i.info.getOrElse("-"), i.year.getOrElse("-")))
 
 }

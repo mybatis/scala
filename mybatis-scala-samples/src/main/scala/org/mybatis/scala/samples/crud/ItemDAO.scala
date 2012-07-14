@@ -18,6 +18,7 @@ package org.mybatis.scala.samples.crud
 
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.TypeHandlers._
 import org.mybatis.scala.session.Session
 
 object ItemDAO {
@@ -26,7 +27,7 @@ object ItemDAO {
     id ( column = "id_", property = "id" )
     result ( column = "description_", property = "description" )
     result ( column = "info_", property = "info", jdbcType=JdbcType.VARCHAR )
-    result ( column = "year_", property = "year", jdbcType=JdbcType.INTEGER )
+    result ( column = "year_", property = "year", typeHandler=T[OptIntegerTypeHandler] )
   }
 
   val SELECT_SQL =
