@@ -18,6 +18,8 @@ package org.mybatis.scala.config
 
 class ObjectFactory extends org.apache.ibatis.reflection.factory.ObjectFactory {
 
+  val cache = new scala.collection.mutable.HashMap[CacheKey, java.lang.reflect.Constructor[_]]
+
   def create[T](t : Class[T]) : T = create(t, null, null)
 
   def create[T](t : Class[T], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
@@ -36,6 +38,8 @@ class ObjectFactory extends org.apache.ibatis.reflection.factory.ObjectFactory {
         null
     }
     
+    val constructor = getConstructor(t, argTypes)
+
     val argValues = {
       if (constructorArgs != null) 
         constructorArgs.toArray[AnyRef](new Array[AnyRef](constructorArgs.size))
@@ -45,17 +49,9 @@ class ObjectFactory extends org.apache.ibatis.reflection.factory.ObjectFactory {
     
     try {
       if (argTypes == null || argValues == null) {
-        val constructor = t.getDeclaredConstructor()
-        if (!constructor.isAccessible()) {
-          constructor.setAccessible(true)
-        }
         constructor.newInstance().asInstanceOf[T]
       }
       else {
-        val constructor = t.getDeclaredConstructor(argTypes : _*)
-        if (!constructor.isAccessible()) {
-          constructor.setAccessible(true)
-        }
         constructor.newInstance(argValues : _*).asInstanceOf[T]
       }      
     }
@@ -101,5 +97,59 @@ class ObjectFactory extends org.apache.ibatis.reflection.factory.ObjectFactory {
   def isCollection[T](t : Class[T]) : Boolean = 
     classOf[scala.collection.Seq[_]].isAssignableFrom(t) ||
     classOf[scala.collection.Set[_]].isAssignableFrom(t)
+
+  sealed class CacheKey(t : Class[_], args : Array[Class[_]]) {
+
+    val _hc : Int = {
+      if (args == null) {
+        t.hashCode
+      }
+      else {
+        var code = t.hashCode
+        for (at <- args) {
+          code = code * 41 + at.hashCode
+        }
+        code
+      }
+    }
+
+    override def hashCode = _hc
+
+    override def equals(that : Any) = 
+      that != null && 
+        that.getClass == classOf[CacheKey] && 
+          that.asInstanceOf[CacheKey]._hc == this._hc
+
+  }
+
+  def getConstructor(t : Class[_], args : Array[Class[_]]) : java.lang.reflect.Constructor[_] = {
+    cache.getOrElseUpdate(new CacheKey(t, args), {
+      try {
+        if (args == null) {
+          val constructor = t.getDeclaredConstructor()
+          if (!constructor.isAccessible()) {
+            constructor.setAccessible(true)
+          }
+          constructor
+        }
+        else {
+          val constructor = t.getDeclaredConstructor(args : _*)
+          if (!constructor.isAccessible()) {
+            constructor.setAccessible(true)
+          }
+          constructor
+        }      
+      }
+      catch {
+        case e : Exception =>
+          val types = {
+            if (args == null) ""
+            else args.map(_.getSimpleName).reduceLeft(_ + ", " + _)
+          }
+          throw new org.apache.ibatis.reflection.ReflectionException(
+            "Error instantiating %s with invalid types (%s). Cause: %s".format(t.getSimpleName, args, e.getMessage), e);
+      }      
+    })
+  } 
 
 }
