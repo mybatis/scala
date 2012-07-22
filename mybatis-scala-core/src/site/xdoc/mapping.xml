@@ -69,7 +69,7 @@
           For example, if you want to select a User by its id:
         </p>
           <source><![CDATA[val findUserById = new SelectOneBy[Int,User] {
-    def xsql = "SELECT * from user WHERE id = #{id}"
+    def xsql = <xsql>SELECT * from user WHERE id = {"id"?}</xsql>
 }
 
 // this is also valid
@@ -78,7 +78,7 @@ val findUserById = new SelectOneBy[Int,User] {
         <xsql>
             SELECT *
             FROM user
-            WHERE id = #{{id}}"
+            WHERE id = {"id"?}
         </xsql>
 }]]></source>
         <p>
@@ -89,12 +89,12 @@ val findUserById = new SelectOneBy[Int,User] {
         <xsql>
             SELECT *
             FROM user
-            WHERE name LIKE #{{name}}
+            WHERE name LIKE {"name"?}
         </xsql>
 }]]></source>
     </subsection>
 
-      <subsection name="Insert, Update, Delete">
+    <subsection name="Insert, Update, Delete">
         <p>
           The same applies to these statement types, just extends and define.
         </p>
@@ -106,7 +106,7 @@ val findUserById = new SelectOneBy[Int,User] {
     def xsql =
         <xsql>
             INSERT INTO user(name, username, password)
-            VALUES (#{{name}}, #{{username}}, #{{password}})
+            VALUES ({"name"?}, {"username"?}, {"password"?})
         </xsql>
 }]]></source>
 
@@ -115,6 +115,46 @@ val findUserById = new SelectOneBy[Int,User] {
           or wherever you want.
         </p>
       </subsection>
+      <subsection name="Parameter binding syntax">
+        <p>
+          There are two syntaxes: Textual notation and Scala notation, lets see
+
+        </p>
+        <h3>Textual notation</h3>
+        <p>
+          The former mybatis notation can be used here escaping '{' and '}' chars.
+          <source>
+            SELECT *
+            FROM ....
+            WHERE field = #{{param}}
+          </source>
+          <source>
+            SELECT *
+            FROM ....
+            WHERE field = #{{param, jdbcType=VARCHAR, mode=IN}}
+          </source>
+          In this case VARCHAR and IN are just strings that will be parsed at runtime.
+
+        </p>
+        <p></p>
+        <h3>Scala notation</h3>
+        <p>
+          You can import <b>org.mybatis.scala.mapping.Binding._</b> and use the ? function. It provides
+          type safety on binding attributes.
+          <source>
+            SELECT *
+            FROM ....
+            WHERE field = {"param"?}
+          </source>
+          <source>
+            SELECT *
+            FROM ....
+            WHERE field = {? ("param", jdbcType=JdbcType.VARCHAR, mode=ModeIN, typeHandler=T[CustomTHandler]) }
+          </source>
+          In this case JdbcType.VARCHAR and ModeIN are true object references and CustomTHandler is a type reference, so they will be checked at compile time.
+
+        </p>
+      </subsection>  
     </section>
   </body>
 </document>
