@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 MyBatis.org.
+ * Copyright 2011-2012 The myBatis Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,8 @@
  * limitations under the License.
  */
 
-package org.mybatis.scala.mapping
+package org.mybatis.scala.session
 
-import org.mybatis.scala.session.Session
-import org.mybatis.scala.session.ResultContext
-
-trait SQLFunction0[+B] {
-  def apply()(implicit s : Session) : B
-}
-
-trait SQLFunction1[-A, +B] {
-  def apply(a : A)(implicit s : Session) : B
-}
-
-trait SQLFunction2[-A, -B, +C] {
-  def apply(a : A, b : B)(implicit s : Session) : C
+class ResultHandlerDelegator(callback : ResultContext => Unit) extends ResultHandler {
+  def handleResult(context : ResultContext) : Unit = callback(context)
 }

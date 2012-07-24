@@ -18,6 +18,7 @@ package org.mybatis.scala.session
 
 import org.apache.ibatis.session.SqlSession
 import scala.collection.JavaConversions._
+import scala.collection.mutable._
 
 /** SqlSession Wrapper.
   * You rarely use this class in an explicit manner.
@@ -40,28 +41,28 @@ class Session(sqls : SqlSession) {
     sqls.selectOne(statement, parameter).asInstanceOf[Result]
   }
 
-  def selectList[Result](statement : String) : List[Result] = {
-    sqls.selectList(statement).toList.asInstanceOf[List[Result]]
+  def selectList[Result](statement : String) : Seq[Result] = {
+    asScalaBuffer(sqls.selectList(statement))
   }
 
-  def selectList[Param,Result](statement : String, parameter : Param) : List[Result] = {
-    sqls.selectList(statement, parameter).toList.asInstanceOf[List[Result]]
+  def selectList[Param,Result](statement : String, parameter : Param) : Seq[Result] = {
+    asScalaBuffer(sqls.selectList(statement, parameter))
   }
 
-  def selectList[Param,Result](statement : String, parameter : Param, rowBounds : RowBounds) : List[Result] = {
-    sqls.selectList(statement, parameter, rowBounds.unwrap).toList.asInstanceOf[List[Result]]
+  def selectList[Param,Result](statement : String, parameter : Param, rowBounds : RowBounds) : Seq[Result] = {
+    asScalaBuffer(sqls.selectList(statement, parameter, rowBounds.unwrap))
   }
 
   def selectMap[Key,Value](statement : String, mapKey : String) : Map[Key,Value] = {
-    sqls.selectMap[Key,Value](statement, mapKey).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
+    mapAsScalaMap(sqls.selectMap[Key,Value](statement, mapKey))
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String) : Map[Key,Value] = {
-    sqls.selectMap[Key,Value](statement, parameter, mapKey).toMap //.toMap[Key,Value] //.asInstanceOf[Map[Key,Value]]
+    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey))
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String, rowBounds : RowBounds) : Map[Key,Value] = {
-    sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap).toMap //[Key,Value] //.asInstanceOf[Map[Key,Value]]
+    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap))
   }
 
   def select[Param](statement : String, parameter : Param, handler : ResultHandler) : Unit = {

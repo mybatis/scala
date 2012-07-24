@@ -16,8 +16,8 @@
 
 package org.mybatis.scala.mapping
 
-import org.mybatis.scala.session.{Session, RowBounds}
-import scala.collection.JavaConversions._
+import org.mybatis.scala.session.{Session, RowBounds, ResultHandlerDelegator, ResultContext}
+import scala.collection.mutable._;
 
 /** Base class for all Select statements.
   */
@@ -72,13 +72,17 @@ sealed trait Select extends Statement {
   */
 abstract class SelectList[Result : Manifest] 
   extends Select 
-  with SQLFunction0[List[Result]] {
+  with SQLFunction0[Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
-  def apply()(implicit s : Session) : List[Result]
+  def apply()(implicit s : Session) : Seq[Result]
     = s.selectList[Result](fqi.id)
+
+  def handle(callback : ResultContext => Unit)(implicit s : Session) : Unit = {
+    s.select(fqi.id, new ResultHandlerDelegator(callback))
+  }
 
 }
 
@@ -107,13 +111,17 @@ abstract class SelectList[Result : Manifest]
   */
 abstract class SelectListBy[Param : Manifest, Result : Manifest] 
   extends Select 
-  with SQLFunction1[Param, List[Result]] {
+  with SQLFunction1[Param, Seq[Result]] {
 
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(param : Param)(implicit s : Session) : List[Result]
+  def apply(param : Param)(implicit s : Session) : Seq[Result]
     = s.selectList[Param,Result](fqi.id, param)
+
+  def handle(param : Param, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
+    s.select(fqi.id, param, new ResultHandlerDelegator(callback))
+  }
 
 }
 
@@ -141,13 +149,17 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   */
 abstract class SelectListPage[Result : Manifest] 
   extends Select 
-  with SQLFunction1[RowBounds,List[Result]] {
+  with SQLFunction1[RowBounds,Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(rowBounds : RowBounds)(implicit s : Session) : List[Result]
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result]
     = s.selectList[Null,Result](fqi.id, null, rowBounds)
+
+  def handle(rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
+    s.select(fqi.id, rowBounds, new ResultHandlerDelegator(callback))
+  }
 
 }
 
@@ -176,13 +188,17 @@ abstract class SelectListPage[Result : Manifest]
   */
 abstract class SelectListPageBy[Param : Manifest, Result : Manifest] 
   extends Select
-  with SQLFunction2[Param, RowBounds, List[Result]] {
+  with SQLFunction2[Param, RowBounds, Seq[Result]] {
 
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : List[Result]
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result]
     = s.selectList[Param,Result](fqi.id, param, rowBounds)
+
+  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
+    s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator(callback))
+  }
 
 }
 

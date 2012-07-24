@@ -16,7 +16,7 @@
 
 package org.mybatis.scala
 
-import org.apache.ibatis.session.{ResultHandler => MBResultHandler}
+import org.apache.ibatis.session.{ResultHandler => MBResultHandler, ResultContext => MBResultContext}
 import org.apache.ibatis.session.{RowBounds => MBRowBounds}
 
 /** Session Management classes.
@@ -40,6 +40,9 @@ package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
   type ResultHandler = MBResultHandler
+  
+  /** Alias of [[org.apache.ibatis.session.ResultContext]] */
+  type ResultContext = MBResultContext
   
   /** Alias of [[org.apache.ibatis.executor.BatchResult]] */
   type BatchResult = org.apache.ibatis.executor.BatchResult
