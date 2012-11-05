@@ -59,8 +59,8 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
           configuration,
           content,
           attr(foreach, "@collection"),
-          attr(foreach, "@item"),
           attr(foreach, "@index"),
+          attr(foreach, "@item"),
           attr(foreach, "@open"),
           attr(foreach, "@close"),
           attr(foreach, "@separator"))
