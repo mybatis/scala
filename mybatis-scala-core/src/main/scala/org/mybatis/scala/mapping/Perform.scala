@@ -31,8 +31,7 @@ abstract class Perform
     * @param s Implicit Session
     * @return number of affected rows
     */
-  def apply()(implicit s : Session) : Int = {
-    s.update(fqi.id)
-  }  
+  def apply()(implicit s : Session) : Int =
+    execute { s.update(fqi.id) }
   
 }

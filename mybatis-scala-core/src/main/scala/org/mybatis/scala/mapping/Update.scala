@@ -34,8 +34,7 @@ abstract class Update[Param : Manifest]
     * @param s Implicit Session
     * @return number of affected rows
     */
-  def apply(param : Param)(implicit s : Session) : Int = {
-    s.update(fqi.id, param)
-  }
+  def apply(param : Param)(implicit s : Session) : Int =
+    execute { s.update(fqi.id, param) }
 
 }

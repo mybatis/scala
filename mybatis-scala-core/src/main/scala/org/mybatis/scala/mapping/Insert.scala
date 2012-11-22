@@ -39,8 +39,7 @@ abstract class Insert[Param : Manifest]
     * @param s Implicit Session
     * @return number of affected rows
     */
-  def apply(param : Param)(implicit s : Session) : Int = {
-    s.insert(fqi.id, param)
-  }
+  def apply(param : Param)(implicit s : Session) : Int =
+    execute { s.insert(fqi.id, param) }
 
 }

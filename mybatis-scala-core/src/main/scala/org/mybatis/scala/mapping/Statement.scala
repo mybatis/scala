@@ -71,4 +71,11 @@ trait Statement {
   /** Returns the Class of the input parameter. */
   def parameterTypeClass : Class[_]
 
+  def execute[A](command : => A) : A = fqi match {
+    case null =>
+      throw new org.mybatis.scala.config.ConfigurationException("Unknown Statement " + this.getClass.getName)
+    case _ =>
+      command
+  }
+
 }

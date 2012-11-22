@@ -77,12 +77,11 @@ abstract class SelectList[Result : Manifest]
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
-  def apply()(implicit s : Session) : Seq[Result]
-    = s.selectList[Result](fqi.id)
+  def apply()(implicit s : Session) : Seq[Result] = 
+    execute { s.selectList[Result](fqi.id) }
 
-  def handle(callback : ResultContext => Unit)(implicit s : Session) : Unit = {
-    s.select(fqi.id, new ResultHandlerDelegator(callback))
-  }
+  def handle(callback : ResultContext => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, new ResultHandlerDelegator(callback)) }
 
 }
 
@@ -116,12 +115,11 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(param : Param)(implicit s : Session) : Seq[Result]
-    = s.selectList[Param,Result](fqi.id, param)
+  def apply(param : Param)(implicit s : Session) : Seq[Result] = 
+    execute { s.selectList[Param,Result](fqi.id, param) }
 
-  def handle(param : Param, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
-    s.select(fqi.id, param, new ResultHandlerDelegator(callback))
-  }
+  def handle(param : Param, callback : ResultContext => Unit)(implicit s : Session) : Unit = 
+    execute { s.select(fqi.id, param, new ResultHandlerDelegator(callback)) }
 
 }
 
@@ -154,12 +152,11 @@ abstract class SelectListPage[Result : Manifest]
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result]
-    = s.selectList[Null,Result](fqi.id, null, rowBounds)
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+    execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
 
-  def handle(rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
-    s.select(fqi.id, rowBounds, new ResultHandlerDelegator(callback))
-  }
+  def handle(rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, rowBounds, new ResultHandlerDelegator(callback)) }
 
 }
 
@@ -193,12 +190,11 @@ abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result]
-    = s.selectList[Param,Result](fqi.id, param, rowBounds)
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+    execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
 
-  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit = {
-    s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator(callback))
-  }
+  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator(callback)) }
 
 }
 
@@ -231,10 +227,11 @@ abstract class SelectOne[Result : Manifest]
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].erasure
 
-  def apply()(implicit s : Session) : Option[Result] = {
-    val r = s.selectOne[Result](fqi.id);
-    if (r == null) None else Some(r)
-  }
+  def apply()(implicit s : Session) : Option[Result] = 
+    execute {
+      val r = s.selectOne[Result](fqi.id);
+      if (r == null) None else Some(r)
+    }
 
 }
 
@@ -268,10 +265,11 @@ abstract class SelectOneBy[Param : Manifest, Result : Manifest]
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[Result].erasure
 
-  def apply(param : Param)(implicit s : Session) : Option[Result] = {
-    val r = s.selectOne[Param,Result](fqi.id, param)
-    if (r == null) None else Some(r)
-  }
+  def apply(param : Param)(implicit s : Session) : Option[Result] = 
+    execute {
+      val r = s.selectOne[Param,Result](fqi.id, param)
+      if (r == null) None else Some(r)
+    }
 
 }
 
@@ -307,8 +305,8 @@ abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[ResultValue].erasure
 
-  def apply()(implicit s : Session) : Map[ResultKey, ResultValue]
-    = s.selectMap[ResultKey,ResultValue](fqi.id, mapKey)
+  def apply()(implicit s : Session) : Map[ResultKey, ResultValue] = 
+    execute { s.selectMap[ResultKey,ResultValue](fqi.id, mapKey) }
 
 }
 
@@ -345,8 +343,8 @@ abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[ResultValue].erasure
 
-  def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue]
-    = s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey)
+  def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+    execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey) }
 
 } 
 
@@ -382,8 +380,8 @@ abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[ResultValue].erasure
 
-  def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue]
-    = s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds)
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+    execute { s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds) }
 
 } 
 
@@ -420,8 +418,8 @@ abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manife
   def parameterTypeClass = manifest[Param].erasure
   def resultTypeClass = manifest[ResultValue].erasure
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue]
-    = s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds)
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+    execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }
 
 } 
  
