@@ -46,7 +46,7 @@ class HashSetWrapper(set : scala.collection.mutable.HashSet[AnyRef]) extends Col
   def addAll[E](elements : java.util.List[E]) : Unit = set.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]])
 }
 
-class ObjectWrapperFactory extends org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory {
+class DefaultObjectWrapperFactory extends ObjectWrapperFactory {
   def hasWrapperFor(obj : AnyRef) : Boolean = obj match {
     case o : scala.collection.mutable.ArrayBuffer[_] => true
     case o : scala.collection.mutable.HashSet[_] => true

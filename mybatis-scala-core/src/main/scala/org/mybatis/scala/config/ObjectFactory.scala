@@ -16,7 +16,7 @@
 
 package org.mybatis.scala.config
 
-class ObjectFactory extends org.apache.ibatis.reflection.factory.ObjectFactory {
+class DefaultObjectFactory extends ObjectFactory {
 
   val cache = new scala.collection.mutable.HashMap[CacheKey, java.lang.reflect.Constructor[_]]
 

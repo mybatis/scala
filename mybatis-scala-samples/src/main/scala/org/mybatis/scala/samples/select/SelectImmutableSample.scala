@@ -32,11 +32,12 @@ object CDB {
   // Simple select function
   val findAll = new SelectListBy[String,CPerson] {
     
-    // Constructor Mapping (Warning: Order is important)
+    // CPerson Constructor Mapping
     resultMap = new ResultMap[CPerson] {
-      idArg(column="id_", javaType=T[Int])
-      arg(column="first_name_", javaType=T[String])
-      arg(column="last_name_", javaType=T[String])
+      // Warning: Order is important (constructor arguments in order)
+      idArg ("id_",         javaType=T[Int])
+      arg   ("first_name_", javaType=T[String])
+      arg   ("last_name_",  javaType=T[String])
     }
     
     def xsql =
@@ -50,27 +51,21 @@ object CDB {
       """
   }
 
-  // Datasource configuration
-  val config = Configuration(
-    Environment(
-      "default", 
-      new JdbcTransactionFactory(), 
-      new PooledDataSource(
-        "org.hsqldb.jdbcDriver",
-        "jdbc:hsqldb:mem:scala",
-        "sa",
-        ""
-      )
+  // Main configuration
+  object ConfigurationSpec extends Configuration.Builder {    
+    // Connection settings
+    environment(
+      id = "default", 
+      transactionFactory = new JdbcTransactionFactory(), 
+      dataSource = new PooledDataSource("org.hsqldb.jdbcDriver", "jdbc:hsqldb:mem:scala", "sa", "")
     )
-  )
-
-  // Add the data access method to the default namespace
-  config += findAll
-  config ++= DBSchema
-  config ++= DBSampleData
-
+    // Add the data access methods to default namespace
+    statements(findAll)
+    mappers(DBSchema, DBSampleData)    
+  }
+  
   // Build the session manager
-  lazy val context = config.createPersistenceContext
+  lazy val context = Configuration(ConfigurationSpec).createPersistenceContext
   
 }
 
@@ -78,19 +73,21 @@ object CDB {
 
 object SelectImmutableSample {
 
+  import CDB._
+
   // Do the Magic ...
-  def main(args : Array[String]) : Unit = {
-    CDB.context.transaction { implicit session =>
-
-      DBSchema.create
-      DBSampleData.populate
-
-      CDB.findAll("%a%").foreach { 
-        case CPerson(id, firstName, lastName) =>
-        	println( "Person(%d): %s %s".format(id, firstName, lastName) )
-      }
-      
+  def main(args: Array[String]): Unit = context.transaction { implicit s =>
+    
+    // Create database and populate it with sample data
+    DBSchema.create
+    DBSampleData.populate
+    
+    // Query
+    findAll("%a%").foreach {
+      case CPerson(id, firstName, lastName) =>
+        println("Person(%d): %s %s" format (id, firstName, lastName))
     }
+    
   }
 
 }
