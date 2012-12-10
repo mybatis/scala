@@ -4,7 +4,7 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq (
     organization := "org.mybatis.scala",
-    version      := "1.0-beta3",
+    version      := "1.0.0",
     scalaVersion := "2.9.2"
   )
 }
