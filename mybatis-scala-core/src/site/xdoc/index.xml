@@ -30,7 +30,7 @@
 
     <body>
         <section name="Disclaimer">
-            <p>This is a beta version. There could be minor changes before the final release.</p>
+            <p>Binary compatible with MyBatis-3.1.0</p>
         </section>
         
         <section name="Introduction">
