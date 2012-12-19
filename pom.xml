@@ -29,7 +29,7 @@
 
   <groupId>org.mybatis.scala</groupId>
   <artifactId>mybatis-scala-parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>MyBatis Scala</name>
@@ -41,9 +41,9 @@
   </modules>
 
   <scm>
-    <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
-    <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
-    <developerConnection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</developerConnection>
+    <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-1.0.0</url>
+    <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-1.0.0</connection>
+    <developerConnection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/tags/mybatis-scala-1.0.0</developerConnection>
   </scm>
 
   <distributionManagement>
