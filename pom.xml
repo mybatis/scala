@@ -35,6 +35,11 @@
   <name>MyBatis Scala</name>
   <url>http://www.mybatis.org/scala</url>
 
+  <modules>
+    <module>mybatis-scala-core</module>
+    <module>mybatis-scala-samples</module>
+  </modules>
+
   <scm>
     <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
     <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
@@ -104,10 +109,5 @@
       </plugins>
     </pluginManagement>
   </build>
-
-  <modules>
-    <module>mybatis-scala-core</module>
-    <module>mybatis-scala-samples</module>
-  </modules>
 
 </project>
