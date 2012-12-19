@@ -105,4 +105,9 @@
     </pluginManagement>
   </build>
 
+  <modules>
+    <module>mybatis-scala-core</module>
+    <module>mybatis-scala-samples</module>
+  </modules>
+
 </project>
