@@ -45,16 +45,8 @@
 
   <distributionManagement>
     <site>
-      <id>mybatis.site</id>
-      <!--
-       | make it overridible, FTP is terribly slow when launched from Maven Wagon
-       | an alternative strategy could be deploying the site locally
-       |
-       |    -Dsite.deploymentUrl=file://...
-       |
-       | then async redeploying it via Filezilla/whatelese
-      -->
-      <url>${site.deploymentUrl}</url>
+      <id>github</id>
+      <url>gitsite:git@github.com/mybatis/scala.git</url>
     </site>
   </distributionManagement>
 
@@ -63,10 +55,6 @@
     <javac.src.version>1.6</javac.src.version>
     <javac.target.version>1.6</javac.target.version>
     <gcu.product>Scala</gcu.product>
-    <!--
-     | see distributionManagement.site.url
-    -->
-    <site.deploymentUrl>ftp://${mybatis.host}/scala/</site.deploymentUrl>
   </properties>
 
   <build>
