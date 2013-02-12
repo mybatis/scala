@@ -37,9 +37,10 @@
   </modules>
 
   <scm>
-    <url>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</url>
-    <connection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</connection>
-    <developerConnection>scm:svn:https://mybatis.googlecode.com/svn/sub-projects/scala/trunk</developerConnection>
+    <url>http://github.com/mybatis/scala</url>
+    <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
+    <developerConnection>scm:git:git+ssh://git@github.com/mybatis/scala.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
