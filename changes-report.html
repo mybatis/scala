@@ -10,8 +10,7 @@
     <meta name="author" content="The MyBatis Team" />
     <meta name="Date-Revision-yyyymmdd" content="20130212" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>
-        MyBatis Scala API > Introduction</title>
+    <title>MyBatis-Scala Changes</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -58,10 +57,12 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Reference Documentation</li>
                                 
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Introduction</a>
-          </li>
+                          <a href="index.html" title="Introduction">
+          <i class="none"></i>
+        Introduction</a>
+            </li>
                   
       <li>
     
@@ -98,13 +99,27 @@
         API Docs</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                    
+                                                                                                              
       <li>
     
                           <a href="project-reports.html" title="Project Reports">
-          <i class="icon-chevron-right"></i>
+          <i class="icon-chevron-down"></i>
         Project Reports</a>
-                  </li>
+                    <ul class="nav nav-list">
+                      
+      <li>
+    
+                          <a href="scaladocs/index.html" title="ScalaDocs">
+          <i class="none"></i>
+        ScalaDocs</a>
+            </li>
+                      
+      <li class="active">
+    
+            <a href="#"><i class="none"></i>Changes Report</a>
+          </li>
+              </ul>
+        </li>
             </ul>
                 
                     
@@ -125,61 +140,7 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <!-- Copyright 2010-2011 The myBatis Team
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License. --><!-- version: $Id$ -->
-
-    
-        <div class="section"><h2>Disclaimer<a name="Disclaimer"></a></h2>
-            <p>Binary compatible with MyBatis-3.1.0</p>
-        </div>
-        
-        <div class="section"><h2>Introduction<a name="Introduction"></a></h2>
-            <p>
-                MyBatis is one of the best advanced persistence frameworks available for java, it can be
-                used with Scala too, but the main API is Java centric. This sub-project is to provide a
-                more scala friendly API, it does not uses any annotation, and all SQL (static and dynamic)
-                can be declared directly and elegantly in your scala code.
-            </p>
-
-            <div class="section"><h3>API Structure<a name="API_Structure"></a></h3>
-                <p>
-                    The API is structured in four main packages, each package contains types and objects related to a specific
-                    concern. They are Configuration, Mapping, Session and Cache.
-                </p>
-                <ul>
-                    <li>
-                        <a href="./configuration.html">Configuration</a> package: 
-                        <tt>org.mybatis.scala.config</tt>
-                    </li>
-                    <li>
-                        <a href="./mapping.html">Mapping</a> package: 
-                        <tt>org.mybatis.scala.mapping</tt>
-                    </li>
-                    <li>
-                        <a href="./session.html">Session</a> package: 
-                        <tt>org.mybatis.scala.session</tt>
-                    </li>
-                    <li>
-                        <a href="./cache.html">Cache</a> package: 
-                        <tt>org.mybatis.scala.cache</tt>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-
+            <div class="section"><h2>MyBatis-Scala Changes<a name="MyBatis-Scala_Changes"></a></h2><a name="MyBatis-Scala_Changes"></a><div class="section"><h3>Release History<a name="Release_History"></a></h3><a name="Release_History"></a><table border="0" class="table table-striped"><tr class="a"><th>Version</th><th>Date</th><th>Description</th></tr><tr class="b"><td><a href="#a1.0-beta2">1.0-beta2</a></td><td>2012-07-25</td><td>1.0-beta2 release</td></tr></table></div><div class="section"><h3>Release 1.0-beta2 - 2012-07-25<a name="Release_1.0-beta2_-_2012-07-25"></a></h3><a name="a1.0-beta2"></a><table border="0" class="table table-striped"><tr class="a"><th>Type</th><th>Changes</th><th>By</th></tr><tr class="b"><td><div class="figure"><p align="center"><img src="images/fix.gif" alt="fix" title="fix" /></p></div></td><td>Support for SQL defined in raw strings. So allow def xsql = &quot;SELECT ...&quot; Fixes 558.</td><td><a href="team-list.html#null"></a></td></tr><tr class="a"><td><div class="figure"><p align="center"><img src="images/update.gif" alt="update" title="update" /></p></div></td><td>Allow different executor types and transaction attributes in SessionManager.</td><td><a href="team-list.html#null"></a></td></tr><tr class="b"><td><div class="figure"><p align="center"><img src="images/add.gif" alt="add" title="add" /></p></div></td><td>Added typesafe compile time checked inline parameter bindings.</td><td><a href="team-list.html#null"></a></td></tr><tr class="a"><td><div class="figure"><p align="center"><img src="images/add.gif" alt="add" title="add" /></p></div></td><td>Basic support of Option[_] TypeHandlers. Resolved by JdbcType.</td><td><a href="team-list.html#null"></a></td></tr><tr class="b"><td><div class="figure"><p align="center"><img src="images/fix.gif" alt="fix" title="fix" /></p></div></td><td>Minor reflection optimizations in ObjectFactory.</td><td><a href="team-list.html#null"></a></td></tr><tr class="a"><td><div class="figure"><p align="center"><img src="images/fix.gif" alt="fix" title="fix" /></p></div></td><td>All SelectList* now returns Seq[Result] instead of List[Result] to avoid unnecessary collection conversions.</td><td><a href="team-list.html#null"></a></td></tr><tr class="b"><td><div class="figure"><p align="center"><img src="images/add.gif" alt="add" title="add" /></p></div></td><td>Added suport for iterartive result handlers in Selects. new method handle(ResultContext =&gt; Unit)</td><td><a href="team-list.html#null"></a></td></tr></table></div></div>
                   </div>
             </div>
           </div>

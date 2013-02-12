@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>org.mybatis.scala.config</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../../lib/template.css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a name="org" class="extype" href="../../../package.html">org</a>.<a name="org.mybatis" class="extype" href="../../package.html">mybatis</a>.<a name="org.mybatis.scala" class="extype" href="../package.html">scala</a></p>
+        <h1>config</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">config</span>
+      </span>
+      </h4>
+      
+      <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Provides main configuration classes.</p><h4> Basic usage </h4><p>Usual steps are:</p><ul><li>Load the configuration from an external XML file</li><li>Add one or more configuration spaces with mapped statements</li><li>Create the persistenceContext</li></ul><h4> Code sample </h4><pre>
+<span class="kw">val</span> config = Configuration(<span class="lit">"META-INF/mybatis.xml"</span>)
+config.addSpace(<span class="lit">"ns"</span>) { space <span class="kw">=&gt;</span>
+  space ++= MyDAO
+}
+<span class="kw">val</span> persistenceContext = config.createPersistenceContext
+</pre><h4> Another example without external XML file and with default namespace </h4><pre>
+<span class="kw">val</span> config = Configuration(
+ Environment(
+   <span class="lit">"default"</span>,
+   <span class="kw">new</span> JdbcTransactionFactory(),
+   <span class="kw">new</span> PooledDataSource(
+     <span class="lit">"org.hsqldb.jdbcDriver"</span>,
+     <span class="lit">"jdbc:hsqldb:mem:scala"</span>,
+     <span class="lit">"sa"</span>,
+     <span class="lit">""</span>
+   )
+ )
+)
+config ++= MyDAO
+
+<span class="kw">val</span> persistenceContext = config.createPersistenceContext
+</pre></div></div>
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div class="types members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="org.mybatis.scala.config.ArrayBufferWrapper" data-isabs="false">
+      <a id="ArrayBufferWrapper:ArrayBufferWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ArrayBufferWrapper.html"><span class="name">ArrayBufferWrapper</span></a><span class="result"> extends CollectionObjectWrapper</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.package.AutoMappingBehavior" data-isabs="true">
+      <a id="AutoMappingBehavior:AutoMappingBehavior"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$AutoMappingBehavior.html"><span class="name">AutoMappingBehavior</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.CollectionObjectWrapper" data-isabs="true">
+      <a id="CollectionObjectWrapper:CollectionObjectWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CollectionObjectWrapper.html"><span class="name">CollectionObjectWrapper</span></a><span class="result"> extends ObjectWrapper</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.Configuration" data-isabs="false">
+      <a id="Configuration:Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Configuration.html"><span class="name">Configuration</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Mybatis Configuration</p>
+    </li><li visbl="pub" name="org.mybatis.scala.config.ConfigurationException" data-isabs="false">
+      <a id="ConfigurationException:ConfigurationException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationException.html"><span class="name">ConfigurationException</span></a><span class="result"> extends Throwable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.ConfigurationSpace" data-isabs="false">
+      <a id="ConfigurationSpace:ConfigurationSpace"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationSpace.html"><span class="name">ConfigurationSpace</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Configuration Space (mybatis namespace)</p>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#DatabaseIdProvider" data-isabs="false">
+      <a id="DatabaseIdProvider:DatabaseIdProvider"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DatabaseIdProvider</span><span class="result"> = <span name="org.apache.ibatis.mapping.DatabaseIdProvider" class="extype">DatabaseIdProvider</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.DefaultObjectFactory" data-isabs="false">
+      <a id="DefaultObjectFactory:DefaultObjectFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DefaultObjectFactory.html"><span class="name">DefaultObjectFactory</span></a><span class="result"> extends ObjectFactory</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.DefaultObjectWrapperFactory" data-isabs="false">
+      <a id="DefaultObjectWrapperFactory:DefaultObjectWrapperFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DefaultObjectWrapperFactory.html"><span class="name">DefaultObjectWrapperFactory</span></a><span class="result"> extends ObjectWrapperFactory</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.Environment" data-isabs="false">
+      <a id="Environment:Environment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Environment.html"><span class="name">Environment</span></a><span class="params">(<span name="id">id: String</span>, <span name="tf">tf: TransactionFactory</span>, <span name="ds">ds: DataSource</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt"></p>
+    </li><li visbl="pub" name="org.mybatis.scala.config.HashSetWrapper" data-isabs="false">
+      <a id="HashSetWrapper:HashSetWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="HashSetWrapper.html"><span class="name">HashSetWrapper</span></a><span class="result"> extends CollectionObjectWrapper</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#JdbcTransactionFactory" data-isabs="false">
+      <a id="JdbcTransactionFactory:JdbcTransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JdbcTransactionFactory</span><span class="result"> = <span name="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" class="extype">JdbcTransactionFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#JndiDataSourceFactory" data-isabs="false">
+      <a id="JndiDataSourceFactory:JndiDataSourceFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JndiDataSourceFactory</span><span class="result"> = <span name="org.apache.ibatis.datasource.jndi.JndiDataSourceFactory" class="extype">JndiDataSourceFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package.LocalCacheScope" data-isabs="true">
+      <a id="LocalCacheScope:LocalCacheScope"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$LocalCacheScope.html"><span class="name">LocalCacheScope</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#ManagedTransactionFactory" data-isabs="false">
+      <a id="ManagedTransactionFactory:ManagedTransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ManagedTransactionFactory</span><span class="result"> = <span name="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" class="extype">ManagedTransactionFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#ObjectFactory" data-isabs="false">
+      <a id="ObjectFactory:ObjectFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ObjectFactory</span><span class="result"> = <span name="org.apache.ibatis.reflection.factory.ObjectFactory" class="extype">ObjectFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#ObjectWrapperFactory" data-isabs="false">
+      <a id="ObjectWrapperFactory:ObjectWrapperFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ObjectWrapperFactory</span><span class="result"> = <span name="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory" class="extype">ObjectWrapperFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#PooledDataSource" data-isabs="false">
+      <a id="PooledDataSource:PooledDataSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PooledDataSource</span><span class="result"> = <span name="org.apache.ibatis.datasource.pooled.PooledDataSource" class="extype">PooledDataSource</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#TransactionFactory" data-isabs="false">
+      <a id="TransactionFactory:TransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TransactionFactory</span><span class="result"> = <span name="org.apache.ibatis.transaction.TransactionFactory" class="extype">TransactionFactory</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li><li visbl="pub" name="org.mybatis.scala.config.package#UnpooledDataSource" data-isabs="false">
+      <a id="UnpooledDataSource:UnpooledDataSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UnpooledDataSource</span><span class="result"> = <span name="org.apache.ibatis.datasource.unpooled.UnpooledDataSource" class="extype">UnpooledDataSource</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="org.mybatis.scala.config.package" class="extype" href="package$.html">package</a></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div class="values members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="org.mybatis.scala.config.Configuration" data-isabs="false">
+      <a id="Configuration:Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Configuration$.html"><span class="name">Configuration</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">A factory of <a name="org.mybatis.scala.config.Configuration" class="extype" href="Configuration.html">Configuration</a> instances.</p>
+    </li></ol>
+            </div>
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
