@@ -42,7 +42,14 @@
     <developerConnection>scm:git:git+ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
+  <issueManagement>
+    <system>GitHub Issue Management</system>
+    <url>https://github.com/mybatis/scala/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>Travis CI</system>
+    <url>https://travis-ci.org/mybatis/scala</url>
+  </ciManagement>
   <distributionManagement>
     <site>
       <id>github</id>
