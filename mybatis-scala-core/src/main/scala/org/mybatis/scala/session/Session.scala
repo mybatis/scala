@@ -101,16 +101,16 @@ class Session(sqls : SqlSession) {
     sqls.delete(statement, parameter)
   }
 
-  def commit : Unit = sqls.commit
+  def commit() : Unit = sqls.commit
 
   def commit(force : Boolean) : Unit = sqls.commit(force)
 
-  def rollback : Unit = sqls.rollback
+  def rollback() : Unit = sqls.rollback
 
   def rollback(force : Boolean) : Unit = sqls.rollback(force)
 
-  def clearCache : Unit = sqls.clearCache
+  def clearCache() : Unit = sqls.clearCache
   
-  def flushStatements : Seq[BatchResult] = sqls.flushStatements
+  def flushStatements() : Seq[BatchResult] = sqls.flushStatements
 
 }
