@@ -29,6 +29,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
   private[scala] var discr : (String, T[_], JdbcType, T[_ <: TypeHandler[_]], Seq[Case]) = null
 
   var fqi : FQI = null
+  var autoMapping : Boolean = false
 
   def resultTypeClass = manifest[ResultType].erasure
 

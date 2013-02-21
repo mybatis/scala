@@ -64,6 +64,7 @@ package object config {
   type ObjectFactory = org.apache.ibatis.reflection.factory.ObjectFactory
   type ObjectWrapperFactory = org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory
   type DatabaseIdProvider = org.apache.ibatis.mapping.DatabaseIdProvider
+  type LanguageDriver = org.apache.ibatis.scripting.LanguageDriver
   
   sealed abstract class LocalCacheScope {
     val unwrap : org.apache.ibatis.session.LocalCacheScope

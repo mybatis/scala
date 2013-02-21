@@ -4,7 +4,7 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq (
     organization := "org.mybatis.scala",
-    version      := "1.0.0",
+    version      := "1.0.1",
     scalaVersion := "2.9.2"
   )
 }
@@ -15,7 +15,7 @@ object Resolvers {
 }
 
 object Dependencies {
-  val mybatis = "org.mybatis" % "mybatis" % "3.1.0"
+  val mybatis = "org.mybatis" % "mybatis" % "3.2.0-SNAPSHOT"
   val scalatest = "org.scalatest" %% "scalatest" % "1.6.1" % "test"
 }
 

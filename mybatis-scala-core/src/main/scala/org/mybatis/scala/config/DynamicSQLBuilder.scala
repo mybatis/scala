@@ -18,7 +18,7 @@ package org.mybatis.scala.config
 
 import org.apache.ibatis.session.{Configuration => MBConfig}
 import java.util.{List, ArrayList}
-import org.apache.ibatis.builder.xml.dynamic._
+import org.apache.ibatis.scripting.xmltags._
 import org.apache.ibatis.mapping.SqlSource
 import scala.xml._
 
@@ -68,7 +68,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
         val content = parseChildren(children)
         new IfSqlNode(content, attr(ifNode, "@test"))
       case <choose>{children @ _*}</choose> =>
-        val ifNodes = new ArrayList[IfSqlNode]
+        val ifNodes = new ArrayList[SqlNode]
         var defaultNode : MixedSqlNode = null
         for (child <- children) {
           child match {

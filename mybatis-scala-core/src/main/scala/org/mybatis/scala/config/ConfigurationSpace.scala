@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2012 The myBatis Team
+ * Copyright 2011-2013 The myBatis Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -147,7 +147,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
         rm.resultTypeClass,
         if (rm.parent != null) rm.parent.fqi.id else null,
         discriminator,
-        resultMappings
+        resultMappings,
+        rm.autoMapping
       )
 
     }
@@ -177,10 +178,12 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.resultSetType.unwrap,
             stmt.flushCache,
             stmt.useCache,
+            false, // TODO Issue #577
             new NoKeyGenerator(),
             null,
             null,
-            stmt.databaseId
+            stmt.databaseId,
+            DefaultScriptingDriver
           )
         case stmt : Insert[_] =>
           builderAssistant.addMappedStatement(
@@ -197,10 +200,12 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             ResultSetType.FORWARD_ONLY.unwrap,
             stmt.flushCache,
             false,
+            false, // TODO Issue #577
             buildKeyGenerator(stmt.keyGenerator, stmt.parameterTypeClass, stmt.fqi.id, stmt.databaseId),
             if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyProperty,
             if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyColumn,
-            stmt.databaseId
+            stmt.databaseId,
+            DefaultScriptingDriver
           )
         case stmt : Update[_] =>
           builderAssistant.addMappedStatement(
@@ -217,10 +222,12 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             ResultSetType.FORWARD_ONLY.unwrap,
             stmt.flushCache,
             false,
+            false, // TODO Issue #577
             new NoKeyGenerator(),
             null,
             null,
-            stmt.databaseId
+            stmt.databaseId,
+            DefaultScriptingDriver
           )
         case stmt : Delete[_] =>
           builderAssistant.addMappedStatement(
@@ -237,10 +244,12 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             ResultSetType.FORWARD_ONLY.unwrap,
             stmt.flushCache,
             false,
+            false, // TODO Issue #577
             new NoKeyGenerator(),
             null,
             null,
-            stmt.databaseId
+            stmt.databaseId,
+            DefaultScriptingDriver
           )
         case stmt : Perform =>
           builderAssistant.addMappedStatement(
@@ -257,10 +266,12 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             ResultSetType.FORWARD_ONLY.unwrap,
             stmt.flushCache,
             false,
+            false, // TODO Issue #577
             new NoKeyGenerator(),
             null,
             null,
-            stmt.databaseId
+            stmt.databaseId,
+            DefaultScriptingDriver
           )
         case unsupported =>
           throw new ConfigurationException("Unsupported statement type")
@@ -316,11 +327,13 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
       resultTypeClass,
       resultSetTypeEnum, 
       flushCache, 
-      useCache, 
+      useCache,
+      false, // TODO Issue #577 
       keyGenerator, 
       keyProperty, 
       keyColumn,
-      databaseId)
+      databaseId,
+      DefaultScriptingDriver)
 
     val keyStatement = configuration.getMappedStatement(id, false)
     val answer = new SelectKeyGenerator(keyStatement, executeBefore)
