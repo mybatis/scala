@@ -154,7 +154,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     }
   }
 
-  private def resolveFQI(r : { val fqi : FQI}) : String = {
+  private def resolveFQI(r : { def fqi : FQI}) : String = {
     if (r == null) null else r.fqi resolveIn spaceName
   }
 
