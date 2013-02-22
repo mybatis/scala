@@ -1,0 +1,214 @@
+# /
+/target
+/nbproject
+/catalog.xml
+/.build.sbt.swp
+/.ensime_port
+/.ensime
+
+# /mybatis-scala-core/
+/mybatis-scala-core/target
+/mybatis-scala-core/nbproject
+/mybatis-scala-core/catalog.xml
+/mybatis-scala-core/.build.sbt.swp
+/mybatis-scala-core/.cache
+/mybatis-scala-core/.classpath
+/mybatis-scala-core/.project
+
+# /mybatis-scala-core/src/
+/mybatis-scala-core/src/target
+/mybatis-scala-core/src/nbproject
+/mybatis-scala-core/src/catalog.xml
+
+# /mybatis-scala-core/src/main/
+/mybatis-scala-core/src/main/target
+/mybatis-scala-core/src/main/nbproject
+/mybatis-scala-core/src/main/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/
+/mybatis-scala-core/src/main/scala/target
+/mybatis-scala-core/src/main/scala/nbproject
+/mybatis-scala-core/src/main/scala/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/
+/mybatis-scala-core/src/main/scala/org/target
+/mybatis-scala-core/src/main/scala/org/nbproject
+/mybatis-scala-core/src/main/scala/org/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/
+/mybatis-scala-core/src/main/scala/org/mybatis/target
+/mybatis-scala-core/src/main/scala/org/mybatis/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/scala/
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/target
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/scala/cache/
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/cache/target
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/cache/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/cache/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/scala/config/
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/config/target
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/config/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/config/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/scala/mapping/
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/mapping/target
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/mapping/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/mapping/catalog.xml
+
+# /mybatis-scala-core/src/main/scala/org/mybatis/scala/session/
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/session/target
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/session/nbproject
+/mybatis-scala-core/src/main/scala/org/mybatis/scala/session/catalog.xml
+
+# /mybatis-scala-core/src/site/
+/mybatis-scala-core/src/site/target
+/mybatis-scala-core/src/site/nbproject
+/mybatis-scala-core/src/site/catalog.xml
+
+# /mybatis-scala-core/src/site/xdoc/
+/mybatis-scala-core/src/site/xdoc/target
+/mybatis-scala-core/src/site/xdoc/nbproject
+/mybatis-scala-core/src/site/xdoc/catalog.xml
+
+# /mybatis-scala-core/src/test/
+/mybatis-scala-core/src/test/target
+/mybatis-scala-core/src/test/nbproject
+/mybatis-scala-core/src/test/catalog.xml
+
+# /mybatis-scala-core/src/test/scala/
+/mybatis-scala-core/src/test/scala/target
+/mybatis-scala-core/src/test/scala/nbproject
+/mybatis-scala-core/src/test/scala/catalog.xml
+
+# /mybatis-scala-samples/
+/mybatis-scala-samples/target
+/mybatis-scala-samples/nbproject
+/mybatis-scala-samples/catalog.xml
+/mybatis-scala-samples/.build.sbt.swp
+/mybatis-scala-samples/project/target
+/mybatis-scala-samples/.cache
+/mybatis-scala-samples/.classpath
+/mybatis-scala-samples/.project
+
+# /mybatis-scala-samples/project/
+/mybatis-scala-samples/project/target
+/mybatis-scala-samples/project/nbproject
+/mybatis-scala-samples/project/catalog.xml
+/mybatis-scala-samples/project/.build.sbt.swp
+/mybatis-scala-samples/project/project/target
+
+# /mybatis-scala-samples/src/
+/mybatis-scala-samples/src/target
+/mybatis-scala-samples/src/nbproject
+/mybatis-scala-samples/src/catalog.xml
+/mybatis-scala-samples/src/.build.sbt.swp
+/mybatis-scala-samples/src/project/target
+
+# /mybatis-scala-samples/src/main/
+/mybatis-scala-samples/src/main/target
+/mybatis-scala-samples/src/main/nbproject
+/mybatis-scala-samples/src/main/catalog.xml
+/mybatis-scala-samples/src/main/.build.sbt.swp
+/mybatis-scala-samples/src/main/project/target
+
+# /mybatis-scala-samples/src/main/resources/
+/mybatis-scala-samples/src/main/resources/target
+/mybatis-scala-samples/src/main/resources/nbproject
+/mybatis-scala-samples/src/main/resources/catalog.xml
+/mybatis-scala-samples/src/main/resources/.build.sbt.swp
+/mybatis-scala-samples/src/main/resources/project/target
+
+# /mybatis-scala-samples/src/main/scala/
+/mybatis-scala-samples/src/main/scala/target
+/mybatis-scala-samples/src/main/scala/nbproject
+/mybatis-scala-samples/src/main/scala/catalog.xml
+/mybatis-scala-samples/src/main/scala/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/project/target
+
+# /mybatis-scala-samples/src/main/scala/org/
+/mybatis-scala-samples/src/main/scala/org/target
+/mybatis-scala-samples/src/main/scala/org/nbproject
+/mybatis-scala-samples/src/main/scala/org/catalog.xml
+/mybatis-scala-samples/src/main/scala/org/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/org/project/target
+
+# /mybatis-scala-samples/src/main/scala/org/mybatis/
+/mybatis-scala-samples/src/main/scala/org/mybatis/target
+/mybatis-scala-samples/src/main/scala/org/mybatis/nbproject
+/mybatis-scala-samples/src/main/scala/org/mybatis/catalog.xml
+/mybatis-scala-samples/src/main/scala/org/mybatis/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/org/mybatis/project/target
+
+# /mybatis-scala-samples/src/main/scala/org/mybatis/scala/
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/target
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/nbproject
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/catalog.xml
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/project/target
+
+# /mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/target
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/nbproject
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/catalog.xml
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/project/target
+
+# /mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/target
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/nbproject
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/catalog.xml
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/.build.sbt.swp
+/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/project/target
+
+# /mybatis-scala-samples/src/site/
+/mybatis-scala-samples/src/site/target
+/mybatis-scala-samples/src/site/nbproject
+/mybatis-scala-samples/src/site/catalog.xml
+/mybatis-scala-samples/src/site/.build.sbt.swp
+/mybatis-scala-samples/src/site/project/target
+
+# /mybatis-scala-samples/src/site/resources/
+/mybatis-scala-samples/src/site/resources/target
+/mybatis-scala-samples/src/site/resources/nbproject
+/mybatis-scala-samples/src/site/resources/catalog.xml
+/mybatis-scala-samples/src/site/resources/.build.sbt.swp
+/mybatis-scala-samples/src/site/resources/project/target
+
+# /mybatis-scala-samples/src/site/resources/images/
+/mybatis-scala-samples/src/site/resources/images/target
+/mybatis-scala-samples/src/site/resources/images/nbproject
+/mybatis-scala-samples/src/site/resources/images/catalog.xml
+/mybatis-scala-samples/src/site/resources/images/.build.sbt.swp
+/mybatis-scala-samples/src/site/resources/images/project/target
+
+# /mybatis-scala-samples/src/site/xdoc/
+/mybatis-scala-samples/src/site/xdoc/target
+/mybatis-scala-samples/src/site/xdoc/nbproject
+/mybatis-scala-samples/src/site/xdoc/catalog.xml
+/mybatis-scala-samples/src/site/xdoc/.build.sbt.swp
+/mybatis-scala-samples/src/site/xdoc/project/target
+
+# /mybatis-scala-samples/src/test/
+/mybatis-scala-samples/src/test/target
+/mybatis-scala-samples/src/test/nbproject
+/mybatis-scala-samples/src/test/catalog.xml
+/mybatis-scala-samples/src/test/.build.sbt.swp
+/mybatis-scala-samples/src/test/project/target
+
+# /mybatis-scala-samples/src/test/scala/
+/mybatis-scala-samples/src/test/scala/target
+/mybatis-scala-samples/src/test/scala/nbproject
+/mybatis-scala-samples/src/test/scala/catalog.xml
+/mybatis-scala-samples/src/test/scala/.build.sbt.swp
+/mybatis-scala-samples/src/test/scala/project/target
+
+# /project/
+/project/target
+/project/nbproject
+/project/catalog.xml
+/project/.Build.scala.swp
