@@ -5,7 +5,7 @@ object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq (
     organization := "org.mybatis.scala",
     version      := "1.0.1",
-    scalaVersion := "2.9.2"
+    scalaVersion := "2.10.0"
   )
 }
 
@@ -16,7 +16,7 @@ object Resolvers {
 
 object Dependencies {
   val mybatis = "org.mybatis" % "mybatis" % "3.2.0-SNAPSHOT"
-  val scalatest = "org.scalatest" %% "scalatest" % "1.6.1" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "1.9.1" % "test"
   val hsqldb = "org.hsqldb" % "hsqldb" % "2.2.8"
 }
 
