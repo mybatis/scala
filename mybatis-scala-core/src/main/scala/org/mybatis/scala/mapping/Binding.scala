@@ -94,7 +94,7 @@ object Binding {
       ,if (typeHandler != null) Some("typeHandler=" + typeHandler.unwrap.getName) else None
       ,if (resultMap != null) Some("resultMap=" + resultMap.fqi.id) else None
       ,{
-        val t = manifest[JavaType].erasure
+        val t = manifest[JavaType].runtimeClass
         if (t != classOf[Object]) Some("javaType=" + translate(t)) else None
       }
       ) filter {_ match {case Some(x) => true; case None => false }} map {_.get} mkString("#{", ",", "}")

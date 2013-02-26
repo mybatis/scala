@@ -73,7 +73,7 @@ abstract class SqlGeneratedKey[Type : Manifest] extends KeyGenerator {
   var executeBefore   : Boolean = false
 
   /** Returns the Class of the generated key. */
-  val resultTypeClass = manifest[Type].erasure
+  val resultTypeClass = manifest[Type].runtimeClass
 
   /** Dynamic SQL CODE to be executed in order to obtain/generate the key
     * == Code sample ==

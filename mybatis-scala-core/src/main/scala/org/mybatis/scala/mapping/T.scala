@@ -21,8 +21,8 @@ package org.mybatis.scala.mapping
   * @tparam t wrapped type
   */
 class T[t : Manifest] {
-  val raw = manifest[t].erasure.asInstanceOf[Class[Any]]
-  val unwrap = manifest[t].erasure.asInstanceOf[Class[t]]
+  val raw = manifest[t].runtimeClass.asInstanceOf[Class[Any]]
+  val unwrap = manifest[t].runtimeClass.asInstanceOf[Class[t]]
   val isVoid = unwrap == java.lang.Void.TYPE
 }
 

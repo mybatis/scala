@@ -75,7 +75,7 @@ abstract class SelectList[Result : Manifest]
   with SQLFunction0[Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].erasure
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply()(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Result](fqi.id) }
@@ -112,8 +112,8 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   extends Select 
   with SQLFunction1[Param, Seq[Result]] {
 
-  def parameterTypeClass = manifest[Param].erasure
-  def resultTypeClass = manifest[Result].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Param,Result](fqi.id, param) }
@@ -150,7 +150,7 @@ abstract class SelectListPage[Result : Manifest]
   with SQLFunction1[RowBounds,Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].erasure
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
@@ -187,8 +187,8 @@ abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   extends Select
   with SQLFunction2[Param, RowBounds, Seq[Result]] {
 
-  def parameterTypeClass = manifest[Param].erasure
-  def resultTypeClass = manifest[Result].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
@@ -225,7 +225,7 @@ abstract class SelectOne[Result : Manifest]
   with SQLFunction0[Option[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].erasure
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply()(implicit s : Session) : Option[Result] = 
     execute {
@@ -262,8 +262,8 @@ abstract class SelectOneBy[Param : Manifest, Result : Manifest]
   extends Select
   with SQLFunction1[Param, Option[Result]] {
 
-  def parameterTypeClass = manifest[Param].erasure
-  def resultTypeClass = manifest[Result].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
+  def resultTypeClass = manifest[Result].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Option[Result] = 
     execute {
@@ -303,7 +303,7 @@ abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
   with SQLFunction0[Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[ResultValue].erasure
+  def resultTypeClass = manifest[ResultValue].runtimeClass
 
   def apply()(implicit s : Session) : Map[ResultKey, ResultValue] = 
     execute { s.selectMap[ResultKey,ResultValue](fqi.id, mapKey) }
@@ -340,8 +340,8 @@ abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](
   extends Select
   with SQLFunction1[Param, Map[ResultKey, ResultValue]] {
 
-  def parameterTypeClass = manifest[Param].erasure
-  def resultTypeClass = manifest[ResultValue].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
+  def resultTypeClass = manifest[ResultValue].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] = 
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey) }
@@ -378,7 +378,7 @@ abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
   with SQLFunction1[RowBounds, Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[ResultValue].erasure
+  def resultTypeClass = manifest[ResultValue].runtimeClass
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
     execute { s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds) }
@@ -415,8 +415,8 @@ abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manife
   extends Select
   with SQLFunction2[Param, RowBounds, Map[ResultKey, ResultValue]] {
 
-  def parameterTypeClass = manifest[Param].erasure
-  def resultTypeClass = manifest[ResultValue].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
+  def resultTypeClass = manifest[ResultValue].runtimeClass
 
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }

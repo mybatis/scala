@@ -27,7 +27,7 @@ abstract class Delete [Param : Manifest]
   extends Statement 
      with SQLFunction1[Param,Int] {
 
-  def parameterTypeClass = manifest[Param].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
 
   /** Exceutes the SQL DELETE Statement
     * @param param Input paramenter of the statement

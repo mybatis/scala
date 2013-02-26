@@ -31,7 +31,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
   var fqi : FQI = null
   var autoMapping : Boolean = false
 
-  def resultTypeClass = manifest[ResultType].erasure
+  def resultTypeClass = manifest[ResultType].runtimeClass
 
   /** A single result mapping between a column and a property or field.
     * This property will be used for comparisons.

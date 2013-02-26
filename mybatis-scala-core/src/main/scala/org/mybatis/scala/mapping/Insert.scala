@@ -32,7 +32,7 @@ abstract class Insert[Param : Manifest]
     */
   var keyGenerator : KeyGenerator = null //JdbcGeneratedKey(null, "id")
 
-  def parameterTypeClass = manifest[Param].erasure
+  def parameterTypeClass = manifest[Param].runtimeClass
 
   /** Exceutes the SQL INSERT Statement
     * @param param Input paramenter of the statement
