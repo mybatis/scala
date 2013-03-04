@@ -23,14 +23,14 @@
     <version>1.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>mybatis-scala-samples</artifactId>
+  <artifactId>mybatis-scala-samples_2.9.2</artifactId>
   <packaging>jar</packaging>
   <name>MyBatis Scala API Samples</name>
 
   <dependencies>
     <dependency>
       <groupId>org.mybatis.scala</groupId>
-      <artifactId>mybatis-scala-core</artifactId>
+      <artifactId>mybatis-scala-core_2.9.2</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
