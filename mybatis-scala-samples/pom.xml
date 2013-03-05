@@ -27,16 +27,21 @@
   <packaging>jar</packaging>
   <name>MyBatis Scala API Samples</name>
 
+  <properties>
+    <scala.binary>2.9.2</scala.binary>
+    <scala.version>${scala.binary}</scala.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.mybatis.scala</groupId>
-      <artifactId>mybatis-scala-core_2.9.2</artifactId>
+      <artifactId>mybatis-scala-core_${scala.binary}</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
-      <version>2.9.2</version>
+      <version>${scala.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hsqldb</groupId>
