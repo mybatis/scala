@@ -15,7 +15,7 @@ object Resolvers {
 }
 
 object Dependencies {
-  val mybatis = "org.mybatis" % "mybatis" % "3.2.0-SNAPSHOT"
+  val mybatis = "org.mybatis" % "mybatis" % "3.2.0"
   val scalatest = "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 }
 
