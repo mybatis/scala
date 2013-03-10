@@ -17,7 +17,6 @@ object Resolvers {
 object Dependencies {
   val mybatis = "org.mybatis.scala" %% "mybatis-scala-core" % "1.0.1"
   val hsqldb = "org.hsqldb" % "hsqldb" % "2.2.8"
-  val log4j = "log4j" % "log4j" % "1.2.17"
 }
 
 object MainBuild extends Build {
@@ -26,7 +25,7 @@ object MainBuild extends Build {
   import Resolvers._
   import Dependencies._
 
-  val deps = Seq(mybatis, hsqldb, log4j)
+  val deps = Seq(mybatis, hsqldb)
   val coreResolvers = Seq(sonatypeSnapshots, sonatype)
 
   lazy val samples = Project(
