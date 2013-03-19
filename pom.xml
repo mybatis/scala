@@ -20,12 +20,12 @@
   <parent>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
-    <version>17-SNAPSHOT</version>
+    <version>17</version>
   </parent>
 
   <groupId>org.mybatis.scala</groupId>
   <artifactId>mybatis-scala-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
 
   <name>MyBatis Scala</name>
