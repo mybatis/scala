@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>session - MyBatis Scala API Core 1.0.1 API - org.mybatis.scala.session</title>
+          <meta name="description" content="session - MyBatis Scala API Core 1.0.1 API - org.mybatis.scala.session" />
+          <meta name="keywords" content="session MyBatis Scala API Core 1.0.1 API org.mybatis.scala.session" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'org.mybatis.scala.session.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.mybatis">mybatis</a>.<a href="../package.html" class="extype" name="org.mybatis.scala">scala</a></p>
+        <h1>session</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">session</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Session Management classes.
+Provides classes needed to execute the mapped statements.</p><h4> Basic usage </h4><p>Usual steps are:</p><ul><li>Obtain a SessionManager instance from a Configuration</li><li>Call any of the lifecycle methods of the SessionManager passing the code to be executed.</li></ul><h4> Code sample </h4><pre><span class="kw">val</span> db = Config.persistenceContext
+db.transaction { <span class="kw">implicit</span> session <span class="kw">=&gt;</span>
+  MyDAO.insert(...)
+  MyDAO.update(...)
+  <span class="cmt">// etc...</span>
+}</pre></div><dl class="attributes block"> <dt>Version</dt><dd><p>$Revision$
+</p></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.mybatis.scala.session"><span>session</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.mybatis.scala.session.BatchResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BatchResult=org.apache.ibatis.executor.BatchResult"></a>
+      <a id="BatchResult:BatchResult"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">BatchResult</span><span class="result"> = <span class="extype" name="org.apache.ibatis.executor.BatchResult">apache.ibatis.executor.BatchResult</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias of <span class="extype" name="org.apache.ibatis.executor.BatchResult">org.apache.ibatis.executor.BatchResult</span></p>
+    </li><li name="org.mybatis.scala.session.ExecutorType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ExecutorTypeextendsObject"></a>
+      <a id="ExecutorType:ExecutorType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ExecutorType.html"><span class="name">ExecutorType</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.session.ResultContext" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultContext=org.apache.ibatis.session.ResultContext"></a>
+      <a id="ResultContext:ResultContext"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultContext</span><span class="result"> = <span class="extype" name="org.apache.ibatis.session.ResultContext">apache.ibatis.session.ResultContext</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias of <span class="extype" name="org.apache.ibatis.session.ResultContext">org.apache.ibatis.session.ResultContext</span></p>
+    </li><li name="org.mybatis.scala.session.ResultHandler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultHandler=org.apache.ibatis.session.ResultHandler"></a>
+      <a id="ResultHandler:ResultHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResultHandler</span><span class="result"> = <span class="extype" name="org.apache.ibatis.session.ResultHandler">apache.ibatis.session.ResultHandler</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alias of <span class="extype" name="org.apache.ibatis.session.ResultHandler">org.apache.ibatis.session.ResultHandler</span></p>
+    </li><li name="org.mybatis.scala.session.ResultHandlerDelegator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultHandlerDelegatorextendsResultHandler"></a>
+      <a id="ResultHandlerDelegator:ResultHandlerDelegator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ResultHandlerDelegator.html"><span class="name">ResultHandlerDelegator</span></a><span class="result"> extends <span class="extype" name="org.apache.ibatis.session.ResultHandler">apache.ibatis.session.ResultHandler</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.session.RowBounds" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RowBoundsextendsProductwithSerializable"></a>
+      <a id="RowBounds:RowBounds"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="RowBounds.html"><span class="name">RowBounds</span></a><span class="params">(<span name="offset">offset: <span class="extype" name="scala.Int">Int</span></span>, <span name="limit">limit: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Wrapper of <span class="extype" name="org.apache.ibatis.session.RowBounds">org.apache.ibatis.session.RowBounds</span>
+</p>
+    </li><li name="org.mybatis.scala.session.Session" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SessionextendsObject"></a>
+      <a id="Session:Session"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Session.html"><span class="name">Session</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">SqlSession Wrapper.</p>
+    </li><li name="org.mybatis.scala.session.SessionManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SessionManagerextendsObject"></a>
+      <a id="SessionManager:SessionManager"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SessionManager.html"><span class="name">SessionManager</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Session lifecycle manager.</p>
+    </li><li name="org.mybatis.scala.session.TransactionIsolationLevel" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TransactionIsolationLevelextendsObject"></a>
+      <a id="TransactionIsolationLevel:TransactionIsolationLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="TransactionIsolationLevel.html"><span class="name">TransactionIsolationLevel</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.mybatis.scala.session.ExecutorType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExecutorType"></a>
+      <a id="ExecutorType:ExecutorType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExecutorType$.html"><span class="name">ExecutorType</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.session.TransactionIsolationLevel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TransactionIsolationLevel"></a>
+      <a id="TransactionIsolationLevel:TransactionIsolationLevel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TransactionIsolationLevel$.html"><span class="name">TransactionIsolationLevel</span></a>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
