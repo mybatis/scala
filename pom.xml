@@ -20,12 +20,12 @@
   <parent>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
-    <version>17-SNAPSHOT</version>
+    <version>17</version>
   </parent>
 
   <groupId>org.mybatis.scala</groupId>
   <artifactId>mybatis-scala-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
 
   <name>MyBatis Scala</name>
@@ -40,7 +40,7 @@
     <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:git+ssh://git@github.com/mybatis/scala.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>mybatis-scala-parent-1.0.1</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issue Management</system>
