@@ -73,6 +73,14 @@
           <arguments>-Prelease,bundle,gupload</arguments>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
     </plugins>
 
     <pluginManagement>
