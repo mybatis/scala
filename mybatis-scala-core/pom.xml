@@ -19,8 +19,8 @@
 
   <parent>
     <groupId>org.mybatis.scala</groupId>
-    <artifactId>mybatis-scala-parent</artifactId>
-    <version>1.0.1</version>
+    <artifactId>mybatis-scala-parent_2.9.2</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>mybatis-scala-core_2.9.2</artifactId>
