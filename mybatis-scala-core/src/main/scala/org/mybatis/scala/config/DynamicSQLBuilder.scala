@@ -82,6 +82,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
               else
                 throw new ConfigurationException("Too many default (otherwise) elements in choose statement.")
                 //error("Too many default (otherwise) elements in choose statement.")
+            case _ =>
           }
         }
         new ChooseSqlNode(ifNodes, defaultNode)
