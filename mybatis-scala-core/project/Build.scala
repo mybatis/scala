@@ -4,10 +4,10 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq (
     organization := "org.mybatis.scala",
-    version      := "1.0.1",
-    scalaVersion := "2.10.0"
+    version      := "1.0.2",
+    scalaVersion := "2.10.3"
   )
-  val mybatisVersion = "3.2.1"
+  val mybatisVersion = "3.2.3"
 }
 
 object Resolvers {

@@ -29,14 +29,14 @@
 
   <properties>
     <scala.binary>2.10</scala.binary>
-    <scala.version>${scala.binary}.0</scala.version>
+    <scala.version>${scala.binary}.3</scala.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.2.1</version>
+      <version>3.2.3</version>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>

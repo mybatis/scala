@@ -29,7 +29,7 @@
 
   <properties>
     <scala.binary>2.10</scala.binary>
-    <scala.version>${scala.binary}.0</scala.version>
+    <scala.version>${scala.binary}.3</scala.version>
   </properties>
 
   <dependencies>
