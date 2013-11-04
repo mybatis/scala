@@ -36,7 +36,8 @@ object DB {
   // Simple select function
   val findAll = new SelectListBy[String,Person] {
     def xsql =
-      """
+      <xsql>
+        <bind name="pattern" value="'%' + _parameter + '%'" />
         SELECT
           id_ as id,
           first_name_ as firstName,
@@ -44,8 +45,8 @@ object DB {
         FROM
           person
         WHERE
-          first_name_ LIKE #{name}
-      """
+          first_name_ LIKE #{{pattern}}
+      </xsql>
   }
 
   // Datasource configuration
@@ -83,7 +84,7 @@ object SelectSample {
       DBSchema.create
       DBSampleData.populate
 
-      DB.findAll("%a%").foreach { p => 
+      DB.findAll("a").foreach { p => 
         println( "Person(%d): %s %s".format(p.id, p.firstName, p.lastName) )
       }
       
