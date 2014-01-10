@@ -148,7 +148,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
         if (rm.parent != null) rm.parent.fqi.id else null,
         discriminator,
         resultMappings,
-        rm.autoMapping
+        rm.autoMapping.value
       )
 
     }

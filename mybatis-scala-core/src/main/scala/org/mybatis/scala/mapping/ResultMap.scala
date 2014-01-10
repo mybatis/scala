@@ -18,6 +18,14 @@ package org.mybatis.scala.mapping
 
 import scala.collection.mutable.ListBuffer
 
+sealed trait AutoMappingBehaviour {
+  val value : java.lang.Boolean
+}
+
+object AutoMappingEnabled extends AutoMappingBehaviour { val value = java.lang.Boolean.TRUE }
+object AutoMappingDisabled extends AutoMappingBehaviour { val value = java.lang.Boolean.FALSE }
+object AutoMappingInherited extends AutoMappingBehaviour { val value = null }
+
 /** Defines a mapping between JDBC Results and Java/Scala Classes.
   * @tparam ResultType type of the resulting object
   * @param parent if defined, this resultmap will inherit mappings from parent.
@@ -29,7 +37,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
   private[scala] var discr : (String, T[_], JdbcType, T[_ <: TypeHandler[_]], Seq[Case]) = null
 
   var fqi : FQI = null
-  var autoMapping : Boolean = false
+  var autoMapping : AutoMappingBehaviour = AutoMappingInherited
 
   def resultTypeClass = manifest[ResultType].runtimeClass
 
