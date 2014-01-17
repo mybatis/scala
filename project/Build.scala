@@ -7,7 +7,7 @@ object BuildSettings {
     version      := "1.0.2",
     scalaVersion := "2.10.3"
   )
-  val mybatisVersion = "3.2.3"
+  val mybatisVersion = "3.2.4"
 }
 
 object Resolvers {
