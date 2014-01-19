@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.mybatis.scala</groupId>
     <artifactId>mybatis-scala-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>mybatis-scala-core_2.10</artifactId>
