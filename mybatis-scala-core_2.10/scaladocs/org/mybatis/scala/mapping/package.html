@@ -2,18 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>mapping - MyBatis Scala API Core 1.0.1 API - org.mybatis.scala.mapping</title>
-          <meta name="description" content="mapping - MyBatis Scala API Core 1.0.1 API - org.mybatis.scala.mapping" />
-          <meta name="keywords" content="mapping MyBatis Scala API Core 1.0.1 API org.mybatis.scala.mapping" />
+          <title>mapping - MyBatis Scala API Core 1.0.2 API - org.mybatis.scala.mapping</title>
+          <meta name="description" content="mapping - MyBatis Scala API Core 1.0.2 API - org.mybatis.scala.mapping" />
+          <meta name="keywords" content="mapping MyBatis Scala API Core 1.0.2 API org.mybatis.scala.mapping" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../../../lib/template.js"></script>
-      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../index.html';
@@ -149,7 +144,20 @@ resultMap = <span class="kw">new</span> ResultMap[Person] {
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="org.mybatis.scala.mapping.Case" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.mybatis.scala.mapping.AutoMappingBehaviour" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AutoMappingBehaviourextendsAnyRef"></a>
+      <a id="AutoMappingBehaviour:AutoMappingBehaviour"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AutoMappingBehaviour.html"><span class="name">AutoMappingBehaviour</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.mapping.Case" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CaseextendsProductwithSerializable"></a>
       <a id="Case:Case"></a>
       <h4 class="signature">
@@ -202,7 +210,7 @@ resultMap = <span class="kw">new</span> ResultMap[Person] {
       </h4>
       <p class="comment cmt">JDBC 3 Key Generator implementation.</p>
     </li><li name="org.mybatis.scala.mapping.JdbcType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="JdbcTypeextendsObject"></a>
+      <a id="JdbcTypeextendsAnyRef"></a>
       <a id="JdbcType:JdbcType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -215,7 +223,7 @@ resultMap = <span class="kw">new</span> ResultMap[Person] {
       </h4>
       <p class="comment cmt">A wrapper of <span class="extype" name="org.apache.ibatis.type.JdbcType">org.apache.ibatis.type.JdbcType</span></p>
     </li><li name="org.mybatis.scala.mapping.KeyGenerator" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="KeyGeneratorextendsObject"></a>
+      <a id="KeyGeneratorextendsAnyRef"></a>
       <a id="KeyGenerator:KeyGenerator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -242,7 +250,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Generic scala.</p>
     </li><li name="org.mybatis.scala.mapping.ParamModeEnum" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ParamModeEnumextendsObject"></a>
+      <a id="ParamModeEnumextendsAnyRef"></a>
       <a id="ParamModeEnum:ParamModeEnum"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -268,7 +276,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">A mapped SQL UPDATE statement.</p>
     </li><li name="org.mybatis.scala.mapping.ResultMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ResultMap[ResultType]extendsObject"></a>
+      <a id="ResultMap[ResultType]extendsAnyRef"></a>
       <a id="ResultMap[ResultType]:ResultMap[ResultType]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -281,7 +289,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Defines a mapping between JDBC Results and Java/Scala Classes.</p>
     </li><li name="org.mybatis.scala.mapping.ResultSetType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ResultSetTypeextendsObject"></a>
+      <a id="ResultSetTypeextendsAnyRef"></a>
       <a id="ResultSetType:ResultSetType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -294,7 +302,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Wrapper of org.</p>
     </li><li name="org.mybatis.scala.mapping.SQLFunction0" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="SQLFunction0[+B]extendsObject"></a>
+      <a id="SQLFunction0[+B]extendsAnyRef"></a>
       <a id="SQLFunction0[+B]:SQLFunction0[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -307,7 +315,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       
     </li><li name="org.mybatis.scala.mapping.SQLFunction1" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="SQLFunction1[-A,+B]extendsObject"></a>
+      <a id="SQLFunction1[-A,+B]extendsAnyRef"></a>
       <a id="SQLFunction1[-A,+B]:SQLFunction1[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -320,7 +328,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       
     </li><li name="org.mybatis.scala.mapping.SQLFunction2" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="SQLFunction2[-A,-B,+C]extendsObject"></a>
+      <a id="SQLFunction2[-A,-B,+C]extendsAnyRef"></a>
       <a id="SQLFunction2[-A,-B,+C]:SQLFunction2[A,B,C]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -489,7 +497,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Base class to define a native SQL Key generator.</p>
     </li><li name="org.mybatis.scala.mapping.Statement" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StatementextendsObject"></a>
+      <a id="StatementextendsAnyRef"></a>
       <a id="Statement:Statement"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -502,7 +510,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Abstract SQL statement mapping.</p>
     </li><li name="org.mybatis.scala.mapping.StatementType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StatementTypeextendsObject"></a>
+      <a id="StatementTypeextendsAnyRef"></a>
       <a id="StatementType:StatementType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -515,7 +523,7 @@ This trait must be implemented by any KeyGenerator.</p>
       </h4>
       <p class="comment cmt">Wrapper of org.</p>
     </li><li name="org.mybatis.scala.mapping.T" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="T[t]extendsObject"></a>
+      <a id="T[t]extendsAnyRef"></a>
       <a id="T[t]:T[t]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -573,7 +581,46 @@ This trait must be implemented by any KeyGenerator.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="org.mybatis.scala.mapping.Binding" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="org.mybatis.scala.mapping.AutoMappingDisabled" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AutoMappingDisabled"></a>
+      <a id="AutoMappingDisabled:AutoMappingDisabled"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="AutoMappingDisabled$.html"><span class="name">AutoMappingDisabled</span></a><span class="result"> extends <a href="AutoMappingBehaviour.html" class="extype" name="org.mybatis.scala.mapping.AutoMappingBehaviour">AutoMappingBehaviour</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.mapping.AutoMappingEnabled" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AutoMappingEnabled"></a>
+      <a id="AutoMappingEnabled:AutoMappingEnabled"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="AutoMappingEnabled$.html"><span class="name">AutoMappingEnabled</span></a><span class="result"> extends <a href="AutoMappingBehaviour.html" class="extype" name="org.mybatis.scala.mapping.AutoMappingBehaviour">AutoMappingBehaviour</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.mapping.AutoMappingInherited" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AutoMappingInherited"></a>
+      <a id="AutoMappingInherited:AutoMappingInherited"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="AutoMappingInherited$.html"><span class="name">AutoMappingInherited</span></a><span class="result"> extends <a href="AutoMappingBehaviour.html" class="extype" name="org.mybatis.scala.mapping.AutoMappingBehaviour">AutoMappingBehaviour</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="org.mybatis.scala.mapping.Binding" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Binding"></a>
       <a id="Binding:Binding"></a>
       <h4 class="signature">
@@ -745,7 +792,6 @@ This trait must be implemented by any KeyGenerator.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../lib/template.js"></script>
     </body>
       </html>
