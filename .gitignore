@@ -212,3 +212,5 @@
 /project/nbproject
 /project/catalog.xml
 /project/.Build.scala.swp
+.project
+.settings

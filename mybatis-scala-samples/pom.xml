@@ -14,7 +14,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -25,11 +26,11 @@
 
   <artifactId>mybatis-scala-samples_2.10</artifactId>
   <packaging>jar</packaging>
-  <name>MyBatis Scala API Samples</name>
+  <name>mybatis-scala-samples</name>
 
   <properties>
     <scala.binary>2.10</scala.binary>
-    <scala.version>${scala.binary}.3</scala.version>
+    <scala.version>${scala.binary}.4</scala.version>
   </properties>
 
   <dependencies>
@@ -46,7 +47,7 @@
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
-      <version>2.2.8</version>
+      <version>2.3.2</version>
     </dependency>
   </dependencies>
 
@@ -67,10 +68,10 @@
 
     <resources>
       <resource>
-        <directory>${basedir}/src/main/resources</directory>
+        <directory>${project.basedir}/src/main/resources</directory>
       </resource>
       <resource>
-        <directory>${basedir}/../</directory>
+        <directory>${project.basedir}/../</directory>
         <targetPath>META-INF</targetPath>
         <includes>
           <include>LICENSE</include>

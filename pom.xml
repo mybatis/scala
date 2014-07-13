@@ -14,13 +14,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
-    <version>20</version>
+    <version>22-SNAPSHOT</version>
   </parent>
 
   <groupId>org.mybatis.scala</groupId>
@@ -28,7 +29,7 @@
   <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>MyBatis Scala</name>
+  <name>mybatis-scala-parent</name>
   <url>http://www.mybatis.org/scala</url>
 
   <modules>
@@ -59,8 +60,8 @@
 
   <properties>
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
-    <javac.src.version>1.6</javac.src.version>
-    <javac.target.version>1.6</javac.target.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
     <gcu.product>Scala</gcu.product>
   </properties>
 
@@ -102,6 +103,32 @@
               <phase>test-compile</phase>
             </execution>
           </executions>
+        </plugin>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+            <groupId>org.eclipse.m2e</groupId>
+            <artifactId>lifecycle-mapping</artifactId>
+            <version>1.0.0</version>
+            <configuration>
+                <lifecycleMappingMetadata>
+                    <pluginExecutions>
+                        <pluginExecution>
+                            <pluginExecutionFilter>
+                                <groupId>org.scala-tools</groupId>
+                                <artifactId>maven-scala-plugin</artifactId>
+                                <versionRange>[2.15.2,)</versionRange>
+                                <goals>
+                                    <goal>testCompile</goal>
+                                    <goal>compile</goal>
+                                </goals>
+                            </pluginExecutionFilter>
+                            <action>
+                                <ignore></ignore>
+                            </action>
+                        </pluginExecution>
+                    </pluginExecutions>
+                </lifecycleMappingMetadata>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
