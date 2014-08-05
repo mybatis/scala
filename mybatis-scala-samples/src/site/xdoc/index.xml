@@ -43,7 +43,7 @@
             </p>
             <p>
                 Also most of them share the same configuration file:
-                <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/resources/mybatis.xml">mybatis.xml</a>
+                <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/resources/mybatis.xml">mybatis.xml</a>
             </p>
             <p>
                 <source><![CDATA[
@@ -72,38 +72,38 @@
                 <ul>
                     <li>
                         Simple Select without result map:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/select/SelectSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/select/SelectSample.scala">Code</a>
                     </li>
                     <li>
                         Complex Select with nested resultmaps:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/resultmap/SelectWithResultMapSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/resultmap/SelectWithResultMapSample.scala">Code</a>
                     </li>
                     <li>
                         Complex Select with nested selects
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/nestedselect/NestedSelectSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/nestedselect/NestedSelectSample.scala">Code</a>
                     </li>
                     <li>
                         Insert:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/insert/InsertSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/insert/InsertSample.scala">Code</a>
                     </li>
                     <li>
                         Update:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/update/UpdateSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/update/UpdateSample.scala">Code</a>
                     </li>
                     <li>
                         Delete:
-                        <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/delete/DeleteSample.scala">Code</a>
+                        <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/delete/DeleteSample.scala">Code</a>
                     </li>
                 </ul>
             </p>
             <p>
                 The CRUD example: A little more complete example.
-                <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/">Code</a>
+                <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/src/main/scala/org/mybatis/scala/samples/crud/">Code</a>
             </p>
         </section>
         <section name="Source code">
             You can browse all the sample code at:
-            <a href="http://code.google.com/p/mybatis/source/browse/sub-projects/scala/trunk/mybatis-scala-samples/">google code</a>
+            <a href="https://github.com/mybatis/scala/blob/master/mybatis-scala-samples/">Source Code</a>
         </section>
     </body>
 
