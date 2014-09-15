@@ -60,8 +60,6 @@
 
   <properties>
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
     <gcu.product>Scala</gcu.product>
   </properties>
 
