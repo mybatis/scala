@@ -19,9 +19,6 @@ package org.mybatis.scala;
 /**
  * This class has the sole purpose to provide javadoc artifact to make Nexus happy.
  */
-public final class MyBatisScala
-{
-
+public final class MyBatisScala {
     // nothing to declare
-
 }
