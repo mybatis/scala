@@ -2,23 +2,29 @@ package org.mybatis.scala.mapping
 
 import org.scalatest._
 import org.mybatis.scala.config.ConfigurationException
+import org.scalatest.matchers.{ShouldMatchers, ClassicMatchers, Matchers}
 import scala.util.control.NonFatal
 
 /**
  * The specification for [[Statement]].
  */
-class StatementSpec extends FlatSpec with Matchers {
+class StatementSpec extends FlatSpec with ClassicMatchers with ShouldMatchers {
   val simpleStatement = new Statement {
   override def parameterTypeClass: Class[_] = classOf[Unit]
     override def xsql: XSQL = <xsql>SELECT 1</xsql>
   }
 
   "A Statement" should "throw an exception if FQI isn't set" in {
-    a [ConfigurationException] should be thrownBy {
+    evaluating{
       simpleStatement.execute {
         fail("should not come here")
       }
-    }
+    } should produce [ConfigurationException]
+    /*a [ConfigurationException] should be thrownBy {
+      simpleStatement.execute {
+        fail("should not come here")
+      }
+    }*/
   }
 
   it should "not throw any exception if FQI is set" in {
