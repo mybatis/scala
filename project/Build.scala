@@ -27,7 +27,7 @@ object MainBuild extends Build {
   import Resolvers._
   import Dependencies._
 
-  val coreDeps = Seq(mybatis, scalatest)
+  val coreDeps = Seq(mybatis, scalatest, hsqldb % "test" )
   val coreResolvers = Seq(sonatypeSnapshots, sonatype)
 
   lazy val root = Project(
