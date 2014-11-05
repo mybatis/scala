@@ -17,7 +17,7 @@ object Resolvers {
 
 object Dependencies {
   val mybatis = "org.mybatis" % "mybatis" % BuildSettings.mybatisVersion
-  val scalatest = "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "2.2.2" % "test"
   val hsqldb = "org.hsqldb" % "hsqldb" % "2.2.8"
 }
 
