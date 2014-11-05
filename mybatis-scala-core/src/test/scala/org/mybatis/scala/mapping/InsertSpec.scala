@@ -1,15 +1,15 @@
 package org.mybatis.scala.mapping
 
-import org.scalatest._
-import org.mybatis.scala.infrastructure.UserRepository
 import org.mybatis.scala.DatabaseSupport
 import org.mybatis.scala.domain.User
-import org.scalatest.matchers.{ShouldMatchers, ClassicMatchers}
+import org.mybatis.scala.infrastructure.UserRepository
+import org.scalatest._
+import org.scalatest.matchers.ShouldMatchers
 
 /**
  * The specification for [[Insert]].
  */
-class InsertSpec extends FlatSpec with ClassicMatchers with ShouldMatchers with DatabaseSupport {
+class InsertSpec extends FlatSpec with Matchers with DatabaseSupport {
   "A Insert" should "insert User into user table" in {
     withReadOnly(Database.default) { implicit session =>
       val expected = User(0, "test", "example@example.com")
