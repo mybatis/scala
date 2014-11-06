@@ -17,7 +17,7 @@ object Resolvers {
 
 object Dependencies {
   val mybatis = "org.mybatis" % "mybatis" % BuildSettings.mybatisVersion
-  val scalatest = "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "2.2.2" % "test"
   val hsqldb = "org.hsqldb" % "hsqldb" % "2.2.8"
 }
 
@@ -27,7 +27,7 @@ object MainBuild extends Build {
   import Resolvers._
   import Dependencies._
 
-  val coreDeps = Seq(mybatis, scalatest)
+  val coreDeps = Seq(mybatis, scalatest, hsqldb % "test" )
   val coreResolvers = Seq(sonatypeSnapshots, sonatype)
 
   lazy val root = Project(

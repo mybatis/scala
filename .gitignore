@@ -214,3 +214,5 @@
 /project/.Build.scala.swp
 .project
 .settings
+.idea
+project

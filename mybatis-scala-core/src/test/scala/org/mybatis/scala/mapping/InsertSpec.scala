@@ -1,9 +1,10 @@
 package org.mybatis.scala.mapping
 
-import org.scalatest._
-import org.mybatis.scala.infrastructure.UserRepository
 import org.mybatis.scala.DatabaseSupport
 import org.mybatis.scala.domain.User
+import org.mybatis.scala.infrastructure.UserRepository
+import org.scalatest._
+import org.scalatest.matchers.ShouldMatchers
 
 /**
  * The specification for [[Insert]].
