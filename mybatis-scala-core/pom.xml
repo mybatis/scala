@@ -24,13 +24,13 @@
     <version>1.0.3-SNAPSHOT</version>
   </parent>
 
-  <artifactId>mybatis-scala-core_2.10</artifactId>
+  <artifactId>mybatis-scala-core_2.11</artifactId>
   <packaging>jar</packaging>
   <name>mybatis-scala-core</name>
 
   <properties>
-    <scala.binary>2.10</scala.binary>
-    <scala.version>${scala.binary}.4</scala.version>
+    <scala.binary>2.11</scala.binary>
+    <scala.version>${scala.binary}.6</scala.version>
   </properties>
 
   <dependencies>
@@ -44,6 +44,11 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+      <dependency>
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-xml</artifactId>
+          <version>${scala.binary}.0-M4</version>
+      </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.binary}</artifactId>
