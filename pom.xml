@@ -87,6 +87,7 @@
           <configuration>
             <args>
               <arg>-deprecation</arg>
+                <arg>-feature</arg>
             </args>
           </configuration>
           <executions>
