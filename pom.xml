@@ -37,6 +37,7 @@
     <module>mybatis-scala-samples</module>
   </modules>
 
+
   <scm>
     <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
@@ -62,6 +63,8 @@
     <clirr.comparisonVersion>1.0.2</clirr.comparisonVersion>
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <gcu.product>Scala</gcu.product>
+      <scala.binary>2.11</scala.binary>
+      <scala.version>${scala.binary}.6</scala.version>
   </properties>
 
   <build>
@@ -132,5 +135,21 @@
       </plugins>
     </pluginManagement>
   </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-xml</artifactId>
+                <version>${scala.binary}.0-M4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
 </project>
