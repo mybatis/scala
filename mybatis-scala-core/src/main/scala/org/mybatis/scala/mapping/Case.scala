@@ -22,4 +22,4 @@ package org.mybatis.scala.mapping
   * @param resultMap A ResultMap to be used if value matches
   * @version \$Revision$
   */
-case class Case(val value : String, val resultMap : ResultMap[_])
+case class Case(val value : String, val resultMap : ResultMap[Any])
