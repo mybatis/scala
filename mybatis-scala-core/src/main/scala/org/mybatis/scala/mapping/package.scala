@@ -18,6 +18,7 @@ package org.mybatis.scala
 
 import org.apache.ibatis.`type`.{TypeHandler => MBTypeHandler}
 import scala.xml.Node
+import scala.language.implicitConversions
 
 /** Statement and result mapping classes.
   * == Code sample ==
