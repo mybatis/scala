@@ -91,8 +91,8 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
         new IfSqlNode(content, attr(ifNode, "@test"))
       case other @ <otherwise>{children @ _*}</otherwise> =>
         parseChildren(other)
-      case a : Atom[String] =>
-        new TextSqlNode(a.data)
+      case a : Atom[_] =>
+        new TextSqlNode(a.data.asInstanceOf[String])
       case bind @ <bind /> =>
         new VarDeclSqlNode(attr(bind, "@name"), attr(bind, "@value"))
       case unsupported =>

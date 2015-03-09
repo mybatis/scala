@@ -82,7 +82,7 @@ sealed class SessionManager(factory : SqlSessionFactory) {
       t
     }
     catch {
-      case e =>
+      case e : Throwable =>
         sqlSession.rollback
         throw e
     }

@@ -53,8 +53,8 @@ class DefaultObjectWrapperFactory extends ObjectWrapperFactory {
     case _ => false
   }
   def getWrapperFor(metaObject : MetaObject, obj : AnyRef) : org.apache.ibatis.reflection.wrapper.ObjectWrapper = obj match {
-    case o : scala.collection.mutable.ArrayBuffer[AnyRef] => new ArrayBufferWrapper(o)
-    case o : scala.collection.mutable.HashSet[AnyRef] => new HashSetWrapper(o)
+    case o : scala.collection.mutable.ArrayBuffer[_] => new ArrayBufferWrapper(o.asInstanceOf[scala.collection.mutable.ArrayBuffer[AnyRef]])
+    case o : scala.collection.mutable.HashSet[_] => new HashSetWrapper(o.asInstanceOf[scala.collection.mutable.HashSet[AnyRef]])
     case _ => 
       throw new IllegalArgumentException("Type not supported: " + obj.getClass.getSimpleName)
   }
