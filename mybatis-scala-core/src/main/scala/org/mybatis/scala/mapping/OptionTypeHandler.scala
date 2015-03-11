@@ -37,22 +37,13 @@ class OptionTypeHandler[T](delegate : TypeHandler[T]) extends TypeHandler[Option
     }
 
   def getResult(rs : ResultSet, columnName : String) : Option[T] =
-    delegate.getResult(rs, columnName) match {
-      case null => None
-      case v : T => Some(v)
-    }
+    Option{ delegate.getResult(rs, columnName) }
 
   def getResult(rs : ResultSet, columnIndex : Int) : Option[T]  =
-    delegate.getResult(rs, columnIndex) match {
-      case null => None
-      case v : T => Some(v)
-    }
+    Option{ delegate.getResult(rs, columnIndex) }
 
   def getResult(cs : CallableStatement, columnIndex : Int) : Option[T] = 
-    delegate.getResult(cs, columnIndex) match {
-      case null => None
-      case v : T => Some(v)
-    }
+    Option{ delegate.getResult(cs, columnIndex) }
 
 }
 

@@ -4,6 +4,7 @@ import org.mybatis.scala.mapping._
 import org.mybatis.scala.mapping.Binding._
 import org.mybatis.scala.domain.{Entry, Blog}
 import org.mybatis.scala.session.Session
+import scala.language.postfixOps
 
 object BlogRepository {
   lazy val blogResultMap = new ResultMap[Blog] {

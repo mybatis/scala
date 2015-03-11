@@ -20,6 +20,7 @@ import org.mybatis.scala.mapping._
 import org.mybatis.scala.mapping.Binding._
 import org.mybatis.scala.mapping.TypeHandlers._
 import org.mybatis.scala.session.Session
+import scala.language.postfixOps
 
 object ItemDAO {
 

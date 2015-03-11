@@ -3,6 +3,7 @@ package org.mybatis.scala.infrastructure
 import org.mybatis.scala.domain.User
 import org.mybatis.scala.mapping._
 import org.mybatis.scala.mapping.Binding._
+import scala.language.postfixOps
 
 object UserRepository {
   val defaultResultMap = new ResultMap[User] {

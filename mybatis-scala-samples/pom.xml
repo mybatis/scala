@@ -20,18 +20,18 @@
 
   <parent>
     <groupId>org.mybatis.scala</groupId>
-    <artifactId>mybatis-scala-parent</artifactId>
+    <artifactId>mybatis-scala-parent_2.11</artifactId>
     <version>1.0.3-SNAPSHOT</version>
   </parent>
 
-  <artifactId>mybatis-scala-samples_2.10</artifactId>
+  <artifactId>mybatis-scala-samples_2.11</artifactId>
   <packaging>jar</packaging>
   <name>mybatis-scala-samples</name>
 
-  <properties>
-    <scala.binary>2.10</scala.binary>
-    <scala.version>${scala.binary}.4</scala.version>
-  </properties>
+  <!--<properties>
+    <scala.binary>2.11</scala.binary>
+    <scala.version>${scala.binary}.6</scala.version>
+  </properties>-->
 
   <dependencies>
     <dependency>

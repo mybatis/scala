@@ -101,11 +101,11 @@ object Binding {
   }
 
   /** Utility class for simplified syntax support */
-  case class Param(property : String) {
+  implicit class Param(property : String) {
     def ? = Binding ? (property)
   }
 
   /** Implicit conversion for simplified syntax support */
-  implicit def StringToParam(s : String) = new Param(s)
+  //implicit def StringToParam(s : String) = new Param(s)
 
 }

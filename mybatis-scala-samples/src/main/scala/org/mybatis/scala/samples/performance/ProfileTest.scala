@@ -20,6 +20,7 @@ import org.mybatis.scala.mapping._
 import org.mybatis.scala.config._
 import org.mybatis.scala.session._
 import org.mybatis.scala.mapping.Binding._
+import scala.language.postfixOps
 
 class TestBean {
   var id : Int = 0
