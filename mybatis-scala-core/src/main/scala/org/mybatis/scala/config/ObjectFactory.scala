@@ -18,8 +18,6 @@ package org.mybatis.scala.config
 
 class DefaultObjectFactory extends ObjectFactory {
 
-  val cache = new scala.collection.mutable.HashMap[CacheKey, java.lang.reflect.Constructor[_]]
-
   def create[T](t : Class[T]) : T = create(t, null, null)
 
   def create[T](t : Class[T], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
@@ -123,7 +121,6 @@ class DefaultObjectFactory extends ObjectFactory {
   }
 
   def getConstructor(t : Class[_], args : Array[Class[_]]) : java.lang.reflect.Constructor[_] = {
-    cache.getOrElseUpdate(new CacheKey(t, args), {
       try {
         if (args == null) {
           val constructor = t.getDeclaredConstructor()
@@ -149,7 +146,6 @@ class DefaultObjectFactory extends ObjectFactory {
           throw new org.apache.ibatis.reflection.ReflectionException(
             "Error instantiating %s with invalid types (%s). Cause: %s".format(t.getSimpleName, args, e.getMessage), e);
       }      
-    })
   } 
 
 }
