@@ -4,10 +4,10 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq (
     organization := "org.mybatis.scala",
-    version      := "1.0.2",
-    scalaVersion := "2.10.3"
+    version      := "1.0.3",
+    scalaVersion := "2.11.6"
   )
-  val mybatisVersion = "3.2.4"
+  val mybatisVersion = "3.2.8"
 }
 
 object Resolvers {
@@ -17,7 +17,8 @@ object Resolvers {
 
 object Dependencies {
   val mybatis = "org.mybatis" % "mybatis" % BuildSettings.mybatisVersion
-  val scalatest = "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+  val scalaxml = "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.3"
 }
 
 object MainBuild extends Build {
@@ -26,7 +27,7 @@ object MainBuild extends Build {
   import Resolvers._
   import Dependencies._
 
-  val coreDeps = Seq(mybatis, scalatest)
+  val coreDeps = Seq(mybatis, scalaxml, scalatest)
   val coreResolvers = Seq(sonatypeSnapshots, sonatype)
 
   lazy val core = Project(
