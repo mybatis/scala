@@ -29,10 +29,11 @@
   <packaging>jar</packaging>
   <name>mybatis-scala-core</name>
 
-  <!--<properties>
-    <scala.binary>2.11</scala.binary>
-    <scala.version>${scala.binary}.6</scala.version>
-  </properties>-->
+  <scm>
+    <url>http://github.com/mybatis/scala</url>
+    <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
+  </scm>
 
   <dependencies>
     <dependency>
