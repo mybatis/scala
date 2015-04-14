@@ -1,0 +1,540 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>config - mybatis-scala-core 1.0.4-SNAPSHOT API - org.mybatis.scala.config</title>
+          <meta name="description" content="config - mybatis - scala - core 1.0.4 - SNAPSHOT API - org.mybatis.scala.config" />
+          <meta name="keywords" content="config mybatis scala core 1.0.4 SNAPSHOT API org.mybatis.scala.config" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../../index.html';
+            var hash = 'org.mybatis.scala.config.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../../lib/package_big.png" />
+        <p id="owner"><a href="../../../package.html" class="extype" name="org">org</a>.<a href="../../package.html" class="extype" name="org.mybatis">mybatis</a>.<a href="../package.html" class="extype" name="org.mybatis.scala">scala</a></p>
+        <h1>config</h1><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">config</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides main configuration classes.</p><h4> Basic usage </h4><p>Usual steps are:</p><ul><li>Load the configuration from an external XML file</li><li>Add one or more configuration spaces with mapped statements</li><li>Create the persistenceContext</li></ul><h4> Code sample </h4><pre><span class="kw">val</span> config = Configuration(<span class="lit">"META-INF/mybatis.xml"</span>)
+config.addSpace(<span class="lit">"ns"</span>) { space <span class="kw">=&gt;</span>
+  space ++= MyDAO
+}
+<span class="kw">val</span> persistenceContext = config.createPersistenceContext</pre><h4> Another example without external XML file and with default namespace </h4><pre><span class="kw">val</span> config = Configuration(
+ Environment(
+   <span class="lit">"default"</span>,
+   <span class="kw">new</span> JdbcTransactionFactory(),
+   <span class="kw">new</span> PooledDataSource(
+     <span class="lit">"org.hsqldb.jdbcDriver"</span>,
+     <span class="lit">"jdbc:hsqldb:mem:scala"</span>,
+     <span class="lit">"sa"</span>,
+     <span class="lit">""</span>
+   )
+ )
+)
+config ++= MyDAO
+
+<span class="kw">val</span> persistenceContext = config.createPersistenceContext</pre></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="org.mybatis.scala.config"><span>config</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.mybatis.scala.config.ArrayBufferWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ArrayBufferWrapperextendsCollectionObjectWrapper"></a>
+      <a id="ArrayBufferWrapper:ArrayBufferWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ArrayBufferWrapper.html"><span class="name">ArrayBufferWrapper</span></a><span class="result"> extends <a href="CollectionObjectWrapper.html" class="extype" name="org.mybatis.scala.config.CollectionObjectWrapper">CollectionObjectWrapper</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ArrayBufferWrapperextendsCollectionObjectWrapper" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.AutoMappingBehavior" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AutoMappingBehaviorextendsAnyRef"></a>
+      <a id="AutoMappingBehavior:AutoMappingBehavior"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$AutoMappingBehavior.html"><span class="name">AutoMappingBehavior</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@AutoMappingBehaviorextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.CollectionObjectWrapper" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CollectionObjectWrapperextendsObjectWrapper"></a>
+      <a id="CollectionObjectWrapper:CollectionObjectWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CollectionObjectWrapper.html"><span class="name">CollectionObjectWrapper</span></a><span class="result"> extends <span class="extype" name="org.apache.ibatis.reflection.wrapper.ObjectWrapper">ObjectWrapper</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@CollectionObjectWrapperextendsObjectWrapper" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationextendsAnyRef"></a>
+      <a id="Configuration:Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Configuration.html"><span class="name">Configuration</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ConfigurationextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Mybatis Configuration</p>
+    </li><li name="org.mybatis.scala.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationExceptionextendsThrowable"></a>
+      <a id="ConfigurationException:ConfigurationException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationException.html"><span class="name">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Throwable">Throwable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ConfigurationExceptionextendsThrowable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.ConfigurationSpace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationSpaceextendsAnyRef"></a>
+      <a id="ConfigurationSpace:ConfigurationSpace"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationSpace.html"><span class="name">ConfigurationSpace</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ConfigurationSpaceextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Configuration Space (mybatis namespace)</p>
+    </li><li name="org.mybatis.scala.config.DatabaseIdProvider" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DatabaseIdProvider=org.apache.ibatis.mapping.DatabaseIdProvider"></a>
+      <a id="DatabaseIdProvider:DatabaseIdProvider"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DatabaseIdProvider</span><span class="result"> = <span class="extype" name="org.apache.ibatis.mapping.DatabaseIdProvider">apache.ibatis.mapping.DatabaseIdProvider</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@DatabaseIdProvider=org.apache.ibatis.mapping.DatabaseIdProvider" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.DefaultObjectFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DefaultObjectFactoryextendsorg.mybatis.scala.config.ObjectFactory"></a>
+      <a id="DefaultObjectFactory:DefaultObjectFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DefaultObjectFactory.html"><span class="name">DefaultObjectFactory</span></a><span class="result"> extends <a href="#ObjectFactory=org.apache.ibatis.reflection.factory.ObjectFactory" class="extmbr" name="org.mybatis.scala.config.ObjectFactory">ObjectFactory</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@DefaultObjectFactoryextendsorg.mybatis.scala.config.ObjectFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.DefaultObjectWrapperFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DefaultObjectWrapperFactoryextendsorg.mybatis.scala.config.ObjectWrapperFactory"></a>
+      <a id="DefaultObjectWrapperFactory:DefaultObjectWrapperFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DefaultObjectWrapperFactory.html"><span class="name">DefaultObjectWrapperFactory</span></a><span class="result"> extends <a href="#ObjectWrapperFactory=org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory" class="extmbr" name="org.mybatis.scala.config.ObjectWrapperFactory">ObjectWrapperFactory</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@DefaultObjectWrapperFactoryextendsorg.mybatis.scala.config.ObjectWrapperFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.Environment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EnvironmentextendsProductwithSerializable"></a>
+      <a id="Environment:Environment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Environment.html"><span class="name">Environment</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tf">tf: <a href="#TransactionFactory=org.apache.ibatis.transaction.TransactionFactory" class="extmbr" name="org.mybatis.scala.config.TransactionFactory">TransactionFactory</a></span>, <span name="ds">ds: <span class="extype" name="javax.sql.DataSource">DataSource</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@EnvironmentextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p>
+    </li><li name="org.mybatis.scala.config.HashSetWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HashSetWrapperextendsCollectionObjectWrapper"></a>
+      <a id="HashSetWrapper:HashSetWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="HashSetWrapper.html"><span class="name">HashSetWrapper</span></a><span class="result"> extends <a href="CollectionObjectWrapper.html" class="extype" name="org.mybatis.scala.config.CollectionObjectWrapper">CollectionObjectWrapper</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@HashSetWrapperextendsCollectionObjectWrapper" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.JdbcTransactionFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JdbcTransactionFactory=org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory"></a>
+      <a id="JdbcTransactionFactory:JdbcTransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JdbcTransactionFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory">apache.ibatis.transaction.jdbc.JdbcTransactionFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@JdbcTransactionFactory=org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.JndiDataSourceFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JndiDataSourceFactory=org.apache.ibatis.datasource.jndi.JndiDataSourceFactory"></a>
+      <a id="JndiDataSourceFactory:JndiDataSourceFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JndiDataSourceFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.datasource.jndi.JndiDataSourceFactory">apache.ibatis.datasource.jndi.JndiDataSourceFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@JndiDataSourceFactory=org.apache.ibatis.datasource.jndi.JndiDataSourceFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.LanguageDriver" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LanguageDriver=org.apache.ibatis.scripting.LanguageDriver"></a>
+      <a id="LanguageDriver:LanguageDriver"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LanguageDriver</span><span class="result"> = <span class="extype" name="org.apache.ibatis.scripting.LanguageDriver">apache.ibatis.scripting.LanguageDriver</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@LanguageDriver=org.apache.ibatis.scripting.LanguageDriver" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.LocalCacheScope" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LocalCacheScopeextendsAnyRef"></a>
+      <a id="LocalCacheScope:LocalCacheScope"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$LocalCacheScope.html"><span class="name">LocalCacheScope</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@LocalCacheScopeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.ManagedTransactionFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ManagedTransactionFactory=org.apache.ibatis.transaction.managed.ManagedTransactionFactory"></a>
+      <a id="ManagedTransactionFactory:ManagedTransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ManagedTransactionFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.transaction.managed.ManagedTransactionFactory">apache.ibatis.transaction.managed.ManagedTransactionFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ManagedTransactionFactory=org.apache.ibatis.transaction.managed.ManagedTransactionFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.ObjectFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ObjectFactory=org.apache.ibatis.reflection.factory.ObjectFactory"></a>
+      <a id="ObjectFactory:ObjectFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ObjectFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.reflection.factory.ObjectFactory">apache.ibatis.reflection.factory.ObjectFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ObjectFactory=org.apache.ibatis.reflection.factory.ObjectFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.ObjectWrapperFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ObjectWrapperFactory=org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory"></a>
+      <a id="ObjectWrapperFactory:ObjectWrapperFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ObjectWrapperFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory">apache.ibatis.reflection.wrapper.ObjectWrapperFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@ObjectWrapperFactory=org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.PooledDataSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PooledDataSource=org.apache.ibatis.datasource.pooled.PooledDataSource"></a>
+      <a id="PooledDataSource:PooledDataSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PooledDataSource</span><span class="result"> = <span class="extype" name="org.apache.ibatis.datasource.pooled.PooledDataSource">apache.ibatis.datasource.pooled.PooledDataSource</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@PooledDataSource=org.apache.ibatis.datasource.pooled.PooledDataSource" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.TransactionFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TransactionFactory=org.apache.ibatis.transaction.TransactionFactory"></a>
+      <a id="TransactionFactory:TransactionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TransactionFactory</span><span class="result"> = <span class="extype" name="org.apache.ibatis.transaction.TransactionFactory">apache.ibatis.transaction.TransactionFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@TransactionFactory=org.apache.ibatis.transaction.TransactionFactory" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="org.mybatis.scala.config.UnpooledDataSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnpooledDataSource=org.apache.ibatis.datasource.unpooled.UnpooledDataSource"></a>
+      <a id="UnpooledDataSource:UnpooledDataSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">UnpooledDataSource</span><span class="result"> = <span class="extype" name="org.apache.ibatis.datasource.unpooled.UnpooledDataSource">apache.ibatis.datasource.unpooled.UnpooledDataSource</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@UnpooledDataSource=org.apache.ibatis.datasource.unpooled.UnpooledDataSource" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="org.mybatis.scala.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Configuration"></a>
+      <a id="Configuration:Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Configuration$.html"><span class="name">Configuration</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@Configuration" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A factory of <a href="Configuration.html" class="extype" name="org.mybatis.scala.config.Configuration">org.mybatis.scala.config.Configuration</a> instances.</p>
+    </li><li name="org.mybatis.scala.config.DefaultScriptingDriver" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DefaultScriptingDriver"></a>
+      <a id="DefaultScriptingDriver:DefaultScriptingDriver"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DefaultScriptingDriver$.html"><span class="name">DefaultScriptingDriver</span></a><span class="result"> extends <span class="extype" name="org.apache.ibatis.scripting.xmltags.XMLLanguageDriver">XMLLanguageDriver</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#org.mybatis.scala.config.package@DefaultScriptingDriver" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
