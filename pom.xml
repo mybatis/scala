@@ -56,8 +56,8 @@
     <clirr.comparisonVersion>1.0.2</clirr.comparisonVersion>
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <gcu.product>Scala</gcu.product>
-      <scala.binary>2.11</scala.binary>
-      <scala.version>${scala.binary}.6</scala.version>
+    <scala.binary>2.11</scala.binary>
+    <scala.version>${scala.binary}.6</scala.version>
   </properties>
 
   <build>
