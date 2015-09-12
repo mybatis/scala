@@ -96,7 +96,7 @@ object ProfileTest extends App {
   // Read 1.000.000 rows one by one
   context.readOnly { implicit s =>
     select.handle[TestBean] { context =>
-      val bean = context.getResultObject/*.asInstanceOf[TestBean]*/
+      val bean = context.getResultObject
     }
   }
   
