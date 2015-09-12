@@ -31,6 +31,12 @@
   <name>mybatis-scala-parent</name>
   <url>http://www.mybatis.org/scala</url>
 
+  <modules>
+    <module>mybatis-scala-core</module>
+    <module>mybatis-scala-samples</module>
+  </modules>
+
+
   <scm>
     <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
@@ -112,9 +118,9 @@
           <version>${scala.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-xml</artifactId>
-          <version>${scala.binary}.0-M4</version>
+          <groupId>org.scala-lang.modules</groupId>
+          <artifactId>scala-xml_${scala.binary}</artifactId>
+          <version>1.0.5</version>
         </dependency>
       </dependencies>
     </dependencyManagement>
