@@ -44,12 +44,10 @@
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
     </dependency>
       <dependency>
           <groupId>org.scala-lang</groupId>
           <artifactId>scala-xml</artifactId>
-          <version>${scala.binary}.0-M4</version>
       </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
