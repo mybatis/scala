@@ -16,6 +16,6 @@
 
 package org.mybatis.scala.session
 
-class ResultHandlerDelegator(callback : ResultContext => Unit) extends ResultHandler {
-  def handleResult(context : ResultContext) : Unit = callback(context)
+class ResultHandlerDelegator[T](callback : ResultContext[_ <: T] => Unit) extends ResultHandler[T] {
+  def handleResult(context : ResultContext[_ <: T]) : Unit = callback(context)
 }

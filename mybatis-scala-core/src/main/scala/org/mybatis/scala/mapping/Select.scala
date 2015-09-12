@@ -80,8 +80,8 @@ abstract class SelectList[Result : Manifest]
   def apply()(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Result](fqi.id) }
 
-  def handle(callback : ResultContext => Unit)(implicit s : Session) : Unit =
-    execute { s.select(fqi.id, new ResultHandlerDelegator(callback)) }
+  def handle[T](callback : ResultContext[_ <: T] => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, new ResultHandlerDelegator[T](callback)) }
 
 }
 
@@ -118,8 +118,8 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   def apply(param : Param)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Param,Result](fqi.id, param) }
 
-  def handle(param : Param, callback : ResultContext => Unit)(implicit s : Session) : Unit = 
-    execute { s.select(fqi.id, param, new ResultHandlerDelegator(callback)) }
+  def handle(param : Param, callback : ResultContext[_ <: Result] => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }
 
 }
 
@@ -155,8 +155,8 @@ abstract class SelectListPage[Result : Manifest]
   def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
 
-  def handle(rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit =
-    execute { s.select(fqi.id, rowBounds, new ResultHandlerDelegator(callback)) }
+  def handle(rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }
 
 }
 
@@ -193,8 +193,8 @@ abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
     execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
 
-  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext => Unit)(implicit s : Session) : Unit =
-    execute { s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator(callback)) }
+  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
+    execute { s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }
 
 }
 

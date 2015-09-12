@@ -85,8 +85,9 @@ sealed class Configuration(private val configuration: MBConfig) {
     flushInterval: Long = -1,
     size: Int = -1,
     readWrite: Boolean = true,
+    blocking : Boolean = false,
     props: Properties = null) =
-    defaultSpace.cache(impl, eviction, flushInterval, size, readWrite, props)
+    defaultSpace.cache(impl, eviction, flushInterval, size, readWrite, blocking, props)
 
   /** Reference to an external Cache */
   def cacheRef(that: ConfigurationSpace) = defaultSpace.cacheRef(that)
@@ -350,8 +351,9 @@ object Configuration {
       flushInterval: Long = -1,
       size: Int = -1,
       readWrite: Boolean = true,
+      blocking : Boolean = false,
       props: Properties = null) = 
-        set(2, pos) { _.cache(impl, eviction, flushInterval, size, readWrite, props) }
+        set(2, pos) { _.cache(impl, eviction, flushInterval, size, readWrite, blocking, props) }
 
     // PENDING FOR mybatis 3.1.1+ ==================================================
     
