@@ -65,15 +65,15 @@ class Session(sqls : SqlSession) {
     mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap))
   }
 
-  def select[Param](statement : String, parameter : Param, handler : ResultHandler) : Unit = {
+  def select[Param, Res](statement : String, parameter : Param, handler : ResultHandler[Res]) : Unit = {
     sqls.select(statement, parameter, handler)
   }
 
-  def select(statement : String, handler : ResultHandler) : Unit = {
+  def select[T](statement : String, handler : ResultHandler[T]) : Unit = {
     sqls.select(statement, handler)
   }
 
-  def select[Param](statement : String, parameter : Param, rowBounds : RowBounds, handler : ResultHandler) : Unit = {
+  def select[Param, Res](statement : String, parameter : Param, rowBounds : RowBounds, handler : ResultHandler[Res]) : Unit = {
     sqls.select(statement, parameter, rowBounds.unwrap, handler)
   }
 

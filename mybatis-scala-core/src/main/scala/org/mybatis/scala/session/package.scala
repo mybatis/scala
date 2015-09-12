@@ -39,10 +39,10 @@ import org.apache.ibatis.session.{RowBounds => MBRowBounds}
 package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
-  type ResultHandler = MBResultHandler
+  type ResultHandler[T] = MBResultHandler[T]
   
   /** Alias of [[org.apache.ibatis.session.ResultContext]] */
-  type ResultContext = MBResultContext
+  type ResultContext[T] = MBResultContext[T]
   
   /** Alias of [[org.apache.ibatis.executor.BatchResult]] */
   type BatchResult = org.apache.ibatis.executor.BatchResult

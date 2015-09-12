@@ -74,6 +74,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     flushInterval : Long = -1,
     size : Int = -1,
     readWrite : Boolean = true,
+    blocking : Boolean = false,
     props : Properties = null) : this.type = {
 
     builderAssistant.useNewCache(
@@ -82,6 +83,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
       if (flushInterval > -1) flushInterval else null,
       if (size > -1) size else null,
       readWrite,
+      blocking,
       props
     )
     this
