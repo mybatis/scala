@@ -423,8 +423,30 @@ abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manife
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }
 
-} 
+}
 
+/** Query for a single object using a map.
+  *
+  * == Details ==
+  * This class defines a function: (Map[String, Any] => Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOneByMap[Person] {
+  *     def xsql = "SELECT * FROM person WHERE age = #{age} AND name = #{name}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find(Map("age" -> 25, "name" -> "Anon"))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result result type
+  */
 abstract class SelectOneByMap[Result : Manifest]
   extends Select
   with SQLFunction1[collection.Map[String, Any], Option[Result]] {
@@ -438,6 +460,28 @@ abstract class SelectOneByMap[Result : Manifest]
     }
 }
 
+/** Query for a list of objects using map.
+  *
+  * == Details ==
+  * This class defines a function: (Map[String, Any] => Seq[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findByNameAndAge = new SelectListByMap[Person] {
+  *     def xsql = "SELECT * FROM person WHERE name LIKE #{name} AND age BETWEEN #{minAge} AND #{maxAge}"
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByNameAndAge(Map("name" -> "John%", "minAge" -> 18, "maxAge" -> 25))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result result type
+  */
 abstract class SelectListByMap[Result : Manifest]
   extends Select
   with SQLFunction1[collection.Map[String, Any], Seq[Result]] {
