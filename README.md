@@ -4,7 +4,7 @@ MyBatis Scala Adapter
 [![Build Status](https://travis-ci.org/mybatis/scala.svg?branch=master)](https://travis-ci.org/mybatis/scala)
 [![Coverage Status](https://coveralls.io/repos/mybatis/scala/badge.svg?branch=master&service=github)](https://coveralls.io/github/mybatis/scala?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/5619b5f6a193340f280004a2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5619b5f6a193340f280004a2)
-[![Apache 2](http://img.shields.io/badge/license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Scala 2.9.2 [![Maven central](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.9.2/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.9.2)
 ===========
