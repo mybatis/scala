@@ -162,7 +162,6 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * and a typeHandler if you want to override the retrieval of the result values.
     * @param property Name of the property
     * @param column name of the column
-    * @param javaType Type of the property
     * @param jdbcType Type of the column
     * @param typeHandler Type of the handler
     * @param select Reference to an external select which will be called to obtain this value.
@@ -195,6 +194,43 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
 
   }
 
+  /** The association element deals with a “has-one” type relationship.
+    * An association mapping works mostly like any other result.
+    * You specify the target property, the column to retrieve the value from, the javaType
+    * of the property (which MyBatis can figure out most of the time), the jdbcType if necessary
+    * and a typeHandler if you want to override the retrieval of the result values.
+    * @param column name of the column
+    * @param jdbcType Type of the column
+    * @param typeHandler Type of the handler
+    * @param select Reference to an external select which will be called to obtain this value.
+    * @param resultMap Reference to an external resultMap which handles this value.
+    * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
+    * @tparam Type type of the associated object
+    */
+  def associationArg[Type : Manifest](
+    column : String = null,
+    jdbcType : JdbcType = JdbcType.UNDEFINED,
+    select : Select = null,
+    resultMap : ResultMap[_] = null,
+    notNullColumn : String = null,
+    columnPrefix : String = null,
+    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+
+    mappings += new ResultMapping(
+      T[ResultType],
+      null,
+      column,
+      T[Type],
+      jdbcType,
+      select,
+      resultMap,
+      notNullColumn,
+      columnPrefix,
+      typeHandler,
+      Seq(ResultFlag.CONSTRUCTOR))
+
+  }
+
   /** The collection element deals with a “has-many” type relationship.
     * A collection mapping works mostly like any other result.
     * You specify the target property, the column to retrieve the value from, the javaType
@@ -202,7 +238,6 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * and a typeHandler if you want to override the retrieval of the result values.
     * The collection element works almost identically to the association but for One-To_Many relationships.
     * @param column name of the column
-    * @param javaType Type of the property
     * @param jdbcType Type of the column
     * @param typeHandler Type of the handler
     * @param select Reference to an external select which will be called to obtain this value.
@@ -232,6 +267,44 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
       columnPrefix,
       typeHandler,
       Seq())
+
+  }
+
+  /** The collection element deals with a “has-many” type relationship.
+    * A collection mapping works mostly like any other result.
+    * You specify the target property, the column to retrieve the value from, the javaType
+    * of the property (which MyBatis can figure out most of the time), the jdbcType if necessary
+    * and a typeHandler if you want to override the retrieval of the result values.
+    * The collection element works almost identically to the association but for One-To_Many relationships.
+    * @param column name of the column
+    * @param jdbcType Type of the column
+    * @param typeHandler Type of the handler
+    * @param select Reference to an external select which will be called to obtain this value.
+    * @param resultMap Reference to an external resultMap which handles this value.
+    * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
+    * @tparam Type type of the associated objects
+    */
+  def collectionArg[Type : Manifest](
+     column : String = null,
+     jdbcType : JdbcType = JdbcType.UNDEFINED,
+     select : Select = null,
+     resultMap : ResultMap[_] = null,
+     notNullColumn : String = null,
+     columnPrefix : String = null,
+     typeHandler : T[_ <: TypeHandler[_]] = null) = {
+
+    mappings += new ResultMapping(
+      T[ResultType],
+      null,
+      column,
+      null /* Let's mybatis infer this */,
+      jdbcType,
+      select,
+      resultMap,
+      notNullColumn,
+      columnPrefix,
+      typeHandler,
+      Seq(ResultFlag.CONSTRUCTOR))
 
   }
 
