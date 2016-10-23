@@ -125,7 +125,7 @@
         <dependency>
           <groupId>org.scala-lang.modules</groupId>
           <artifactId>scala-xml_${scala.binary}</artifactId>
-          <version>1.0.5</version>
+          <version>1.0.6</version>
         </dependency>
       </dependencies>
     </dependencyManagement>
