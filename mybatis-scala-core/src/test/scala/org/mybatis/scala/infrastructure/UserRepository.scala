@@ -33,7 +33,6 @@ object UserRepository {
   }
 
   val createFromTuple2 = new Insert[(String, String)] {
-    keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql = <xsql>INSERT INTO user(name, email) VALUES({"_1" ?}, {"_2" ?})</xsql>
   }
 
