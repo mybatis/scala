@@ -22,7 +22,7 @@ object BuildSettings {
     version      := "1.0.3",
     scalaVersion := "2.11.6"
   )
-  val mybatisVersion = "3.2.8"
+  val mybatisVersion = "3.4.4"
 }
 
 object Resolvers {
