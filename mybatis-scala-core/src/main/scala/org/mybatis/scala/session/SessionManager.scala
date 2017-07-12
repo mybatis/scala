@@ -16,6 +16,8 @@
 package org.mybatis.scala.session
 
 import org.apache.ibatis.session._
+import org.apache.ibatis.logging.LogFactory
+import SessionManager.log
 
 /** Session lifecycle manager.
   * Manages the lifecycle of the Session
@@ -82,7 +84,16 @@ sealed class SessionManager(factory : SqlSessionFactory) {
     }
     catch {
       case e : Throwable =>
-        sqlSession.rollback
+        try {
+          sqlSession.rollback
+        }
+        catch {
+          case e2 : Exception =>
+            // Ignore.  There's nothing that can be done at this point.
+            // Throw the original exception as that's the one that matters.
+            log.warn("Unexpected exception on rolling back transaction.  Cause: " + e2)
+            throw e
+        }
         throw e
     }
     finally {
@@ -128,4 +139,8 @@ sealed class SessionManager(factory : SqlSessionFactory) {
   /** Executes the callback within a new session. Does not call any transaction method. */
   def managed[T](callback : Callback[T]) : T = managed[T](ExecutorType.SIMPLE)(callback)
   
+}
+
+object SessionManager {
+  val log = LogFactory.getLog(classOf[SessionManager])
 }
