@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-       Copyright 2011-2017 the original author or authors.
+       Copyright 2011-2018 the original author or authors.
 
        Licensed under the Apache License, Version 2.0 (the "License");
        you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
-    <version>30</version>
+    <version>31-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -68,7 +68,7 @@
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <gcu.product>Scala</gcu.product>
     <scala.binary>2.11</scala.binary>
-    <scala.version>${scala.binary}.8</scala.version>
+    <scala.version>${scala.binary}.12</scala.version>
   </properties>
 
   <build>
@@ -85,9 +85,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.scala-tools</groupId>
-          <artifactId>maven-scala-plugin</artifactId>
-          <version>2.15.2</version>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>3.4.4</version>
           <configuration>
             <args>
               <arg>-deprecation</arg>
@@ -151,9 +151,9 @@
                   <pluginExecutions>
                     <pluginExecution>
                       <pluginExecutionFilter>
-                        <groupId>org.scala-tools</groupId>
-                        <artifactId>maven-scala-plugin</artifactId>
-                        <versionRange>[2.15.2,)</versionRange>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>scala-maven-plugin</artifactId>
+                        <versionRange>[3.4.4,)</versionRange>
                         <goals>
                           <goal>testCompile</goal>
                           <goal>compile</goal>
