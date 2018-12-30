@@ -69,6 +69,7 @@
     <gcu.product>Scala</gcu.product>
     <scala.binary>2.11</scala.binary>
     <scala.version>${scala.binary}.12</scala.version>
+    <module.name>org.mybatis.scala</module.name>
   </properties>
 
   <build>
