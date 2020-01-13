@@ -154,7 +154,7 @@
                       <pluginExecutionFilter>
                         <groupId>net.alchim31.maven</groupId>
                         <artifactId>scala-maven-plugin</artifactId>
-                        <versionRange>[3.4.4,)</versionRange>
+                        <versionRange>[4.3.0,)</versionRange>
                         <goals>
                           <goal>testCompile</goal>
                           <goal>compile</goal>
