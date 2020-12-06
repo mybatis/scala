@@ -251,7 +251,7 @@ object Configuration {
     // Pre ====================================================================
     
     def properties(props: (String, String)*) =
-      set(0, pre) { _.getVariables() ++= Map(props: _*) }
+      set(0, pre) { _.getVariables ++= Map(props: _*) }
 
     def properties(props: Properties) =
       set(1, pre) { _.getVariables ++= props }
