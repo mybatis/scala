@@ -70,6 +70,12 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
+        <execution>
+          <id>attach-javadocs</id>
+          <goals>
+            <goal>doc-jar</goal>
+          </goals>
+        </execution>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
