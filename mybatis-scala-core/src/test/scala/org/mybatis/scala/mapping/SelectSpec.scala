@@ -20,11 +20,13 @@ import org.scalatest._
 import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.infrastructure.BlogRepository
 import org.mybatis.scala.domain.{Blog, Entry}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
 /**
  * The specification of [[org.mybatis.scala.mapping.SelectList]].
  */
-class SelectSpec extends FunSpec with Matchers with DatabaseSupport with BeforeAndAfter {
+class SelectSpec extends AnyFunSpec with Matchers with DatabaseSupport with BeforeAndAfter {
   describe("selectOne") {
     it("should fetch first record") {
       withReadOnly(Database.default) { implicit session =>

@@ -19,11 +19,13 @@ import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.domain.User
 import org.mybatis.scala.infrastructure.UserRepository
 import org.scalatest._
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
 /**
  * The specification for [[Insert]].
  */
-class InsertSpec extends FunSpec with Matchers with DatabaseSupport {
+class InsertSpec extends AnyFunSpec with Matchers with DatabaseSupport {
   describe("A Insert") {
     it("should insert User into user table") {
       withReadOnly(Database.default) { implicit session =>
