@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.mybatis.scala</groupId>
     <artifactId>mybatis-scala-parent_2.12</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>mybatis-scala-samples_2.12</artifactId>
@@ -33,7 +33,7 @@
     <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
-    <tag>mybatis-scala-parent_2.12-1.2.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
