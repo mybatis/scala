@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Session.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.session</a> &gt; <span class="el_source">Session.scala</span></div><h1>Session.scala</h1><pre class="source lang-java linenums">/**
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.session
+
+import org.apache.ibatis.session.SqlSession
+import scala.collection.JavaConversions._
+import scala.collection.mutable._
+
+/** SqlSession Wrapper.
+  * You rarely use this class in an explicit manner.
+  * == Usage ==
+  * Used implicitly by mapped statements:
+  * {{{
+  * dbcontext.transaction( implicit session =&gt;
+  *   MyDAO.findAll()
+  * )
+  * }}}
+  * @version \$Revision$
+  */
+<span class="nc" id="L33">class Session(sqls : SqlSession) {</span>
+
+  def selectOne[Result](statement : String) : Result = {
+<span class="nc" id="L36">    sqls.selectOne(statement).asInstanceOf[Result]</span>
+  }
+
+  def selectOne[Param,Result](statement : String, parameter : Param) : Result = {
+<span class="nc" id="L40">    sqls.selectOne(statement, parameter).asInstanceOf[Result]</span>
+  }
+
+  def selectList[Result](statement : String) : Seq[Result] = {
+<span class="nc" id="L44">    asScalaBuffer(sqls.selectList(statement))</span>
+  }
+
+  def selectList[Param,Result](statement : String, parameter : Param) : Seq[Result] = {
+<span class="nc" id="L48">    asScalaBuffer(sqls.selectList(statement, parameter))</span>
+  }
+
+  def selectList[Param,Result](statement : String, parameter : Param, rowBounds : RowBounds) : Seq[Result] = {
+<span class="nc" id="L52">    asScalaBuffer(sqls.selectList(statement, parameter, rowBounds.unwrap))</span>
+  }
+
+  def selectMap[Key,Value](statement : String, mapKey : String) : Map[Key,Value] = {
+<span class="nc" id="L56">    mapAsScalaMap(sqls.selectMap[Key,Value](statement, mapKey))</span>
+  }
+
+  def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String) : Map[Key,Value] = {
+<span class="nc" id="L60">    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey))</span>
+  }
+
+  def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String, rowBounds : RowBounds) : Map[Key,Value] = {
+<span class="nc" id="L64">    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap))</span>
+  }
+
+  def select[Param, Res](statement : String, parameter : Param, handler : ResultHandler[Res]) : Unit = {
+<span class="nc" id="L68">    sqls.select(statement, parameter, handler)</span>
+  }
+
+  def select[T](statement : String, handler : ResultHandler[T]) : Unit = {
+<span class="nc" id="L72">    sqls.select(statement, handler)</span>
+  }
+
+  def select[Param, Res](statement : String, parameter : Param, rowBounds : RowBounds, handler : ResultHandler[Res]) : Unit = {
+<span class="nc" id="L76">    sqls.select(statement, parameter, rowBounds.unwrap, handler)</span>
+  }
+
+  def insert(statement : String) : Int = {
+<span class="nc" id="L80">    sqls.insert(statement)</span>
+  }
+
+  def insert[Param](statement : String, parameter : Param) : Int = {
+<span class="nc" id="L84">    sqls.insert(statement, parameter)</span>
+  }
+
+  def update(statement : String) : Int = {
+<span class="nc" id="L88">    sqls.update(statement)</span>
+  }
+
+  def update[Param](statement : String, parameter : Param) : Int = {
+<span class="nc" id="L92">    sqls.update(statement, parameter)</span>
+  }
+
+  def delete(statement : String) : Int = {
+<span class="nc" id="L96">    sqls.delete(statement)</span>
+  }
+
+  def delete[Param](statement : String, parameter : Param) : Int = {
+<span class="nc" id="L100">    sqls.delete(statement, parameter)</span>
+  }
+
+<span class="nc" id="L103">  def commit() : Unit = sqls.commit</span>
+
+<span class="nc" id="L105">  def commit(force : Boolean) : Unit = sqls.commit(force)</span>
+
+<span class="nc" id="L107">  def rollback() : Unit = sqls.rollback</span>
+
+<span class="nc" id="L109">  def rollback(force : Boolean) : Unit = sqls.rollback(force)</span>
+
+<span class="nc" id="L111">  def clearCache() : Unit = sqls.clearCache</span>
+  
+<span class="nc" id="L113">  def flushStatements() : Seq[BatchResult] = sqls.flushStatements</span>
+
+<span class="nc" id="L115">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

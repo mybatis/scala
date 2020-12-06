@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>scala - mybatis-scala-core 1.0.4-SNAPSHOT API - org.mybatis.scala</title>
-          <meta name="description" content="scala - mybatis - scala - core 1.0.4 - SNAPSHOT API - org.mybatis.scala" />
-          <meta name="keywords" content="scala mybatis scala core 1.0.4 SNAPSHOT API org.mybatis.scala" />
+          <title>scala - mybatis-scala-core 1.0.6 API - org.mybatis.scala</title>
+          <meta name="description" content="scala - mybatis - scala - core 1.0.6 API - org.mybatis.scala" />
+          <meta name="keywords" content="scala mybatis scala core 1.0.6 API org.mybatis.scala" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -28,11 +28,11 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../lib/package_big.png" />
+        <img alt="Package" src="../../../lib/package_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="org">org</a>.<a href="../package.html" class="extype" name="org.mybatis">mybatis</a></p>
         <h1>scala</h1><span class="permalink">
       <a href="../../../index.html#org.mybatis.scala.package" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
+        <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       </div>
@@ -64,27 +64,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="org.mybatis.scala.MyBatisScala" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="MyBatisScalaextendsObject"></a>
-      <a id="MyBatisScala:MyBatisScala"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="MyBatisScala.html"><span class="name">MyBatisScala</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#org.mybatis.scala.package@MyBatisScalaextendsObject" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
-      </a>
-    </span>
-      
-    </li></ol>
-            </div>
+        
 
         
 
@@ -103,7 +83,7 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#org.mybatis.scala.package@cache" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
+        <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Provides Cache supporting types and objects</p>
@@ -120,7 +100,7 @@
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#org.mybatis.scala.package@config" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
+        <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Provides main configuration classes.</p><div class="fullcomment"><div class="comment cmt"><p>Provides main configuration classes.</p><h4> Basic usage </h4><p>Usual steps are:</p><ul><li>Load the configuration from an external XML file</li><li>Add one or more configuration spaces with mapped statements</li><li>Create the persistenceContext</li></ul><h4> Code sample </h4><pre><span class="kw">val</span> config = Configuration(<span class="lit">"META-INF/mybatis.xml"</span>)
@@ -155,7 +135,7 @@ config ++= MyDAO
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#org.mybatis.scala.package@mapping" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
+        <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Statement and result mapping classes.</p><div class="fullcomment"><div class="comment cmt"><p>Statement and result mapping classes.</p><h4> Code sample </h4><p>Sample database</p><pre>CREATE TABLE people_group (
@@ -235,7 +215,7 @@ resultMap = <span class="kw">new</span> ResultMap[Person] {
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#org.mybatis.scala.package@session" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
+        <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Session Management classes.</p><div class="fullcomment"><div class="comment cmt"><p>Session Management classes.
@@ -244,8 +224,7 @@ db.transaction { <span class="kw">implicit</span> session <span class="kw">=&gt;
   MyDAO.insert(...)
   MyDAO.update(...)
   <span class="cmt">// etc...</span>
-}</pre></div><dl class="attributes block"> <dt>Version</dt><dd><p>$Revision$
-</p></dd></dl></div>
+}</pre></div><dl class="attributes block"> <dt>Version</dt><dd><p>$Revision$</p></dd></dl></div>
     </li></ol>
             </div>
 

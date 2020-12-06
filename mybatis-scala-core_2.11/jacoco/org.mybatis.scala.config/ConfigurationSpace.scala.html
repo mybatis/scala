@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConfigurationSpace.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.config</a> &gt; <span class="el_source">ConfigurationSpace.scala</span></div><h1>ConfigurationSpace.scala</h1><pre class="source lang-java linenums">/**
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.config
+
+import org.apache.ibatis.session.{Configuration =&gt; MBConfig}
+import org.apache.ibatis.executor.keygen.{Jdbc3KeyGenerator, NoKeyGenerator, SelectKeyGenerator, KeyGenerator =&gt; MBKeyGenerator}
+import org.apache.ibatis.builder.MapperBuilderAssistant
+import org.mybatis.scala.mapping._
+import org.mybatis.scala.cache._
+import java.util.ArrayList
+import org.apache.ibatis.mapping.{ResultMapping =&gt; MBResultMapping, SqlSource, SqlCommandType, Discriminator}
+import java.util.Properties
+//eliminate a feature warning, might be a good idea to define and use traits instead of using structural types
+import scala.language.reflectiveCalls
+
+/** Configuration Space (mybatis namespace)
+  * @constructor Creates an empty configuration space.
+  * @param configuration myBatis Configuration target
+  * @param spaceName Space name or namespace
+  */
+<span class="nc" id="L34">class ConfigurationSpace(configuration : MBConfig, val spaceName : String = &quot;_DEFAULT_&quot;) {</span>
+
+  // == Start primary constructor code ===
+
+<span class="nc" id="L38">  private val builderAssistant = new MapperBuilderAssistant(configuration, spaceName)</span>
+
+<span class="nc" id="L40">  builderAssistant.setCurrentNamespace(spaceName)</span>
+
+  // == End Primary constructor code ===
+
+  // == Start of public API ===
+
+  /** Adds a statement to the space */
+<span class="nc" id="L47">  def += (s : Statement) : this.type = addStatement(s)</span>
+
+  /** Adds a sequence of statements to the space */
+  def ++=(ss : Seq[Statement]) : this.type = {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">    for (s &lt;- ss) addStatement(s)</span>
+<span class="nc" id="L52">    this</span>
+  }
+
+  /** Adds a mapper to the space */
+<span class="nc bnc" id="L56" title="All 4 branches missed.">  def ++=(mapper : { def bind : Seq[Statement] }) : this.type = ++=(mapper.bind)</span>
+
+  /** Adds cache support to this space.
+    * @param impl Cache implementation class
+    * @param eviction cache eviction policy (LRU,FIFO,WEAK,SOFT)
+    * @param flushInterval any positive integer in milliseconds.
+    *        The default is not set, thus no flush interval is used and the cache is only flushed by calls to statements.
+    * @param size max number of objects that can live in the cache. Default is 1024
+    * @param readWrite A read-only cache will return the same instance of the cached object to all callers.
+    *        Thus such objects should not be modified.  This offers a significant performance advantage though.
+    *        A read-write cache will return a copy (via serialization) of the cached object,
+    *        this is slower, but safer, and thus the default is true.
+    * @param props implementation specific properties.
+    */
+  def cache(
+<span class="nc" id="L71">    impl : T[_ &lt;: Cache] = DefaultCache,</span>
+<span class="nc" id="L72">    eviction : T[_ &lt;: Cache] = Eviction.LRU,</span>
+<span class="nc" id="L73">    flushInterval : Long = -1,</span>
+<span class="nc" id="L74">    size : Int = -1,</span>
+<span class="nc" id="L75">    readWrite : Boolean = true,</span>
+<span class="nc" id="L76">    blocking : Boolean = false,</span>
+<span class="nc" id="L77">    props : Properties = null) : this.type = {</span>
+
+<span class="nc" id="L79">    builderAssistant.useNewCache(</span>
+<span class="nc" id="L80">      impl.unwrap,</span>
+<span class="nc" id="L81">      eviction.unwrap,</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">      if (flushInterval &gt; -1) flushInterval else null,</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">      if (size &gt; -1) size else null,</span>
+<span class="nc" id="L84">      readWrite,</span>
+<span class="nc" id="L85">      blocking,</span>
+<span class="nc" id="L86">      props</span>
+    )
+<span class="nc" id="L88">    this</span>
+  }
+
+  /** Reference to an external Cache */
+  def cacheRef(that : ConfigurationSpace) : this.type = {
+<span class="nc" id="L93">    builderAssistant.useCacheRef(that.spaceName)</span>
+<span class="nc" id="L94">    this</span>
+  }
+
+  // == End of public API ===
+
+  private def addResultMap(rm : ResultMap[_]) : Unit = {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">    if (rm.fqi == null) {</span>
+<span class="nc" id="L101">      rm.fqi = ConfigurationSpace.generateFQI(spaceName, rm)</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">      if (rm.parent != null) addResultMap(rm.parent)</span>
+<span class="nc" id="L103">      val resultMappings = new ArrayList[MBResultMapping]</span>
+
+      // Mappings
+<span class="nc bnc" id="L106" title="All 2 branches missed.">      for (r &lt;- rm.constructor ++ rm.mappings) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (r.nestedSelect != null) addStatement(r.nestedSelect)</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (r.nestedResultMap != null) addResultMap(r.nestedResultMap)</span>
+<span class="nc" id="L109">        resultMappings add</span>
+<span class="nc" id="L110">          builderAssistant.buildResultMapping(</span>
+<span class="nc" id="L111">            r.resultTypeClass,</span>
+<span class="nc" id="L112">            r.property,</span>
+<span class="nc" id="L113">            r.column,</span>
+<span class="nc" id="L114">            r.javaTypeClass,</span>
+<span class="nc" id="L115">            r.jdbcTypeEnum,</span>
+<span class="nc" id="L116">            resolveFQI(r.nestedSelect),</span>
+<span class="nc" id="L117">            resolveFQI(r.nestedResultMap),</span>
+<span class="nc" id="L118">            r.notNullColumn,</span>
+<span class="nc" id="L119">            r.columnPrefix,</span>
+<span class="nc" id="L120">            r.typeHandlerClass,</span>
+<span class="nc" id="L121">            r.flags</span>
+          )
+      }
+
+      // Discriminator
+      import java.util.HashMap
+<span class="nc" id="L127">      var discriminator : Discriminator = null</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">      rm.discr match {</span>
+<span class="nc" id="L129">        case (column, javaType, jdbcType, typeHandler, cases) =&gt;</span>
+<span class="nc" id="L130">          val discriminatorMap = new HashMap[String,String]</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">          for (c &lt;- cases) {</span>
+<span class="nc" id="L132">            addResultMap(c.resultMap)</span>
+<span class="nc" id="L133">            discriminatorMap.put(c.value, c.resultMap.fqi.resolveIn(spaceName))</span>
+          }
+<span class="nc" id="L135">          discriminator = builderAssistant.buildDiscriminator(</span>
+<span class="nc" id="L136">            rm.resultTypeClass,</span>
+<span class="nc" id="L137">            column,</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">            if (javaType == null || javaType.isVoid) classOf[String] else javaType.unwrap,</span>
+<span class="nc bnc" id="L139" title="All 8 branches missed.">            if (jdbcType == null || jdbcType == JdbcType.UNDEFINED) null else jdbcType.unwrap,</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (typeHandler == null) null else typeHandler.unwrap,</span>
+<span class="nc" id="L141">            discriminatorMap</span>
+          )
+<span class="nc" id="L143">        case _ =&gt;</span>
+          // Skip
+      }
+
+      // Assemble
+<span class="nc" id="L148">      builderAssistant.addResultMap(</span>
+<span class="nc" id="L149">        rm.fqi.id,</span>
+<span class="nc" id="L150">        rm.resultTypeClass,</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        if (rm.parent != null) rm.parent.fqi.id else null,</span>
+<span class="nc" id="L152">        discriminator,</span>
+<span class="nc" id="L153">        resultMappings,</span>
+<span class="nc" id="L154">        rm.autoMapping.value</span>
+      )
+
+    }
+  }
+
+  private def resolveFQI(r : { def fqi : FQI}) : String = {
+<span class="nc bnc" id="L161" title="All 6 branches missed.">    if (r == null) null else r.fqi resolveIn spaceName</span>
+  }
+
+  private def addStatement(statement : Statement) : this.type = {
+<span class="nc bnc" id="L165" title="All 2 branches missed.">    if (statement.fqi == null) {</span>
+<span class="nc" id="L166">      statement.fqi = ConfigurationSpace.generateFQI(spaceName, statement)</span>
+<span class="nc" id="L167">      statement match {</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        case stmt : Select =&gt;</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">          if (stmt.resultMap != null) addResultMap(stmt.resultMap)</span>
+<span class="nc" id="L170">          builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L171">            stmt.fqi.resolveIn(spaceName),</span>
+<span class="nc" id="L172">            buildDynamicSQL(stmt.xsql),</span>
+<span class="nc" id="L173">            stmt.statementType.unwrap,</span>
+<span class="nc" id="L174">            SqlCommandType.SELECT,</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            if (stmt.fetchSize &gt; 0) stmt.fetchSize else null,</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (stmt.timeout &gt; -1) stmt.timeout else null,</span>
+<span class="nc" id="L177">            null,</span>
+<span class="nc" id="L178">            stmt.parameterTypeClass,</span>
+<span class="nc" id="L179">            resolveFQI(stmt.resultMap),</span>
+<span class="nc" id="L180">            stmt.resultTypeClass,</span>
+<span class="nc" id="L181">            stmt.resultSetType.unwrap,</span>
+<span class="nc" id="L182">            stmt.flushCache,</span>
+<span class="nc" id="L183">            stmt.useCache,</span>
+<span class="nc" id="L184">            false, // TODO Issue #577</span>
+<span class="nc" id="L185">            new NoKeyGenerator(),</span>
+<span class="nc" id="L186">            null,</span>
+<span class="nc" id="L187">            null,</span>
+<span class="nc" id="L188">            stmt.databaseId,</span>
+<span class="nc" id="L189">            DefaultScriptingDriver</span>
+          )
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        case stmt : Insert[_] =&gt;</span>
+<span class="nc" id="L192">          builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L193">            stmt.fqi.resolveIn(spaceName),</span>
+<span class="nc" id="L194">            buildDynamicSQL(stmt.xsql),</span>
+<span class="nc" id="L195">            stmt.statementType.unwrap,</span>
+<span class="nc" id="L196">            SqlCommandType.INSERT,</span>
+<span class="nc" id="L197">            null,</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (stmt.timeout &gt; -1) stmt.timeout else null,</span>
+<span class="nc" id="L199">            null,</span>
+<span class="nc" id="L200">            stmt.parameterTypeClass,</span>
+<span class="nc" id="L201">            null,</span>
+<span class="nc" id="L202">            classOf[Int],</span>
+<span class="nc" id="L203">            ResultSetType.FORWARD_ONLY.unwrap,</span>
+<span class="nc" id="L204">            stmt.flushCache,</span>
+<span class="nc" id="L205">            false,</span>
+<span class="nc" id="L206">            false, // TODO Issue #577</span>
+<span class="nc" id="L207">            buildKeyGenerator(stmt.keyGenerator, stmt.parameterTypeClass, stmt.fqi.id, stmt.databaseId),</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">            if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyProperty,</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            if (stmt.keyGenerator == null) null else stmt.keyGenerator.keyColumn,</span>
+<span class="nc" id="L210">            stmt.databaseId,</span>
+<span class="nc" id="L211">            DefaultScriptingDriver</span>
+          )
+<span class="nc bnc" id="L213" title="All 2 branches missed.">        case stmt : Update[_] =&gt;</span>
+<span class="nc" id="L214">          builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L215">            stmt.fqi.resolveIn(spaceName),</span>
+<span class="nc" id="L216">            buildDynamicSQL(stmt.xsql),</span>
+<span class="nc" id="L217">            stmt.statementType.unwrap,</span>
+<span class="nc" id="L218">            SqlCommandType.UPDATE,</span>
+<span class="nc" id="L219">            null,</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            if (stmt.timeout &gt; -1) stmt.timeout else null,</span>
+<span class="nc" id="L221">            null,</span>
+<span class="nc" id="L222">            stmt.parameterTypeClass,</span>
+<span class="nc" id="L223">            null,</span>
+<span class="nc" id="L224">            classOf[Int],</span>
+<span class="nc" id="L225">            ResultSetType.FORWARD_ONLY.unwrap,</span>
+<span class="nc" id="L226">            stmt.flushCache,</span>
+<span class="nc" id="L227">            false,</span>
+<span class="nc" id="L228">            false, // TODO Issue #577</span>
+<span class="nc" id="L229">            new NoKeyGenerator(),</span>
+<span class="nc" id="L230">            null,</span>
+<span class="nc" id="L231">            null,</span>
+<span class="nc" id="L232">            stmt.databaseId,</span>
+<span class="nc" id="L233">            DefaultScriptingDriver</span>
+          )
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        case stmt : Delete[_] =&gt;</span>
+<span class="nc" id="L236">          builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L237">            stmt.fqi.resolveIn(spaceName),</span>
+<span class="nc" id="L238">            buildDynamicSQL(stmt.xsql),</span>
+<span class="nc" id="L239">            stmt.statementType.unwrap,</span>
+<span class="nc" id="L240">            SqlCommandType.DELETE,</span>
+<span class="nc" id="L241">            null,</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            if (stmt.timeout &gt; -1) stmt.timeout else null,</span>
+<span class="nc" id="L243">            null,</span>
+<span class="nc" id="L244">            stmt.parameterTypeClass,</span>
+<span class="nc" id="L245">            null,</span>
+<span class="nc" id="L246">            classOf[Int],</span>
+<span class="nc" id="L247">            ResultSetType.FORWARD_ONLY.unwrap,</span>
+<span class="nc" id="L248">            stmt.flushCache,</span>
+<span class="nc" id="L249">            false,</span>
+<span class="nc" id="L250">            false, // TODO Issue #577</span>
+<span class="nc" id="L251">            new NoKeyGenerator(),</span>
+<span class="nc" id="L252">            null,</span>
+<span class="nc" id="L253">            null,</span>
+<span class="nc" id="L254">            stmt.databaseId,</span>
+<span class="nc" id="L255">            DefaultScriptingDriver</span>
+          )
+<span class="nc bnc" id="L257" title="All 2 branches missed.">        case stmt : Perform =&gt;</span>
+<span class="nc" id="L258">          builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L259">            stmt.fqi.resolveIn(spaceName),</span>
+<span class="nc" id="L260">            buildDynamicSQL(stmt.xsql),</span>
+<span class="nc" id="L261">            stmt.statementType.unwrap,</span>
+<span class="nc" id="L262">            SqlCommandType.UPDATE,</span>
+<span class="nc" id="L263">            null,</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">            if (stmt.timeout &gt; -1) stmt.timeout else null,</span>
+<span class="nc" id="L265">            null,</span>
+<span class="nc" id="L266">            stmt.parameterTypeClass,</span>
+<span class="nc" id="L267">            null,</span>
+<span class="nc" id="L268">            classOf[Int],</span>
+<span class="nc" id="L269">            ResultSetType.FORWARD_ONLY.unwrap,</span>
+<span class="nc" id="L270">            stmt.flushCache,</span>
+<span class="nc" id="L271">            false,</span>
+<span class="nc" id="L272">            false, // TODO Issue #577</span>
+<span class="nc" id="L273">            new NoKeyGenerator(),</span>
+<span class="nc" id="L274">            null,</span>
+<span class="nc" id="L275">            null,</span>
+<span class="nc" id="L276">            stmt.databaseId,</span>
+<span class="nc" id="L277">            DefaultScriptingDriver</span>
+          )
+        case unsupported =&gt;
+<span class="nc" id="L280">          throw new ConfigurationException(&quot;Unsupported statement type&quot;)</span>
+          //error(&quot;Unsupported statement type&quot;)
+      }
+    }
+<span class="nc" id="L284">    this</span>
+  }
+
+  private def buildDynamicSQL(xsql : XSQL) : SqlSource
+<span class="nc" id="L288">    = new DynamicSQLBuilder(configuration, xsql).build</span>
+
+  private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
+<span class="nc" id="L291">    generator match {</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">      case jdbc : JdbcGeneratedKey =&gt;</span>
+<span class="nc" id="L293">        new Jdbc3KeyGenerator()</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">      case sql : SqlGeneratedKey[_] =&gt;</span>
+<span class="nc" id="L295">        buildSqlKeyGenerator(sql, parameterTypeClass, baseId, databaseId)</span>
+      case _ =&gt;
+<span class="nc" id="L297">        new NoKeyGenerator()</span>
+    }
+  }
+
+  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[_], parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
+
+<span class="nc" id="L303">    val id = baseId + SelectKeyGenerator.SELECT_KEY_SUFFIX</span>
+<span class="nc" id="L304">    val useCache = false</span>
+<span class="nc" id="L305">    val keyGenerator = new NoKeyGenerator()</span>
+<span class="nc" id="L306">    val fetchSize = null</span>
+<span class="nc" id="L307">    val timeout = null</span>
+<span class="nc" id="L308">    val flushCache = false</span>
+<span class="nc" id="L309">    val parameterMap = null</span>
+<span class="nc" id="L310">    val resultMap = null</span>
+<span class="nc" id="L311">    val resultSetTypeEnum = null</span>
+<span class="nc" id="L312">    val sqlSource = buildDynamicSQL(generator.xsql)</span>
+<span class="nc" id="L313">    val sqlCommandType = SqlCommandType.SELECT</span>
+<span class="nc" id="L314">    val statementType = generator.statementType.unwrap</span>
+<span class="nc" id="L315">    val keyProperty = generator.keyProperty</span>
+<span class="nc" id="L316">    val keyColumn = generator.keyColumn</span>
+<span class="nc" id="L317">    val executeBefore = generator.executeBefore</span>
+<span class="nc" id="L318">    val resultTypeClass = generator.resultTypeClass</span>
+
+<span class="nc" id="L320">    builderAssistant.addMappedStatement(</span>
+<span class="nc" id="L321">      id, </span>
+<span class="nc" id="L322">      sqlSource, </span>
+<span class="nc" id="L323">      statementType, </span>
+<span class="nc" id="L324">      sqlCommandType,</span>
+<span class="nc" id="L325">      fetchSize, </span>
+<span class="nc" id="L326">      timeout, </span>
+<span class="nc" id="L327">      parameterMap, </span>
+<span class="nc" id="L328">      parameterTypeClass, </span>
+<span class="nc" id="L329">      resultMap, </span>
+<span class="nc" id="L330">      resultTypeClass,</span>
+<span class="nc" id="L331">      resultSetTypeEnum, </span>
+<span class="nc" id="L332">      flushCache, </span>
+<span class="nc" id="L333">      useCache,</span>
+<span class="nc" id="L334">      false, // TODO Issue #577 </span>
+<span class="nc" id="L335">      keyGenerator, </span>
+<span class="nc" id="L336">      keyProperty, </span>
+<span class="nc" id="L337">      keyColumn,</span>
+<span class="nc" id="L338">      databaseId,</span>
+<span class="nc" id="L339">      DefaultScriptingDriver)</span>
+
+<span class="nc" id="L341">    val keyStatement = configuration.getMappedStatement(id, false)</span>
+<span class="nc" id="L342">    val answer = new SelectKeyGenerator(keyStatement, executeBefore)</span>
+
+<span class="nc" id="L344">    configuration.addKeyGenerator(id, answer)</span>
+<span class="nc" id="L345">    answer</span>
+  }
+
+}
+
+<span class="nc" id="L350">private object ConfigurationSpace {</span>
+
+<span class="nc" id="L352">  private var count : Int = 0</span>
+
+  private[config] def generateFQI(spaceId : String, subject : AnyRef) = {
+<span class="nc" id="L355">    count += 1</span>
+<span class="nc" id="L356">    FQI(spaceId, subject.getClass.getName.replace('.', '-') + &quot;-&quot; + count)</span>
+  }
+
+<span class="nc" id="L359">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

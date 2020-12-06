@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResultMapping.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.mapping</a> &gt; <span class="el_source">ResultMapping.scala</span></div><h1>ResultMapping.scala</h1><pre class="source lang-java linenums">/**
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.mapping
+
+import org.apache.ibatis.`type`.{JdbcType =&gt; JdbcTypeEnum}
+import org.apache.ibatis.mapping.{ResultFlag =&gt; ResultFlagEnum}
+import java.util.{List =&gt; JList}
+import scala.collection.JavaConversions._
+
+<span class="nc" id="L23">private[scala] class ResultMapping (</span>
+<span class="nc" id="L24">  resultType : T[_],</span>
+<span class="nc" id="L25">  property_ : String,</span>
+<span class="nc" id="L26">  column_ : String,</span>
+<span class="nc" id="L27">  javaType : T[_],</span>
+<span class="nc" id="L28">  jdbcType : JdbcType,</span>
+<span class="nc" id="L29">  nestedSelect_ : Select,</span>
+<span class="nc" id="L30">  nestedResultMap_ : ResultMap[_],</span>
+<span class="nc" id="L31">  notNullColumn_ : String,</span>
+<span class="nc" id="L32">  columnPrefix_ : String,</span>
+<span class="nc" id="L33">  typeHandler : T[_ &lt;: TypeHandler[_]],</span>
+<span class="nc" id="L34">  flags_ : Seq[ResultFlag] = Seq()</span>
+) {
+
+<span class="nc" id="L37">  def resultTypeClass : Class[_] = resultType.unwrap</span>
+<span class="nc" id="L38">  def property : String = property_</span>
+<span class="nc" id="L39">  def column : String = column_</span>
+<span class="nc bnc" id="L40" title="All 4 branches missed.">  def javaTypeClass : Class[_] = if (javaType == null || javaType.isVoid) null else javaType.unwrap</span>
+<span class="nc bnc" id="L41" title="All 8 branches missed.">  def jdbcTypeEnum : JdbcTypeEnum = if (jdbcType == null || jdbcType == JdbcType.UNDEFINED) null else jdbcType.unwrap</span>
+<span class="nc" id="L42">  def nestedSelect : Select = nestedSelect_</span>
+<span class="nc" id="L43">  def nestedResultMap : ResultMap[_] = nestedResultMap_</span>
+<span class="nc" id="L44">  def notNullColumn : String = notNullColumn_</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">  def typeHandlerClass : Class[_ &lt;: TypeHandler[_]] = if (typeHandler == null) null else typeHandler.unwrap</span>
+<span class="nc" id="L46">  def flags : JList[ResultFlagEnum] = for (f &lt;- flags_) yield f.unwrap</span>
+<span class="nc" id="L47">  def columnPrefix = columnPrefix_</span>
+<span class="nc" id="L48">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

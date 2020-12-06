@@ -1,0 +1,235 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPageBy,122,0,0,0,6,0,26,0,26,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapBy,112,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,Update..anonfun.apply.new Serializable() {...},29,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,Perform..anonfun.apply.new Serializable() {...},24,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping,119,0,14,0,23,0,20,0,13,0
+mybatis-scala-core,org.mybatis.scala.mapping,package,4,0,0,0,0,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOne..anonfun.apply.new Serializable() {...},30,0,4,0,3,0,4,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SqlGeneratedKey,53,0,0,0,6,0,10,0,10,0
+mybatis-scala-core,org.mybatis.scala.mapping,Select.class,17,0,0,0,5,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListBy..anonfun.handle.new Serializable() {...},37,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectList,111,0,0,0,6,0,26,0,26,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding..anonfun..qmark.new Serializable() {...},24,0,4,0,1,0,4,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,T,46,0,6,0,4,0,8,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBooleanTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptByteTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingInherited.,16,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding..anonfun..qmark.new Serializable() {...},7,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,T.,13,0,0,0,2,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingEnabled,3,0,0,0,0,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPage,105,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptNStringTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType.,256,0,0,0,32,0,33,0,33,0
+mybatis-scala-core,org.mybatis.scala.mapping,Update,70,0,0,0,4,0,16,0,16,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeINOUT.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeIN.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBlobTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultFlag.,24,0,0,0,3,0,4,0,4,0
+mybatis-scala-core,org.mybatis.scala.mapping,Statement.class,46,0,2,0,10,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.,8,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOneBy,109,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptLongTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingEnabled.,14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultFlag..anon.new ResultFlag() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultFlag..anon.new ResultFlag() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPageBy..anonfun.apply.new Serializable() {...},34,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptDoubleTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,ParamModeEnum,9,0,0,0,3,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptStringTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPage,113,0,0,0,6,0,26,0,26,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOneByMap,120,0,0,0,6,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOne,101,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeOUT.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeOUT,23,0,0,0,0,0,7,0,7,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding.,307,0,24,0,23,0,24,0,12,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding,33,0,0,0,0,0,8,0,8,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping..anonfun.flags.new Serializable() {...},6,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectList..anonfun.handle.new Serializable() {...},32,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingDisabled,3,0,0,0,0,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListByMap..anonfun.apply.new Serializable() {...},28,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding.Param,25,0,0,0,3,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPage..anonfun.apply.new Serializable() {...},27,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMap..anonfun.apply.new Serializable() {...},24,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingDisabled.,14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPage..anonfun.handle.new Serializable() {...},37,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPageBy,113,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMap,438,0,0,0,156,0,72,0,72,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListByMap..anonfun.handle.new Serializable() {...},37,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPageBy..anonfun.handle.new Serializable() {...},42,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,Case,138,0,25,0,1,0,31,0,18,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType.,32,0,0,0,4,0,5,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBigDecimalTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPage..anonfun.apply.new Serializable() {...},30,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,StatementType..anon.new StatementType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,StatementType..anon.new StatementType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,StatementType..anon.new StatementType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,package.,26,0,0,0,2,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptTimestampTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,Delete..anonfun.apply.new Serializable() {...},29,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptNClobTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingInherited,3,0,0,0,0,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping.,13,0,0,0,2,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,Insert..anonfun.apply.new Serializable() {...},29,0,2,0,1,0,4,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMapBy..anonfun.apply.new Serializable() {...},29,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,FQI.,33,0,2,0,1,0,7,0,6,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptTimeTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListBy,120,0,0,0,6,0,26,0,26,0
+mybatis-scala-core,org.mybatis.scala.mapping,FQI,180,0,31,0,5,0,36,0,20,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListPageBy..anonfun.apply.new Serializable() {...},31,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeINOUT,23,0,0,0,0,0,7,0,7,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptIntegerTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,StatementType.,32,0,0,0,4,0,5,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,Case.,33,0,2,0,1,0,7,0,6,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListByMap,131,0,0,0,6,0,26,0,26,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcGeneratedKey.,14,0,0,0,2,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,OptionTypeHandler,70,0,4,0,7,0,7,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcGeneratedKey,28,0,0,0,3,0,6,0,6,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptShortTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptClobTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeIN,23,0,0,0,0,0,7,0,7,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectListBy..anonfun.apply.new Serializable() {...},26,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectMap,104,0,0,0,5,0,25,0,25,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptDateTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,Delete,70,0,0,0,4,0,16,0,16,0
+mybatis-scala-core,org.mybatis.scala.mapping,Insert,80,0,0,0,5,0,18,0,18,0
+mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptFloatTypeHandler,6,0,0,0,1,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType.class,5,0,0,0,2,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMap.,10,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOneBy..anonfun.apply.new Serializable() {...},35,0,4,0,3,0,4,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectList..anonfun.apply.new Serializable() {...},21,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,Perform,62,0,0,0,4,0,16,0,16,0
+mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.mapping,SelectOneByMap..anonfun.apply.new Serializable() {...},30,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,SessionManager..anonfun.new Serializable() {...},6,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,SessionManager.,15,0,0,0,2,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel.,56,0,0,0,7,0,8,0,8,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,ResultHandlerDelegator,12,0,0,0,2,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.session,SessionManager,178,0,0,0,32,0,18,0,18,0
+mybatis-scala-core,org.mybatis.scala.session,Session,153,0,0,0,25,0,24,0,24,0
+mybatis-scala-core,org.mybatis.scala.session,RowBounds,144,0,17,0,2,0,28,0,19,0
+mybatis-scala-core,org.mybatis.scala.session,ExecutorType.,32,0,0,0,4,0,5,0,5,0
+mybatis-scala-core,org.mybatis.scala.session,RowBounds.,33,0,2,0,1,0,7,0,6,0
+mybatis-scala-core,org.mybatis.scala.session,package.,8,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.SESSION.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.mappers.new Serializable() {...},15,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DynamicSQLBuilder..anonfun.org.mybatis.scala.config.DynamicSQLBuilder..parseChildren.new Serializable() {...},21,0,2,0,2,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.jdbcTypeForNull.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.autoMappingBehavior.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.useGeneratedKeys.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.cacheRef.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.NONE.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.lazyLoadingSupport.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.aggressiveLazyLoading.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.environment.new Serializable() {...},24,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.databaseIdProvider.new Serializable() {...},15,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,ArrayBufferWrapper,26,0,0,0,3,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.STATEMENT.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace..anonfun.org.mybatis.scala.config.ConfigurationSpace..addResultMap.new Serializable() {...},32,0,2,0,3,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace..anonfun.org.mybatis.scala.config.ConfigurationSpace..addResultMap.new Serializable() {...},68,0,6,0,16,0,5,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace,861,0,70,0,210,0,60,0,25,0
+mybatis-scala-core,org.mybatis.scala.config,Environment.,36,0,2,0,1,0,7,0,6,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.localCacheScope.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultScriptingDriver,18,0,0,0,0,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.defaultExecutorType.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.namespace.new Serializable() {...},21,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DynamicSQLBuilder..anonfun.org.mybatis.scala.config.DynamicSQLBuilder..parse.new Serializable() {...},110,0,12,0,10,0,8,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.defaultStatementTimeout.new Serializable() {...},13,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior,96,0,12,0,4,0,13,0,7,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.mapUnderscoreToCamelCase.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.typeHandler.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.typeHandler.new Serializable() {...},25,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory.CacheKey,65,0,14,0,12,0,11,0,4,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.typeHandler.new Serializable() {...},19,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.multipleResultSetsSupport.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.propertiesFromUrl.new Serializable() {...},18,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder,441,0,0,0,48,0,44,0,44,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory.CacheKey..anonfun.new Serializable() {...},18,0,0,0,2,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.useColumnLabel.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.objectWrapperFactory.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anon.new Configuration.Builder.ConfigElem() {...},19,0,0,0,3,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,HashSetWrapper,20,0,0,0,3,0,3,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.build.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.build.new Serializable() {...},12,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.objectFactory.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder.ConfigElem,10,0,2,0,2,0,2,0,1,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.build.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.build.new Serializable() {...},12,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration..anonfun.registerOptionTypeHandler.new Serializable() {...},21,0,0,0,2,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.,74,0,0,0,12,0,10,0,10,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace.,48,0,0,0,5,0,6,0,6,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace..anonfun..plus.plus.eq.new Serializable() {...},15,0,2,0,1,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory,368,0,72,0,62,0,44,0,8,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.PARTIAL.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.mappers.1..anonfun.apply.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,CollectionObjectWrapper,24,0,0,0,12,0,12,0,12,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.cache.new Serializable() {...},42,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope,65,0,8,0,3,0,9,0,5,0
+mybatis-scala-core,org.mybatis.scala.config,DynamicSQLBuilder,551,0,72,0,60,0,43,0,7,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration,533,0,16,0,45,0,36,0,28,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.properties.new Serializable() {...},18,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.properties.new Serializable() {...},17,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.properties.new Serializable() {...},19,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},14,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},14,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},6,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},6,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.plugin.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},6,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory..anonfun.new Serializable() {...},14,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.,8,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.lazyLoadTriggerMethods.new Serializable() {...},13,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectWrapperFactory,62,0,8,0,9,0,7,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,Environment,177,0,32,0,2,0,38,0,21,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationException.,12,0,0,0,1,0,4,0,4,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationException,8,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.FULL.,35,0,0,0,1,0,9,0,9,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.cacheSupport.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.safeRowBoundsSupport.new Serializable() {...},11,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anonfun.statements.new Serializable() {...},12,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultScriptingDriver.,8,0,0,0,1,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.cache,package,3,0,0,0,0,0,1,0,1,0
+mybatis-scala-core,org.mybatis.scala.cache,package.Eviction.,48,0,0,0,5,0,6,0,6,0
+mybatis-scala-core,org.mybatis.scala.cache,package.,18,0,0,0,2,0,3,0,3,0
