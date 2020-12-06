@@ -251,16 +251,16 @@ object Configuration {
     // Pre ====================================================================
     
     def properties(props: (String, String)*) =
-      set(0, pre) { _.getVariables().putAll(Map(props: _*)) }
+      set(0, pre) { _.getVariables() ++= Map(props: _*) }
 
     def properties(props: Properties) =
-      set(1, pre) { _.getVariables.putAll(props) }
+      set(1, pre) { _.getVariables ++= props }
 
     def properties(resource: String) =
-      set(2, pre) { _.getVariables.putAll(Resources.getResourceAsProperties(resource)) }
+      set(2, pre) { _.getVariables ++= Resources.getResourceAsProperties(resource) }
 
     def propertiesFromUrl(url: String) =
-      set(3, pre) { _.getVariables.putAll(Resources.getUrlAsProperties(url)) }
+      set(3, pre) { _.getVariables ++= Resources.getUrlAsProperties(url) }
 
     def plugin(plugin: Interceptor) =
       set(4, pre) { _.addInterceptor(plugin) }
