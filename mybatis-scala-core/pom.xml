@@ -54,7 +54,7 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.binary}</artifactId>
-      <version>3.2.3</version>
+      <version>3.3.0-SNAP2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
