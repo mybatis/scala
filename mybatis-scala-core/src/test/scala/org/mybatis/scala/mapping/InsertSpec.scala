@@ -19,6 +19,7 @@ import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.domain.User
 import org.mybatis.scala.infrastructure.UserRepository
 import org.scalatest._
+import org.scalatest.funspec.AnyFunSpec
 
 /**
  * The specification for [[Insert]].

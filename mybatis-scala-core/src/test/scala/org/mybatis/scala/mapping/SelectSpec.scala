@@ -20,6 +20,7 @@ import org.scalatest._
 import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.infrastructure.BlogRepository
 import org.mybatis.scala.domain.{Blog, Entry}
+import org.scalatest.funspec.AnyFunSpec
 
 /**
  * The specification of [[org.mybatis.scala.mapping.SelectList]].

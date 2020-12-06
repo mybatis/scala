@@ -18,6 +18,7 @@ package org.mybatis.scala.mapping
 import org.mybatis.scala.config.ConfigurationException
 import org.scalatest._
 import scala.util.control.NonFatal
+import org.scalatest.funspec.AnyFunSpec
 
 /**
  * The specification for [[Statement]].
