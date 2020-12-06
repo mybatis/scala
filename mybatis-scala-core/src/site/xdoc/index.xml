@@ -29,7 +29,7 @@
         <section name="Disclaimer">
             <p>Binary compatible with MyBatis-3.1.0</p>
         </section>
-        
+
         <section name="Introduction">
             <p>
                 MyBatis is one of the best advanced persistence frameworks available for java, it can be
@@ -45,19 +45,19 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="./configuration.html">Configuration</a> package: 
+                        <a href="./configuration.html">Configuration</a> package:
                         <code>org.mybatis.scala.config</code>
                     </li>
                     <li>
-                        <a href="./mapping.html">Mapping</a> package: 
+                        <a href="./mapping.html">Mapping</a> package:
                         <code>org.mybatis.scala.mapping</code>
                     </li>
                     <li>
-                        <a href="./session.html">Session</a> package: 
+                        <a href="./session.html">Session</a> package:
                         <code>org.mybatis.scala.session</code>
                     </li>
                     <li>
-                        <a href="./cache.html">Cache</a> package: 
+                        <a href="./cache.html">Cache</a> package:
                         <code>org.mybatis.scala.cache</code>
                     </li>
                 </ul>

@@ -151,7 +151,7 @@ val findUserById = new SelectOneBy[Int,User] {
           In this case JdbcType.VARCHAR and ModeIN are true object references and CustomTHandler is a type reference, so they will be checked at compile time.
 
         </p>
-      </subsection>  
+      </subsection>
     </section>
   </body>
 </document>
