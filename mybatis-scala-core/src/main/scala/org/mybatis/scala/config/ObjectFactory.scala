@@ -24,7 +24,7 @@ class DefaultObjectFactory extends ObjectFactory {
     instantiateClass[T](classToCreate, constructorArgTypes, constructorArgs)
   }
 
-  def setProperties(properties : java.util.Properties) : Unit = {}
+  override def setProperties(properties : java.util.Properties) : Unit = {}
 
   private def instantiateClass[T](t : Class[_], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
     
