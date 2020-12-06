@@ -30,6 +30,13 @@
   <packaging>jar</packaging>
   <name>mybatis-scala-samples</name>
 
+  <scm>
+    <url>http://github.com/mybatis/scala</url>
+    <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>org.mybatis.scala</groupId>
