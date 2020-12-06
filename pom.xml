@@ -64,7 +64,7 @@
   </distributionManagement>
 
   <properties>
-    <clirr.comparisonVersion>1.1.0</clirr.comparisonVersion>
+    <clirr.comparisonVersion>1.2.0</clirr.comparisonVersion>
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <gcu.product>Scala</gcu.product>
     <scala.binary>2.13</scala.binary>

@@ -10,6 +10,7 @@ Versions
 * **Scala 2.10** [![Maven central](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.10/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.10)
 * **Scala 2.11** [![Maven central](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.11)
 * **Scala 2.12** [![Maven central](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.12)
+* **Scala 2.13** [![Maven central](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.mybatis.scala/mybatis-scala-core_2.13)
 
 ![mybatis-logo](http://mybatis.github.io/images/mybatis-logo.png)
 
