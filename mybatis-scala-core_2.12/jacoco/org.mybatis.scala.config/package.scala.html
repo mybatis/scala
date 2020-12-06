@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>package.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.config</a> &gt; <span class="el_source">package.scala</span></div><h1>package.scala</h1><pre class="source lang-java linenums">/**
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala
+
+/** Provides main configuration classes.
+  * == Basic usage ==
+  * Usual steps are:
+  *  - Load the configuration from an external XML file
+  *  - Add one or more configuration spaces with mapped statements
+  *  - Create the persistenceContext
+  *
+  * == Code sample ==
+  * {{{
+  * val config = Configuration(&quot;META-INF/mybatis.xml&quot;)
+  * config.addSpace(&quot;ns&quot;) { space =&gt;
+  *   space ++= MyDAO
+  * }
+  * val persistenceContext = config.createPersistenceContext
+  * }}}
+  * 
+  * == Another example without external XML file and with default namespace ==
+  * {{{
+  * val config = Configuration(
+  *  Environment(
+  *    &quot;default&quot;, 
+  *    new JdbcTransactionFactory(), 
+  *    new PooledDataSource(
+  *      &quot;org.hsqldb.jdbcDriver&quot;,
+  *      &quot;jdbc:hsqldb:mem:scala&quot;,
+  *      &quot;sa&quot;,
+  *      &quot;&quot;
+  *    )
+  *  )
+  * )
+  * config ++= MyDAO
+  * 
+  * val persistenceContext = config.createPersistenceContext
+  * }}}
+  */
+<span class="nc" id="L53">package object config {</span>
+
+  type TransactionFactory = org.apache.ibatis.transaction.TransactionFactory
+  type JdbcTransactionFactory = org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
+  type ManagedTransactionFactory = org.apache.ibatis.transaction.managed.ManagedTransactionFactory
+  
+  type PooledDataSource = org.apache.ibatis.datasource.pooled.PooledDataSource
+  type UnpooledDataSource = org.apache.ibatis.datasource.unpooled.UnpooledDataSource
+  type JndiDataSourceFactory = org.apache.ibatis.datasource.jndi.JndiDataSourceFactory
+  
+  type ObjectFactory = org.apache.ibatis.reflection.factory.ObjectFactory
+  type ObjectWrapperFactory = org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory
+  type DatabaseIdProvider = org.apache.ibatis.mapping.DatabaseIdProvider
+  type LanguageDriver = org.apache.ibatis.scripting.LanguageDriver
+  
+<span class="nc" id="L68">  sealed abstract class LocalCacheScope {</span>
+    val unwrap : org.apache.ibatis.session.LocalCacheScope
+<span class="nc bnc" id="L70" title="All 4 branches missed.">    case object SESSION extends LocalCacheScope { val unwrap = org.apache.ibatis.session.LocalCacheScope.SESSION }</span>
+<span class="nc bnc" id="L71" title="All 4 branches missed.">    case object STATEMENT extends LocalCacheScope { val unwrap = org.apache.ibatis.session.LocalCacheScope.STATEMENT }</span>
+  }
+  
+<span class="nc" id="L74">  sealed abstract class AutoMappingBehavior {</span>
+    val unwrap : org.apache.ibatis.session.AutoMappingBehavior
+<span class="nc bnc" id="L76" title="All 4 branches missed.">    case object FULL extends AutoMappingBehavior { val unwrap = org.apache.ibatis.session.AutoMappingBehavior.FULL }</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">    case object NONE extends AutoMappingBehavior { val unwrap = org.apache.ibatis.session.AutoMappingBehavior.NONE }</span>
+<span class="nc bnc" id="L78" title="All 4 branches missed.">    case object PARTIAL extends AutoMappingBehavior { val unwrap = org.apache.ibatis.session.AutoMappingBehavior.PARTIAL }</span>
+  }
+  
+<span class="nc" id="L81">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SessionManager.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.session</a> &gt; <span class="el_source">SessionManager.scala</span></div><h1>SessionManager.scala</h1><pre class="source lang-java linenums">/**
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.session
+
+import org.apache.ibatis.session._
+import org.apache.ibatis.logging.LogFactory
+import SessionManager.log
+
+/** Session lifecycle manager.
+  * Manages the lifecycle of the Session
+  * == Usage ==
+  *  - Rollback only
+  *    {{{
+  *    sessionManager.readOnly { implicit session =&gt;
+  *       // Your code ...
+  *       // Always rollback at the end automatically.
+  *    }
+  *    }}}
+  *  - Direct transaction
+  *    {{{
+  *    sessionManager.transaction { implicit session =&gt;
+  *       // Your code ...
+  *       // Always commit at the end if no exceptions are thrown, else rollback.
+  *    }
+  *    }}}
+  *  - External transaction
+  *    {{{
+  *    sessionManager.managed { implicit session =&gt;
+  *       // Your code ...
+  *       // Never commit or rollback automatically.
+  *       // The transaction can be managed externally or manually.
+  *    }
+  *    }}}
+  *
+  * @version \$Revision$
+  */
+<span class="nc" id="L50">sealed class SessionManager(factory : SqlSessionFactory) {</span>
+
+  type Callback[T] = (Session) =&gt; T
+  type CloseSessionHook = (SqlSession) =&gt; Unit
+
+<span class="nc" id="L55">  private var closeSession : CloseSessionHook = {(s : SqlSession) =&gt; s.close}</span>
+
+  def closeSessionHook(hook : CloseSessionHook) = {
+<span class="nc" id="L58">    closeSession = hook</span>
+  }
+
+  /** Executes the callback within a new session and rollback at the end. */
+  def readOnly[T](
+<span class="nc" id="L63">    executorType : ExecutorType = ExecutorType.SIMPLE,</span>
+<span class="nc" id="L64">    level: TransactionIsolationLevel = TransactionIsolationLevel.UNDEFINED)(callback : Callback[T]) : T = {</span>
+<span class="nc" id="L65">    val sqlSession = factory.openSession(executorType.unwrap, level.unwrap)</span>
+    try {
+<span class="nc" id="L67">      val ret = callback(new Session(sqlSession))</span>
+<span class="nc" id="L68">      sqlSession.rollback</span>
+<span class="nc" id="L69">      ret</span>
+    }
+    finally {
+<span class="nc" id="L72">      closeSession(sqlSession)</span>
+    }
+  }  
+  
+  /** Executes the callback within a new session and rollback at the end. */
+<span class="nc" id="L77">  def readOnly[T](callback : Callback[T]) : T = readOnly[T]()(callback)</span>
+
+  private def transaction[T](sqlSession : SqlSession)(callback : Callback[T]) : T = {
+    try {
+<span class="nc" id="L81">      val t = callback(new Session(sqlSession))</span>
+<span class="nc" id="L82">      sqlSession.commit</span>
+<span class="nc" id="L83">      t</span>
+    }
+    catch {
+      case e : Throwable =&gt;
+        try {
+<span class="nc" id="L88">          sqlSession.rollback</span>
+        }
+        catch {
+          case e2 : Exception =&gt;
+            // Ignore.  There's nothing that can be done at this point.
+            // Throw the original exception as that's the one that matters.
+<span class="nc" id="L94">            log.warn(&quot;Unexpected exception on rolling back transaction.  Cause: &quot; + e2)</span>
+<span class="nc" id="L95">            throw e</span>
+        }
+<span class="nc" id="L97">        throw e</span>
+    }
+    finally {
+<span class="nc" id="L100">      closeSession(sqlSession)</span>
+    }
+  }
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType, level : TransactionIsolationLevel)(callback : Callback[T]) : T = 
+<span class="nc" id="L106">    transaction[T](factory.openSession(executorType.unwrap, level.unwrap))(callback)</span>
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType)(callback : Callback[T]) : T = 
+<span class="nc" id="L110">    transaction[T](factory.openSession(executorType.unwrap))(callback)</span>
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](level : TransactionIsolationLevel)(callback : Callback[T]) : T = 
+<span class="nc" id="L114">    transaction[T](factory.openSession(level.unwrap))(callback)</span>
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](executorType : ExecutorType, autoCommit : Boolean)(callback : Callback[T]) : T = 
+<span class="nc" id="L118">    transaction[T](factory.openSession(executorType.unwrap, autoCommit))(callback)</span>
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](autoCommit : Boolean)(callback : Callback[T]) : T = 
+<span class="nc" id="L122">    transaction[T](factory.openSession(autoCommit))(callback)</span>
+
+  /** Executes the callback within a new transaction and commit at the end, automatically calls rollback if any exception. */
+  def transaction[T](callback : Callback[T]) : T = 
+<span class="nc" id="L126">    transaction[T](ExecutorType.SIMPLE, TransactionIsolationLevel.UNDEFINED)(callback)</span>
+
+  /** Executes the callback within a new session. Does not call any transaction method. */
+  def managed[T](executorType : ExecutorType)(callback : Callback[T]) : T = {
+<span class="nc" id="L130">    val sqlSession = factory.openSession(executorType.unwrap)</span>
+    try {
+<span class="nc" id="L132">      callback(new Session(sqlSession))</span>
+    }
+    finally {
+<span class="nc" id="L135">      closeSession(sqlSession)</span>
+    }
+  }
+
+  /** Executes the callback within a new session. Does not call any transaction method. */
+<span class="nc" id="L140">  def managed[T](callback : Callback[T]) : T = managed[T](ExecutorType.SIMPLE)(callback)</span>
+  
+}
+
+<span class="nc" id="L144">object SessionManager {</span>
+<span class="nc" id="L145">  val log = LogFactory.getLog(classOf[SessionManager])</span>
+<span class="nc" id="L146">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
