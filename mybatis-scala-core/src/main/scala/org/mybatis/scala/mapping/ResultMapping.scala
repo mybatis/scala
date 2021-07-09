@@ -18,7 +18,7 @@ package org.mybatis.scala.mapping
 import org.apache.ibatis.`type`.{JdbcType => JdbcTypeEnum}
 import org.apache.ibatis.mapping.{ResultFlag => ResultFlagEnum}
 import java.util.{List => JList}
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 
 private[scala] class ResultMapping (
   resultType : T[_],
@@ -43,6 +43,6 @@ private[scala] class ResultMapping (
   def nestedResultMap : ResultMap[_] = nestedResultMap_
   def notNullColumn : String = notNullColumn_
   def typeHandlerClass : Class[_ <: TypeHandler[_]] = if (typeHandler == null) null else typeHandler.unwrap
-  def flags : JList[ResultFlagEnum] = for (f <- flags_) yield f.unwrap
+  def flags : JList[ResultFlagEnum] = (for (f <- flags_) yield f.unwrap).asJava
   def columnPrefix = columnPrefix_
 }

@@ -72,12 +72,12 @@ object InsertSampleBatch {
     db.transaction(ExecutorType.BATCH) { implicit session =>
 
       DBSchema.create      
-      session.flushStatements
+      session.flushStatements()
       
       val g = new Group
       g.name = "New Group"
       insertGroup(g)
-      session.flushStatements
+      session.flushStatements()
 
       Seq(("Jonh", "Smith"), ("Mary", "Jane"), ("Pepe", "Grillo")) map { (t) =>
         val p = new Person
@@ -87,7 +87,7 @@ object InsertSampleBatch {
         insertPerson(p)
       }
 
-      val created = session.flushStatements
+      val created = session.flushStatements()
       for (result <- created) {
         println( "\n==========================================================" )
         println( result.getSql )
