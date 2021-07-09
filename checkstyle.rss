@@ -23,9 +23,9 @@ under the License.
     <link>http://www.mybatis.org/scala</link>
     <description>mybatis-scala-parent - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2011 - 2020 MyBatis.org</copyright>
+    <copyright>&#169;2011 - 2021 MyBatis.org</copyright>
     <item>
-      <title>File: 3,
+      <title>File: 2,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -61,20 +61,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://www.mybatis.org/scala/checkstyle.html#mybatis-scala-samples.....mvn.wrapper.maven-wrapper.properties">mybatis-scala-samples/../.mvn/wrapper/maven-wrapper.properties</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://www.mybatis.org/scala/checkstyle.html#.mvn.wrapper.maven-wrapper.properties">.mvn/wrapper/maven-wrapper.properties</a>
                 </td>
                 <td>
                   0
