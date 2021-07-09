@@ -1,7 +1,7 @@
 MyBatis Scala Adapter
 =====================
 
-[![Build Status](https://travis-ci.org/mybatis/scala.svg?branch=master)](https://travis-ci.org/mybatis/scala)
+[![Java CI](https://github.com/mybatis/scala/workflows/Java%20CI/badge.svg)](https://github.com/mybatis/scala/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/mybatis/scala/badge.svg?branch=master&service=github)](https://coveralls.io/github/mybatis/scala?branch=master)
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
