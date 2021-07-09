@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KeyGenerator.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.mapping</a> &gt; <span class="el_source">KeyGenerator.scala</span></div><h1>KeyGenerator.scala</h1><pre class="source lang-java linenums">/*
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.mapping
+
+/** Abstract KeyGenerator
+  * This trait must be implemented by any KeyGenerator.
+  */
+trait KeyGenerator {
+  var keyProperty : String
+  var keyColumn   : String
+}
+
+/** JDBC 3 Key Generator implementation.
+  * This uses JDBC generatedKeys
+  * @param keyColumn Column to be read from the generated keys resultset.
+  * @param keyProperty Property to be set with the generated key value.
+  */
+<span class="nc" id="L31">class JdbcGeneratedKey(keyColumn_ : String, keyProperty_ : String) extends KeyGenerator {</span>
+<span class="nc" id="L32">  var keyColumn = keyColumn_</span>
+<span class="nc" id="L33">  var keyProperty = keyProperty_</span>
+}
+
+/** Factory of JdbcGeneratedKey */
+<span class="nc" id="L37">object JdbcGeneratedKey {</span>
+
+  /** Crteates a new JdbcGeneratedKey
+    * @param keyColumn Column to be read from the generated keys resultset.
+    * @param keyProperty Property to be set with the generated key value.
+    */
+<span class="nc" id="L43">  def apply(keyColumn : String, keyProperty : String) : JdbcGeneratedKey = new JdbcGeneratedKey(keyColumn, keyProperty)</span>
+
+}
+
+/** Base class to define a native SQL Key generator.
+  * @tparam Type result type of the generated key.
+  * == Sample code ==
+  * {{{
+  *   keyGenerator = new SqlGeneratedKey[Long] {
+  *     keyProperty = &quot;myId&quot;
+  *     def xsql = &quot;SELECT currval('my_sequence')&quot;
+  *   }
+  * }}}
+  */
+<span class="nc" id="L57">abstract class SqlGeneratedKey[Type : Manifest] extends KeyGenerator {</span>
+
+  /** Any one of STATEMENT, PREPARED or CALLABLE.
+    * This causes MyBatis to use Statement, PreparedStatement or CallableStatement respectively.
+    * Default: PREPARED.
+    */
+<span class="nc" id="L63">  var statementType   : StatementType = StatementType.PREPARED</span>
+
+  /** Property to be set. */
+<span class="nc" id="L66">  var keyProperty     : String = &quot;id&quot;</span>
+
+  /** Property to be set. */
+<span class="nc" id="L69">  var keyColumn       : String = null</span>
+
+  /** If true then this statement will be executed before the main statement. */
+<span class="nc" id="L72">  var executeBefore   : Boolean = false</span>
+
+  /** Returns the Class of the generated key. */
+<span class="nc" id="L75">  val resultTypeClass = manifest[Type].runtimeClass</span>
+
+  /** Dynamic SQL CODE to be executed in order to obtain/generate the key
+    * == Code sample ==
+    * {{{
+    *   def xsql = &quot;SELECT currval('my_sequence')&quot;
+    * }}}
+    */
+  def xsql : XSQL
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Select.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mybatis-scala-core</a> &gt; <a href="index.source.html" class="el_package">org.mybatis.scala.mapping</a> &gt; <span class="el_source">Select.scala</span></div><h1>Select.scala</h1><pre class="source lang-java linenums">/*
+ *    Copyright 2011-2015 the original author or authors.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+package org.mybatis.scala.mapping
+
+import org.mybatis.scala.session.{Session, RowBounds, ResultHandlerDelegator, ResultContext}
+import scala.collection.mutable._;
+import java.util.{Map =&gt; JavaMap}
+import scala.jdk.CollectionConverters._
+
+/** Base class for all Select statements.
+  */
+<span class="nc" id="L25">sealed trait Select extends Statement {</span>
+
+  /** A reference to an external resultMap.
+    * Result maps are the most powerful feature of MyBatis, and with a good understanding of them,
+    * many difficult mapping cases can be solved.
+    */
+<span class="nc" id="L31">  var resultMap       : ResultMap[_] = null</span>
+
+  /** Any one of FORWARD_ONLY|SCROLL_SENSITIVE|SCROLL_INSENSITIVE. Default FORWARD_ONLY. */
+<span class="nc" id="L34">  var resultSetType   : ResultSetType = ResultSetType.FORWARD_ONLY</span>
+
+  /** This is a driver hint that will attempt to cause the driver to return results in batches of rows
+    * numbering in size equal to this setting. Default is unset (driver dependent).
+    */
+<span class="nc" id="L39">  var fetchSize       : Int = -1</span>
+
+  /** Setting this to true will cause the results of this statement to be cached.
+    * Default: true for select statements.
+    */
+<span class="nc" id="L44">  var useCache        : Boolean = true</span>
+
+<span class="nc" id="L46">  flushCache = false</span>
+
+  def resultTypeClass : Class[_]
+
+}
+
+/** Query for a list of objects.
+  *
+  * == Details ==
+  * This class defines a function: (=&gt; List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findAll = new SelectList[Person] {
+  *     def xsql = &quot;SELECT * FROM person ORDER BY name&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findAll()
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result retult type
+  */
+<span class="nc" id="L74">abstract class SelectList[Result : Manifest] </span>
+<span class="nc" id="L75">  extends Select </span>
+  with SQLFunction0[Seq[Result]] {
+
+<span class="nc" id="L78">  def parameterTypeClass = classOf[Nothing]</span>
+<span class="nc" id="L79">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply()(implicit s : Session) : Seq[Result] = 
+<span class="nc" id="L82">    execute { s.selectList[Result](fqi.id) }</span>
+
+  def handle[T](callback : ResultContext[_ &lt;: T] =&gt; Unit)(implicit s : Session) : Unit =
+<span class="nc" id="L85">    execute { s.select(fqi.id, new ResultHandlerDelegator[T](callback)) }</span>
+
+}
+
+/** Query for a list of objects using the input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param =&gt; List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findByName = new SelectListBy[String,Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE name LIKE #{name}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByName(&quot;John%&quot;)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
+<span class="nc" id="L112">abstract class SelectListBy[Param : Manifest, Result : Manifest] </span>
+<span class="nc" id="L113">  extends Select </span>
+  with SQLFunction1[Param, Seq[Result]] {
+
+<span class="nc" id="L116">  def parameterTypeClass = manifest[Param].runtimeClass</span>
+<span class="nc" id="L117">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(param : Param)(implicit s : Session) : Seq[Result] = 
+<span class="nc" id="L120">    execute { s.selectList[Param,Result](fqi.id, param) }</span>
+
+  def handle(param : Param, callback : ResultContext[_ &lt;: Result] =&gt; Unit)(implicit s : Session) : Unit =
+<span class="nc" id="L123">    execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }</span>
+
+}
+
+/** Query for a list of objects with RowBounds.
+  *
+  * == Details ==
+  * This class defines a function: (RowBounds =&gt; List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findAll = new SelectListPage[Person] {
+  *     def xsql = &quot;SELECT * FROM person ORDER BY name&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findAll(RowBounds(100, 20))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result retult type
+  */
+<span class="nc" id="L149">abstract class SelectListPage[Result : Manifest] </span>
+<span class="nc" id="L150">  extends Select </span>
+  with SQLFunction1[RowBounds,Seq[Result]] {
+
+<span class="nc" id="L153">  def parameterTypeClass = classOf[Nothing]</span>
+<span class="nc" id="L154">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+<span class="nc" id="L157">    execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }</span>
+
+  def handle(rowBounds : RowBounds, callback : ResultContext[_ &lt;: Seq[Result]] =&gt; Unit)(implicit s : Session) : Unit =
+<span class="nc" id="L160">    execute { s.select(fqi.id, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }</span>
+
+}
+
+/** Query for a list of objects with RowBounds and one input parameter.
+  *
+  * == Details ==
+  * This class defines a function: ((Param, RowBounds) =&gt; List[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findByName = new SelectListPageBy[String,Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE name LIKE #{name}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByName(&quot;John%&quot;, RowBounds(100, 20))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
+<span class="nc" id="L187">abstract class SelectListPageBy[Param : Manifest, Result : Manifest] </span>
+<span class="nc" id="L188">  extends Select</span>
+  with SQLFunction2[Param, RowBounds, Seq[Result]] {
+
+<span class="nc" id="L191">  def parameterTypeClass = manifest[Param].runtimeClass</span>
+<span class="nc" id="L192">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+<span class="nc" id="L195">    execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }</span>
+
+  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext[_ &lt;: Seq[Result]] =&gt; Unit)(implicit s : Session) : Unit =
+<span class="nc" id="L198">    execute { s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }</span>
+
+}
+
+/** Query for a single object.
+  *
+  * == Details ==
+  * This class defines a function: (=&gt; Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOne[Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE id = 1&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find()
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result retult type
+  */
+<span class="nc" id="L224">abstract class SelectOne[Result : Manifest] </span>
+<span class="nc" id="L225">  extends Select</span>
+  with SQLFunction0[Option[Result]] {
+
+<span class="nc" id="L228">  def parameterTypeClass = classOf[Nothing]</span>
+<span class="nc" id="L229">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply()(implicit s : Session) : Option[Result] = 
+<span class="nc" id="L232">    execute {</span>
+<span class="nc" id="L233">      val r = s.selectOne[Result](fqi.id);</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">      if (r == null) None else Some(r)</span>
+    }
+
+}
+
+/** Query for a single object using an input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param =&gt; Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOneBy[Int,Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE id = #{id}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find(1)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam Result retult type
+  */
+<span class="nc" id="L262">abstract class SelectOneBy[Param : Manifest, Result : Manifest] </span>
+<span class="nc" id="L263">  extends Select</span>
+  with SQLFunction1[Param, Option[Result]] {
+
+<span class="nc" id="L266">  def parameterTypeClass = manifest[Param].runtimeClass</span>
+<span class="nc" id="L267">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(param : Param)(implicit s : Session) : Option[Result] = 
+<span class="nc" id="L270">    execute {</span>
+<span class="nc" id="L271">      val r = s.selectOne[Param,Result](fqi.id, param)</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">      if (r == null) None else Some(r)</span>
+    }
+
+}
+
+/** Query for a Map of objects.
+  *
+  * == Details ==
+  * This class defines a function: (=&gt; Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMap[Long,Person](mapKey=&quot;id&quot;) {
+  *     def xsql = &quot;SELECT * FROM person&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById()
+  *     val p = people(5)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+<span class="nc" id="L302">abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String) </span>
+<span class="nc" id="L303">  extends Select</span>
+  with SQLFunction0[Map[ResultKey, ResultValue]] {
+
+<span class="nc" id="L306">  def parameterTypeClass = classOf[Nothing]</span>
+<span class="nc" id="L307">  def resultTypeClass = manifest[ResultValue].runtimeClass</span>
+
+  def apply()(implicit s : Session) : Map[ResultKey, ResultValue] = 
+<span class="nc" id="L310">    execute { s.selectMap[ResultKey,ResultValue](fqi.id, mapKey) }</span>
+
+}
+
+/** Query for a Map of objects using an input parameter.
+  *
+  * == Details ==
+  * This class defines a function: (Param =&gt; Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapBy[String,Long,Person](mapKey=&quot;id&quot;) {
+  *     def xsql = &quot;SELECT * FROM person WHERE name LIKE #{name}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById(&quot;John%&quot;)
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+<span class="nc" id="L340">abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) </span>
+<span class="nc" id="L341">  extends Select</span>
+  with SQLFunction1[Param, Map[ResultKey, ResultValue]] {
+
+<span class="nc" id="L344">  def parameterTypeClass = manifest[Param].runtimeClass</span>
+<span class="nc" id="L345">  def resultTypeClass = manifest[ResultValue].runtimeClass</span>
+
+  def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+<span class="nc" id="L348">    execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey) }</span>
+
+} 
+
+/** Query for a Map of objects with RowBounds.
+  *
+  * == Details ==
+  * This class defines a function: (RowBounds =&gt; Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapPage[Long,Person](mapKey=&quot;id&quot;) {
+  *     def xsql = &quot;SELECT * FROM person&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById(RowBounds(100,20))
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+<span class="nc" id="L377">abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String) </span>
+<span class="nc" id="L378">  extends Select</span>
+  with SQLFunction1[RowBounds, Map[ResultKey, ResultValue]] {
+
+<span class="nc" id="L381">  def parameterTypeClass = classOf[Nothing]</span>
+<span class="nc" id="L382">  def resultTypeClass = manifest[ResultValue].runtimeClass</span>
+
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+<span class="nc" id="L385">    execute { s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds) }</span>
+
+} 
+
+/** Query for a Map of objects with RowBounds and one input parameter.
+  *
+  * == Details ==
+  * This class defines a function: ((Param, RowBounds) =&gt; Map[ResultKey, ResultValue])
+  *
+  * == Sample code ==
+  * {{{
+  *   val peopleMapById = new SelectMapPageBy[String,Long,Person](mapKey=&quot;id&quot;) {
+  *     def xsql = &quot;SELECT * FROM person WHERE name LIKE #{name}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val people = peopleMapById(&quot;John%&quot;, RowBounds(100,20))
+  *     val p = people(3)
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Param input parameter type
+  * @tparam ResultKey map Key type
+  * @tparam ResultValue map Value type
+  * @param mapKey Property to be used as map key
+  */
+<span class="nc" id="L415">abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) </span>
+<span class="nc" id="L416">  extends Select</span>
+  with SQLFunction2[Param, RowBounds, Map[ResultKey, ResultValue]] {
+
+<span class="nc" id="L419">  def parameterTypeClass = manifest[Param].runtimeClass</span>
+<span class="nc" id="L420">  def resultTypeClass = manifest[ResultValue].runtimeClass</span>
+
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+<span class="nc" id="L423">    execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }</span>
+
+}
+
+/** Query for a single object using a map.
+  *
+  * == Details ==
+  * This class defines a function: (Map[String, Any] =&gt; Result)
+  *
+  * == Sample code ==
+  * {{{
+  *   val find = new SelectOneByMap[Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE age = #{age} AND name = #{name}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val p = find(Map(&quot;age&quot; -&gt; 25, &quot;name&quot; -&gt; &quot;Anon&quot;))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result result type
+  */
+<span class="nc" id="L449">abstract class SelectOneByMap[Result : Manifest]</span>
+<span class="nc" id="L450">  extends Select</span>
+  with SQLFunction1[collection.Map[String, Any], Option[Result]] {
+
+<span class="nc" id="L453">  def parameterTypeClass = manifest[JavaMap[String, Any]].runtimeClass</span>
+<span class="nc" id="L454">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(param : collection.Map[String, Any])(implicit s : Session) : Option[Result] =
+<span class="nc" id="L457">    execute {</span>
+<span class="nc" id="L458">      Option(s.selectOne[JavaMap[String, Any],Result](fqi.id, param.asJava))</span>
+    }
+}
+
+/** Query for a list of objects using map.
+  *
+  * == Details ==
+  * This class defines a function: (Map[String, Any] =&gt; Seq[Result])
+  *
+  * == Sample code ==
+  * {{{
+  *   val findByNameAndAge = new SelectListByMap[Person] {
+  *     def xsql = &quot;SELECT * FROM person WHERE name LIKE #{name} AND age BETWEEN #{minAge} AND #{maxAge}&quot;
+  *   }
+  *
+  *   // Configuration etc .. omitted ..
+  *
+  *   // Then use it
+  *   db.readOnly {
+  *     val list = findByNameAndAge(Map(&quot;name&quot; -&gt; &quot;John%&quot;, &quot;minAge&quot; -&gt; 18, &quot;maxAge&quot; -&gt; 25))
+  *     ...
+  *   }
+  *
+  * }}}
+  * @tparam Result result type
+  */
+<span class="nc" id="L484">abstract class SelectListByMap[Result : Manifest]</span>
+<span class="nc" id="L485">  extends Select</span>
+  with SQLFunction1[collection.Map[String, Any], Seq[Result]] {
+
+<span class="nc" id="L488">  def parameterTypeClass = manifest[JavaMap[String, Any]].runtimeClass</span>
+<span class="nc" id="L489">  def resultTypeClass = manifest[Result].runtimeClass</span>
+
+  def apply(param : collection.Map[String, Any])(implicit s : Session) : Seq[Result] =
+<span class="nc" id="L492">    execute { s.selectList[JavaMap[String, Any],Result](fqi.id, param.asJava) }</span>
+
+  def handle(param : collection.Map[String, Any], callback : ResultContext[_ &lt;: Result] =&gt; Unit)(implicit s : Session) : Unit =
+<span class="nc" id="L495">    execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
