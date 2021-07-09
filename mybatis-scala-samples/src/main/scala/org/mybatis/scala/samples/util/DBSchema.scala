@@ -61,7 +61,7 @@ object DBSchema {
 
   val bind = Seq(createPeopleGroupTable, createPersonTable, createContactInfoTable)
   
-  def create(implicit s: Session) {
+  def create(implicit s: Session): Unit = {
     createPeopleGroupTable()
     createPersonTable()
     createContactInfoTable()

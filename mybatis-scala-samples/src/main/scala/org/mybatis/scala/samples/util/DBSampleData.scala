@@ -48,25 +48,25 @@ object DBSampleData {
   
   def populate(implicit s : Session) = {
     
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     
-    insertGroup(Map("id" -> 1, "name" -> "Customers"))
-    insertGroup(Map("id" -> 2, "name" -> "Suppliers"))
-    insertGroup(Map("id" -> 3, "name" -> "Employees"))
+    insertGroup(Map("id" -> 1, "name" -> "Customers").asJava)
+    insertGroup(Map("id" -> 2, "name" -> "Suppliers").asJava)
+    insertGroup(Map("id" -> 3, "name" -> "Employees").asJava)
     
-    insertPerson(Map("id" -> 1, "firstname" -> "John", "lastname" -> "Smart", "group" -> 1))
-    insertPerson(Map("id" -> 2, "firstname" -> "Maria", "lastname" -> "Perez", "group" -> 2))
-    insertPerson(Map("id" -> 3, "firstname" -> "Janeth", "lastname" -> "Ros", "group" -> 1))
-    insertPerson(Map("id" -> 4, "firstname" -> "Paul", "lastname" -> "Jobs", "group" -> 3))
-    insertPerson(Map("id" -> 5, "firstname" -> "Bill", "lastname" -> "Rich", "group" -> 1))
+    insertPerson(Map("id" -> 1, "firstname" -> "John", "lastname" -> "Smart", "group" -> 1).asJava)
+    insertPerson(Map("id" -> 2, "firstname" -> "Maria", "lastname" -> "Perez", "group" -> 2).asJava)
+    insertPerson(Map("id" -> 3, "firstname" -> "Janeth", "lastname" -> "Ros", "group" -> 1).asJava)
+    insertPerson(Map("id" -> 4, "firstname" -> "Paul", "lastname" -> "Jobs", "group" -> 3).asJava)
+    insertPerson(Map("id" -> 5, "firstname" -> "Bill", "lastname" -> "Rich", "group" -> 1).asJava)
     
-    insertContactInfo(Map("person" -> 1, "address" -> "222 Street",         "phone" -> "555-0988998"))
-    insertContactInfo(Map("person" -> 2, "address" -> "333 Av",             "phone" -> "554-7464363"))
-    insertContactInfo(Map("person" -> 2, "address" -> "1 Rose Ave",         "phone" -> "836-8456463"))
-    insertContactInfo(Map("person" -> 3, "address" -> "444 St Rose",        "phone" -> "665-9476558"))
-    insertContactInfo(Map("person" -> 4, "address" -> "555 Wall Street",    "phone" -> "666-7474664"))
-    insertContactInfo(Map("person" -> 5, "address" -> "666 Mountain View",  "phone" -> "571-9875923"))
-    insertContactInfo(Map("person" -> 5, "address" -> "777 Mars",           "phone" -> "587-3984792"))
+    insertContactInfo(Map("person" -> 1, "address" -> "222 Street",         "phone" -> "555-0988998").asJava)
+    insertContactInfo(Map("person" -> 2, "address" -> "333 Av",             "phone" -> "554-7464363").asJava)
+    insertContactInfo(Map("person" -> 2, "address" -> "1 Rose Ave",         "phone" -> "836-8456463").asJava)
+    insertContactInfo(Map("person" -> 3, "address" -> "444 St Rose",        "phone" -> "665-9476558").asJava)
+    insertContactInfo(Map("person" -> 4, "address" -> "555 Wall Street",    "phone" -> "666-7474664").asJava)
+    insertContactInfo(Map("person" -> 5, "address" -> "666 Mountain View",  "phone" -> "571-9875923").asJava)
+    insertContactInfo(Map("person" -> 5, "address" -> "777 Mars",           "phone" -> "587-3984792").asJava)
     
   }
   

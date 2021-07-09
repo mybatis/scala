@@ -15,9 +15,9 @@
  */
 package org.mybatis.scala.session
 
-import org.apache.ibatis.session._
 import org.apache.ibatis.logging.LogFactory
 import SessionManager.log
+import org.apache.ibatis.session.{SqlSession, SqlSessionFactory}
 
 /** Session lifecycle manager.
   * Manages the lifecycle of the Session

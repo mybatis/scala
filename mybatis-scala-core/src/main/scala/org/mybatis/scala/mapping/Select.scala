@@ -18,7 +18,7 @@ package org.mybatis.scala.mapping
 import org.mybatis.scala.session.{Session, RowBounds, ResultHandlerDelegator, ResultContext}
 import scala.collection.mutable._;
 import java.util.{Map => JavaMap}
-import scala.collection.JavaConversions.mapAsJavaMap
+import scala.jdk.CollectionConverters._
 
 /** Base class for all Select statements.
   */
@@ -455,7 +455,7 @@ abstract class SelectOneByMap[Result : Manifest]
 
   def apply(param : collection.Map[String, Any])(implicit s : Session) : Option[Result] =
     execute {
-      Option(s.selectOne[JavaMap[String, Any],Result](fqi.id, mapAsJavaMap(param)))
+      Option(s.selectOne[JavaMap[String, Any],Result](fqi.id, param.asJava))
     }
 }
 
@@ -489,7 +489,7 @@ abstract class SelectListByMap[Result : Manifest]
   def resultTypeClass = manifest[Result].runtimeClass
 
   def apply(param : collection.Map[String, Any])(implicit s : Session) : Seq[Result] =
-    execute { s.selectList[JavaMap[String, Any],Result](fqi.id, param) }
+    execute { s.selectList[JavaMap[String, Any],Result](fqi.id, param.asJava) }
 
   def handle(param : collection.Map[String, Any], callback : ResultContext[_ <: Result] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }

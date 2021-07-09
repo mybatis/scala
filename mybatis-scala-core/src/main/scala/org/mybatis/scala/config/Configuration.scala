@@ -213,7 +213,7 @@ object Configuration {
     import org.apache.ibatis.plugin.Interceptor
     import scala.collection.mutable.ArrayBuffer
     import org.mybatis.scala.session.ExecutorType
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
     import org.apache.ibatis.mapping.Environment
 
     /** Reference to self. Support for operational notation. */
@@ -251,16 +251,16 @@ object Configuration {
     // Pre ====================================================================
     
     def properties(props: (String, String)*) =
-      set(0, pre) { _.getVariables ++= Map(props: _*) }
+      set(0, pre) { _.getVariables.asScala ++= Map(props: _*) }
 
     def properties(props: Properties) =
-      set(1, pre) { _.getVariables ++= props }
+      set(1, pre) { _.getVariables.asScala ++= props.asScala }
 
     def properties(resource: String) =
-      set(2, pre) { _.getVariables ++= Resources.getResourceAsProperties(resource) }
+      set(2, pre) { _.getVariables.asScala ++= Resources.getResourceAsProperties(resource).asScala }
 
     def propertiesFromUrl(url: String) =
-      set(3, pre) { _.getVariables ++= Resources.getUrlAsProperties(url) }
+      set(3, pre) { _.getVariables.asScala ++= Resources.getUrlAsProperties(url).asScala }
 
     def plugin(plugin: Interceptor) =
       set(4, pre) { _.addInterceptor(plugin) }
@@ -313,7 +313,7 @@ object Configuration {
       set(20, pre) { _.setJdbcTypeForNull(jdbcType.unwrap) }
     
     def lazyLoadTriggerMethods(names: Set[String]) = 
-      set(21, pre) { _.setLazyLoadTriggerMethods(names) }
+      set(21, pre) { _.setLazyLoadTriggerMethods(names.asJava) }
     
     def environment(id: String, transactionFactory: TransactionFactory, dataSource: javax.sql.DataSource) =
       set(24, pre) { _.setEnvironment(new Environment(id, transactionFactory, dataSource)) }

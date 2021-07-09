@@ -16,7 +16,7 @@
 package org.mybatis.scala.session
 
 import org.apache.ibatis.session.SqlSession
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.collection.mutable._
 
 /** SqlSession Wrapper.
@@ -41,27 +41,27 @@ class Session(sqls : SqlSession) {
   }
 
   def selectList[Result](statement : String) : Seq[Result] = {
-    asScalaBuffer(sqls.selectList(statement))
+    sqls.selectList(statement).asScala.toBuffer
   }
 
   def selectList[Param,Result](statement : String, parameter : Param) : Seq[Result] = {
-    asScalaBuffer(sqls.selectList(statement, parameter))
+    sqls.selectList(statement, parameter).asScala.toBuffer
   }
 
   def selectList[Param,Result](statement : String, parameter : Param, rowBounds : RowBounds) : Seq[Result] = {
-    asScalaBuffer(sqls.selectList(statement, parameter, rowBounds.unwrap))
+    sqls.selectList(statement, parameter, rowBounds.unwrap).asScala.toBuffer
   }
 
   def selectMap[Key,Value](statement : String, mapKey : String) : Map[Key,Value] = {
-    mapAsScalaMap(sqls.selectMap[Key,Value](statement, mapKey))
+    sqls.selectMap[Key,Value](statement, mapKey).asScala
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String) : Map[Key,Value] = {
-    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey))
+    sqls.selectMap[Key,Value](statement, parameter, mapKey).asScala
   }
 
   def selectMap[Param,Key,Value](statement : String, parameter : Param, mapKey : String, rowBounds : RowBounds) : Map[Key,Value] = {
-    mapAsScalaMap(sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap))
+    sqls.selectMap[Key,Value](statement, parameter, mapKey, rowBounds.unwrap).asScala
   }
 
   def select[Param, Res](statement : String, parameter : Param, handler : ResultHandler[Res]) : Unit = {
@@ -110,6 +110,6 @@ class Session(sqls : SqlSession) {
 
   def clearCache() : Unit = sqls.clearCache
   
-  def flushStatements() : Seq[BatchResult] = sqls.flushStatements
+  def flushStatements() : Seq[BatchResult] = sqls.flushStatements.asScala
 
 }

@@ -34,15 +34,15 @@ abstract class CollectionObjectWrapper extends org.apache.ibatis.reflection.wrap
 }
 
 class ArrayBufferWrapper(buffer : scala.collection.mutable.ArrayBuffer[AnyRef]) extends CollectionObjectWrapper {
-  import scala.collection.JavaConversions._
+  import scala.jdk.CollectionConverters._
   def add(element : AnyRef) : Unit = buffer append element
-  def addAll[E](elements : java.util.List[E]) : Unit = buffer.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]])
+  def addAll[E](elements : java.util.List[E]) : Unit = buffer.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]].asScala)
 }
 
 class HashSetWrapper(set : scala.collection.mutable.HashSet[AnyRef]) extends CollectionObjectWrapper {
-  import scala.collection.JavaConversions._
+  import scala.jdk.CollectionConverters._
   def add(element : AnyRef) : Unit = set add element  
-  def addAll[E](elements : java.util.List[E]) : Unit = set.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]])
+  def addAll[E](elements : java.util.List[E]) : Unit = set.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]].asScala)
 }
 
 class DefaultObjectWrapperFactory extends ObjectWrapperFactory {
