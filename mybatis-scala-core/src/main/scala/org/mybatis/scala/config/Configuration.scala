@@ -204,7 +204,7 @@ object Configuration {
    * Creates a Configuration built from a custom builder
    * @param builder Builder => Unit
    */
-  def apply(builder: Builder): Configuration = builder.build
+  def apply(builder: Builder): Configuration = builder.build()
 
   /** Configuration builder */
   class Builder {
@@ -232,7 +232,7 @@ object Configuration {
     }
 
     /** Ordered deferred setter */
-    private def set[A](i: Int, e: ArrayBuffer[ConfigElem[A]])(f: A => Unit) {
+    private def set[A](i: Int, e: ArrayBuffer[ConfigElem[A]])(f: A => Unit): Unit = {
       e += new ConfigElem[A] {
         val index = i
         def set(c: A) = f(c)
