@@ -70,6 +70,9 @@
     <scala.binary>2.13</scala.binary>
     <scala.version>2.13.8</scala.version>
     <module.name>org.mybatis.scala</module.name>
+
+    <!-- Reproducible Builds -->
+    <project.build.outputTimestamp>1757561022</project.build.outputTimestamp>
   </properties>
 
   <build>
