@@ -68,7 +68,7 @@
     <findbugs.onlyAnalyze>org.mybatis.scala.*</findbugs.onlyAnalyze>
     <gcu.product>Scala</gcu.product>
     <scala.binary>2.13</scala.binary>
-    <scala.version>2.13.9</scala.version>
+    <scala.version>2.13.10</scala.version>
     <module.name>org.mybatis.scala</module.name>
 
     <!-- Reproducible Builds -->
