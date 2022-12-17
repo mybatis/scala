@@ -2,8 +2,8 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 mybatis-scala-core,org.mybatis.scala.mapping,SelectListPageBy,138,0,0,0,6,0,28,0,28,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectMapBy,119,0,0,0,5,0,26,0,26,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPageBy,121,0,0,0,5,0,26,0,26,0
-mybatis-scala-core,org.mybatis.scala.mapping,ResultMap,455,0,0,0,156,0,72,0,72,0
-mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping,118,0,14,0,24,0,21,0,14,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMap,403,0,0,0,155,0,72,0,72,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping,118,0,14,0,23,0,21,0,14,0
 mybatis-scala-core,org.mybatis.scala.mapping,package,4,0,0,0,0,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,SqlGeneratedKey,53,0,0,0,6,0,10,0,10,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
@@ -12,7 +12,7 @@ mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...}
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
-mybatis-scala-core,org.mybatis.scala.mapping,Case,153,0,28,0,1,0,35,0,20,0
+mybatis-scala-core,org.mybatis.scala.mapping,Case,144,0,26,0,1,0,34,0,20,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType.,23,0,0,0,4,0,4,0,4,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBigDecimalTypeHandler,6,0,0,0,1,0,1,0,1,0
@@ -20,7 +20,7 @@ mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...}
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectList,123,0,0,0,6,0,28,0,28,0
-mybatis-scala-core,org.mybatis.scala.mapping,T,46,0,6,0,5,0,8,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,T,46,0,6,0,4,0,8,0,5,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBooleanTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptByteTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingInherited.,9,0,0,0,1,0,2,0,2,0
@@ -35,17 +35,17 @@ mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingEnabled,3,0,0,0,0,0,1,0,
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptNClobTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingInherited,3,0,0,0,0,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectMapPage,113,0,0,0,5,0,26,0,26,0
-mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping.,11,0,0,0,2,0,2,0,2,0
-mybatis-scala-core,org.mybatis.scala.mapping,Statement,49,0,2,0,11,0,3,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,ResultMapping.,8,0,0,0,2,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,Statement,46,0,2,0,11,0,3,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptNStringTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType.,191,0,0,0,32,0,32,0,32,0
 mybatis-scala-core,org.mybatis.scala.mapping,Update,75,0,0,0,4,0,17,0,17,0
 mybatis-scala-core,org.mybatis.scala.mapping,FQI.,33,0,2,0,1,0,6,0,5,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptTimeTypeHandler,6,0,0,0,1,0,1,0,1,0
-mybatis-scala-core,org.mybatis.scala.mapping,ModeINOUT.,44,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeINOUT.,41,0,0,0,1,0,11,0,11,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectListBy,134,0,0,0,6,0,28,0,28,0
-mybatis-scala-core,org.mybatis.scala.mapping,ModeIN.,44,0,0,0,1,0,11,0,11,0
-mybatis-scala-core,org.mybatis.scala.mapping,FQI,197,0,34,0,5,0,40,0,22,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeIN.,41,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.mapping,FQI,188,0,32,0,5,0,39,0,22,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptBlobTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,ResultFlag.,17,0,0,0,3,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,StatementType,9,0,0,0,0,0,3,0,3,0
@@ -71,7 +71,7 @@ mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...}
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptDoubleTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,StatementType.,23,0,0,0,4,0,4,0,4,0
 mybatis-scala-core,org.mybatis.scala.mapping,Case.,33,0,2,0,1,0,6,0,5,0
-mybatis-scala-core,org.mybatis.scala.mapping,ParamModeEnum,9,0,0,0,3,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,ParamModeEnum,9,0,0,0,2,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectListByMap,148,0,0,0,6,0,28,0,28,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptStringTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcGeneratedKey.,11,0,0,0,2,0,2,0,2,0
@@ -80,13 +80,13 @@ mybatis-scala-core,org.mybatis.scala.mapping,SelectOneByMap,130,0,0,0,6,0,26,0,2
 mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
-mybatis-scala-core,org.mybatis.scala.mapping,OptionTypeHandler,73,0,4,0,7,0,7,0,5,0
+mybatis-scala-core,org.mybatis.scala.mapping,OptionTypeHandler,72,0,4,0,7,0,7,0,5,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectOne,114,0,2,0,7,0,27,0,26,0
 mybatis-scala-core,org.mybatis.scala.mapping,ResultSetType..anon.new ResultSetType() {...},9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcGeneratedKey,28,0,0,0,3,0,6,0,6,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType,98,0,0,0,2,0,33,0,33,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptShortTypeHandler,6,0,0,0,1,0,1,0,1,0
-mybatis-scala-core,org.mybatis.scala.mapping,ModeOUT.,44,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.mapping,ModeOUT.,41,0,0,0,1,0,11,0,11,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptClobTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,ModeIN,30,0,0,0,0,0,9,0,9,0
 mybatis-scala-core,org.mybatis.scala.mapping,SelectMap,110,0,0,0,5,0,26,0,26,0
@@ -96,7 +96,7 @@ mybatis-scala-core,org.mybatis.scala.mapping,Delete,75,0,0,0,4,0,17,0,17,0
 mybatis-scala-core,org.mybatis.scala.mapping,Insert,85,0,0,0,5,0,19,0,19,0
 mybatis-scala-core,org.mybatis.scala.mapping,TypeHandlers.OptFloatTypeHandler,6,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.mapping,ModeOUT,30,0,0,0,0,0,9,0,9,0
-mybatis-scala-core,org.mybatis.scala.mapping,Binding.,335,0,28,0,23,0,28,0,14,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding.,331,0,28,0,23,0,28,0,14,0
 mybatis-scala-core,org.mybatis.scala.mapping,Binding,33,0,0,0,0,0,8,0,8,0
 mybatis-scala-core,org.mybatis.scala.mapping,ResultMap.,7,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingDisabled,3,0,0,0,0,0,1,0,1,0
@@ -111,15 +111,15 @@ mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...}
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.mapping,Perform,66,0,0,0,4,0,17,0,17,0
 mybatis-scala-core,org.mybatis.scala.mapping,JdbcType..anon.new JdbcType() {...},14,0,0,0,1,0,3,0,3,0
-mybatis-scala-core,org.mybatis.scala.mapping,Binding.Param,25,0,0,0,3,0,2,0,2,0
+mybatis-scala-core,org.mybatis.scala.mapping,Binding.Param,25,0,0,0,2,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.mapping,AutoMappingDisabled.,9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.session,ResultHandlerDelegator,12,0,0,0,2,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.session,ExecutorType..anon.new ExecutorType() {...},9,0,0,0,1,0,2,0,2,0
-mybatis-scala-core,org.mybatis.scala.session,SessionManager,187,0,0,0,30,0,20,0,20,0
-mybatis-scala-core,org.mybatis.scala.session,Session,163,0,0,0,25,0,24,0,24,0
-mybatis-scala-core,org.mybatis.scala.session,RowBounds,165,0,20,0,2,0,32,0,21,0
+mybatis-scala-core,org.mybatis.scala.session,SessionManager,187,0,0,0,29,0,20,0,20,0
+mybatis-scala-core,org.mybatis.scala.session,Session,163,0,0,0,24,0,24,0,24,0
+mybatis-scala-core,org.mybatis.scala.session,RowBounds,156,0,18,0,2,0,31,0,21,0
 mybatis-scala-core,org.mybatis.scala.session,ExecutorType.,23,0,0,0,4,0,4,0,4,0
 mybatis-scala-core,org.mybatis.scala.session,SessionManager.,10,0,0,0,2,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.session,RowBounds.,33,0,2,0,1,0,6,0,5,0
@@ -135,32 +135,32 @@ mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new
 mybatis-scala-core,org.mybatis.scala.session,TransactionIsolationLevel..anon.new TransactionIsolationLevel() {...},9,0,0,0,1,0,2,0,2,0
 mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder..anon.new Configuration.Builder.ConfigElem() {...},19,0,0,0,4,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.config,HashSetWrapper,21,0,0,0,3,0,3,0,3,0
-mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder.ConfigElem,10,0,2,0,2,0,2,0,1,0
-mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.SESSION.,41,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder.ConfigElem,10,0,2,0,1,0,2,0,1,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.SESSION.,38,0,0,0,1,0,11,0,11,0
 mybatis-scala-core,org.mybatis.scala.config,Configuration.,71,0,0,0,12,0,9,0,9,0
 mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace.,42,0,0,0,5,0,5,0,5,0
-mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.NONE.,41,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.NONE.,38,0,0,0,1,0,11,0,11,0
 mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory,392,0,72,0,53,0,50,0,14,0
-mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.PARTIAL.,41,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.PARTIAL.,38,0,0,0,1,0,11,0,11,0
 mybatis-scala-core,org.mybatis.scala.config,CollectionObjectWrapper,24,0,0,0,12,0,12,0,12,0
-mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope,53,0,8,0,4,0,9,0,5,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope,53,0,8,0,3,0,9,0,5,0
 mybatis-scala-core,org.mybatis.scala.config,ArrayBufferWrapper,21,0,0,0,3,0,3,0,3,0
-mybatis-scala-core,org.mybatis.scala.config,DynamicSQLBuilder,700,0,94,0,70,0,57,0,10,0
-mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.STATEMENT.,41,0,0,0,1,0,11,0,11,0
-mybatis-scala-core,org.mybatis.scala.config,Configuration,561,0,16,0,46,0,38,0,30,0
-mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace,897,0,70,0,227,0,63,0,28,0
+mybatis-scala-core,org.mybatis.scala.config,DynamicSQLBuilder,675,0,94,0,69,0,57,0,10,0
+mybatis-scala-core,org.mybatis.scala.config,package.LocalCacheScope.STATEMENT.,38,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration,425,0,16,0,45,0,38,0,30,0
+mybatis-scala-core,org.mybatis.scala.config,ConfigurationSpace,885,0,70,0,226,0,63,0,28,0
 mybatis-scala-core,org.mybatis.scala.config,Environment.,36,0,2,0,1,0,6,0,5,0
 mybatis-scala-core,org.mybatis.scala.config,DefaultScriptingDriver,18,0,0,0,0,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.config,package.,5,0,0,0,1,0,1,0,1,0
-mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior,78,0,12,0,5,0,13,0,7,0
-mybatis-scala-core,org.mybatis.scala.config,DefaultObjectWrapperFactory,69,0,8,0,9,0,7,0,3,0
-mybatis-scala-core,org.mybatis.scala.config,Environment,194,0,36,0,2,0,43,0,23,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior,78,0,12,0,4,0,13,0,7,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectWrapperFactory,60,0,8,0,9,0,7,0,3,0
+mybatis-scala-core,org.mybatis.scala.config,Environment,185,0,34,0,2,0,42,0,23,0
 mybatis-scala-core,org.mybatis.scala.config,ConfigurationException.,12,0,0,0,1,0,3,0,3,0
 mybatis-scala-core,org.mybatis.scala.config,ConfigurationException,8,0,0,0,1,0,2,0,2,0
-mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory.CacheKey,78,0,14,0,13,0,13,0,6,0
-mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.FULL.,41,0,0,0,1,0,11,0,11,0
-mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder,761,0,4,0,49,0,117,0,115,0
+mybatis-scala-core,org.mybatis.scala.config,DefaultObjectFactory.CacheKey,78,0,14,0,12,0,13,0,6,0
+mybatis-scala-core,org.mybatis.scala.config,package.AutoMappingBehavior.FULL.,38,0,0,0,1,0,11,0,11,0
+mybatis-scala-core,org.mybatis.scala.config,Configuration.Builder,761,0,4,0,48,0,117,0,115,0
 mybatis-scala-core,org.mybatis.scala.config,DefaultScriptingDriver.,5,0,0,0,1,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.cache,package,3,0,0,0,0,0,1,0,1,0
 mybatis-scala-core,org.mybatis.scala.cache,package.,13,0,0,0,2,0,2,0,2,0
-mybatis-scala-core,org.mybatis.scala.cache,package.Eviction.,40,0,0,0,6,0,6,0,6,0
+mybatis-scala-core,org.mybatis.scala.cache,package.Eviction.,40,0,0,0,5,0,6,0,6,0
