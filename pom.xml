@@ -43,7 +43,7 @@
 
   <scm>
     <url>http://github.com/mybatis/scala</url>
-    <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
+    <connection>scm:git:ssh://git@github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
@@ -57,9 +57,9 @@
   </ciManagement>
   <distributionManagement>
     <site>
-      <id>gh-pages</id>
+      <id>gh-pages-scm</id>
       <name>Mybatis GitHub Pages</name>
-      <url>git:ssh://git@github.com/mybatis/scala.git?gh-pages#</url>
+      <url>scm:git:ssh://git@github.com/mybatis/scala.git</url>
     </site>
   </distributionManagement>
 
