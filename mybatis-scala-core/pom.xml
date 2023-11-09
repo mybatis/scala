@@ -31,10 +31,10 @@
   <name>mybatis-scala-core</name>
 
   <scm>
-    <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
+    <url>http://github.com/mybatis/scala</url>
   </scm>
 
   <dependencies>
@@ -66,6 +66,17 @@
   </dependencies>
 
   <build>
+
+    <resources>
+      <resource>
+        <targetPath>META-INF</targetPath>
+        <directory>${project.basedir}/../</directory>
+        <includes>
+          <include>LICENSE</include>
+          <include>NOTICE</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>net.alchim31.maven</groupId>
@@ -87,7 +98,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-            <skipTests>true</skipTests>
+          <skipTests>true</skipTests>
         </configuration>
       </plugin>
       <plugin>
@@ -109,17 +120,6 @@
         </executions>
       </plugin>
     </plugins>
-
-    <resources>
-      <resource>
-        <directory>${project.basedir}/../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE</include>
-          <include>NOTICE</include>
-        </includes>
-      </resource>
-    </resources>
   </build>
 
   <reporting>

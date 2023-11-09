@@ -23,7 +23,7 @@
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-parent</artifactId>
     <version>40</version>
-    <relativePath />
+    <relativePath/>
   </parent>
 
   <groupId>org.mybatis.scala</groupId>
@@ -42,10 +42,10 @@
   </modules>
 
   <scm>
-    <url>http://github.com/mybatis/scala</url>
     <connection>scm:git:ssh://git@github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
+    <url>http://github.com/mybatis/scala</url>
   </scm>
   <issueManagement>
     <system>GitHub Issue Management</system>
@@ -75,19 +75,22 @@
     <project.build.outputTimestamp>1671291815</project.build.outputTimestamp>
   </properties>
 
-  <build>
-    <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
-    <testSourceDirectory>${project.basedir}src/test/scala</testSourceDirectory>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-library</artifactId>
+        <version>${scala.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.scala-lang.modules</groupId>
+        <artifactId>scala-xml_${scala.binary}</artifactId>
+        <version>2.2.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <releaseProfiles>release,bundle</releaseProfiles>
-        </configuration>
-      </plugin>
-    </plugins>
+  <build>
 
     <pluginManagement>
       <plugins>
@@ -98,7 +101,7 @@
           <configuration>
             <args>
               <arg>-deprecation</arg>
-                <arg>-feature</arg>
+              <arg>-feature</arg>
             </args>
           </configuration>
           <executions>
@@ -120,22 +123,19 @@
         </plugin>
       </plugins>
     </pluginManagement>
-  </build>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.scala-lang</groupId>
-        <artifactId>scala-library</artifactId>
-        <version>${scala.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.scala-lang.modules</groupId>
-        <artifactId>scala-xml_${scala.binary}</artifactId>
-        <version>2.2.0</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <releaseProfiles>release,bundle</releaseProfiles>
+        </configuration>
+      </plugin>
+    </plugins>
+    <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
+    <testSourceDirectory>${project.basedir}src/test/scala</testSourceDirectory>
+  </build>
 
   <profiles>
     <profile>
@@ -167,8 +167,8 @@
                         </goals>
                       </pluginExecutionFilter>
                       <action>
-                        <ignore />
-                       </action>
+                        <ignore/>
+                      </action>
                     </pluginExecution>
                   </pluginExecutions>
                 </lifecycleMappingMetadata>
