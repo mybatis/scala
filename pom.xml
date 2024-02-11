@@ -33,7 +33,7 @@
   <packaging>pom</packaging>
 
   <name>mybatis-scala-parent</name>
-  <url>http://www.mybatis.org/scala</url>
+  <url>http://www.mybatis.org/scala/</url>
 
   <inceptionYear>2011</inceptionYear>
 
@@ -46,7 +46,7 @@
     <connection>scm:git:ssh://git@github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
-    <url>http://github.com/mybatis/scala</url>
+    <url>http://github.com/mybatis/scala/</url>
   </scm>
   <issueManagement>
     <system>GitHub Issue Management</system>
