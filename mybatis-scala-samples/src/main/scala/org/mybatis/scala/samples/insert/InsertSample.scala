@@ -74,7 +74,7 @@ object InsertSample {
     db.transaction { implicit session =>
 
       DBSchema.create
-      
+
       val g = new Group
       g.name = "New Group"
 

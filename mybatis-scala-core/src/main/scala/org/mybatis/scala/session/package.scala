@@ -39,11 +39,11 @@ package object session {
 
   /** Alias of [[org.apache.ibatis.session.ResultHandler]] */
   type ResultHandler[T] = MBResultHandler[T]
-  
+
   /** Alias of [[org.apache.ibatis.session.ResultContext]] */
   type ResultContext[T] = MBResultContext[T]
-  
+
   /** Alias of [[org.apache.ibatis.executor.BatchResult]] */
   type BatchResult = org.apache.ibatis.executor.BatchResult
-  
+
 }

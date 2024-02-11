@@ -64,8 +64,8 @@ object ItemDAO {
     def xsql =
       <xsql>
         INSERT INTO item(description_, info_, year_)
-        VALUES ( 
-          { "description"? }, 
+        VALUES (
+          { "description"? },
           {? ("info", jdbcType=JdbcType.VARCHAR)},
           {? ("year", jdbcType=JdbcType.INTEGER)}
         )
@@ -76,7 +76,7 @@ object ItemDAO {
     def xsql =
       <xsql>
         UPDATE item
-        SET 
+        SET
           description_ = {"description"?},
           info_ = {? ("info", jdbcType=JdbcType.VARCHAR)},
           year_ = {? ("year", jdbcType=JdbcType.INTEGER)}

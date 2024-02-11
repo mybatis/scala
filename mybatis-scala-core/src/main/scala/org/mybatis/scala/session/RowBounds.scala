@@ -18,5 +18,5 @@ package org.mybatis.scala.session
 /** Wrapper of [[org.apache.ibatis.session.RowBounds]]
   */
 case class RowBounds(val offset: Int, val limit: Int) {
-  val unwrap = new org.apache.ibatis.session.RowBounds(offset, limit)  
+  val unwrap = new org.apache.ibatis.session.RowBounds(offset, limit)
 }

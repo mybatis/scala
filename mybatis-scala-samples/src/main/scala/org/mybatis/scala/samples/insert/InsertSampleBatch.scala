@@ -61,7 +61,7 @@ object InsertSampleBatch {
 
   // Create a configuration space, add the data access method
   config ++= Seq(insertPerson, insertGroup)
-  config ++= DBSchema  
+  config ++= DBSchema
 
   // Build the session manager
   val db = config.createPersistenceContext
@@ -71,9 +71,9 @@ object InsertSampleBatch {
 
     db.transaction(ExecutorType.BATCH) { implicit session =>
 
-      DBSchema.create      
+      DBSchema.create
       session.flushStatements()
-      
+
       val g = new Group
       g.name = "New Group"
       insertGroup(g)
@@ -94,7 +94,7 @@ object InsertSampleBatch {
         println( "\nCalled " + result.getUpdateCounts.size + " times")
         println( "Total update counts: " + result.getUpdateCounts.foldLeft(0)((a,b)=>a + b) )
       }
-      
+
     }
 
   }

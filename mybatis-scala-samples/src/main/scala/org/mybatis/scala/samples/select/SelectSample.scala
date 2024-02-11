@@ -51,8 +51,8 @@ object DB {
   // Datasource configuration
   val config = Configuration(
     Environment(
-      "default", 
-      new JdbcTransactionFactory(), 
+      "default",
+      new JdbcTransactionFactory(),
       new PooledDataSource(
         "org.hsqldb.jdbcDriver",
         "jdbc:hsqldb:mem:scala",
@@ -69,7 +69,7 @@ object DB {
 
   // Build the session manager
   lazy val context = config.createPersistenceContext
-  
+
 }
 
 // Application code ============================================================
@@ -83,10 +83,10 @@ object SelectSample {
       DBSchema.create
       DBSampleData.populate
 
-      DB.findAll("a").foreach { p => 
+      DB.findAll("a").foreach { p =>
         println( "Person(%d): %s %s".format(p.id, p.firstName, p.lastName) )
       }
-      
+
     }
   }
 

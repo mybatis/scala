@@ -48,7 +48,7 @@ class Person {
 // Data access layer ===========================================================
 
 object Persistence {
-  
+
   // Simple select function (Nothing) => List[Person]
   val findAll = new SelectList[Person] {
 
@@ -100,7 +100,7 @@ object Persistence {
 
   // Build the session manager
   lazy val context = config.createPersistenceContext
-  
+
 }
 
 // Application code ============================================================
@@ -113,7 +113,7 @@ object SelectWithResultMapSample {
 
       DBSchema.create
       DBSampleData.populate
-      
+
       for (p <- Persistence.findAll()) {
         println("\nPerson(%d): %s %s is in group: %s".format(p.id, p.firstName, p.lastName, p.group.name))
         for (contact <- p.contact) {

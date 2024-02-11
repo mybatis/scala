@@ -71,14 +71,14 @@ sealed trait Select extends Statement {
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectList[Result : Manifest] 
-  extends Select 
+abstract class SelectList[Result : Manifest]
+  extends Select
   with SQLFunction0[Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply()(implicit s : Session) : Seq[Result] = 
+  def apply()(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Result](fqi.id) }
 
   def handle[T](callback : ResultContext[_ <: T] => Unit)(implicit s : Session) : Unit =
@@ -109,14 +109,14 @@ abstract class SelectList[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectListBy[Param : Manifest, Result : Manifest] 
-  extends Select 
+abstract class SelectListBy[Param : Manifest, Result : Manifest]
+  extends Select
   with SQLFunction1[Param, Seq[Result]] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply(param : Param)(implicit s : Session) : Seq[Result] = 
+  def apply(param : Param)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param) }
 
   def handle(param : Param, callback : ResultContext[_ <: Result] => Unit)(implicit s : Session) : Unit =
@@ -146,14 +146,14 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectListPage[Result : Manifest] 
-  extends Select 
+abstract class SelectListPage[Result : Manifest]
+  extends Select
   with SQLFunction1[RowBounds,Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
 
   def handle(rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
@@ -184,14 +184,14 @@ abstract class SelectListPage[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectListPageBy[Param : Manifest, Result : Manifest] 
+abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   extends Select
   with SQLFunction2[Param, RowBounds, Seq[Result]] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] = 
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
 
   def handle(param : Param, rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
@@ -221,14 +221,14 @@ abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectOne[Result : Manifest] 
+abstract class SelectOne[Result : Manifest]
   extends Select
   with SQLFunction0[Option[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply()(implicit s : Session) : Option[Result] = 
+  def apply()(implicit s : Session) : Option[Result] =
     execute {
       val r = s.selectOne[Result](fqi.id);
       if (r == null) None else Some(r)
@@ -259,14 +259,14 @@ abstract class SelectOne[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectOneBy[Param : Manifest, Result : Manifest] 
+abstract class SelectOneBy[Param : Manifest, Result : Manifest]
   extends Select
   with SQLFunction1[Param, Option[Result]] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
   def resultTypeClass = manifest[Result].runtimeClass
 
-  def apply(param : Param)(implicit s : Session) : Option[Result] = 
+  def apply(param : Param)(implicit s : Session) : Option[Result] =
     execute {
       val r = s.selectOne[Param,Result](fqi.id, param)
       if (r == null) None else Some(r)
@@ -299,14 +299,14 @@ abstract class SelectOneBy[Param : Manifest, Result : Manifest]
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String) 
+abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
   extends Select
   with SQLFunction0[Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[ResultValue].runtimeClass
 
-  def apply()(implicit s : Session) : Map[ResultKey, ResultValue] = 
+  def apply()(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[ResultKey,ResultValue](fqi.id, mapKey) }
 
 }
@@ -337,17 +337,17 @@ abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) 
+abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String)
   extends Select
   with SQLFunction1[Param, Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
   def resultTypeClass = manifest[ResultValue].runtimeClass
 
-  def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+  def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey) }
 
-} 
+}
 
 /** Query for a Map of objects with RowBounds.
   *
@@ -374,17 +374,17 @@ abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String) 
+abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
   extends Select
   with SQLFunction1[RowBounds, Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
   def resultTypeClass = manifest[ResultValue].runtimeClass
 
-  def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+  def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds) }
 
-} 
+}
 
 /** Query for a Map of objects with RowBounds and one input parameter.
   *
@@ -412,14 +412,14 @@ abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String) 
+abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String)
   extends Select
   with SQLFunction2[Param, RowBounds, Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
   def resultTypeClass = manifest[ResultValue].runtimeClass
 
-  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] = 
+  def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }
 
 }

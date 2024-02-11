@@ -45,8 +45,8 @@ trait Statement {
   var databaseId : String = null
 
   /** Scripting driver */
-  var languageDriver = org.mybatis.scala.config.DefaultScriptingDriver 
-  
+  var languageDriver = org.mybatis.scala.config.DefaultScriptingDriver
+
   /** Dynamic SQL definition, an xml node with root &lt;xsql&gt;
     * == Code sample ==
     * As simple as an static SQL:
