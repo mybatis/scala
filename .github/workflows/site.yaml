@@ -29,6 +29,6 @@ jobs:
         with:
           ssh-key: true
           branch: gh-pages
-          folder: target/staging
+          folder: target/scala.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
