@@ -17,6 +17,7 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -32,7 +33,7 @@
   <packaging>pom</packaging>
 
   <name>mybatis-scala-parent</name>
-  <url>http://www.mybatis.org/scala</url>
+  <url>http://www.mybatis.org/scala/</url>
 
   <inceptionYear>2011</inceptionYear>
 
@@ -45,7 +46,7 @@
     <connection>scm:git:ssh://git@github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
     <tag>HEAD</tag>
-    <url>http://github.com/mybatis/scala</url>
+    <url>http://github.com/mybatis/scala/</url>
   </scm>
   <issueManagement>
     <system>GitHub Issue Management</system>
@@ -73,6 +74,9 @@
 
     <!-- Reproducible Builds -->
     <project.build.outputTimestamp>1671291815</project.build.outputTimestamp>
+
+    <!-- Disable topSiteURL -->
+    <topSiteURL />
   </properties>
 
   <dependencyManagement>
