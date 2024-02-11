@@ -17,8 +17,8 @@ package org.mybatis.scala.config
 
 import javax.sql.DataSource
 
-/** 
-  * 
+/**
+  *
   */
 case class Environment(id : String, tf : TransactionFactory, ds : DataSource) {
 

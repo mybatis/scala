@@ -29,7 +29,7 @@ import java.sql.ResultSet
   */
 class OptionTypeHandler[T](delegate : TypeHandler[T]) extends TypeHandler[Option[T]] {
 
-  def setParameter(ps : PreparedStatement, i : Int, parameter : Option[T], jdbcType : JdbcTypeEnum) : Unit = 
+  def setParameter(ps : PreparedStatement, i : Int, parameter : Option[T], jdbcType : JdbcTypeEnum) : Unit =
     parameter match {
       case None => delegate.setParameter(ps, i, null.asInstanceOf[T], jdbcType)
       case Some(v) => delegate.setParameter(ps, i, v, jdbcType)
@@ -41,16 +41,16 @@ class OptionTypeHandler[T](delegate : TypeHandler[T]) extends TypeHandler[Option
   def getResult(rs : ResultSet, columnIndex : Int) : Option[T]  =
     Option{ delegate.getResult(rs, columnIndex) }
 
-  def getResult(cs : CallableStatement, columnIndex : Int) : Option[T] = 
+  def getResult(cs : CallableStatement, columnIndex : Int) : Option[T] =
     Option{ delegate.getResult(cs, columnIndex) }
 
 }
 
 /** Builtin Option TypeHandlers */
 object TypeHandlers {
-  
+
   import org.apache.ibatis.`type`._
-  
+
   class OptBooleanTypeHandler     extends OptionTypeHandler(new BooleanTypeHandler())
   class OptByteTypeHandler        extends OptionTypeHandler(new ByteTypeHandler())
   class OptShortTypeHandler       extends OptionTypeHandler(new ShortTypeHandler())

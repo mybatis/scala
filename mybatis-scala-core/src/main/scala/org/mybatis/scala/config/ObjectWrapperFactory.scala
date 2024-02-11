@@ -41,7 +41,7 @@ class ArrayBufferWrapper(buffer : scala.collection.mutable.ArrayBuffer[AnyRef]) 
 
 class HashSetWrapper(set : scala.collection.mutable.HashSet[AnyRef]) extends CollectionObjectWrapper {
   import scala.jdk.CollectionConverters._
-  def add(element : AnyRef) : Unit = set add element  
+  def add(element : AnyRef) : Unit = set add element
   def addAll[E](elements : java.util.List[E]) : Unit = set.addAll(elements.asInstanceOf[java.util.Collection[AnyRef]].asScala)
 }
 
@@ -54,7 +54,7 @@ class DefaultObjectWrapperFactory extends ObjectWrapperFactory {
   def getWrapperFor(metaObject : MetaObject, obj : AnyRef) : org.apache.ibatis.reflection.wrapper.ObjectWrapper = obj match {
     case o : scala.collection.mutable.ArrayBuffer[_] => new ArrayBufferWrapper(o.asInstanceOf[scala.collection.mutable.ArrayBuffer[AnyRef]])
     case o : scala.collection.mutable.HashSet[_] => new HashSetWrapper(o.asInstanceOf[scala.collection.mutable.HashSet[AnyRef]])
-    case _ => 
+    case _ =>
       throw new IllegalArgumentException("Type not supported: " + obj.getClass.getSimpleName)
   }
 }

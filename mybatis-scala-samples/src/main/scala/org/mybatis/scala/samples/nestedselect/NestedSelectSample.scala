@@ -50,14 +50,14 @@ object Persistence {
 
   // Query for a Group
   val selectGroup = new SelectOneBy[Int,Group] {
-    def xsql = 
+    def xsql =
       <xsql>
-      SELECT id_ as id, name_ as name 
-      FROM people_group 
+      SELECT id_ as id, name_ as name
+      FROM people_group
       WHERE id_ = #{{id}}
       </xsql>
   }
-  
+
   // Query for a list of contact info
   val selectContact = new SelectListBy[Int,ContactInfo] {
     resultMap = new ResultMap[ContactInfo] {
@@ -67,7 +67,7 @@ object Persistence {
     }
     def xsql = <xsql>SELECT * FROM contact_info WHERE owner_id_ = #{{id}}</xsql>
   }
-  
+
   // Query for a list of all persons
   val findAll = new SelectList[Person] {
 
@@ -80,7 +80,7 @@ object Persistence {
 
       association[Group] (property="group", column="group_id_", select=selectGroup)
 
-      collection[ContactInfo] (property="contact", column="id_", select=selectContact)  
+      collection[ContactInfo] (property="contact", column="id_", select=selectContact)
 
     }
 
@@ -103,7 +103,7 @@ object Persistence {
 
   // Build the session manager
   lazy val context = config.createPersistenceContext
-  
+
 }
 
 // Application code ============================================================
@@ -116,14 +116,14 @@ object NestedSelectSample {
 
       DBSchema.create
       DBSampleData.populate
-      
+
       for (p <- Persistence.findAll()) {
         println("\nPerson(%d): %s %s (%s)".format(p.id, p.firstName, p.lastName, p.group.name))
         for (contact <- p.contact) {
           println("  Address: %s, Phone: %s".format(contact.address, contact.phone))
         }
       }
-      
+
     }
   }
 

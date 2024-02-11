@@ -249,7 +249,7 @@ object Configuration {
     }
 
     // Pre ====================================================================
-    
+
     def properties(props: (String, String)*) =
       set(0, pre) { _.getVariables.asScala ++= Map(props: _*) }
 
@@ -282,39 +282,39 @@ object Configuration {
     def lazyLoadingSupport(enabled: Boolean) =
       set(10, pre) { _.setLazyLoadingEnabled(enabled) }
 
-    def aggressiveLazyLoading(enabled: Boolean) = 
+    def aggressiveLazyLoading(enabled: Boolean) =
       set(11, pre) { _.setAggressiveLazyLoading(enabled) }
-    
-    def multipleResultSetsSupport(enabled: Boolean) = 
+
+    def multipleResultSetsSupport(enabled: Boolean) =
       set(12, pre) { _.setMultipleResultSetsEnabled(enabled) }
-    
-    def useColumnLabel(enabled: Boolean) = 
+
+    def useColumnLabel(enabled: Boolean) =
       set(13, pre) { _.setUseColumnLabel(enabled) }
-    
-    def useGeneratedKeys(enabled: Boolean) = 
+
+    def useGeneratedKeys(enabled: Boolean) =
       set(14, pre) { _.setUseGeneratedKeys(enabled) }
-    
-    def defaultExecutorType(executorType: ExecutorType) = 
+
+    def defaultExecutorType(executorType: ExecutorType) =
       set(15, pre) { _.setDefaultExecutorType(executorType.unwrap) }
-    
-    def defaultStatementTimeout(timeout: Int) = 
+
+    def defaultStatementTimeout(timeout: Int) =
       set(16, pre) { _.setDefaultStatementTimeout(timeout) }
-    
-    def mapUnderscoreToCamelCase(enabled: Boolean) = 
+
+    def mapUnderscoreToCamelCase(enabled: Boolean) =
       set(17, pre) { _.setMapUnderscoreToCamelCase(enabled) }
-    
-    def safeRowBoundsSupport(enabled: Boolean) = 
+
+    def safeRowBoundsSupport(enabled: Boolean) =
       set(18, pre) { _.setSafeRowBoundsEnabled(enabled) }
-    
-    def localCacheScope(localCacheScope: LocalCacheScope) = 
+
+    def localCacheScope(localCacheScope: LocalCacheScope) =
       set(19, pre) { _.setLocalCacheScope(localCacheScope.unwrap) }
-    
-    def jdbcTypeForNull(jdbcType: JdbcType) = 
+
+    def jdbcTypeForNull(jdbcType: JdbcType) =
       set(20, pre) { _.setJdbcTypeForNull(jdbcType.unwrap) }
-    
-    def lazyLoadTriggerMethods(names: Set[String]) = 
+
+    def lazyLoadTriggerMethods(names: Set[String]) =
       set(21, pre) { _.setLazyLoadTriggerMethods(names.asJava) }
-    
+
     def environment(id: String, transactionFactory: TransactionFactory, dataSource: javax.sql.DataSource) =
       set(24, pre) { _.setEnvironment(new Environment(id, transactionFactory, dataSource)) }
 
@@ -324,10 +324,10 @@ object Configuration {
     def typeHandler(jdbcType: JdbcType, handler: (T[_], TypeHandler[_])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, jdbcType.unwrap, handler._2) }
 
-    def typeHandler(handler: (T[_], TypeHandler[_])) = 
+    def typeHandler(handler: (T[_], TypeHandler[_])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, handler._2) }
-    
-    def typeHandler(handler: TypeHandler[_]) = 
+
+    def typeHandler(handler: TypeHandler[_]) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler) }
 
     // Pos ===========================================================
@@ -335,15 +335,15 @@ object Configuration {
     def namespace(name: String)(f: (ConfigurationSpace => Unit)) =
       set(0, pos) { c => f(new ConfigurationSpace(c.configuration, name)) }
 
-    def statements(s: Statement*) = 
+    def statements(s: Statement*) =
       set(1, pos) { _ ++= s }
-    
-    def mappers(mappers: { def bind: Seq[Statement] }*) = 
+
+    def mappers(mappers: { def bind: Seq[Statement] }*) =
       set(1, pos) { c => mappers.foreach(c ++= _) }
-    
-    def cacheRef(that: ConfigurationSpace) = 
+
+    def cacheRef(that: ConfigurationSpace) =
       set(2, pos) { _.cacheRef(that) }
-    
+
     def cache(
       impl: T[_ <: Cache] = DefaultCache,
       eviction: T[_ <: Cache] = Eviction.LRU,
@@ -351,11 +351,11 @@ object Configuration {
       size: Int = -1,
       readWrite: Boolean = true,
       blocking : Boolean = false,
-      props: Properties = null) = 
+      props: Properties = null) =
         set(2, pos) { _.cache(impl, eviction, flushInterval, size, readWrite, blocking, props) }
 
     // PENDING FOR mybatis 3.1.1+ ==================================================
-    
+
     // TODO (3.1.1) def proxyFactory(factory: ProxyFactory) = set( 7, pre) { _.setProxyFactory(factory) }
     // TODO (3.1.1) def safeResultHandlerSupport(enabled : Boolean) = set(22, pre) { _.setSafeResultHandlerEnabled(enabled) }
     // TODO (3.1.1) def defaultScriptingLanguage(driver : T[_]) = set(23, pre) { _.setDefaultScriptingLanguage(driver) }

@@ -318,22 +318,22 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     val resultTypeClass = generator.resultTypeClass
 
     builderAssistant.addMappedStatement(
-      id, 
-      sqlSource, 
-      statementType, 
+      id,
+      sqlSource,
+      statementType,
       sqlCommandType,
-      fetchSize, 
-      timeout, 
-      parameterMap, 
-      parameterTypeClass, 
-      resultMap, 
+      fetchSize,
+      timeout,
+      parameterMap,
+      parameterTypeClass,
+      resultMap,
       resultTypeClass,
-      resultSetTypeEnum, 
-      flushCache, 
+      resultSetTypeEnum,
+      flushCache,
       useCache,
-      false, // TODO Issue #577 
-      keyGenerator, 
-      keyProperty, 
+      false, // TODO Issue #577
+      keyGenerator,
+      keyProperty,
       keyColumn,
       databaseId,
       DefaultScriptingDriver)

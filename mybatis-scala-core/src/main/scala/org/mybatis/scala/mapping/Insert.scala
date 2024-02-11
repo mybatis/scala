@@ -22,7 +22,7 @@ import org.mybatis.scala.session.Session
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
-abstract class Insert[Param : Manifest] 
+abstract class Insert[Param : Manifest]
   extends Statement
      with SQLFunction1[Param,Int] {
 

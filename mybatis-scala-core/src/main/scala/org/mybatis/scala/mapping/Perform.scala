@@ -20,17 +20,17 @@ import org.mybatis.scala.session.Session
 /** A mapped SQL UPDATE statement.
   * Basically this defines a function: (=> Int)
   */
-abstract class Perform 
+abstract class Perform
   extends Statement
   with SQLFunction0[Int] {
 
   def parameterTypeClass = classOf[Nothing]
-  
+
   /** Exceutes the SQL Statement
     * @param s Implicit Session
     * @return number of affected rows
     */
   def apply()(implicit s : Session) : Int =
     execute { s.update(fqi.id) }
-  
+
 }

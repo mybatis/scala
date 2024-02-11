@@ -62,7 +62,7 @@ case object ModeINOUT extends ParamModeEnum("INOUT")
   * }}}
   *
   */
-object Binding {  
+object Binding {
 
   /** Custom Aliased Types */
   private val valueTypes = Set("byte", "long", "short", "int", "double", "float", "boolean",
@@ -83,7 +83,7 @@ object Binding {
     mode : ParamModeEnum = ModeIN,
     typeHandler : T[_ <: TypeHandler[_]] = null,
     resultMap : ResultMap[_] = null
-  ) : String = {  
+  ) : String = {
     Seq[Option[String]](
       Some(property)
       ,if (jdbcType != null) Some("jdbcType=" + jdbcType.toString) else None

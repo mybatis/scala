@@ -230,7 +230,7 @@ object BlogRepository {
     keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql = <xsql>INSERT INTO blog(title) VALUES({"title" ?})</xsql>
   }
-  
+
   val insertEntry = new Insert[Entry] {
     keyGenerator = JdbcGeneratedKey(null, "id")
     def xsql = <xsql>INSERT INTO entry(body) VALUES({"body" ?})</xsql>

@@ -30,7 +30,7 @@ object CDB {
 
   // Simple select function
   val findAll = new SelectListBy[String,CPerson] {
-    
+
     // CPerson Constructor Mapping
     resultMap = new ResultMap[CPerson] {
       // Warning: Order is important (constructor arguments in order)
@@ -38,7 +38,7 @@ object CDB {
       arg   ("first_name_", javaType=T[String])
       arg   ("last_name_",  javaType=T[String])
     }
-    
+
     def xsql =
       """
         SELECT
@@ -51,21 +51,21 @@ object CDB {
   }
 
   // Main configuration
-  object ConfigurationSpec extends Configuration.Builder {    
+  object ConfigurationSpec extends Configuration.Builder {
     // Connection settings
     environment(
-      id = "default", 
-      transactionFactory = new JdbcTransactionFactory(), 
+      id = "default",
+      transactionFactory = new JdbcTransactionFactory(),
       dataSource = new PooledDataSource("org.hsqldb.jdbcDriver", "jdbc:hsqldb:mem:scala", "sa", "")
     )
     // Add the data access methods to default namespace
     statements(findAll)
-    mappers(DBSchema, DBSampleData)    
+    mappers(DBSchema, DBSampleData)
   }
-  
+
   // Build the session manager
   lazy val context = Configuration(ConfigurationSpec).createPersistenceContext
-  
+
 }
 
 // Application code ============================================================
@@ -76,17 +76,17 @@ object SelectImmutableSample {
 
   // Do the Magic ...
   def main(args: Array[String]): Unit = context.transaction { implicit s =>
-    
+
     // Create database and populate it with sample data
     DBSchema.create
     DBSampleData.populate
-    
+
     // Query
     findAll("%a%").foreach {
       case CPerson(id, firstName, lastName) =>
         println("Person(%d): %s %s" format (id, firstName, lastName))
     }
-    
+
   }
 
 }

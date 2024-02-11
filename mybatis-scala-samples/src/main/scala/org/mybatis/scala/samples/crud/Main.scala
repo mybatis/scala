@@ -45,7 +45,7 @@ object Main extends App {
       item.info = Some("-MEXICO-")
       ItemDAO update item
     }
-    
+
     // Show again ...
     println("== With some changes =================")
     ItemDAO.findAll() foreach (printItem _)
@@ -54,7 +54,7 @@ object Main extends App {
     for (item <- ItemDAO findById(3)) {
       ItemDAO delete item
     }
-    
+
     // Show again ...
     println("== With some items removed ===========")
     ItemDAO.findAll() foreach (printItem _)
@@ -65,7 +65,7 @@ object Main extends App {
 
   }
 
-  def printItem(i : Item) = 
+  def printItem(i : Item) =
     println("%d: %10s\t %10s\t %5s" format (i.id, i.description, i.info.getOrElse("-"), i.year.getOrElse("-")))
 
 }

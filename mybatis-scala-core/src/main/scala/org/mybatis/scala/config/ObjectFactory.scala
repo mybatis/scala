@@ -27,30 +27,30 @@ class DefaultObjectFactory extends ObjectFactory {
   override def setProperties(properties : java.util.Properties) : Unit = {}
 
   private def instantiateClass[T](t : Class[_], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
-    
+
     val argTypes = {
-      if (constructorArgTypes != null) 
+      if (constructorArgTypes != null)
         constructorArgTypes.toArray[Class[_]](new Array[Class[_]](constructorArgTypes.size))
       else
         null
     }
-    
+
     val constructor = getConstructor(t, argTypes)
 
     val argValues = {
-      if (constructorArgs != null) 
+      if (constructorArgs != null)
         constructorArgs.toArray[AnyRef](new Array[AnyRef](constructorArgs.size))
-      else 
+      else
         null
     }
-    
+
     try {
       if (argTypes == null || argValues == null) {
         constructor.newInstance().asInstanceOf[T]
       }
       else {
         constructor.newInstance(argValues : _*).asInstanceOf[T]
-      }      
+      }
     }
     catch {
       case e : Exception =>
@@ -90,8 +90,8 @@ class DefaultObjectFactory extends ObjectFactory {
       t
     }
   }
-    
-  def isCollection[T](t : Class[T]) : Boolean = 
+
+  def isCollection[T](t : Class[T]) : Boolean =
     classOf[scala.collection.Seq[_]].isAssignableFrom(t) ||
     classOf[scala.collection.Set[_]].isAssignableFrom(t)
 
@@ -112,9 +112,9 @@ class DefaultObjectFactory extends ObjectFactory {
 
     override def hashCode = _hc
 
-    override def equals(that : Any) = 
-      that != null && 
-        that.getClass == classOf[CacheKey] && 
+    override def equals(that : Any) =
+      that != null &&
+        that.getClass == classOf[CacheKey] &&
           that.asInstanceOf[CacheKey]._hc == this._hc
 
   }
@@ -134,7 +134,7 @@ class DefaultObjectFactory extends ObjectFactory {
             constructor.setAccessible(true)
           }
           constructor
-        }      
+        }
       }
       catch {
         case e : Exception =>
@@ -144,7 +144,7 @@ class DefaultObjectFactory extends ObjectFactory {
           }
           throw new org.apache.ibatis.reflection.ReflectionException(
             "Error instantiating %s with invalid types (%s). Cause: %s".format(t.getSimpleName, args, e.getMessage), e);
-      }      
-  } 
+      }
+  }
 
 }

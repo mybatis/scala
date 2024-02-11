@@ -83,7 +83,7 @@ object DeleteSample {
 
       DBSchema.create
       DBSampleData.populate
-      
+
       println("Before =>")
       for (p <- findAll())
         println( "\tPerson(%d): %s %s".format(p.id, p.firstName, p.lastName) )

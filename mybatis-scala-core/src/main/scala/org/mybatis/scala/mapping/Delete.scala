@@ -22,8 +22,8 @@ import org.mybatis.scala.session.Session
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
-abstract class Delete [Param : Manifest] 
-  extends Statement 
+abstract class Delete [Param : Manifest]
+  extends Statement
      with SQLFunction1[Param,Int] {
 
   def parameterTypeClass = manifest[Param].runtimeClass
