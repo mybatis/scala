@@ -34,4 +34,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@9d877eea73427180ae43cf98e8914934fe157a1a # v4
         with:
           branch: gh-pages
-          folder: target/staging
+          folder: target/scala.git
