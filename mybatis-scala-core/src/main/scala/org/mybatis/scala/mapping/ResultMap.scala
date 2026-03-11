@@ -16,6 +16,7 @@
 package org.mybatis.scala.mapping
 
 import scala.collection.mutable.ListBuffer
+import scala.reflect.ClassTag
 
 sealed trait AutoMappingBehaviour {
   val value : java.lang.Boolean
@@ -29,7 +30,7 @@ object AutoMappingInherited extends AutoMappingBehaviour { val value = null }
   * @tparam ResultType type of the resulting object
   * @param parent if defined, this resultmap will inherit mappings from parent.
   */
-class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
+class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
 
   private[scala] val mappings = new ListBuffer[ResultMapping]
   private[scala] val constructor = new ListBuffer[ResultMapping]
@@ -38,7 +39,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
   var fqi : FQI = null
   var autoMapping : AutoMappingBehaviour = AutoMappingInherited
 
-  def resultTypeClass = manifest[ResultType].runtimeClass
+  def resultTypeClass = summon[ClassTag[ResultType]].runtimeClass
 
   /** A single result mapping between a column and a property or field.
     * This property will be used for comparisons.
@@ -169,7 +170,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
     * @tparam Type type of the associated object
     */
-  def association[Type : Manifest](
+  def association[Type : ClassTag](
     property : String = null,
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
@@ -207,7 +208,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
     * @tparam Type type of the associated object
     */
-  def associationArg[Type : Manifest](
+  def associationArg[Type : ClassTag](
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
     select : Select = null,
@@ -245,7 +246,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
     * @tparam Type type of the associated objects
     */
-  def collection[Type : Manifest](
+  def collection[Type](
     property : String = null,
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
@@ -284,7 +285,7 @@ class ResultMap[ResultType : Manifest](val parent : ResultMap[_] = null) {
     * @param notNullColumn Name of the column to be checked to avoid loading of empty objects.
     * @tparam Type type of the associated objects
     */
-  def collectionArg[Type : Manifest](
+  def collectionArg[Type](
      column : String = null,
      jdbcType : JdbcType = JdbcType.UNDEFINED,
      select : Select = null,

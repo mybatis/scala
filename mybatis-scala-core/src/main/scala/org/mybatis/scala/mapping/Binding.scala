@@ -74,15 +74,19 @@ object Binding {
     else cls.getName
   }
 
-  /** Generates an inline parameter binding */
-  def ?[JavaType : Manifest] (
+  /** Generates an inline parameter binding.
+    * When javaType is provided, it is included in the binding expression.
+    * Use classOf[T] or T[MyType].unwrap to supply the javaType.
+    */
+  def ? (
     property : String,
     jdbcType : JdbcType = null,
     jdbcTypeName : String = null,
     numericScale : Int = 0,
     mode : ParamModeEnum = ModeIN,
     typeHandler : T[_ <: TypeHandler[_]] = null,
-    resultMap : ResultMap[_] = null
+    resultMap : ResultMap[_] = null,
+    javaType : Class[_] = null
   ) : String = {
     Seq[Option[String]](
       Some(property)
@@ -92,16 +96,13 @@ object Binding {
       ,if (mode != ModeIN) Some("mode=" + mode.toString) else None
       ,if (typeHandler != null) Some("typeHandler=" + typeHandler.unwrap.getName) else None
       ,if (resultMap != null) Some("resultMap=" + resultMap.fqi.id) else None
-      ,{
-        val t = manifest[JavaType].runtimeClass
-        if (t != classOf[Nothing]) Some("javaType=" + translate(t)) else None
-      }
-      ) filter {_ match {case Some(x) => true; case None => false }} map {_.get} mkString("#{", ",", "}")
+      ,if (javaType != null) Some("javaType=" + translate(javaType)) else None
+      ).flatten.mkString("#{", ",", "}")
   }
 
   /** Utility class for simplified syntax support */
   implicit class Param(property : String) {
-    def ? = Binding ? (property)
+    def ? : String = "#{" + property + "}"
   }
 
   /** Implicit conversion for simplified syntax support */
