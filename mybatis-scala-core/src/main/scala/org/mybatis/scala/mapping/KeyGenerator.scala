@@ -15,6 +15,8 @@
  */
 package org.mybatis.scala.mapping
 
+import scala.reflect.ClassTag
+
 /** Abstract KeyGenerator
   * This trait must be implemented by any KeyGenerator.
   */
@@ -54,7 +56,7 @@ object JdbcGeneratedKey {
   *   }
   * }}}
   */
-abstract class SqlGeneratedKey[Type : Manifest] extends KeyGenerator {
+abstract class SqlGeneratedKey[Type : ClassTag] extends KeyGenerator {
 
   /** Any one of STATEMENT, PREPARED or CALLABLE.
     * This causes MyBatis to use Statement, PreparedStatement or CallableStatement respectively.
@@ -72,7 +74,7 @@ abstract class SqlGeneratedKey[Type : Manifest] extends KeyGenerator {
   var executeBefore   : Boolean = false
 
   /** Returns the Class of the generated key. */
-  val resultTypeClass = manifest[Type].runtimeClass
+  val resultTypeClass = summon[ClassTag[Type]].runtimeClass
 
   /** Dynamic SQL CODE to be executed in order to obtain/generate the key
     * == Code sample ==

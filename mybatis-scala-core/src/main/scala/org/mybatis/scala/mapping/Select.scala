@@ -16,9 +16,10 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.{Session, RowBounds, ResultHandlerDelegator, ResultContext}
-import scala.collection.mutable._;
+import scala.collection.mutable._
 import java.util.{Map => JavaMap}
 import scala.jdk.CollectionConverters._
+import scala.reflect.ClassTag
 
 /** Base class for all Select statements.
   */
@@ -71,12 +72,12 @@ sealed trait Select extends Statement {
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectList[Result : Manifest]
+abstract class SelectList[Result : ClassTag]
   extends Select
   with SQLFunction0[Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply()(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Result](fqi.id) }
@@ -109,12 +110,12 @@ abstract class SelectList[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectListBy[Param : Manifest, Result : Manifest]
+abstract class SelectListBy[Param : ClassTag, Result : ClassTag]
   extends Select
   with SQLFunction1[Param, Seq[Result]] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
-  def resultTypeClass = manifest[Result].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param) }
@@ -146,12 +147,12 @@ abstract class SelectListBy[Param : Manifest, Result : Manifest]
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectListPage[Result : Manifest]
+abstract class SelectListPage[Result : ClassTag]
   extends Select
   with SQLFunction1[RowBounds,Seq[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
@@ -184,12 +185,12 @@ abstract class SelectListPage[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
+abstract class SelectListPageBy[Param : ClassTag, Result : ClassTag]
   extends Select
   with SQLFunction2[Param, RowBounds, Seq[Result]] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
-  def resultTypeClass = manifest[Result].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
@@ -221,12 +222,12 @@ abstract class SelectListPageBy[Param : Manifest, Result : Manifest]
   * }}}
   * @tparam Result retult type
   */
-abstract class SelectOne[Result : Manifest]
+abstract class SelectOne[Result : ClassTag]
   extends Select
   with SQLFunction0[Option[Result]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[Result].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply()(implicit s : Session) : Option[Result] =
     execute {
@@ -259,12 +260,12 @@ abstract class SelectOne[Result : Manifest]
   * @tparam Param input parameter type
   * @tparam Result retult type
   */
-abstract class SelectOneBy[Param : Manifest, Result : Manifest]
+abstract class SelectOneBy[Param : ClassTag, Result : ClassTag]
   extends Select
   with SQLFunction1[Param, Option[Result]] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
-  def resultTypeClass = manifest[Result].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Option[Result] =
     execute {
@@ -299,12 +300,12 @@ abstract class SelectOneBy[Param : Manifest, Result : Manifest]
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
+abstract class SelectMap[ResultKey, ResultValue : ClassTag](mapKey : String)
   extends Select
   with SQLFunction0[Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[ResultValue].runtimeClass
+  def resultTypeClass = summon[ClassTag[ResultValue]].runtimeClass
 
   def apply()(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[ResultKey,ResultValue](fqi.id, mapKey) }
@@ -337,12 +338,12 @@ abstract class SelectMap[ResultKey, ResultValue : Manifest](mapKey : String)
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String)
+abstract class SelectMapBy[Param : ClassTag, ResultKey, ResultValue : ClassTag](mapKey : String)
   extends Select
   with SQLFunction1[Param, Map[ResultKey, ResultValue]] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
-  def resultTypeClass = manifest[ResultValue].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
+  def resultTypeClass = summon[ClassTag[ResultValue]].runtimeClass
 
   def apply(param : Param)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey) }
@@ -374,12 +375,12 @@ abstract class SelectMapBy[Param : Manifest, ResultKey, ResultValue : Manifest](
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
+abstract class SelectMapPage[ResultKey, ResultValue : ClassTag](mapKey : String)
   extends Select
   with SQLFunction1[RowBounds, Map[ResultKey, ResultValue]] {
 
   def parameterTypeClass = classOf[Nothing]
-  def resultTypeClass = manifest[ResultValue].runtimeClass
+  def resultTypeClass = summon[ClassTag[ResultValue]].runtimeClass
 
   def apply(rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Null,ResultKey,ResultValue](fqi.id, null, mapKey, rowBounds) }
@@ -412,12 +413,12 @@ abstract class SelectMapPage[ResultKey, ResultValue : Manifest](mapKey : String)
   * @tparam ResultValue map Value type
   * @param mapKey Property to be used as map key
   */
-abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manifest](mapKey : String)
+abstract class SelectMapPageBy[Param : ClassTag, ResultKey, ResultValue : ClassTag](mapKey : String)
   extends Select
   with SQLFunction2[Param, RowBounds, Map[ResultKey, ResultValue]] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
-  def resultTypeClass = manifest[ResultValue].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
+  def resultTypeClass = summon[ClassTag[ResultValue]].runtimeClass
 
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Map[ResultKey, ResultValue] =
     execute { s.selectMap[Param,ResultKey,ResultValue](fqi.id, param, mapKey, rowBounds) }
@@ -446,12 +447,12 @@ abstract class SelectMapPageBy[Param : Manifest, ResultKey, ResultValue : Manife
   * }}}
   * @tparam Result result type
   */
-abstract class SelectOneByMap[Result : Manifest]
+abstract class SelectOneByMap[Result : ClassTag]
   extends Select
   with SQLFunction1[collection.Map[String, Any], Option[Result]] {
 
-  def parameterTypeClass = manifest[JavaMap[String, Any]].runtimeClass
-  def resultTypeClass = manifest[Result].runtimeClass
+  def parameterTypeClass = classOf[java.util.Map[String, Any]]
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(param : collection.Map[String, Any])(implicit s : Session) : Option[Result] =
     execute {
@@ -481,12 +482,12 @@ abstract class SelectOneByMap[Result : Manifest]
   * }}}
   * @tparam Result result type
   */
-abstract class SelectListByMap[Result : Manifest]
+abstract class SelectListByMap[Result : ClassTag]
   extends Select
   with SQLFunction1[collection.Map[String, Any], Seq[Result]] {
 
-  def parameterTypeClass = manifest[JavaMap[String, Any]].runtimeClass
-  def resultTypeClass = manifest[Result].runtimeClass
+  def parameterTypeClass = classOf[java.util.Map[String, Any]]
+  def resultTypeClass = summon[ClassTag[Result]].runtimeClass
 
   def apply(param : collection.Map[String, Any])(implicit s : Session) : Seq[Result] =
     execute { s.selectList[JavaMap[String, Any],Result](fqi.id, param.asJava) }
