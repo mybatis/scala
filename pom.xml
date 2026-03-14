@@ -141,7 +141,7 @@
       </plugin>
     </plugins>
     <sourceDirectory>${project.basedir}/src/main/scala</sourceDirectory>
-    <testSourceDirectory>${project.basedir}src/test/scala</testSourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/scala</testSourceDirectory>
   </build>
 
   <profiles>

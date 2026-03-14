@@ -28,6 +28,9 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
   def build : SqlSource =
     new DynamicSqlSource(configuration, parse(node))
 
+  private def isXmlWhitespace(text : String) : Boolean =
+    text.forall(c => c == ' ' || c == '\t' || c == '\r' || c == '\n')
+
   private def parse(n : Node) : SqlNode = {
     n match {
       case Text(text) =>
@@ -81,7 +84,10 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
               else
                 throw new ConfigurationException("Too many default (otherwise) elements in choose statement.")
                 //error("Too many default (otherwise) elements in choose statement.")
-            case _ =>
+            case Text(text) if isXmlWhitespace(text) =>
+            case PCData(text) if isXmlWhitespace(text) =>
+            case other =>
+              throw new ConfigurationException("Invalid content in choose statement: " + other.getClass.getName + ".")
           }
         }
         new ChooseSqlNode(ifNodes, defaultNode)
