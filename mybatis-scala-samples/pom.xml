@@ -36,6 +36,11 @@
     <url>http://github.com/mybatis/scala</url>
   </scm>
 
+  <properties>
+    <!-- Suppress Scala 2 -doc-title option that breaks Scala 3 scaladoc -->
+    <doctitle />
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.mybatis.scala</groupId>
