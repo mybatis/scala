@@ -21,11 +21,11 @@
 
   <parent>
     <groupId>org.mybatis.scala</groupId>
-    <artifactId>mybatis-scala-parent_2.13</artifactId>
+    <artifactId>mybatis-scala-parent_3</artifactId>
     <version>1.3.3-SNAPSHOT</version>
   </parent>
 
-  <artifactId>mybatis-scala-core_2.13</artifactId>
+  <artifactId>mybatis-scala-core_3</artifactId>
   <version>1.3.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>mybatis-scala-core</name>
@@ -33,9 +33,14 @@
   <scm>
     <connection>scm:git:ssh://github.com/mybatis/scala.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mybatis/scala.git</developerConnection>
-    <tag>mybatis-scala-parent_2.13-1.3.2</tag>
+    <tag>mybatis-scala-parent_3-1.3.2</tag>
     <url>http://github.com/mybatis/scala</url>
   </scm>
+
+  <properties>
+    <!-- Suppress Scala 2 -doc-title option that breaks Scala 3 scaladoc -->
+    <doctitle />
+  </properties>
 
   <dependencies>
     <dependency>
@@ -45,7 +50,7 @@
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
+      <artifactId>scala3-library_3</artifactId>
     </dependency>
     <dependency>
       <groupId>org.scala-lang.modules</groupId>

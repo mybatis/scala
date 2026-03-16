@@ -50,5 +50,13 @@ object UserRepository {
     def xsql = <xsql>CALL IDENTITY()</xsql>
   }
 
-  def bind = Seq(create, createFromTuple2, findById, findAll, lastInsertId)
+  val deleteById = new Delete[Int] {
+    def xsql = <xsql>DELETE FROM user WHERE id = {"id" ?}</xsql>
+  }
+
+  val updateUser = new Update[User] {
+    def xsql = <xsql>UPDATE user SET name = {"name" ?}, email = {"email" ?} WHERE id = {"id" ?}</xsql>
+  }
+
+  def bind = Seq(create, createFromTuple2, findById, findAll, lastInsertId, deleteById, updateUser)
 }

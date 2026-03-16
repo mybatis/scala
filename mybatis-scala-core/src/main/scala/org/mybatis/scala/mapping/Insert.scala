@@ -16,13 +16,14 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
+import scala.reflect.ClassTag
 
 /** A mapped SQL INSERT statement.
   * Basically this defines a function: (Param => Int)
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
-abstract class Insert[Param : Manifest]
+abstract class Insert[Param : ClassTag]
   extends Statement
      with SQLFunction1[Param,Int] {
 
@@ -31,7 +32,7 @@ abstract class Insert[Param : Manifest]
     */
   var keyGenerator : KeyGenerator = null //JdbcGeneratedKey(null, "id")
 
-  def parameterTypeClass = manifest[Param].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
 
   /** Exceutes the SQL INSERT Statement
     * @param param Input paramenter of the statement

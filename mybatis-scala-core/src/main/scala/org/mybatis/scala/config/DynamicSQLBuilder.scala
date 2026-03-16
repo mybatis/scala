@@ -1,5 +1,5 @@
 /*
- *    Copyright 2011-2015 the original author or authors.
+ *    Copyright 2011-2026 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -37,72 +37,69 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
         new TextSqlNode(text)
       case PCData(text) =>
         new TextSqlNode(text)
-      case <xsql>{children @ _*}</xsql> =>
-        parseChildren(children)
-      case trim @ <trim>{children @ _*}</trim> =>
-        val content = parseChildren(children)
-        new TrimSqlNode(
-          configuration,
-          content,
-          attr(trim, "@prefix"),
-          attr(trim, "@prefixOverrides"),
-          attr(trim, "@suffix"),
-          attr(trim, "@suffixOverrides")
-        )
-      case <where>{children @ _*}</where> =>
-        val content = parseChildren(children)
-        new WhereSqlNode(configuration, content)
-      case <set>{children @ _*}</set> =>
-        val content = parseChildren(children)
-        new SetSqlNode(configuration, content)
-      case foreach @ <foreach>{children @ _*}</foreach> =>
-        val content = parseChildren(children)
-        new ForEachSqlNode(
-          configuration,
-          content,
-          attr(foreach, "@collection"),
-          attr(foreach, "@index"),
-          attr(foreach, "@item"),
-          attr(foreach, "@open"),
-          attr(foreach, "@close"),
-          attr(foreach, "@separator"))
-      case ifNode @ <if>{children @ _*}</if> =>
-        val content = parseChildren(children)
-        new IfSqlNode(content, attr(ifNode, "@test"))
-      case <choose>{children @ _*}</choose> =>
-        val ifNodes = new ArrayList[SqlNode]
-        var defaultNode : MixedSqlNode = null
-        for (child <- children) {
-          child match {
-            case when @ <when>{ch @ _*}</when> => {
-              val content = parseChildren(ch)
-              ifNodes add new IfSqlNode(content, attr(when, "@test"))
+      case elem : Elem =>
+        elem.label match {
+          case "xsql" =>
+            parseChildren(elem.child)
+          case "trim" =>
+            val content = parseChildren(elem.child)
+            new TrimSqlNode(
+              configuration,
+              content,
+              attr(elem, "@prefix"),
+              attr(elem, "@prefixOverrides"),
+              attr(elem, "@suffix"),
+              attr(elem, "@suffixOverrides")
+            )
+          case "where" =>
+            new WhereSqlNode(configuration, parseChildren(elem.child))
+          case "set" =>
+            new SetSqlNode(configuration, parseChildren(elem.child))
+          case "foreach" =>
+            val content = parseChildren(elem.child)
+            new ForEachSqlNode(
+              configuration,
+              content,
+              attr(elem, "@collection"),
+              attr(elem, "@index"),
+              attr(elem, "@item"),
+              attr(elem, "@open"),
+              attr(elem, "@close"),
+              attr(elem, "@separator"))
+          case "if" =>
+            new IfSqlNode(parseChildren(elem.child), attr(elem, "@test"))
+          case "choose" =>
+            val ifNodes = new ArrayList[SqlNode]
+            var defaultNode : MixedSqlNode = null
+            for (child <- elem.child) {
+              child match {
+                case when : Elem if when.label == "when" =>
+                  ifNodes add new IfSqlNode(parseChildren(when.child), attr(when, "@test"))
+                case otherwise : Elem if otherwise.label == "otherwise" =>
+                  if (defaultNode == null)
+                    defaultNode = parseChildren(otherwise.child)
+                  else
+                    throw new ConfigurationException("Too many default (otherwise) elements in choose statement.")
+                case Text(text) if isXmlWhitespace(text) =>
+                case PCData(text) if isXmlWhitespace(text) =>
+                case other =>
+                  throw new ConfigurationException("Invalid content in choose statement: " + other.getClass.getName + ".")
+              }
             }
-            case other @ <otherwise>{ch @ _*}</otherwise> =>
-              if (defaultNode == null)
-                defaultNode = parseChildren(ch)
-              else
-                throw new ConfigurationException("Too many default (otherwise) elements in choose statement.")
-                //error("Too many default (otherwise) elements in choose statement.")
-            case Text(text) if isXmlWhitespace(text) =>
-            case PCData(text) if isXmlWhitespace(text) =>
-            case other =>
-              throw new ConfigurationException("Invalid content in choose statement: " + other.getClass.getName + ".")
-          }
+            new ChooseSqlNode(ifNodes, defaultNode)
+          case "when" =>
+            new IfSqlNode(parseChildren(elem.child), attr(elem, "@test"))
+          case "otherwise" =>
+            parseChildren(elem.child)
+          case "bind" =>
+            new VarDeclSqlNode(attr(elem, "@name"), attr(elem, "@value"))
+          case _ =>
+            throw new ConfigurationException("Unknown element " + elem.label + " in SQL statement.")
         }
-        new ChooseSqlNode(ifNodes, defaultNode)
-      case ifNode @ <when>{children @ _*}</when> =>
-        val content = parseChildren(children)
-        new IfSqlNode(content, attr(ifNode, "@test"))
-      case other @ <otherwise>{children @ _*}</otherwise> =>
-        parseChildren(other)
       case a : Atom[_] =>
         new TextSqlNode(a.data.asInstanceOf[String])
-      case bind @ <bind /> =>
-        new VarDeclSqlNode(attr(bind, "@name"), attr(bind, "@value"))
       case unsupported =>
         throw new ConfigurationException("Unknown element " + unsupported.getClass.getName + " in SQL statement.")
-        //error("Unknown element " + unsupported.toString + " in SQL statement.")
     }
   }
 

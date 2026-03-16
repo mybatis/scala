@@ -16,17 +16,18 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.Session
+import scala.reflect.ClassTag
 
 /** A mapped SQL DELETE statement.
   * Basically this defines a function: (Param => Int)
   * @tparam Param Input parameter type of the apply method.
   * @version \$Revision$
   */
-abstract class Delete [Param : Manifest]
+abstract class Delete [Param : ClassTag]
   extends Statement
      with SQLFunction1[Param,Int] {
 
-  def parameterTypeClass = manifest[Param].runtimeClass
+  def parameterTypeClass = summon[ClassTag[Param]].runtimeClass
 
   /** Exceutes the SQL DELETE Statement
     * @param param Input paramenter of the statement
