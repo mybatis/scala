@@ -1,5 +1,5 @@
 /*
- *    Copyright 2011-2015 the original author or authors.
+ *    Copyright 2011-2026 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ class DynamicSQLBuilderSpec extends AnyFunSpec with Matchers {
   }
 
   describe("DynamicSQLBuilder") {
+
     describe("choose element") {
       it("should accept XML whitespace between when/otherwise tags") {
         buildSQL(
@@ -64,6 +65,111 @@ class DynamicSQLBuilderSpec extends AnyFunSpec with Matchers {
           )
         }
       }
+
+      it("should throw ConfigurationException when more than one otherwise element appears in choose") {
+        intercept[ConfigurationException] {
+          buildSQL(
+            <xsql><choose><when test="true">1</when><otherwise>a</otherwise><otherwise>b</otherwise></choose></xsql>
+          )
+        }
+      }
+    }
+
+    describe("if element") {
+      it("should build an if node") {
+        buildSQL(<xsql>SELECT 1 FROM dual<if test="true"> AND 1=1</if></xsql>)
+      }
+    }
+
+    describe("where element") {
+      it("should build a where node") {
+        buildSQL(
+          <xsql>
+            SELECT * FROM user
+            <where>
+              <if test="id != null">AND id = {"{id}"}</if>
+            </where>
+          </xsql>
+        )
+      }
+    }
+
+    describe("set element") {
+      it("should build a set node") {
+        buildSQL(
+          <xsql>
+            UPDATE user
+            <set>
+              <if test="name != null">name = {"{name}"},</if>
+            </set>
+            WHERE id = {"{id}"}
+          </xsql>
+        )
+      }
+    }
+
+    describe("trim element") {
+      it("should build a trim node with prefix/suffix") {
+        buildSQL(
+          <xsql>
+            SELECT * FROM user
+            <trim prefix="WHERE" prefixOverrides="AND |OR ">
+              <if test="name != null">AND name = {"{name}"}</if>
+            </trim>
+          </xsql>
+        )
+      }
+    }
+
+    describe("foreach element") {
+      it("should build a foreach node") {
+        buildSQL(
+          <xsql>
+            SELECT * FROM user WHERE id IN
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+              {"{item}"}
+            </foreach>
+          </xsql>
+        )
+      }
+    }
+
+    describe("bind element") {
+      it("should build a bind node") {
+        buildSQL(
+          <xsql>
+            <bind name="pattern" value="'%' + name + '%'"/>
+            SELECT * FROM user WHERE name LIKE {"{pattern}"}
+          </xsql>
+        )
+      }
+    }
+
+    describe("when element at top level") {
+      it("should build a when node used directly") {
+        buildSQL(<xsql><when test="true">text</when></xsql>)
+      }
+    }
+
+    describe("otherwise element at top level") {
+      it("should build an otherwise node used directly") {
+        buildSQL(<xsql><otherwise>text</otherwise></xsql>)
+      }
+    }
+
+    describe("CDATA sections") {
+      it("should build a text node from CDATA") {
+        buildSQL(<xsql>{scala.xml.PCData("SELECT 1 FROM dual WHERE 1 < 2")}</xsql>)
+      }
+    }
+
+    describe("error cases") {
+      it("should throw ConfigurationException for unknown XML elements") {
+        intercept[ConfigurationException] {
+          buildSQL(<xsql><unknowntag>text</unknowntag></xsql>)
+        }
+      }
     }
   }
 }
+
