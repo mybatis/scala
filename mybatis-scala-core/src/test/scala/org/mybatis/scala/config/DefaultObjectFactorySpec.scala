@@ -23,9 +23,6 @@ import java.util
 
 class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
 
-  class EmptyClass
-  class WithArgs(val value: String)
-
   describe("DefaultObjectFactory.create") {
     it("should resolve Java collection interfaces to default concrete classes") {
       val factory = new DefaultObjectFactory()
@@ -47,19 +44,19 @@ class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
 
     it("should instantiate classes with a matching constructor and arguments") {
       val factory = new DefaultObjectFactory()
-      val argTypes = util.Arrays.asList(classOf[String])
+      val argTypes = util.Arrays.asList(classOf[String].asInstanceOf[Class[?]])
       val args = util.Arrays.asList("abc".asInstanceOf[AnyRef])
 
-      val created = factory.create(classOf[WithArgs], argTypes, args)
+      val created = factory.create(classOf[DefaultObjectFactorySpec.WithArgs], argTypes, args)
       created.value shouldBe "abc"
     }
 
     it("should throw ReflectionException for invalid constructor argument types") {
       val factory = new DefaultObjectFactory()
-      val argTypes = util.Arrays.asList(classOf[java.lang.Integer])
+      val argTypes = util.Arrays.asList(classOf[java.lang.Integer].asInstanceOf[Class[?]])
       val args = util.Arrays.asList("abc".asInstanceOf[AnyRef])
 
-      val error = the[ReflectionException] thrownBy factory.create(classOf[WithArgs], argTypes, args)
+      val error = the[ReflectionException] thrownBy factory.create(classOf[DefaultObjectFactorySpec.WithArgs], argTypes, args)
       error.getMessage should include("Error instantiating")
     }
   }
@@ -67,7 +64,7 @@ class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
   describe("DefaultObjectFactory.getConstructor") {
     it("should get the no-arg constructor when args are null") {
       val factory = new DefaultObjectFactory()
-      val constructor = factory.getConstructor(classOf[EmptyClass], null)
+      val constructor = factory.getConstructor(classOf[DefaultObjectFactorySpec.EmptyClass], null)
 
       constructor should not be null
       constructor.getParameterCount shouldBe 0
@@ -75,7 +72,7 @@ class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
 
     it("should throw ReflectionException for an invalid constructor signature") {
       val factory = new DefaultObjectFactory()
-      val error = the[ReflectionException] thrownBy factory.getConstructor(classOf[EmptyClass], Array(classOf[String]))
+      val error = the[ReflectionException] thrownBy factory.getConstructor(classOf[DefaultObjectFactorySpec.EmptyClass], Array(classOf[String]))
 
       error.getMessage should include("Error instantiating")
     }
@@ -87,7 +84,7 @@ class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
 
       factory.isCollection(classOf[scala.collection.mutable.ArrayBuffer[?]]) shouldBe true
       factory.isCollection(classOf[scala.collection.mutable.HashSet[?]]) shouldBe true
-      factory.isCollection(classOf[EmptyClass]) shouldBe false
+      factory.isCollection(classOf[DefaultObjectFactorySpec.EmptyClass]) shouldBe false
     }
   }
 
@@ -105,4 +102,9 @@ class DefaultObjectFactorySpec extends AnyFunSpec with Matchers {
       k1.equals(null) shouldBe false
     }
   }
+}
+
+object DefaultObjectFactorySpec {
+  class EmptyClass
+  class WithArgs(val value: String)
 }

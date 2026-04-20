@@ -54,8 +54,12 @@ class UtilityCoverageSpec extends AnyFunSpec with Matchers {
     it("should invoke callback with incoming context") {
       var seen: String = null
       val delegator = new ResultHandlerDelegator[String](ctx => seen = ctx.getResultObject)
-      val ctx = new org.apache.ibatis.session.defaults.DefaultResultContext[String]()
-      ctx.nextResultObject("value")
+      val ctx = new org.apache.ibatis.session.ResultContext[String] {
+        override def getResultObject: String = "value"
+        override def getResultCount: Int = 1
+        override def isStopped: Boolean = false
+        override def stop(): Unit = ()
+      }
 
       delegator.handleResult(ctx)
       seen shouldBe "value"
@@ -82,5 +86,6 @@ class UtilityCoverageSpec extends AnyFunSpec with Matchers {
       ex.getMessage shouldBe "msg"
       ex.getCause shouldBe cause
     }
+
   }
 }
