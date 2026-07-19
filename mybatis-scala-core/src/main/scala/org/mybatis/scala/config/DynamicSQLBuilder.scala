@@ -96,7 +96,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
           case _ =>
             throw new ConfigurationException("Unknown element " + elem.label + " in SQL statement.")
         }
-      case a : Atom[_] =>
+      case a : Atom[?] =>
         new TextSqlNode(a.data.asInstanceOf[String])
       case unsupported =>
         throw new ConfigurationException("Unknown element " + unsupported.getClass.getName + " in SQL statement.")

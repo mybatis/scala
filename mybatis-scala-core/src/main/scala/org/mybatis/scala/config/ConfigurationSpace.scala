@@ -291,14 +291,14 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     generator match {
       case jdbc : JdbcGeneratedKey =>
         new Jdbc3KeyGenerator()
-      case sql : SqlGeneratedKey[_] =>
+      case sql : SqlGeneratedKey[?] =>
         buildSqlKeyGenerator(sql, parameterTypeClass, baseId, databaseId)
       case _ =>
         new NoKeyGenerator()
     }
   }
 
-  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[_], parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
+  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[?], parameterTypeClass : Class[?], baseId : String, databaseId : String) : MBKeyGenerator = {
 
     val id = baseId + SelectKeyGenerator.SELECT_KEY_SUFFIX
     val useCache = false
