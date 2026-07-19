@@ -15,9 +15,11 @@
  */
 package org.mybatis.scala.samples.crud
 
+import scala.compiletime.uninitialized
+
 class Item {
-  var id : Int = _
-  var description : String = _
+  var id : Int = uninitialized
+  var description : String = uninitialized
   var info : Option[String] = None
   var year : Option[Int] = None
 }

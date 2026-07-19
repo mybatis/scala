@@ -1,5 +1,5 @@
 /*
- *    Copyright 2011-2026 the original author or authors.
+ *    Copyright 2011-2015 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,10 +16,11 @@
 package org.mybatis.scala.config
 
 import org.apache.ibatis.session.{Configuration => MBConfig}
+import java.lang.Boolean
 import java.util.{List, ArrayList}
-import org.apache.ibatis.scripting.xmltags._
+import org.apache.ibatis.scripting.xmltags.*
 import org.apache.ibatis.mapping.SqlSource
-import scala.xml._
+import scala.xml.*
 
 /** Builder of Dynamic SQL Trees. */
 private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : Node) {
@@ -61,6 +62,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
               configuration,
               content,
               attr(elem, "@collection"),
+              Boolean.FALSE,
               attr(elem, "@index"),
               attr(elem, "@item"),
               attr(elem, "@open"),
@@ -74,7 +76,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
             for (child <- elem.child) {
               child match {
                 case when : Elem if when.label == "when" =>
-                  ifNodes add new IfSqlNode(parseChildren(when.child), attr(when, "@test"))
+                  ifNodes.add(new IfSqlNode(parseChildren(when.child), attr(when, "@test")))
                 case otherwise : Elem if otherwise.label == "otherwise" =>
                   if (defaultNode == null)
                     defaultNode = parseChildren(otherwise.child)
@@ -96,7 +98,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
           case _ =>
             throw new ConfigurationException("Unknown element " + elem.label + " in SQL statement.")
         }
-      case a : Atom[_] =>
+      case a : Atom[?] =>
         new TextSqlNode(a.data.asInstanceOf[String])
       case unsupported =>
         throw new ConfigurationException("Unknown element " + unsupported.getClass.getName + " in SQL statement.")
@@ -106,7 +108,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
   private def parseChildren(children : Seq[Node]) : MixedSqlNode = {
     val nodes = new ArrayList[SqlNode]
     for (child <- children) {
-      nodes add parse(child)
+      nodes.add(parse(child))
     }
     new MixedSqlNode(nodes)
   }

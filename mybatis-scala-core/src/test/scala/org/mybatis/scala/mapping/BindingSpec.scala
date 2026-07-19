@@ -1,5 +1,5 @@
 /*
- *    Copyright 2011-2026 the original author or authors.
+ *    Copyright 2011-2015 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package org.mybatis.scala.mapping
 
-import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.Binding.*
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -65,7 +65,7 @@ class BindingSpec extends AnyFunSpec with Matchers {
       result should equal ("#{count,javaType=_int}")
     }
 
-    it("should include javaType from T[_].unwrap") {
+    it("should include javaType from T[?].unwrap") {
       val result = ?("name", javaType = T[String].unwrap)
       result should equal ("#{name,javaType=java.lang.String}")
     }

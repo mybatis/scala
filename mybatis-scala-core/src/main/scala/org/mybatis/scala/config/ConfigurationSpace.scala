@@ -18,13 +18,13 @@ package org.mybatis.scala.config
 import org.apache.ibatis.session.{Configuration => MBConfig}
 import org.apache.ibatis.executor.keygen.{Jdbc3KeyGenerator, NoKeyGenerator, SelectKeyGenerator, KeyGenerator => MBKeyGenerator}
 import org.apache.ibatis.builder.MapperBuilderAssistant
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.cache._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.cache.*
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
 import java.util.Properties
 //eliminate a feature warning, might be a good idea to define and use traits instead of using structural types
-import scala.language.reflectiveCalls
+import scala.reflect.Selectable.reflectiveSelectable
 
 /** Configuration Space (mybatis namespace)
   * @constructor Creates an empty configuration space.
@@ -68,8 +68,8 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
     * @param props implementation specific properties.
     */
   def cache(
-    impl : T[_ <: Cache] = DefaultCache,
-    eviction : T[_ <: Cache] = Eviction.LRU,
+    impl : T[? <: Cache] = DefaultCache,
+    eviction : T[? <: Cache] = Eviction.LRU,
     flushInterval : Long = -1,
     size : Int = -1,
     readWrite : Boolean = true,
@@ -96,7 +96,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
 
   // == End of public API ===
 
-  private def addResultMap(rm : ResultMap[_]) : Unit = {
+  private def addResultMap(rm : ResultMap[?]) : Unit = {
     if (rm.fqi == null) {
       rm.fqi = ConfigurationSpace.generateFQI(spaceName, rm)
       if (rm.parent != null) addResultMap(rm.parent)
@@ -106,7 +106,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
       for (r <- rm.constructor ++ rm.mappings) {
         if (r.nestedSelect != null) addStatement(r.nestedSelect)
         if (r.nestedResultMap != null) addResultMap(r.nestedResultMap)
-        resultMappings add
+        resultMappings.add(
           builderAssistant.buildResultMapping(
             r.resultTypeClass,
             r.property,
@@ -120,6 +120,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             r.typeHandlerClass,
             r.flags
           )
+        )
       }
 
       // Discriminator
@@ -140,7 +141,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             if (typeHandler == null) null else typeHandler.unwrap,
             discriminatorMap
           )
-        case _ =>
+        case null =>
           // Skip
       }
 
@@ -158,7 +159,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   }
 
   private def resolveFQI(r : { def fqi : FQI}) : String = {
-    if (r == null) null else r.fqi resolveIn spaceName
+    if (r == null) null else r.fqi.resolveIn(spaceName)
   }
 
   private def addStatement(statement : Statement) : this.type = {
@@ -188,7 +189,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.databaseId,
             DefaultScriptingDriver
           )
-        case stmt : Insert[_] =>
+        case stmt : Insert[?] =>
           builderAssistant.addMappedStatement(
             stmt.fqi.resolveIn(spaceName),
             buildDynamicSQL(stmt.xsql),
@@ -210,7 +211,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.databaseId,
             DefaultScriptingDriver
           )
-        case stmt : Update[_] =>
+        case stmt : Update[?] =>
           builderAssistant.addMappedStatement(
             stmt.fqi.resolveIn(spaceName),
             buildDynamicSQL(stmt.xsql),
@@ -232,7 +233,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             stmt.databaseId,
             DefaultScriptingDriver
           )
-        case stmt : Delete[_] =>
+        case stmt : Delete[?] =>
           builderAssistant.addMappedStatement(
             stmt.fqi.resolveIn(spaceName),
             buildDynamicSQL(stmt.xsql),
@@ -287,18 +288,18 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   private def buildDynamicSQL(xsql : XSQL) : SqlSource
     = new DynamicSQLBuilder(configuration, xsql).build
 
-  private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
+  private def buildKeyGenerator(generator : KeyGenerator, parameterTypeClass : Class[?], baseId : String, databaseId : String) : MBKeyGenerator = {
     generator match {
       case jdbc : JdbcGeneratedKey =>
         new Jdbc3KeyGenerator()
-      case sql : SqlGeneratedKey[_] =>
+      case sql : SqlGeneratedKey[?] =>
         buildSqlKeyGenerator(sql, parameterTypeClass, baseId, databaseId)
       case _ =>
         new NoKeyGenerator()
     }
   }
 
-  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[_], parameterTypeClass : Class[_], baseId : String, databaseId : String) : MBKeyGenerator = {
+  private def buildSqlKeyGenerator(generator : SqlGeneratedKey[?], parameterTypeClass : Class[?], baseId : String, databaseId : String) : MBKeyGenerator = {
 
     val id = baseId + SelectKeyGenerator.SELECT_KEY_SUFFIX
     val useCache = false

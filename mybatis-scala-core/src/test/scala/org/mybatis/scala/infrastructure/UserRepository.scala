@@ -16,8 +16,8 @@
 package org.mybatis.scala.infrastructure
 
 import org.mybatis.scala.domain.User
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.mapping.Binding.*
 import scala.language.postfixOps
 
 object UserRepository {

@@ -16,8 +16,8 @@
 package org.mybatis.scala.session
 
 import org.apache.ibatis.session.SqlSession
-import scala.jdk.CollectionConverters._
-import scala.collection.mutable._
+import scala.jdk.CollectionConverters.*
+import scala.collection.mutable.*
 
 /** SqlSession Wrapper.
   * You rarely use this class in an explicit manner.

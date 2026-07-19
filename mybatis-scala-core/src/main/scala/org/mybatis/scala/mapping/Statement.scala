@@ -71,7 +71,7 @@ trait Statement {
   def xsql : XSQL
 
   /** Returns the Class of the input parameter. */
-  def parameterTypeClass : Class[_]
+  def parameterTypeClass : Class[?]
 
   def execute[A](command : => A) : A = fqi match {
     case null =>

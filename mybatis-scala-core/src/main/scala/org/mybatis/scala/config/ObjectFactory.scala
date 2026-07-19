@@ -19,18 +19,18 @@ class DefaultObjectFactory extends ObjectFactory {
 
   def create[T](t : Class[T]) : T = create(t, null, null)
 
-  def create[T](t : Class[T], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
+  def create[T](t : Class[T], constructorArgTypes : java.util.List[Class[?]], constructorArgs : java.util.List[AnyRef]) : T = {
     val classToCreate = resolveInterface(t)
     instantiateClass[T](classToCreate, constructorArgTypes, constructorArgs)
   }
 
   override def setProperties(properties : java.util.Properties) : Unit = {}
 
-  private def instantiateClass[T](t : Class[_], constructorArgTypes : java.util.List[Class[_]], constructorArgs : java.util.List[AnyRef]) : T = {
+  private def instantiateClass[T](t : Class[?], constructorArgTypes : java.util.List[Class[?]], constructorArgs : java.util.List[AnyRef]) : T = {
 
     val argTypes = {
       if (constructorArgTypes != null)
-        constructorArgTypes.toArray[Class[_]](new Array[Class[_]](constructorArgTypes.size))
+        constructorArgTypes.toArray[Class[?]](new Array[Class[?]](constructorArgTypes.size))
       else
         null
     }
@@ -49,7 +49,7 @@ class DefaultObjectFactory extends ObjectFactory {
         constructor.newInstance().asInstanceOf[T]
       }
       else {
-        constructor.newInstance(argValues : _*).asInstanceOf[T]
+        constructor.newInstance(argValues*).asInstanceOf[T]
       }
     }
     catch {
@@ -67,35 +67,35 @@ class DefaultObjectFactory extends ObjectFactory {
     }
   }
 
-  private def resolveInterface[T](t : Class[T]) : Class[_] = {
+  private def resolveInterface[T](t : Class[T]) : Class[?] = {
     // Java Collections
-    if (t == classOf[java.util.List[_]])
-      classOf[java.util.LinkedList[_]]
-    else if (t == classOf[java.util.Collection[_]])
-      classOf[java.util.LinkedList[_]]
-    else if (t == classOf[java.util.Map[_,_]])
-      classOf[java.util.HashMap[_,_]]
-    else if (t == classOf[java.util.SortedSet[_]])
-      classOf[java.util.TreeSet[_]]
-    else if (t == classOf[java.util.Set[_]])
-      classOf[java.util.HashSet[_]]
+    if (t == classOf[java.util.List[?]])
+      classOf[java.util.LinkedList[?]]
+    else if (t == classOf[java.util.Collection[?]])
+      classOf[java.util.LinkedList[?]]
+    else if (t == classOf[java.util.Map[?,?]])
+      classOf[java.util.HashMap[?,?]]
+    else if (t == classOf[java.util.SortedSet[?]])
+      classOf[java.util.TreeSet[?]]
+    else if (t == classOf[java.util.Set[?]])
+      classOf[java.util.HashSet[?]]
     // Scala Collections
-    else if (t == classOf[scala.collection.Seq[_]])
-      classOf[scala.collection.mutable.ArrayBuffer[_]]
-    else if (t == classOf[scala.collection.Map[_,_]])
-      classOf[scala.collection.mutable.HashMap[_,_]]
-    else if (t == classOf[scala.collection.Set[_]])
-      classOf[scala.collection.mutable.HashSet[_]]
+    else if (t == classOf[scala.collection.Seq[?]])
+      classOf[scala.collection.mutable.ArrayBuffer[?]]
+    else if (t == classOf[scala.collection.Map[?,?]])
+      classOf[scala.collection.mutable.HashMap[?,?]]
+    else if (t == classOf[scala.collection.Set[?]])
+      classOf[scala.collection.mutable.HashSet[?]]
     else {
       t
     }
   }
 
   def isCollection[T](t : Class[T]) : Boolean =
-    classOf[scala.collection.Seq[_]].isAssignableFrom(t) ||
-    classOf[scala.collection.Set[_]].isAssignableFrom(t)
+    classOf[scala.collection.Seq[?]].isAssignableFrom(t) ||
+    classOf[scala.collection.Set[?]].isAssignableFrom(t)
 
-  sealed class CacheKey(t : Class[_], args : Array[Class[_]]) {
+  sealed class CacheKey(t : Class[?], args : Array[Class[?]]) {
 
     val _hc : Int = {
       if (args == null) {
@@ -119,18 +119,18 @@ class DefaultObjectFactory extends ObjectFactory {
 
   }
 
-  def getConstructor(t : Class[_], args : Array[Class[_]]) : java.lang.reflect.Constructor[_] = {
+  def getConstructor(t : Class[?], args : Array[Class[?]]) : java.lang.reflect.Constructor[?] = {
       try {
         if (args == null) {
           val constructor = t.getDeclaredConstructor()
-          if (!constructor.isAccessible()) {
+          if (!constructor.canAccess(null)) {
             constructor.setAccessible(true)
           }
           constructor
         }
         else {
-          val constructor = t.getDeclaredConstructor(args : _*)
-          if (!constructor.isAccessible()) {
+          val constructor = t.getDeclaredConstructor(args*)
+          if (!constructor.canAccess(null)) {
             constructor.setAccessible(true)
           }
           constructor

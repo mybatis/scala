@@ -49,7 +49,7 @@ class OptionTypeHandler[T](delegate : TypeHandler[T]) extends TypeHandler[Option
 /** Builtin Option TypeHandlers */
 object TypeHandlers {
 
-  import org.apache.ibatis.`type`._
+  import org.apache.ibatis.`type`.*
 
   class OptBooleanTypeHandler     extends OptionTypeHandler(new BooleanTypeHandler())
   class OptByteTypeHandler        extends OptionTypeHandler(new ByteTypeHandler())

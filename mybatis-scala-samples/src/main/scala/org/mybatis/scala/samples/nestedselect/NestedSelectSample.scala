@@ -15,33 +15,35 @@
  */
 package org.mybatis.scala.samples.nestedselect
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.config._
-import org.mybatis.scala.session._
-import org.mybatis.scala.samples.util._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.config.*
+import org.mybatis.scala.session.*
+import org.mybatis.scala.samples.util.*
+
+import scala.compiletime.uninitialized
 
 // Model beans =================================================================
 
 // Simple Group POJO
 class Group {
-  var id : Int = _
-  var name : String = _
+  var id : Int = uninitialized
+  var name : String = uninitialized
 }
 
 // Simple ContactInfo POJO
 class ContactInfo {
-  var id : Int = _
-  var address : String = _
-  var phone : String = _
+  var id : Int = uninitialized
+  var address : String = uninitialized
+  var phone : String = uninitialized
 }
 
 // Simple Person POJO with OneToMany to ContactInfo
 class Person {
-  var id : Int = _
-  var firstName : String = _
-  var lastName : String = _
-  var group : Group = _
-  var contact : Seq[ContactInfo] = _
+  var id : Int = uninitialized
+  var firstName : String = uninitialized
+  var lastName : String = uninitialized
+  var group : Group = uninitialized
+  var contact : Seq[ContactInfo] = uninitialized
 }
 
 // Data access layer ===========================================================

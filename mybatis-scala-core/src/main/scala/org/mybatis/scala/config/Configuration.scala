@@ -23,7 +23,7 @@ import org.mybatis.scala.session.SessionManager
 import java.util.Properties
 import org.mybatis.scala.mapping.Statement
 import org.mybatis.scala.mapping.T
-import org.mybatis.scala.cache._
+import org.mybatis.scala.cache.*
 import org.apache.ibatis.`type`.TypeHandler
 
 /**
@@ -79,8 +79,8 @@ sealed class Configuration(private val configuration: MBConfig) {
    * @param props implementation specific properties.
    */
   def cache(
-    impl: T[_ <: Cache] = DefaultCache,
-    eviction: T[_ <: Cache] = Eviction.LRU,
+    impl: T[? <: Cache] = DefaultCache,
+    eviction: T[? <: Cache] = Eviction.LRU,
     flushInterval: Long = -1,
     size: Int = -1,
     readWrite: Boolean = true,
@@ -97,10 +97,10 @@ sealed class Configuration(private val configuration: MBConfig) {
     new SessionManager(builder.build(configuration))
   }
 
-  private def registerOptionTypeHandler[T <: Option[_]](h: TypeHandler[T], jdbcTypes: Seq[org.apache.ibatis.`type`.JdbcType]) = {
+  private def registerOptionTypeHandler[T <: Option[?]](h: TypeHandler[T], jdbcTypes: Seq[org.apache.ibatis.`type`.JdbcType]) = {
     import org.mybatis.scala.mapping.OptionTypeHandler
     val registry = configuration.getTypeHandlerRegistry
-    val cls = classOf[Option[_]]
+    val cls = classOf[Option[?]]
     for (jdbcType <- jdbcTypes) {
       registry.register(cls, jdbcType, h)
     }
@@ -108,9 +108,9 @@ sealed class Configuration(private val configuration: MBConfig) {
 
   private def registerCommonOptionTypeHandlers = {
     import org.mybatis.scala.mapping.OptionTypeHandler
-    import org.mybatis.scala.mapping.TypeHandlers._
-    import org.apache.ibatis.`type`._
-    import org.apache.ibatis.`type`.JdbcType._
+    import org.mybatis.scala.mapping.TypeHandlers.*
+    import org.apache.ibatis.`type`.*
+    import org.apache.ibatis.`type`.JdbcType.*
     registerOptionTypeHandler(new OptBooleanTypeHandler(), Seq(BOOLEAN, BIT))
     registerOptionTypeHandler(new OptByteTypeHandler(), Seq(TINYINT))
     registerOptionTypeHandler(new OptShortTypeHandler(), Seq(SMALLINT))
@@ -127,7 +127,7 @@ sealed class Configuration(private val configuration: MBConfig) {
     registerOptionTypeHandler(new OptDateTypeHandler(), Seq(DATE))
     registerOptionTypeHandler(new OptTimeTypeHandler(), Seq(TIME))
     registerOptionTypeHandler(new OptTimestampTypeHandler(), Seq(TIMESTAMP))
-    registerOptionTypeHandler(new OptionTypeHandler(new UnknownTypeHandler(configuration.getTypeHandlerRegistry)), Seq(OTHER))
+    registerOptionTypeHandler(new OptionTypeHandler(new UnknownTypeHandler(configuration)), Seq(OTHER))
   }
 
 }
@@ -213,7 +213,7 @@ object Configuration {
     import org.apache.ibatis.plugin.Interceptor
     import scala.collection.mutable.ArrayBuffer
     import org.mybatis.scala.session.ExecutorType
-    import scala.jdk.CollectionConverters._
+    import scala.jdk.CollectionConverters.*
     import org.apache.ibatis.mapping.Environment
 
     /** Reference to self. Support for operational notation. */
@@ -251,7 +251,7 @@ object Configuration {
     // Pre ====================================================================
 
     def properties(props: (String, String)*) =
-      set(0, pre) { _.getVariables.asScala ++= Map(props: _*) }
+      set(0, pre) { _.getVariables.asScala ++= Map(props*) }
 
     def properties(props: Properties) =
       set(1, pre) { _.getVariables.asScala ++= props.asScala }
@@ -284,9 +284,6 @@ object Configuration {
 
     def aggressiveLazyLoading(enabled: Boolean) =
       set(11, pre) { _.setAggressiveLazyLoading(enabled) }
-
-    def multipleResultSetsSupport(enabled: Boolean) =
-      set(12, pre) { _.setMultipleResultSetsEnabled(enabled) }
 
     def useColumnLabel(enabled: Boolean) =
       set(13, pre) { _.setUseColumnLabel(enabled) }
@@ -321,13 +318,13 @@ object Configuration {
     def databaseIdProvider(provider: DatabaseIdProvider) =
       set(25, pre) { c => c.setDatabaseId(provider.getDatabaseId(c.getEnvironment.getDataSource)) }
 
-    def typeHandler(jdbcType: JdbcType, handler: (T[_], TypeHandler[_])) =
+    def typeHandler(jdbcType: JdbcType, handler: (T[?], TypeHandler[?])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, jdbcType.unwrap, handler._2) }
 
-    def typeHandler(handler: (T[_], TypeHandler[_])) =
+    def typeHandler(handler: (T[?], TypeHandler[?])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, handler._2) }
 
-    def typeHandler(handler: TypeHandler[_]) =
+    def typeHandler(handler: TypeHandler[?]) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler) }
 
     // Pos ===========================================================
@@ -345,8 +342,8 @@ object Configuration {
       set(2, pos) { _.cacheRef(that) }
 
     def cache(
-      impl: T[_ <: Cache] = DefaultCache,
-      eviction: T[_ <: Cache] = Eviction.LRU,
+      impl: T[? <: Cache] = DefaultCache,
+      eviction: T[? <: Cache] = Eviction.LRU,
       flushInterval: Long = -1,
       size: Int = -1,
       readWrite: Boolean = true,
@@ -358,7 +355,7 @@ object Configuration {
 
     // TODO (3.1.1) def proxyFactory(factory: ProxyFactory) = set( 7, pre) { _.setProxyFactory(factory) }
     // TODO (3.1.1) def safeResultHandlerSupport(enabled : Boolean) = set(22, pre) { _.setSafeResultHandlerEnabled(enabled) }
-    // TODO (3.1.1) def defaultScriptingLanguage(driver : T[_]) = set(23, pre) { _.setDefaultScriptingLanguage(driver) }
+    // TODO (3.1.1) def defaultScriptingLanguage(driver : T[?]) = set(23, pre) { _.setDefaultScriptingLanguage(driver) }
 
   }
 

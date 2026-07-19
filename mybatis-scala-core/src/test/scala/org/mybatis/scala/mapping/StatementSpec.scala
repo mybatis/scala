@@ -16,7 +16,7 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.config.ConfigurationException
-import org.scalatest._
+import org.scalatest.*
 import scala.util.control.NonFatal
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
@@ -26,7 +26,7 @@ import org.scalatest.matchers.should.Matchers
  */
 class StatementSpec extends AnyFunSpec with Matchers {
   val simpleStatement = new Statement {
-  override def parameterTypeClass: Class[_] = classOf[Unit]
+  override def parameterTypeClass: Class[?] = classOf[Unit]
     override def xsql: XSQL = <xsql>SELECT 1</xsql>
   }
 
