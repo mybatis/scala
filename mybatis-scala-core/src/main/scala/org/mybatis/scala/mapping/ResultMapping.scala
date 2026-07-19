@@ -18,7 +18,7 @@ package org.mybatis.scala.mapping
 import org.apache.ibatis.`type`.{JdbcType => JdbcTypeEnum}
 import org.apache.ibatis.mapping.{ResultFlag => ResultFlagEnum}
 import java.util.{List => JList}
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 private[scala] class ResultMapping (
   resultType : T[_],

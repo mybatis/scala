@@ -15,7 +15,7 @@
  */
 package org.mybatis.scala.samples.crud
 
-import org.mybatis.scala.session._
+import org.mybatis.scala.session.*
 
 object Main extends App {
 

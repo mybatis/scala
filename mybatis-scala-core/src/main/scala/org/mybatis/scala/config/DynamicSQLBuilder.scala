@@ -17,9 +17,9 @@ package org.mybatis.scala.config
 
 import org.apache.ibatis.session.{Configuration => MBConfig}
 import java.util.{List, ArrayList}
-import org.apache.ibatis.scripting.xmltags._
+import org.apache.ibatis.scripting.xmltags.*
 import org.apache.ibatis.mapping.SqlSource
-import scala.xml._
+import scala.xml.*
 
 /** Builder of Dynamic SQL Trees. */
 private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : Node) {

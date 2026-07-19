@@ -15,7 +15,7 @@
  */
 package org.mybatis.scala.mapping
 
-import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.Binding.*
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 

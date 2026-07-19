@@ -18,7 +18,7 @@ package org.mybatis.scala.mapping
 import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.domain.User
 import org.mybatis.scala.infrastructure.UserRepository
-import org.scalatest._
+import org.scalatest.*
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 

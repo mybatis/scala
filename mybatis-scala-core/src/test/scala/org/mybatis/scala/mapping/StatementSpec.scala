@@ -16,7 +16,7 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.config.ConfigurationException
-import org.scalatest._
+import org.scalatest.*
 import scala.util.control.NonFatal
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

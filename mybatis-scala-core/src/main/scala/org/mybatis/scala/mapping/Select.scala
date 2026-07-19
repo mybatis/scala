@@ -16,9 +16,9 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.{Session, RowBounds, ResultHandlerDelegator, ResultContext}
-import scala.collection.mutable._
+import scala.collection.mutable.*
 import java.util.{Map => JavaMap}
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 import scala.reflect.ClassTag
 
 /** Base class for all Select statements.

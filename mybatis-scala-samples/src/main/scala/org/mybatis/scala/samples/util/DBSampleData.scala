@@ -15,8 +15,8 @@
  */
 package org.mybatis.scala.samples.util
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.session._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.session.*
 
 object DBSampleData {
 
@@ -48,7 +48,7 @@ object DBSampleData {
 
   def populate(implicit s : Session) = {
 
-    import scala.jdk.CollectionConverters._
+    import scala.jdk.CollectionConverters.*
 
     insertGroup(Map("id" -> 1, "name" -> "Customers").asJava)
     insertGroup(Map("id" -> 2, "name" -> "Suppliers").asJava)

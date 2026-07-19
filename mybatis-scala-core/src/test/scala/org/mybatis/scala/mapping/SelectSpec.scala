@@ -16,7 +16,7 @@
 package org.mybatis.scala.mapping
 
 import org.mybatis.scala.session.RowBounds
-import org.scalatest._
+import org.scalatest.*
 import org.mybatis.scala.{Database, DatabaseSupport}
 import org.mybatis.scala.infrastructure.BlogRepository
 import org.mybatis.scala.domain.{Blog, Entry}

@@ -136,7 +136,7 @@ val findUserById = new SelectOneBy[Int,User] {
         <p></p>
         <h3>Scala notation</h3>
         <p>
-          You can import <b>org.mybatis.scala.mapping.Binding._</b> and use the ? function. It provides
+          You can import <b>org.mybatis.scala.mapping.Binding.*</b> and use the ? function. It provides
           type safety on binding attributes.
           <source>
             SELECT *

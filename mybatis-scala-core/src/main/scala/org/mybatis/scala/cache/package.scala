@@ -18,7 +18,7 @@ package org.mybatis.scala
 import org.apache.ibatis.cache.{Cache => MBCache}
 import org.apache.ibatis.cache.impl.PerpetualCache
 import org.mybatis.scala.mapping.T
-import org.apache.ibatis.cache.decorators._
+import org.apache.ibatis.cache.decorators.*
 
 /** Provides Cache supporting types and objects */
 package object cache {
