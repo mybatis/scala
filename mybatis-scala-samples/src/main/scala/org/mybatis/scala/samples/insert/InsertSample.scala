@@ -20,20 +20,22 @@ import org.mybatis.scala.mapping.*
 import org.mybatis.scala.config.*
 import org.mybatis.scala.session.*
 
+import scala.compiletime.uninitialized
+
 object InsertSample {
 
   // Simple Group POJO
   class Group {
-    var id : Int = _
-    var name : String = _
+    var id : Int = uninitialized
+    var name : String = uninitialized
   }
 
   // Simple Person POJO
   class Person {
-    var id : Int = _
-    var firstName : String = _
-    var lastName : String = _
-    var group : Group = _
+    var id : Int = uninitialized
+    var firstName : String = uninitialized
+    var lastName : String = uninitialized
+    var group : Group = uninitialized
   }
 
   // Simple insert method
