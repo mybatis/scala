@@ -285,9 +285,6 @@ object Configuration {
     def aggressiveLazyLoading(enabled: Boolean) =
       set(11, pre) { _.setAggressiveLazyLoading(enabled) }
 
-    def multipleResultSetsSupport(enabled: Boolean) =
-      set(12, pre) { _.setMultipleResultSetsEnabled(enabled) }
-
     def useColumnLabel(enabled: Boolean) =
       set(13, pre) { _.setUseColumnLabel(enabled) }
 
