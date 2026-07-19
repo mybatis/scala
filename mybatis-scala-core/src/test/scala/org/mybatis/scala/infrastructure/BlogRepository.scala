@@ -15,8 +15,8 @@
  */
 package org.mybatis.scala.infrastructure
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.mapping.Binding.*
 import org.mybatis.scala.domain.{Entry, Blog}
 import org.mybatis.scala.session.Session
 import scala.language.postfixOps

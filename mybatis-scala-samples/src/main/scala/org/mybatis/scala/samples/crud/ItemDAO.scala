@@ -15,9 +15,9 @@
  */
 package org.mybatis.scala.samples.crud
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.mapping.Binding._
-import org.mybatis.scala.mapping.TypeHandlers._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.mapping.Binding.*
+import org.mybatis.scala.mapping.TypeHandlers.*
 import org.mybatis.scala.session.Session
 import scala.language.postfixOps
 

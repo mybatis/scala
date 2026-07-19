@@ -18,8 +18,8 @@ package org.mybatis.scala.config
 import org.apache.ibatis.session.{Configuration => MBConfig}
 import org.apache.ibatis.executor.keygen.{Jdbc3KeyGenerator, NoKeyGenerator, SelectKeyGenerator, KeyGenerator => MBKeyGenerator}
 import org.apache.ibatis.builder.MapperBuilderAssistant
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.cache._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.cache.*
 import java.util.ArrayList
 import org.apache.ibatis.mapping.{ResultMapping => MBResultMapping, SqlSource, SqlCommandType, Discriminator}
 import java.util.Properties

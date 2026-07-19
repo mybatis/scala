@@ -15,10 +15,10 @@
  */
 package org.mybatis.scala.samples.select
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.config._
-import org.mybatis.scala.session._
-import org.mybatis.scala.samples.util._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.config.*
+import org.mybatis.scala.session.*
+import org.mybatis.scala.samples.util.*
 
 // Model beans (Immutable case class) ==========================================
 
@@ -72,7 +72,7 @@ object CDB {
 
 object SelectImmutableSample {
 
-  import CDB._
+  import CDB.*
 
   // Do the Magic ...
   def main(args: Array[String]): Unit = context.transaction { implicit s =>

@@ -15,10 +15,10 @@
  */
 package org.mybatis.scala.samples.performance
 
-import org.mybatis.scala.mapping._
-import org.mybatis.scala.config._
-import org.mybatis.scala.session._
-import org.mybatis.scala.mapping.Binding._
+import org.mybatis.scala.mapping.*
+import org.mybatis.scala.config.*
+import org.mybatis.scala.session.*
+import org.mybatis.scala.mapping.Binding.*
 import scala.language.postfixOps
 
 class TestBean {

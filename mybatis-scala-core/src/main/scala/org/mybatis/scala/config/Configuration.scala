@@ -23,7 +23,7 @@ import org.mybatis.scala.session.SessionManager
 import java.util.Properties
 import org.mybatis.scala.mapping.Statement
 import org.mybatis.scala.mapping.T
-import org.mybatis.scala.cache._
+import org.mybatis.scala.cache.*
 import org.apache.ibatis.`type`.TypeHandler
 
 /**
@@ -213,7 +213,7 @@ object Configuration {
     import org.apache.ibatis.plugin.Interceptor
     import scala.collection.mutable.ArrayBuffer
     import org.mybatis.scala.session.ExecutorType
-    import scala.jdk.CollectionConverters._
+    import scala.jdk.CollectionConverters.*
     import org.apache.ibatis.mapping.Environment
 
     /** Reference to self. Support for operational notation. */

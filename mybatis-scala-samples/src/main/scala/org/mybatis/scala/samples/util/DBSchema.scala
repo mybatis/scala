@@ -15,7 +15,7 @@
  */
 package org.mybatis.scala.samples.util
 
-import org.mybatis.scala.mapping._
+import org.mybatis.scala.mapping.*
 import org.mybatis.scala.session.Session
 
 object DBSchema {

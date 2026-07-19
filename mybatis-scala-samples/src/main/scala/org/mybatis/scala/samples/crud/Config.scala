@@ -15,7 +15,7 @@
  */
 package org.mybatis.scala.samples.crud
 
-import org.mybatis.scala.config._
+import org.mybatis.scala.config.*
 
 object Config {
 
