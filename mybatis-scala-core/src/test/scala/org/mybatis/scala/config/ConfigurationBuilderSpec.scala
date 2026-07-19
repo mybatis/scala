@@ -89,7 +89,6 @@ class ConfigurationBuilderSpec extends AnyFunSpec with Matchers {
       builder.cacheSupport(enabled = true)
       builder.lazyLoadingSupport(enabled = true)
       builder.aggressiveLazyLoading(enabled = false)
-      builder.multipleResultSetsSupport(enabled = true)
       builder.useColumnLabel(enabled = true)
       builder.useGeneratedKeys(enabled = true)
       builder.defaultExecutorType(ExecutorType.REUSE)
