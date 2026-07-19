@@ -123,14 +123,14 @@ class DefaultObjectFactory extends ObjectFactory {
       try {
         if (args == null) {
           val constructor = t.getDeclaredConstructor()
-          if (!constructor.isAccessible()) {
+          if (!constructor.canAccess(null)) {
             constructor.setAccessible(true)
           }
           constructor
         }
         else {
           val constructor = t.getDeclaredConstructor(args*)
-          if (!constructor.isAccessible()) {
+          if (!constructor.canAccess(null)) {
             constructor.setAccessible(true)
           }
           constructor
