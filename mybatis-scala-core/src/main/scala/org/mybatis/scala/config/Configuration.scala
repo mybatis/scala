@@ -108,9 +108,9 @@ sealed class Configuration(private val configuration: MBConfig) {
 
   private def registerCommonOptionTypeHandlers = {
     import org.mybatis.scala.mapping.OptionTypeHandler
-    import org.mybatis.scala.mapping.TypeHandlers._
-    import org.apache.ibatis.`type`._
-    import org.apache.ibatis.`type`.JdbcType._
+    import org.mybatis.scala.mapping.TypeHandlers.*
+    import org.apache.ibatis.`type`.*
+    import org.apache.ibatis.`type`.JdbcType.*
     registerOptionTypeHandler(new OptBooleanTypeHandler(), Seq(BOOLEAN, BIT))
     registerOptionTypeHandler(new OptByteTypeHandler(), Seq(TINYINT))
     registerOptionTypeHandler(new OptShortTypeHandler(), Seq(SMALLINT))
