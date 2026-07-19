@@ -69,7 +69,7 @@ object Binding {
     "byte[]", "long[]", "short[]", "int[]", "double[]", "float[]", "boolean[]")
 
   /** Custom alias translator */
-  private def translate(cls : Class[_]) : String = {
+  private def translate(cls : Class[?]) : String = {
     if (valueTypes contains cls.getSimpleName) "_" + cls.getSimpleName
     else cls.getName
   }
@@ -84,9 +84,9 @@ object Binding {
     jdbcTypeName : String = null,
     numericScale : Int = 0,
     mode : ParamModeEnum = ModeIN,
-    typeHandler : T[_ <: TypeHandler[_]] = null,
-    resultMap : ResultMap[_] = null,
-    javaType : Class[_] = null
+    typeHandler : T[? <: TypeHandler[?]] = null,
+    resultMap : ResultMap[?] = null,
+    javaType : Class[?] = null
   ) : String = {
     Seq[Option[String]](
       Some(property)

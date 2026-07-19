@@ -26,7 +26,7 @@ import org.scalatest.matchers.should.Matchers
  */
 class StatementSpec extends AnyFunSpec with Matchers {
   val simpleStatement = new Statement {
-  override def parameterTypeClass: Class[_] = classOf[Unit]
+  override def parameterTypeClass: Class[?] = classOf[Unit]
     override def xsql: XSQL = <xsql>SELECT 1</xsql>
   }
 

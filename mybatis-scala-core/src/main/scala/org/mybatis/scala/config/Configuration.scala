@@ -79,8 +79,8 @@ sealed class Configuration(private val configuration: MBConfig) {
    * @param props implementation specific properties.
    */
   def cache(
-    impl: T[_ <: Cache] = DefaultCache,
-    eviction: T[_ <: Cache] = Eviction.LRU,
+    impl: T[? <: Cache] = DefaultCache,
+    eviction: T[? <: Cache] = Eviction.LRU,
     flushInterval: Long = -1,
     size: Int = -1,
     readWrite: Boolean = true,
@@ -97,10 +97,10 @@ sealed class Configuration(private val configuration: MBConfig) {
     new SessionManager(builder.build(configuration))
   }
 
-  private def registerOptionTypeHandler[T <: Option[_]](h: TypeHandler[T], jdbcTypes: Seq[org.apache.ibatis.`type`.JdbcType]) = {
+  private def registerOptionTypeHandler[T <: Option[?]](h: TypeHandler[T], jdbcTypes: Seq[org.apache.ibatis.`type`.JdbcType]) = {
     import org.mybatis.scala.mapping.OptionTypeHandler
     val registry = configuration.getTypeHandlerRegistry
-    val cls = classOf[Option[_]]
+    val cls = classOf[Option[?]]
     for (jdbcType <- jdbcTypes) {
       registry.register(cls, jdbcType, h)
     }
@@ -321,13 +321,13 @@ object Configuration {
     def databaseIdProvider(provider: DatabaseIdProvider) =
       set(25, pre) { c => c.setDatabaseId(provider.getDatabaseId(c.getEnvironment.getDataSource)) }
 
-    def typeHandler(jdbcType: JdbcType, handler: (T[_], TypeHandler[_])) =
+    def typeHandler(jdbcType: JdbcType, handler: (T[?], TypeHandler[?])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, jdbcType.unwrap, handler._2) }
 
-    def typeHandler(handler: (T[_], TypeHandler[_])) =
+    def typeHandler(handler: (T[?], TypeHandler[?])) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler._1.raw, handler._2) }
 
-    def typeHandler(handler: TypeHandler[_]) =
+    def typeHandler(handler: TypeHandler[?]) =
       set(26, pre) { _.getTypeHandlerRegistry.register(handler) }
 
     // Pos ===========================================================
@@ -345,8 +345,8 @@ object Configuration {
       set(2, pos) { _.cacheRef(that) }
 
     def cache(
-      impl: T[_ <: Cache] = DefaultCache,
-      eviction: T[_ <: Cache] = Eviction.LRU,
+      impl: T[? <: Cache] = DefaultCache,
+      eviction: T[? <: Cache] = Eviction.LRU,
       flushInterval: Long = -1,
       size: Int = -1,
       readWrite: Boolean = true,
@@ -358,7 +358,7 @@ object Configuration {
 
     // TODO (3.1.1) def proxyFactory(factory: ProxyFactory) = set( 7, pre) { _.setProxyFactory(factory) }
     // TODO (3.1.1) def safeResultHandlerSupport(enabled : Boolean) = set(22, pre) { _.setSafeResultHandlerEnabled(enabled) }
-    // TODO (3.1.1) def defaultScriptingLanguage(driver : T[_]) = set(23, pre) { _.setDefaultScriptingLanguage(driver) }
+    // TODO (3.1.1) def defaultScriptingLanguage(driver : T[?]) = set(23, pre) { _.setDefaultScriptingLanguage(driver) }
 
   }
 

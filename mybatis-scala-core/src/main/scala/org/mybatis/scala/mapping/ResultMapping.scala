@@ -21,28 +21,28 @@ import java.util.{List => JList}
 import scala.jdk.CollectionConverters.*
 
 private[scala] class ResultMapping (
-  resultType : T[_],
+  resultType : T[?],
   property_ : String,
   column_ : String,
-  javaType : T[_],
+  javaType : T[?],
   jdbcType : JdbcType,
   nestedSelect_ : Select,
-  nestedResultMap_ : ResultMap[_],
+  nestedResultMap_ : ResultMap[?],
   notNullColumn_ : String,
   columnPrefix_ : String,
-  typeHandler : T[_ <: TypeHandler[_]],
+  typeHandler : T[? <: TypeHandler[?]],
   flags_ : Seq[ResultFlag] = Seq()
 ) {
 
-  def resultTypeClass : Class[_] = resultType.unwrap
+  def resultTypeClass : Class[?] = resultType.unwrap
   def property : String = property_
   def column : String = column_
-  def javaTypeClass : Class[_] = if (javaType == null || javaType.isVoid) null else javaType.unwrap
+  def javaTypeClass : Class[?] = if (javaType == null || javaType.isVoid) null else javaType.unwrap
   def jdbcTypeEnum : JdbcTypeEnum = if (jdbcType == null || jdbcType == JdbcType.UNDEFINED) null else jdbcType.unwrap
   def nestedSelect : Select = nestedSelect_
-  def nestedResultMap : ResultMap[_] = nestedResultMap_
+  def nestedResultMap : ResultMap[?] = nestedResultMap_
   def notNullColumn : String = notNullColumn_
-  def typeHandlerClass : Class[_ <: TypeHandler[_]] = if (typeHandler == null) null else typeHandler.unwrap
+  def typeHandlerClass : Class[? <: TypeHandler[?]] = if (typeHandler == null) null else typeHandler.unwrap
   def flags : JList[ResultFlagEnum] = (for (f <- flags_) yield f.unwrap).asJava
   def columnPrefix = columnPrefix_
 }
