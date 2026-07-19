@@ -127,7 +127,7 @@ sealed class Configuration(private val configuration: MBConfig) {
     registerOptionTypeHandler(new OptDateTypeHandler(), Seq(DATE))
     registerOptionTypeHandler(new OptTimeTypeHandler(), Seq(TIME))
     registerOptionTypeHandler(new OptTimestampTypeHandler(), Seq(TIMESTAMP))
-    registerOptionTypeHandler(new OptionTypeHandler(new UnknownTypeHandler(configuration.getTypeHandlerRegistry)), Seq(OTHER))
+    registerOptionTypeHandler(new OptionTypeHandler(new UnknownTypeHandler(configuration)), Seq(OTHER))
   }
 
 }
