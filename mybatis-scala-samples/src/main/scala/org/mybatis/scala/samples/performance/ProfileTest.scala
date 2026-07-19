@@ -19,11 +19,13 @@ import org.mybatis.scala.mapping.*
 import org.mybatis.scala.config.*
 import org.mybatis.scala.session.*
 import org.mybatis.scala.mapping.Binding.*
+
+import scala.compiletime.uninitialized
 import scala.language.postfixOps
 
 class TestBean {
   var id : Int = 0
-  var name : String = _
+  var name : String = uninitialized
 }
 
 object ProfileTest extends App {
