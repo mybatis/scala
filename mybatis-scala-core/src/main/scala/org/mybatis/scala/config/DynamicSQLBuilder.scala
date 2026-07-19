@@ -16,6 +16,7 @@
 package org.mybatis.scala.config
 
 import org.apache.ibatis.session.{Configuration => MBConfig}
+import java.lang.Boolean
 import java.util.{List, ArrayList}
 import org.apache.ibatis.scripting.xmltags.*
 import org.apache.ibatis.mapping.SqlSource
@@ -61,6 +62,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
               configuration,
               content,
               attr(elem, "@collection"),
+              Boolean.FALSE,
               attr(elem, "@index"),
               attr(elem, "@item"),
               attr(elem, "@open"),
