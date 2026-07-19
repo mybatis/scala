@@ -74,7 +74,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
             for (child <- elem.child) {
               child match {
                 case when : Elem if when.label == "when" =>
-                  ifNodes add new IfSqlNode(parseChildren(when.child), attr(when, "@test"))
+                  ifNodes.add(new IfSqlNode(parseChildren(when.child), attr(when, "@test")))
                 case otherwise : Elem if otherwise.label == "otherwise" =>
                   if (defaultNode == null)
                     defaultNode = parseChildren(otherwise.child)
@@ -106,7 +106,7 @@ private[scala] class DynamicSQLBuilder(val configuration : MBConfig, val node : 
   private def parseChildren(children : Seq[Node]) : MixedSqlNode = {
     val nodes = new ArrayList[SqlNode]
     for (child <- children) {
-      nodes add parse(child)
+      nodes.add(parse(child))
     }
     new MixedSqlNode(nodes)
   }
