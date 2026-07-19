@@ -49,7 +49,7 @@ class DefaultObjectFactory extends ObjectFactory {
         constructor.newInstance().asInstanceOf[T]
       }
       else {
-        constructor.newInstance(argValues : _*).asInstanceOf[T]
+        constructor.newInstance(argValues*).asInstanceOf[T]
       }
     }
     catch {
@@ -129,7 +129,7 @@ class DefaultObjectFactory extends ObjectFactory {
           constructor
         }
         else {
-          val constructor = t.getDeclaredConstructor(args : _*)
+          val constructor = t.getDeclaredConstructor(args*)
           if (!constructor.isAccessible()) {
             constructor.setAccessible(true)
           }
