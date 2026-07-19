@@ -106,7 +106,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
       for (r <- rm.constructor ++ rm.mappings) {
         if (r.nestedSelect != null) addStatement(r.nestedSelect)
         if (r.nestedResultMap != null) addResultMap(r.nestedResultMap)
-        resultMappings add
+        resultMappings.add(
           builderAssistant.buildResultMapping(
             r.resultTypeClass,
             r.property,
@@ -120,6 +120,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
             r.typeHandlerClass,
             r.flags
           )
+        )
       }
 
       // Discriminator
@@ -158,7 +159,7 @@ class ConfigurationSpace(configuration : MBConfig, val spaceName : String = "_DE
   }
 
   private def resolveFQI(r : { def fqi : FQI}) : String = {
-    if (r == null) null else r.fqi resolveIn spaceName
+    if (r == null) null else r.fqi.resolveIn(spaceName)
   }
 
   private def addStatement(statement : Statement) : this.type = {
