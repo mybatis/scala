@@ -20,12 +20,14 @@ import org.mybatis.scala.config.*
 import org.mybatis.scala.session.*
 import org.mybatis.scala.samples.util.*
 
+import scala.compiletime.uninitialized
+
 // Model beans =================================================================
 
 class Person {
-  var id : Int = _
-  var firstName : String = _
-  var lastName : String = _
+  var id : Int = uninitialized
+  var firstName : String = uninitialized
+  var lastName : String = uninitialized
 }
 
 // Data access layer ===========================================================

@@ -15,8 +15,10 @@
  */
 package org.mybatis.scala.domain
 
+import scala.compiletime.uninitialized
+
 case class Blog(var title: String) {
-  var id: Int = _
+  var id: Int = uninitialized
   var entries: Seq[Entry] = Seq.empty
 }
 
@@ -29,5 +31,5 @@ object Blog {
 }
 
 case class Entry(var body: String) {
-  var id: Int = _
+  var id: Int = uninitialized
 }

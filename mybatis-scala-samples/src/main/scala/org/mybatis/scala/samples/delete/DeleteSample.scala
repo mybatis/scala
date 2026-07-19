@@ -20,13 +20,15 @@ import org.mybatis.scala.config.*
 import org.mybatis.scala.session.*
 import org.mybatis.scala.samples.util.*
 
+import scala.compiletime.uninitialized
+
 object DeleteSample {
 
   // Simple Person POJO
   class Person {
-    var id : Int = _
-    var firstName : String = _
-    var lastName : String = _
+    var id : Int = uninitialized
+    var firstName : String = uninitialized
+    var lastName : String = uninitialized
   }
 
   // Simple select method
