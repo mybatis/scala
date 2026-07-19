@@ -11,7 +11,7 @@ Versions
 * **Scala 2.11** [![Maven Central](https://img.shields.io/maven-central/v/org.mybatis.scala/mybatis-scala-core_2.11.svg)](https://central.sonatype.com/artifact/org.mybatis.scala/mybatis-scala-core_2.11)
 * **Scala 2.12** [![Maven Central](https://img.shields.io/maven-central/v/org.mybatis.scala/mybatis-scala-core_2.12.svg)](https://central.sonatype.com/artifact/org.mybatis.scala/mybatis-scala-core_2.12)
 * **Scala 2.13** [![Maven Central](https://img.shields.io/maven-central/v/org.mybatis.scala/mybatis-scala-core_2.13.svg)](https://central.sonatype.com/artifact/org.mybatis.scala/mybatis-scala-core_2.13)
-* **Scala 3.8** [TBD]
+* **Scala 3.8** [![Maven Central](https://img.shields.io/maven-central/v/org.mybatis.scala/mybatis-scala-core_3.svg)](https://central.sonatype.com/artifact/org.mybatis.scala/mybatis-scala-core_3]
 
 ![mybatis-logo](https://mybatis.org/images/mybatis-logo.png)
 
