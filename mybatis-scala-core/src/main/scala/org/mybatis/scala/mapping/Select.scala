@@ -29,24 +29,24 @@ sealed trait Select extends Statement {
     * Result maps are the most powerful feature of MyBatis, and with a good understanding of them,
     * many difficult mapping cases can be solved.
     */
-  var resultMap       : ResultMap[_] = null
+  var resultMap : ResultMap[?] = null
 
   /** Any one of FORWARD_ONLY|SCROLL_SENSITIVE|SCROLL_INSENSITIVE. Default FORWARD_ONLY. */
-  var resultSetType   : ResultSetType = ResultSetType.FORWARD_ONLY
+  var resultSetType : ResultSetType = ResultSetType.FORWARD_ONLY
 
   /** This is a driver hint that will attempt to cause the driver to return results in batches of rows
     * numbering in size equal to this setting. Default is unset (driver dependent).
     */
-  var fetchSize       : Int = -1
+  var fetchSize : Int = -1
 
   /** Setting this to true will cause the results of this statement to be cached.
     * Default: true for select statements.
     */
-  var useCache        : Boolean = true
+  var useCache : Boolean = true
 
   flushCache = false
 
-  def resultTypeClass : Class[_]
+  def resultTypeClass : Class[?]
 
 }
 
@@ -82,7 +82,7 @@ abstract class SelectList[Result : ClassTag]
   def apply()(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Result](fqi.id) }
 
-  def handle[T](callback : ResultContext[_ <: T] => Unit)(implicit s : Session) : Unit =
+  def handle[T](callback : ResultContext[? <: T] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, new ResultHandlerDelegator[T](callback)) }
 
 }
@@ -120,7 +120,7 @@ abstract class SelectListBy[Param : ClassTag, Result : ClassTag]
   def apply(param : Param)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param) }
 
-  def handle(param : Param, callback : ResultContext[_ <: Result] => Unit)(implicit s : Session) : Unit =
+  def handle(param : Param, callback : ResultContext[? <: Result] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }
 
 }
@@ -157,7 +157,7 @@ abstract class SelectListPage[Result : ClassTag]
   def apply(rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Null,Result](fqi.id, null, rowBounds) }
 
-  def handle(rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
+  def handle(rowBounds : RowBounds, callback : ResultContext[? <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }
 
 }
@@ -195,7 +195,7 @@ abstract class SelectListPageBy[Param : ClassTag, Result : ClassTag]
   def apply(param : Param, rowBounds : RowBounds)(implicit s : Session) : Seq[Result] =
     execute { s.selectList[Param,Result](fqi.id, param, rowBounds) }
 
-  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext[_ <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
+  def handle(param : Param, rowBounds : RowBounds, callback : ResultContext[? <: Seq[Result]] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, param, rowBounds, new ResultHandlerDelegator[Seq[Result]](callback)) }
 
 }
@@ -492,6 +492,6 @@ abstract class SelectListByMap[Result : ClassTag]
   def apply(param : collection.Map[String, Any])(implicit s : Session) : Seq[Result] =
     execute { s.selectList[JavaMap[String, Any],Result](fqi.id, param.asJava) }
 
-  def handle(param : collection.Map[String, Any], callback : ResultContext[_ <: Result] => Unit)(implicit s : Session) : Unit =
+  def handle(param : collection.Map[String, Any], callback : ResultContext[? <: Result] => Unit)(implicit s : Session) : Unit =
     execute { s.select(fqi.id, param, new ResultHandlerDelegator[Result](callback)) }
 }

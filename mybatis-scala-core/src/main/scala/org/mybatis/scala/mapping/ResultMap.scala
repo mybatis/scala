@@ -30,11 +30,11 @@ object AutoMappingInherited extends AutoMappingBehaviour { val value = null }
   * @tparam ResultType type of the resulting object
   * @param parent if defined, this resultmap will inherit mappings from parent.
   */
-class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
+class ResultMap[ResultType : ClassTag](val parent : ResultMap[?] = null) {
 
   private[scala] val mappings = new ListBuffer[ResultMapping]
   private[scala] val constructor = new ListBuffer[ResultMapping]
-  private[scala] var discr : (String, T[_], JdbcType, T[_ <: TypeHandler[_]], Seq[Case]) = null
+  private[scala] var discr : (String, T[?], JdbcType, T[? <: TypeHandler[?]], Seq[Case]) = null
 
   var fqi : FQI = null
   var autoMapping : AutoMappingBehaviour = AutoMappingInherited
@@ -52,9 +52,9 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
   def id(
     property : String,
     column : String,
-    javaType : T[_] = null,
+    javaType : T[?] = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -81,9 +81,9 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
   def result(
     property : String,
     column : String,
-    javaType : T[_] = null,
+    javaType : T[?] = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -108,9 +108,9 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     */
   def idArg(
     column : String = null,
-    javaType : T[_] = null,
+    javaType : T[?] = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     constructor += new ResultMapping(
       T[ResultType],
@@ -136,11 +136,11 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     */
   def arg(
     column : String = null,
-    javaType : T[_] = null,
+    javaType : T[?] = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
     select : Select = null,
-    resultMap : ResultMap[_] = null,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    resultMap : ResultMap[?] = null,
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     constructor += new ResultMapping(
       T[ResultType],
@@ -175,10 +175,10 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
     select : Select = null,
-    resultMap : ResultMap[_] = null,
+    resultMap : ResultMap[?] = null,
     notNullColumn : String = null,
     columnPrefix : String = null,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -212,10 +212,10 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
     select : Select = null,
-    resultMap : ResultMap[_] = null,
+    resultMap : ResultMap[?] = null,
     notNullColumn : String = null,
     columnPrefix : String = null,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -251,10 +251,10 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     column : String = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
     select : Select = null,
-    resultMap : ResultMap[_] = null,
+    resultMap : ResultMap[?] = null,
     notNullColumn : String = null,
     columnPrefix : String = null,
-    typeHandler : T[_ <: TypeHandler[_]] = null) = {
+    typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -289,10 +289,10 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
      column : String = null,
      jdbcType : JdbcType = JdbcType.UNDEFINED,
      select : Select = null,
-     resultMap : ResultMap[_] = null,
+     resultMap : ResultMap[?] = null,
      notNullColumn : String = null,
      columnPrefix : String = null,
-     typeHandler : T[_ <: TypeHandler[_]] = null) = {
+     typeHandler : T[? <: TypeHandler[?]] = null) = {
 
     mappings += new ResultMapping(
       T[ResultType],
@@ -324,9 +324,9 @@ class ResultMap[ResultType : ClassTag](val parent : ResultMap[_] = null) {
     */
   def discriminator(
     column : String = null,
-    javaType : T[_] = null,
+    javaType : T[?] = null,
     jdbcType : JdbcType = JdbcType.UNDEFINED,
-    typeHandler : T[_ <: TypeHandler[_]] = null,
+    typeHandler : T[? <: TypeHandler[?]] = null,
     cases : Seq[Case] = Seq()) = {
 
     discr = (column, javaType, jdbcType, typeHandler, cases)

@@ -65,7 +65,7 @@ class BindingSpec extends AnyFunSpec with Matchers {
       result should equal ("#{count,javaType=_int}")
     }
 
-    it("should include javaType from T[_].unwrap") {
+    it("should include javaType from T[?].unwrap") {
       val result = ?("name", javaType = T[String].unwrap)
       result should equal ("#{name,javaType=java.lang.String}")
     }

@@ -20,7 +20,7 @@ import org.mybatis.scala.session.*
 
 object DBSampleData {
 
-  val insertPerson = new Insert[java.util.Map[_,_]] {
+  val insertPerson = new Insert[java.util.Map[?,?]] {
     def xsql =
       <xsql>
         INSERT INTO person(id_, first_name_, last_name_, group_id_)
@@ -28,7 +28,7 @@ object DBSampleData {
       </xsql>
   }
 
-  val insertGroup = new Insert[java.util.Map[_,_]] {
+  val insertGroup = new Insert[java.util.Map[?,?]] {
     def xsql =
       <xsql>
         INSERT INTO people_group(id_, name_)
@@ -36,7 +36,7 @@ object DBSampleData {
       </xsql>
   }
 
-  val insertContactInfo = new Insert[java.util.Map[_,_]] {
+  val insertContactInfo = new Insert[java.util.Map[?,?]] {
     def xsql =
       <xsql>
         INSERT INTO contact_info (owner_id_, street_address_, phone_number_)
