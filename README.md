@@ -3,6 +3,7 @@ MyBatis Scala Adapter
 
 [![Java CI](https://github.com/mybatis/scala/workflows/Java%20CI/badge.svg)](https://github.com/mybatis/scala/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/mybatis/scala/badge.svg?branch=master&service=github)](https://coveralls.io/github/mybatis/scala?branch=master)
+[![Docs](https://img.shields.io/badge/docs-mybatis.org-blue?logo=github)](https://mybatis.org/scala/)
 [![License](https://img.shields.io/:license-apache-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Versions
@@ -16,8 +17,3 @@ Versions
 ![mybatis-logo](https://mybatis.org/images/mybatis-logo.png)
 
 MyBatis-Scala adapter for Scala.
-
-Essentials
-----------
-
-* [See the docs](https://mybatis.org/scala/)
